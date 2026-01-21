@@ -1,7 +1,4 @@
-const path = require('path');
-// Attempt to require @prisma/client from the project root node_modules
-const prismaClientPath = path.join(__dirname, '..', 'node_modules', '@prisma', 'client');
-const { PrismaClient } = require(prismaClientPath);
+const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();

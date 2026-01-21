@@ -72,10 +72,23 @@ export async function processMessage(botId: string, telegramChatId: string, mess
         }
     });
 
+    console.log(`[FlowEngine] Found ${triggerNodes.length} trigger nodes for bot ${botId}`);
+
     for (const triggerNode of triggerNodes) {
-        const nodeData = triggerNode.data as unknown as FlowNodeData;
+        let nodeData = triggerNode.data as any;
+        if (typeof nodeData === 'string') {
+            try {
+                nodeData = JSON.parse(nodeData);
+            } catch (e) {
+                console.error("[FlowEngine] Error parsing node data", e);
+                continue;
+            }
+        }
+
         const type = nodeData.triggerType || 'KEYWORD';
         const keyword = nodeData.trigger?.toLowerCase();
+
+        console.log(`[FlowEngine] Checking trigger: type=${type}, keyword=${keyword}, input=${messageText}`);
 
         let IsMatched = false;
 
@@ -83,7 +96,7 @@ export async function processMessage(botId: string, telegramChatId: string, mess
             IsMatched = true;
         } else if (type === 'COMMAND' && keyword && messageText.toLowerCase() === keyword.toLowerCase()) {
             IsMatched = true;
-        } else if (type === 'NEW_LEAD' && messageText.toLowerCase() === '/start') { // Special case for Telegram /start
+        } else if (type === 'NEW_LEAD' && (messageText.toLowerCase() === '/start' || messageText.toLowerCase() === 'start')) {
             IsMatched = true;
         }
 

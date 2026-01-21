@@ -3,18 +3,30 @@ import { prisma } from "./prisma";
 interface FlowNodeData {
     text?: string;
     trigger?: string;
+    url?: string;
+    caption?: string;
+    delay?: number;
+    isSmart?: boolean;
+    showTyping?: boolean;
+    hasButtons?: boolean;
+    buttons?: Array<{ label: string; url?: string; flowId?: string }>;
+    subType?: string;
+    amount?: number;
+    pixKey?: string;
+    variable?: string;
+    inputType?: string;
     [key: string]: any;
 }
 
 export async function processMessage(botId: string, telegramChatId: string, messageText: string) {
     console.log(`[FlowEngine] Processing message from ${telegramChatId}: ${messageText}`);
 
-    // 1. Find a matching trigger in any flow associated with this bot
-    const triggerNode = await prisma.flowNode.findFirst({
+    // 1. Find a matching trigger
+    const triggerNodes = await prisma.flowNode.findMany({
         where: {
             flow: {
                 botId: botId,
-                status: 'PUBLISHED', // Only published flows trigger automatically
+                status: 'PUBLISHED',
             },
             type: 'TRIGGER',
         },
@@ -23,24 +35,19 @@ export async function processMessage(botId: string, telegramChatId: string, mess
         }
     });
 
-    if (!triggerNode) {
-        // Fallback: Check for a default flow or just ignore
-        console.log(`[FlowEngine] No trigger found for bot ${botId}`);
-        return;
-    }
+    for (const triggerNode of triggerNodes) {
+        const nodeData = triggerNode.data as unknown as FlowNodeData;
+        const keyword = nodeData.trigger?.toLowerCase();
 
-    // Check if message matches the keyword (case insensitive for now)
-    const nodeData = triggerNode.data as unknown as FlowNodeData;
-    const keyword = nodeData.trigger?.toLowerCase();
-
-    if (keyword && messageText.toLowerCase().includes(keyword)) {
-        console.log(`[FlowEngine] Trigger matched! Starting flow: ${triggerNode.flow.name}`);
-        await executeNextNodes(triggerNode.flowId, triggerNode.id, telegramChatId, botId);
+        if (keyword && messageText.toLowerCase().includes(keyword)) {
+            console.log(`[FlowEngine] Trigger matched! Starting flow: ${triggerNode.flow.name}`);
+            await executeNextNodes(triggerNode.flowId, triggerNode.id, telegramChatId, botId);
+            return; // Only execute one flow per trigger for now
+        }
     }
 }
 
 async function executeNextNodes(flowId: string, currentNodeId: string, chatId: string, botId: string) {
-    // 1. Find outgoing edges
     const edges = await prisma.flowEdge.findMany({
         where: {
             flowId,
@@ -54,9 +61,11 @@ async function executeNextNodes(flowId: string, currentNodeId: string, chatId: s
         });
 
         if (nextNode) {
-            await executeNode(nextNode, chatId, botId);
-            // Recursively continue if it's not a waiting node
-            if (nextNode.type !== 'INPUT' && nextNode.type !== 'DELAY') {
+            const shouldStop = await executeNode(nextNode, chatId, botId);
+            if (shouldStop) break;
+
+            // Recursively continue if it's not a waiting node or end node
+            if (nextNode.type !== 'INPUT' && (nextNode.data as any).subType !== 'END') {
                 await executeNextNodes(flowId, nextNode.id, chatId, botId);
             }
         }
@@ -66,56 +75,128 @@ async function executeNextNodes(flowId: string, currentNodeId: string, chatId: s
 async function executeNode(node: any, chatId: string, botId: string) {
     const data = node.data as FlowNodeData;
     const bot = await prisma.bot.findUnique({ where: { id: botId } });
-    if (!bot) return;
+    if (!bot) return true;
+
+    console.log(`[FlowEngine] Executing node: ${node.type} (${data.subType || ''})`);
 
     switch (node.type) {
         case 'MESSAGE':
             if (data.text) {
-                await sendTelegramMessage(bot.token, chatId, data.text);
+                const replyMarkup = data.hasButtons && data.buttons?.length
+                    ? { inline_keyboard: [data.buttons.map(b => ({ text: b.label, url: b.url }))] }
+                    : undefined;
 
-                // Also save the message to our DB so it shows in chat
-                const conversation = await prisma.conversation.findUnique({
-                    where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+                await sendTelegramRequest(bot.token, 'sendMessage', {
+                    chat_id: chatId,
+                    text: data.text,
+                    reply_markup: replyMarkup
                 });
+                await saveBotMessage(botId, chatId, data.text);
+            }
+            break;
 
-                if (conversation) {
-                    await prisma.message.create({
-                        data: {
-                            conversationId: conversation.id,
-                            content: data.text,
-                            sender: 'BOT',
-                            type: 'TEXT'
-                        }
-                    });
-                }
+        case 'IMAGE':
+            if (data.url) {
+                await sendTelegramRequest(bot.token, 'sendPhoto', {
+                    chat_id: chatId,
+                    photo: data.url,
+                    caption: data.caption
+                });
+                await saveBotMessage(botId, chatId, `[Imagem] ${data.caption || ''}`);
+            }
+            break;
+
+        case 'VIDEO':
+            if (data.url) {
+                await sendTelegramRequest(bot.token, 'sendVideo', {
+                    chat_id: chatId,
+                    video: data.url,
+                    caption: data.caption
+                });
+                await saveBotMessage(botId, chatId, `[Vídeo] ${data.caption || ''}`);
+            }
+            break;
+
+        case 'AUDIO':
+            if (data.url) {
+                await sendTelegramRequest(bot.token, 'sendAudio', {
+                    chat_id: chatId,
+                    audio: data.url,
+                    caption: data.caption
+                });
+                await saveBotMessage(botId, chatId, `[Áudio] ${data.caption || ''}`);
             }
             break;
 
         case 'DELAY':
-            // TODO: Implement actual delay/typing indicator
-            // For now just a placeholder
-            console.log(`[FlowEngine] Node DELAY: ${data.delay || 3}s`);
+            let delayMs = (data.delay || 3) * 1000;
+            if (data.isSmart) {
+                // Approximate reading/typing time: 10 chars per second
+                delayMs = Math.min(delayMs, 10000); // Caps at 10s for UX
+            }
+
+            if (data.showTyping) {
+                await sendTelegramRequest(bot.token, 'sendChatAction', {
+                    chat_id: chatId,
+                    action: 'typing'
+                });
+            }
+            await new Promise(resolve => setTimeout(resolve, delayMs));
             break;
 
-        // Add other node types here (MEDIA, ACTION, etc.)
+        case 'ACTION':
+            if (data.subType === 'PIX' || data.subType === 'PIX_CUSTOM') {
+                const text = `💠 *Pagamento Pix Gerado*\n\nValor: R$ ${data.amount}\nChave: \`${data.pixKey || 'sua-chave-aqui'}\`\n\n_Copie a chave acima para pagar._`;
+                await sendTelegramRequest(bot.token, 'sendMessage', {
+                    chat_id: chatId,
+                    text,
+                    parse_mode: 'Markdown'
+                });
+                await saveBotMessage(botId, chatId, text);
+            } else if (data.subType === 'CHECKOUT') {
+                const text = `🛒 *Seu Link de Checkout*\n\nClique no botão abaixo para finalizar sua compra.`;
+                await sendTelegramRequest(bot.token, 'sendMessage', {
+                    chat_id: chatId,
+                    text,
+                    parse_mode: 'Markdown',
+                    reply_markup: { inline_keyboard: [[{ text: "Pagar Agora", url: data.url }]] }
+                });
+                await saveBotMessage(botId, chatId, text);
+            } else if (data.subType === 'END') {
+                return true; // Stop execution
+            }
+            break;
+    }
+    return false;
+}
+
+async function saveBotMessage(botId: string, chatId: string, text: string) {
+    const conversation = await prisma.conversation.findUnique({
+        where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+    });
+    if (conversation) {
+        await prisma.message.create({
+            data: {
+                conversationId: conversation.id,
+                content: text,
+                sender: 'BOT',
+                type: 'TEXT'
+            }
+        });
     }
 }
 
-async function sendTelegramMessage(token: string, chatId: string, text: string) {
+async function sendTelegramRequest(token: string, method: string, body: any) {
     try {
-        const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        const response = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: text
-            })
+            body: JSON.stringify(body)
         });
-
         if (!response.ok) {
-            console.error(`[FlowEngine] Telegram API Error: ${await response.text()}`);
+            console.error(`[FlowEngine] Telegram API Error (${method}): ${await response.text()}`);
         }
     } catch (error) {
-        console.error(`[FlowEngine] Fetch Error:`, error);
+        console.error(`[FlowEngine] Fetch Error (${method}):`, error);
     }
 }

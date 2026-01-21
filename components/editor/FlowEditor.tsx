@@ -22,6 +22,7 @@ import { ActionNode } from "./nodes/ActionNode";
 import { MediaNode } from "./nodes/MediaNode";
 import { CollectionNode } from "./nodes/CollectionNode";
 import { DelayNode } from "./nodes/DelayNode";
+import { InputNode } from "./nodes/InputNode";
 
 import { EditorSidebar } from "./EditorSidebar";
 import { PropertiesPanel } from "./PropertiesPanel";
@@ -32,9 +33,12 @@ const nodeTypes = {
     TRIGGER: TriggerNode,
     MESSAGE: MessageNode,
     ACTION: ActionNode,
-    MEDIA: MediaNode,
+    IMAGE: MediaNode,
+    VIDEO: MediaNode,
+    AUDIO: MediaNode,
     COLLECTION: CollectionNode,
     DELAY: DelayNode,
+    INPUT: InputNode,
 };
 
 interface FlowEditorProps {
@@ -58,13 +62,22 @@ function FlowEditorInner({ initialData }: FlowEditorProps) {
         [setEdges]
     );
 
-    const onAddNode = useCallback((type: string) => {
+    const onAddNode = useCallback((type: string, data: any = {}) => {
         const id = `${type}-${Date.now()}`;
         const newNode: Node = {
             id,
             type,
             position: { x: 100, y: 100 },
-            data: { trigger: "", text: "Nova Mensagem", url: "", variable: "", timeout: 60, delay: 3, showTyping: false },
+            data: {
+                trigger: "",
+                text: "Novo Bloco",
+                url: "",
+                variable: "",
+                timeout: 60,
+                delay: 3,
+                showTyping: false,
+                ...data
+            },
         };
         setNodes((nds) => nds.concat(newNode));
         setSelectedNodeId(id);

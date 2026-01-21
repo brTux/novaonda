@@ -1,28 +1,31 @@
 "use client";
 
 import React from "react";
-import { Image as ImageIcon, Video, Music } from "lucide-react";
+import { Image as ImageIcon, Video, Music, FileText } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export function MediaNode({ data, selected }: any) {
-    const Icon = data.mediaType === "video" ? Video : data.mediaType === "audio" ? Music : ImageIcon;
+    const Icon = data.mediaType === "video" ? Video : data.mediaType === "audio" ? Music : data.mediaType === "file" ? FileText : ImageIcon;
 
     return (
         <BaseNode
-            title={`Enviar ${data.mediaType || "Mídia"}`}
-            icon={<Icon size={18} strokeWidth={3} />}
+            title={`Mídia: ${data.mediaType || "Arquivo"}`}
+            icon={<Icon size={18} />}
             selected={selected}
-            colorClass="bg-black"
+            colorClass="bg-emerald-500"
         >
             <div className="space-y-4">
-                <div className="aspect-video bg-black/5 rounded-2xl flex flex-col items-center justify-center border-2 border-dashed border-black/10 transition-all hover:bg-black group">
-                    <Icon size={32} strokeWidth={2.5} className="text-black/20 group-hover:text-white" />
-                    <p className="text-[9px] font-black text-black/30 mt-3 uppercase tracking-widest group-hover:text-white">Visualização Indisponível</p>
+                <div className={`aspect-video rounded-2xl flex flex-col items-center justify-center border-2 border-dashed transition-all ${selected ? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-100'}`}>
+                    <Icon size={32} className={selected ? "text-emerald-400" : "text-slate-300"} />
+                    <p className={`text-[9px] font-bold mt-2 uppercase tracking-widest ${selected ? "text-emerald-500" : "text-slate-400"}`}>
+                        {data.url ? "Mídia Carregada" : "Sem Arquivo"}
+                    </p>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <p className="text-[10px] font-black text-black opacity-40 uppercase tracking-widest">URL do Arquivo</p>
-                    <p className="text-[11px] font-bold text-black truncate italic">{data.url || "Nenhuma URL configurada"}</p>
-                </div>
+                {data.caption && (
+                    <div className="p-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <p className="text-[10px] text-slate-500 italic line-clamp-2">"{data.caption}"</p>
+                    </div>
+                )}
             </div>
         </BaseNode>
     );

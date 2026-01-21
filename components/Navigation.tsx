@@ -12,6 +12,7 @@ import {
     Bell,
     Menu,
     X,
+    Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,6 +23,7 @@ const menuItems = [
     { name: "Disparo", icon: Zap, href: "/disparo" },
     { name: "Bots", icon: Bot, href: "/bots" },
     { name: "Ferramentas", icon: Wrench, href: "/ferramentas" },
+    { name: "Configurações", icon: Settings, href: "/settings" },
 ];
 
 export function Navigation() {
@@ -35,9 +37,9 @@ export function Navigation() {
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded bg-[#ff5100] flex items-center justify-center text-white font-bold text-lg shadow-sm">
-                            N
+                            I
                         </div>
-                        <span className="font-extrabold text-[#2d3339] tracking-tight text-xl hidden sm:block">Nova Onda</span>
+                        <span className="font-extrabold text-[#2d3339] tracking-tight text-xl hidden sm:block">Isy Flow</span>
                     </Link>
 
                     {/* Desktop Menu */}

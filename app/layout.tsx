@@ -6,7 +6,7 @@ import { Navigation } from "@/components/Navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nova Onda - Automação Telegram",
+  title: "Isy Flow - Automação Telegram",
   description: "Plataforma avançada para automação de chatbots e gestão de vendas no Telegram.",
 };
 

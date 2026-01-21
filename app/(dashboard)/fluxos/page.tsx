@@ -1,16 +1,18 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { Plus, Search, MessageSquare, ArrowRight, Filter, MoreHorizontal } from "lucide-react";
+import { getFlows } from "@/app/actions/flows";
+import { getBots } from "@/app/actions/bots";
+import { NewFlowModal } from "@/components/fluxos/NewFlowModal";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
-const fluxos = [
-    { id: 1, name: "Boas-vindas Loja", status: "Ativo", steps: 12, triggers: "Início", date: "Há 2 horas" },
-    { id: 2, name: "Recuperação de Pix", status: "Pausado", steps: 5, triggers: "/pix", date: "Há 1 dia" },
-    { id: 3, name: "Lead Quiz Pressel", status: "Ativo", steps: 24, triggers: "Anúncio", date: "Há 15 min" },
-];
+export default async function FluxosPage() {
+    const [flows, bots] = await Promise.all([
+        getFlows(),
+        getBots()
+    ]);
 
-export default function FluxosPage() {
     return (
         <div className="flex-1 overflow-auto p-6 md:p-10 space-y-8 animate-in fade-in duration-500">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -18,10 +20,7 @@ export default function FluxosPage() {
                     <h1 className="text-2xl font-bold text-[#2d3339]">Automação de Fluxos</h1>
                     <p className="text-sm text-[#555d66] font-medium">Crie sequências inteligentes para vender mais.</p>
                 </div>
-                <button className="flex items-center gap-2 bg-[#ff5100] text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-md hover:bg-[#e64a00] hover:scale-[1.02] active:scale-95 shadow-[#ff5100]/10">
-                    <Plus size={18} />
-                    Novo Fluxo
-                </button>
+                <NewFlowModal bots={bots} />
             </div>
 
             {/* Filter Bar */}
@@ -41,7 +40,13 @@ export default function FluxosPage() {
 
             {/* Fluxos Grid */}
             <div className="grid grid-cols-1 gap-4">
-                {fluxos.map((fluxo) => (
+                {flows.length === 0 && (
+                    <div className="py-20 flex flex-col items-center border-2 border-dashed border-slate-200 rounded-2xl bg-white">
+                        <MessageSquare size={40} className="text-slate-200 mb-4" />
+                        <p className="text-slate-400 font-bold text-sm">Nenhum fluxo criado ainda.</p>
+                    </div>
+                )}
+                {flows.map((fluxo: any) => (
                     <div key={fluxo.id} className="glass-card bg-white p-6 rounded-xl group hover:border-[#ff5100]/20 transition-all duration-300">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                             <div className="flex items-center gap-5">
@@ -51,8 +56,8 @@ export default function FluxosPage() {
                                 <div className="min-w-0">
                                     <div className="flex items-center gap-3">
                                         <h3 className="text-md font-bold text-[#2d3339] truncate">{fluxo.name}</h3>
-                                        <span className={fluxo.status === "Ativo" ? "px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-bold uppercase tracking-wider border border-emerald-100" : "px-2 py-0.5 bg-slate-50 text-slate-500 rounded text-[10px] font-bold uppercase tracking-wider border border-slate-100"}>
-                                            {fluxo.status}
+                                        <span className={fluxo.status === "ACTIVE" ? "px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-bold uppercase tracking-wider border border-emerald-100" : "px-2 py-0.5 bg-slate-50 text-slate-500 rounded text-[10px] font-bold uppercase tracking-wider border border-slate-100"}>
+                                            {fluxo.status === "ACTIVE" ? "Ativo" : "Rascunho"}
                                         </span>
                                     </div>
                                     <p className="text-xs font-semibold text-[#555d66] mt-1 space-x-2">
@@ -60,7 +65,9 @@ export default function FluxosPage() {
                                         <span className="text-slate-200">•</span>
                                         <span>Gatilho: {fluxo.triggers}</span>
                                         <span className="text-slate-200">•</span>
-                                        <span className="opacity-70">{fluxo.date}</span>
+                                        <span className="opacity-70">
+                                            {formatDistanceToNow(new Date(fluxo.updatedAt), { addSuffix: true, locale: ptBR })}
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -73,7 +80,10 @@ export default function FluxosPage() {
                                     Editar Fluxo
                                     <ArrowRight size={14} />
                                 </Link>
-                                <button className="p-2.5 bg-slate-50 text-slate-400 rounded-lg hover:text-[#2d3339] border border-slate-100">
+                                <button
+                                    title="Mais opções"
+                                    className="p-2.5 bg-slate-50 text-slate-400 rounded-lg hover:text-[#2d3339] border border-slate-100"
+                                >
                                     <MoreHorizontal size={18} />
                                 </button>
                             </div>

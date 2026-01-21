@@ -12,12 +12,12 @@ import {
 
 export function EditorSidebar({ onAddNode }: { onAddNode: (type: string) => void }) {
     const elements = [
-        { type: "trigger", label: "Gatilho de Entrada", icon: Play, color: "bg-[#ff5100]" },
-        { type: "message", label: "Enviar Mensagem", icon: MessageSquare, color: "bg-blue-500" },
-        { type: "media", label: "Enviar Mídia", icon: ImageIcon, color: "bg-emerald-500" },
-        { type: "collection", label: "Coleta de Dados", icon: Database, color: "bg-indigo-500" },
-        { type: "delay", label: "Atraso / Digitando", icon: Clock, color: "bg-orange-400" },
-        { type: "action", label: "Gerar Pix / Ação", icon: Zap, color: "bg-[#ffb800]" },
+        { type: "TRIGGER", label: "Gatilho de Entrada", icon: Play, color: "bg-[#ff5100]" },
+        { type: "MESSAGE", label: "Enviar Mensagem", icon: MessageSquare, color: "bg-blue-500" },
+        { type: "MEDIA", label: "Enviar Mídia", icon: ImageIcon, color: "bg-emerald-500" },
+        { type: "COLLECTION", label: "Coleta de Dados", icon: Database, color: "bg-indigo-500" },
+        { type: "DELAY", label: "Atraso / Digitando", icon: Clock, color: "bg-orange-400" },
+        { type: "ACTION", label: "Gerar Pix / Ação", icon: Zap, color: "bg-[#ffb800]" },
     ];
 
     return (

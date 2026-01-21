@@ -63,12 +63,17 @@ export async function POST(
             data: {
                 conversationId: conversation.id,
                 content: text,
-                type: "TEXT", // Simplified for now, will handle media later
+                type: "TEXT",
                 sender: "USER",
             },
         });
 
-        // TODO: Trigger Flow Engine here
+        // 5. Trigger Flow Engine (Fire and Forget)
+        import("@/lib/flow-engine").then(engine => {
+            engine.processMessage(bot.id, chatId, text).catch(err => {
+                console.error("[Webhook] Flow Engine Error:", err);
+            });
+        });
 
         return NextResponse.json({ ok: true });
 

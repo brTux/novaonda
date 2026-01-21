@@ -1,17 +1,20 @@
 'use client';
 
+import { useActionState } from 'react';
 import { registerUser } from '@/app/actions/register';
 import { AuthLayout, SubmitButton } from '@/components/auth/AuthComponents';
 import Link from 'next/link';
 
 export default function RegisterPage() {
+    const initialState = { message: '', errors: {} };
+    const [state, dispatch] = useActionState(registerUser, initialState);
 
     return (
         <AuthLayout
             title="Crie sua conta"
             subtitle="Comece a automatizar suas vendas hoje"
         >
-            <form action={registerUser} className="space-y-6">
+            <form action={dispatch} className="space-y-6">
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                         Nome Completo
@@ -26,6 +29,9 @@ export default function RegisterPage() {
                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#ff5100] focus:border-[#ff5100] sm:text-sm"
                         />
                     </div>
+                    {state?.errors?.name && (
+                        <p className="mt-1 text-sm text-red-600">{state.errors.name}</p>
+                    )}
                 </div>
 
                 <div>
@@ -42,6 +48,9 @@ export default function RegisterPage() {
                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#ff5100] focus:border-[#ff5100] sm:text-sm"
                         />
                     </div>
+                    {state?.errors?.email && (
+                        <p className="mt-1 text-sm text-red-600">{state.errors.email}</p>
+                    )}
                 </div>
 
                 <div>
@@ -58,7 +67,16 @@ export default function RegisterPage() {
                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-[#ff5100] focus:border-[#ff5100] sm:text-sm"
                         />
                     </div>
+                    {state?.errors?.password && (
+                        <p className="mt-1 text-sm text-red-600">{state.errors.password}</p>
+                    )}
                 </div>
+
+                {state?.message && (
+                    <div className="p-3 bg-red-50 text-red-700 rounded-md text-sm">
+                        {state.message}
+                    </div>
+                )}
 
                 <div>
                     <SubmitButton>Criar Conta</SubmitButton>

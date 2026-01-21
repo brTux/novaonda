@@ -11,7 +11,7 @@ const RegisterSchema = z.object({
     password: z.string().min(6, { message: 'Senha deve ter pelo menos 6 caracteres.' }),
 });
 
-export async function registerUser(formData: FormData) {
+export async function registerUser(prevState: any, formData: FormData) {
     const validatedFields = RegisterSchema.safeParse({
         name: formData.get('name'),
         email: formData.get('email'),

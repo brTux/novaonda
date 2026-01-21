@@ -22,6 +22,20 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     session: { strategy: "jwt" },
     trustHost: true,
     secret: process.env.AUTH_SECRET,
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.sub = user.id;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (token.sub && session.user) {
+                session.user.id = token.sub;
+            }
+            return session;
+        },
+    },
     providers: [
         Credentials({
             async authorize(credentials) {

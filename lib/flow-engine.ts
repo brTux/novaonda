@@ -135,11 +135,23 @@ async function executeNextNodes(flowId: string, currentNodeId: string, chatId: s
 }
 
 async function executeNode(node: any, chatId: string, botId: string) {
-    const data = node.data as FlowNodeData;
-    const bot = await prisma.bot.findUnique({ where: { id: botId } });
-    if (!bot) return true;
+    let data = node.data as any;
+    if (typeof data === 'string') {
+        try {
+            data = JSON.parse(data);
+        } catch (e) {
+            console.error("[FlowEngine] Error parsing node data in executeNode", e);
+            return false;
+        }
+    }
 
-    console.log(`[FlowEngine] Executing node: ${node.type} (${data.subType || ''})`);
+    const bot = await prisma.bot.findUnique({ where: { id: botId } });
+    if (!bot) {
+        console.error(`[FlowEngine] Bot not found: ${botId}`);
+        return true;
+    }
+
+    console.log(`[FlowEngine] Executing node: ${node.type} (${data.subType || ''}) for chat ${chatId}`);
 
     switch (node.type) {
         case 'MESSAGE':
@@ -291,15 +303,23 @@ async function saveBotMessage(botId: string, chatId: string, text: string) {
 
 async function sendTelegramRequest(token: string, method: string, body: any) {
     try {
+        console.log(`[FlowEngine] Sending Telegram request: ${method}`);
         const response = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         });
-        if (!response.ok) {
-            console.error(`[FlowEngine] Telegram API Error (${method}): ${await response.text()}`);
+
+        const result = await response.json();
+
+        if (!response.ok || !result.ok) {
+            console.error(`[FlowEngine] Telegram API Error (${method}):`, JSON.stringify(result));
+        } else {
+            console.log(`[FlowEngine] Telegram API Success (${method})`);
         }
+        return result;
     } catch (error) {
         console.error(`[FlowEngine] Fetch Error (${method}):`, error);
+        return { ok: false, error };
     }
 }

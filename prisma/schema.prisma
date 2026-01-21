@@ -1,0 +1,204 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum SubscriptionPlan {
+  FREE
+  PRO
+  ENTERPRISE
+}
+
+enum BotStatus {
+  ACTIVE
+  INACTIVE
+  DISCONNECTED
+}
+
+enum FlowStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum NodeType {
+  TRIGGER
+  MESSAGE
+  IMAGE
+  VIDEO
+  AUDIO
+  INPUT
+  CONDITION
+  DELAY
+  ACTION
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+  LOCATION
+}
+
+enum MessageSender {
+  USER
+  BOT
+  AGENT
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  RUNNING
+  PAUSED
+  COMPLETED
+  FAILED
+}
+
+// Models
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String?   // Hashed, if using credentials auth
+  image         String?
+  plan          SubscriptionPlan @default(FREE)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  bots          Bot[]
+  campaigns     Campaign[]
+  
+  @@map("users")
+}
+
+model Bot {
+  id            String    @id @default(cuid())
+  name          String
+  token         String    @unique // Telegram Bot Token
+  username      String?
+  status        BotStatus @default(INACTIVE)
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  flows         Flow[]
+  conversations Conversation[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("bots")
+}
+
+model Flow {
+  id            String     @id @default(cuid())
+  name          String
+  description   String?
+  isDefault     Boolean    @default(false) // Default flow for new chats
+  status        FlowStatus @default(DRAFT)
+  botId         String
+  bot           Bot        @relation(fields: [botId], references: [id], onDelete: Cascade)
+  
+  nodes         FlowNode[]
+  edges         FlowEdge[]
+  
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@map("flows")
+}
+
+model FlowNode {
+  id            String    @id @default(cuid())
+  flowId        String
+  flow          Flow      @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  type          NodeType
+  positionX     Float
+  positionY     Float
+  data          Json      // Node specific configuration (content, options, etc)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("flow_nodes")
+}
+
+model FlowEdge {
+  id            String    @id @default(cuid())
+  flowId        String
+  flow          Flow      @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  sourceNodeId  String
+  targetNodeId  String
+  label         String?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("flow_edges")
+}
+
+model Conversation {
+  id            String    @id @default(cuid())
+  botId         String
+  bot           Bot       @relation(fields: [botId], references: [id], onDelete: Cascade)
+  telegramChatId String   // Chat ID from Telegram
+  telegramUserId String?  // User ID from Telegram
+  firstName     String?
+  lastName      String?
+  username      String?
+  status        String?   // OPEN, CLOSED, WAITING_AGENT
+  tags          String[]
+  
+  messages      Message[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([botId, telegramChatId])
+  @@map("conversations")
+}
+
+model Message {
+  id             String        @id @default(cuid())
+  conversationId String
+  conversation   Conversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  content        String?
+  type           MessageType   @default(TEXT)
+  sender         MessageSender
+  mediaUrl       String?
+  
+  createdAt      DateTime      @default(now())
+
+  @@map("messages")
+}
+
+model Campaign {
+  id            String         @id @default(cuid())
+  name          String
+  status        CampaignStatus @default(DRAFT)
+  scheduledAt   DateTime?
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  totalLeads    Int            @default(0)
+  sentCount     Int            @default(0)
+  deliveredCount Int           @default(0)
+  readCount     Int            @default(0)
+  failedCount   Int            @default(0)
+  
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@map("campaigns")
+}

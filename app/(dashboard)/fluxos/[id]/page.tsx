@@ -31,7 +31,9 @@ export default async function FlowPage({ params }: FlowPageProps) {
                     <div>
                         <h2 className="font-bold text-[#2d3339] text-sm flex items-center gap-2">
                             {flow.name}
-                            <span className="px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded text-[9px] font-bold uppercase tracking-wider">Rascunho</span>
+                            <span className={flow.status === "PUBLISHED" ? "px-1.5 py-0.5 bg-emerald-100 text-emerald-600 rounded text-[9px] font-bold uppercase tracking-wider" : "px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded text-[9px] font-bold uppercase tracking-wider"}>
+                                {flow.status === "PUBLISHED" ? "Publicado" : "Rascunho"}
+                            </span>
                         </h2>
                         <p className="text-[10px] text-slate-400 font-medium">Editando agora</p>
                     </div>

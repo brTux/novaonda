@@ -77,6 +77,7 @@ export async function getFlowById(id: string) {
     return {
         id: flow.id,
         name: flow.name,
+        status: flow.status,
         nodes: flow.nodes.map((node: any) => ({
             id: node.id,
             type: node.type,
@@ -109,7 +110,7 @@ export async function saveFlow(id: string, nodes: any[], edges: any[], status?: 
         // Transaction to update connection
         await prisma.$transaction(async (tx: any) => {
             // 1. Delete existing nodes and edges (simplest strategy for now)
-            await tx.edge.deleteMany({ where: { flowId: id } });
+            await tx.flowEdge.deleteMany({ where: { flowId: id } });
             await tx.flowNode.deleteMany({ where: { flowId: id } });
 
             // 2. Insert Nodes
@@ -128,7 +129,7 @@ export async function saveFlow(id: string, nodes: any[], edges: any[], status?: 
 
             // 3. Insert Edges
             for (const edge of edges) {
-                await tx.edge.create({
+                await tx.flowEdge.create({
                     data: {
                         id: edge.id,
                         flowId: id,

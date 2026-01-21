@@ -87,14 +87,21 @@ function FlowEditorInner({ initialData }: FlowEditorProps) {
         if (!initialData?.id) return;
         setIsSaving(true);
         try {
-            await saveFlow(initialData.id, nodes, edges, status);
-            // Optional: Show success toast
+            const result = await saveFlow(initialData.id, nodes, edges, status);
+
+            if (result.error) {
+                alert(`Erro: ${result.error}`);
+                return;
+            }
+
             if (status === "PUBLISHED") {
                 alert("Fluxo publicado com sucesso!");
+            } else {
+                alert("Rascunho salvo com sucesso!");
             }
         } catch (error) {
             console.error(error);
-            alert("Erro ao salvar fluxo");
+            alert("Erro fatal ao salvar fluxo");
         } finally {
             setIsSaving(false);
         }

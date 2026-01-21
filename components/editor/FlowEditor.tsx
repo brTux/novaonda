@@ -83,12 +83,15 @@ function FlowEditorInner({ initialData }: FlowEditorProps) {
         setSelectedNodeId(id);
     }, [setNodes]);
 
-    const handleSave = async () => {
+    const handleSave = async (status?: "DRAFT" | "PUBLISHED") => {
         if (!initialData?.id) return;
         setIsSaving(true);
         try {
-            await saveFlow(initialData.id, nodes, edges);
+            await saveFlow(initialData.id, nodes, edges, status);
             // Optional: Show success toast
+            if (status === "PUBLISHED") {
+                alert("Fluxo publicado com sucesso!");
+            }
         } catch (error) {
             console.error(error);
             alert("Erro ao salvar fluxo");
@@ -166,15 +169,23 @@ function FlowEditorInner({ initialData }: FlowEditorProps) {
                     <Controls />
                 </ReactFlow>
 
-                {/* Floating Save Button */}
+                {/* Floating Save/Publish Buttons */}
                 <div className="absolute top-4 right-4 z-10 flex gap-2">
                     <button
-                        onClick={handleSave}
+                        onClick={() => handleSave("DRAFT")}
                         disabled={isSaving}
-                        className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg font-bold text-xs hover:bg-emerald-600 transition-all shadow-lg items-center justify-center min-w-[100px]"
+                        className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-lg font-bold text-xs hover:bg-slate-50 transition-all shadow-sm items-center justify-center min-w-[100px]"
                     >
                         {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
-                        {isSaving ? "Salvando..." : "Salvar Agora"}
+                        {isSaving ? "Salvando..." : "Salvar Rascunho"}
+                    </button>
+                    <button
+                        onClick={() => handleSave("PUBLISHED")}
+                        disabled={isSaving}
+                        className="flex items-center gap-2 px-4 py-2 bg-[#ff5100] text-white rounded-lg font-bold text-xs hover:bg-[#e64a00] transition-all shadow-lg items-center justify-center min-w-[100px]"
+                    >
+                        {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+                        {isSaving ? "Publicando..." : "Publicar Fluxo"}
                     </button>
                 </div>
             </div>

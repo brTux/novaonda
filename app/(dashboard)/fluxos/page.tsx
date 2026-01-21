@@ -56,8 +56,8 @@ export default async function FluxosPage() {
                                 <div className="min-w-0">
                                     <div className="flex items-center gap-3">
                                         <h3 className="text-md font-bold text-[#2d3339] truncate">{fluxo.name}</h3>
-                                        <span className={fluxo.status === "ACTIVE" ? "px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-bold uppercase tracking-wider border border-emerald-100" : "px-2 py-0.5 bg-slate-50 text-slate-500 rounded text-[10px] font-bold uppercase tracking-wider border border-slate-100"}>
-                                            {fluxo.status === "ACTIVE" ? "Ativo" : "Rascunho"}
+                                        <span className={fluxo.status === "PUBLISHED" ? "px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-bold uppercase tracking-wider border border-emerald-100" : "px-2 py-0.5 bg-slate-50 text-slate-500 rounded text-[10px] font-bold uppercase tracking-wider border border-slate-100"}>
+                                            {fluxo.status === "PUBLISHED" ? "Publicado" : "Rascunho"}
                                         </span>
                                     </div>
                                     <p className="text-xs font-semibold text-[#555d66] mt-1 space-x-2">

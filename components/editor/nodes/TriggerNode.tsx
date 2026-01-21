@@ -1,27 +1,44 @@
 "use client";
 
 import React from "react";
-import { Play } from "lucide-react";
+import { Play, Tag, Terminal, UserPlus, Type } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export function TriggerNode({ data, selected }: any) {
+    const getTriggerIcon = () => {
+        switch (data.triggerType) {
+            case 'TAG': return <Tag size={18} />;
+            case 'COMMAND': return <Terminal size={18} />;
+            case 'NEW_LEAD': return <UserPlus size={18} />;
+            default: return <Type size={18} />;
+        }
+    };
+
+    const getTriggerLabel = () => {
+        switch (data.triggerType) {
+            case 'TAG': return "Tag Recebida";
+            case 'COMMAND': return "Comando (/)";
+            case 'NEW_LEAD': return "Novo Lead";
+            default: return "Palavra-chave";
+        }
+    };
+
     return (
         <BaseNode
-            title="Início / Gatilho"
-            icon={<Play size={18} strokeWidth={3} />}
+            title="Gatilho de Entrada"
+            icon={getTriggerIcon()}
             selected={selected}
-            colorClass="bg-black"
+            colorClass="bg-[#ff5100]"
         >
-            <div className="space-y-4">
-                <div className="flex flex-col gap-2">
-                    <label className="text-[10px] font-black text-black opacity-40 uppercase tracking-widest">Gatilho</label>
-                    <div className="bg-black/5 p-4 rounded-xl border-2 border-black/5">
-                        <p className="text-sm font-black text-black uppercase tracking-tight">{data.trigger || "Nova Conversa"}</p>
+            <div className="space-y-3">
+                <div className="flex flex-col gap-1">
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{getTriggerLabel()}</p>
+                    <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl">
+                        <p className="text-xs font-bold text-slate-700 uppercase tracking-tight">
+                            {data.triggerType === 'NEW_LEAD' ? "Qualquer Novo Contato" : (data.trigger || "Não configurado")}
+                        </p>
                     </div>
                 </div>
-                <p className="text-[10px] text-black font-bold opacity-30 leading-relaxed italic">
-                    Este nó inicia o fluxo quando um novo usuário envia uma mensagem.
-                </p>
             </div>
         </BaseNode>
     );

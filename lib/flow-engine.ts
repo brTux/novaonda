@@ -3,6 +3,7 @@ import { prisma } from "./prisma";
 interface FlowNodeData {
     text?: string;
     trigger?: string;
+    triggerType?: 'KEYWORD' | 'COMMAND' | 'TAG' | 'NEW_LEAD';
     url?: string;
     caption?: string;
     delay?: number;
@@ -15,13 +16,49 @@ interface FlowNodeData {
     pixKey?: string;
     variable?: string;
     inputType?: string;
+    timeout?: number;
     [key: string]: any;
 }
 
 export async function processMessage(botId: string, telegramChatId: string, messageText: string) {
     console.log(`[FlowEngine] Processing message from ${telegramChatId}: ${messageText}`);
 
-    // 1. Find a matching trigger
+    const conversation = await prisma.conversation.findUnique({
+        where: { botId_telegramChatId: { botId, telegramChatId } }
+    });
+
+    // 1. Check if we are waiting for an input from a previous node
+    if (conversation?.waitingForNodeId) {
+        const waitingNode = await prisma.flowNode.findUnique({
+            where: { id: conversation.waitingForNodeId }
+        });
+
+        if (waitingNode) {
+            const now = new Date();
+            const isTimeout = conversation.waitingTimeout && now > conversation.waitingTimeout;
+
+            if (isTimeout) {
+                console.log(`[FlowEngine] Input timeout reached for node ${waitingNode.id}`);
+                await clearWaitingState(conversation.id);
+                await executeNextNodes(waitingNode.flowId, waitingNode.id, telegramChatId, botId, 'timeout');
+                // After timeout, we STILL process the current message as a new trigger? 
+                // Usually yes, unless the timeout logic also "consumes" this message.
+                // Decoupling: Timeout path already executed, now see if this message triggers something else.
+            } else {
+                console.log(`[FlowEngine] Input received for node ${waitingNode.id}`);
+                // Save the variable!
+                const data = waitingNode.data as unknown as FlowNodeData;
+                if (data.variable) {
+                    await saveVariable(conversation.id, data.variable, messageText);
+                }
+                await clearWaitingState(conversation.id);
+                await executeNextNodes(waitingNode.flowId, waitingNode.id, telegramChatId, botId, 'success');
+                return; // Response consumed
+            }
+        }
+    }
+
+    // 2. Try to match triggers
     const triggerNodes = await prisma.flowNode.findMany({
         where: {
             flow: {
@@ -37,21 +74,33 @@ export async function processMessage(botId: string, telegramChatId: string, mess
 
     for (const triggerNode of triggerNodes) {
         const nodeData = triggerNode.data as unknown as FlowNodeData;
+        const type = nodeData.triggerType || 'KEYWORD';
         const keyword = nodeData.trigger?.toLowerCase();
 
-        if (keyword && messageText.toLowerCase().includes(keyword)) {
-            console.log(`[FlowEngine] Trigger matched! Starting flow: ${triggerNode.flow.name}`);
+        let IsMatched = false;
+
+        if (type === 'KEYWORD' && keyword && messageText.toLowerCase().includes(keyword)) {
+            IsMatched = true;
+        } else if (type === 'COMMAND' && keyword && messageText.toLowerCase() === keyword.toLowerCase()) {
+            IsMatched = true;
+        } else if (type === 'NEW_LEAD' && messageText.toLowerCase() === '/start') { // Special case for Telegram /start
+            IsMatched = true;
+        }
+
+        if (IsMatched) {
+            console.log(`[FlowEngine] Trigger matched (${type})! Starting flow: ${triggerNode.flow.name}`);
             await executeNextNodes(triggerNode.flowId, triggerNode.id, telegramChatId, botId);
-            return; // Only execute one flow per trigger for now
+            return;
         }
     }
 }
 
-async function executeNextNodes(flowId: string, currentNodeId: string, chatId: string, botId: string) {
+async function executeNextNodes(flowId: string, currentNodeId: string, chatId: string, botId: string, sourceHandle?: string) {
     const edges = await prisma.flowEdge.findMany({
         where: {
             flowId,
-            sourceNodeId: currentNodeId
+            sourceNodeId: currentNodeId,
+            ...(sourceHandle ? { sourceHandle } : {})
         }
     });
 
@@ -131,8 +180,7 @@ async function executeNode(node: any, chatId: string, botId: string) {
         case 'DELAY':
             let delayMs = (data.delay || 3) * 1000;
             if (data.isSmart) {
-                // Approximate reading/typing time: 10 chars per second
-                delayMs = Math.min(delayMs, 10000); // Caps at 10s for UX
+                delayMs = Math.min(delayMs, 10000);
             }
 
             if (data.showTyping) {
@@ -143,6 +191,33 @@ async function executeNode(node: any, chatId: string, botId: string) {
             }
             await new Promise(resolve => setTimeout(resolve, delayMs));
             break;
+
+        case 'INPUT':
+            // Set waiting state
+            const timeoutSeconds = data.timeout || 60;
+            const timeoutDate = new Date(Date.now() + timeoutSeconds * 1000);
+
+            await prisma.conversation.updateMany({
+                where: { botId, telegramChatId: chatId },
+                data: {
+                    waitingForNodeId: node.id,
+                    waitingTimeout: timeoutDate
+                }
+            });
+
+            // Start a timer for the timeout path (failsafe)
+            setTimeout(async () => {
+                const conv = await prisma.conversation.findUnique({
+                    where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+                });
+                if (conv && conv.waitingForNodeId === node.id) {
+                    console.log(`[FlowEngine] Async Timeout reached for node ${node.id}`);
+                    await clearWaitingState(conv.id);
+                    await executeNextNodes(node.flowId, node.id, chatId, botId, 'timeout');
+                }
+            }, timeoutSeconds * 1000);
+
+            return true; // Stop execution until response or timeout
 
         case 'ACTION':
             if (data.subType === 'PIX' || data.subType === 'PIX_CUSTOM') {
@@ -168,6 +243,21 @@ async function executeNode(node: any, chatId: string, botId: string) {
             break;
     }
     return false;
+}
+
+async function clearWaitingState(conversationId: string) {
+    await prisma.conversation.update({
+        where: { id: conversationId },
+        data: {
+            waitingForNodeId: null,
+            waitingTimeout: null
+        }
+    });
+}
+
+async function saveVariable(conversationId: string, name: string, value: string) {
+    // For now, let's just log it or we could add a Variables model
+    console.log(`[FlowEngine] Saving variable {{${name}}} = ${value} for conversation ${conversationId}`);
 }
 
 async function saveBotMessage(botId: string, chatId: string, text: string) {

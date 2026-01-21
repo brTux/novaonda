@@ -183,7 +183,9 @@ model FlowEdge {
   flowId        String
   flow          Flow      @relation(fields: [flowId], references: [id], onDelete: Cascade)
   sourceNodeId  String
+  sourceHandle  String?
   targetNodeId  String
+  targetHandle  String?
   label         String?
   
   createdAt     DateTime  @default(now())
@@ -203,6 +205,9 @@ model Conversation {
   username      String?
   status        String?   // OPEN, CLOSED, WAITING_AGENT
   tags          String[]
+  
+  waitingForNodeId String?
+  waitingTimeout DateTime?
   
   messages      Message[]
   

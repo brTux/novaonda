@@ -44,15 +44,35 @@ export function PropertiesPanel({ selectedNode, onUpdate, onDelete, onClose }: P
                 return (
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">Palavra-chave Gatilho</label>
-                            <input
-                                name="trigger"
-                                value={data.trigger || ""}
+                            <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">Tipo de Gatilho</label>
+                            <select
+                                name="triggerType"
+                                title="Tipo de Gatilho"
+                                value={data.triggerType || "KEYWORD"}
                                 onChange={handleChange}
-                                placeholder="Ex: oi, ajuda, pix"
-                                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium focus:ring-2 ring-[#ff5100]/20 outline-none"
-                            />
+                                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none"
+                            >
+                                <option value="KEYWORD">Palavra-Chave</option>
+                                <option value="COMMAND">Comando (/)</option>
+                                <option value="TAG">Tag Recebida</option>
+                                <option value="NEW_LEAD">Novo Lead / Chat</option>
+                            </select>
                         </div>
+                        {data.triggerType !== 'NEW_LEAD' && (
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">
+                                    {data.triggerType === 'TAG' ? "Nome da Tag" : "Valor do Gatilho"}
+                                </label>
+                                <input
+                                    name="trigger"
+                                    title="Valor do Gatilho"
+                                    value={data.trigger || ""}
+                                    onChange={handleChange}
+                                    placeholder={data.triggerType === 'COMMAND' ? "/ajuda" : "Ex: oi, tag_vip"}
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium focus:ring-2 ring-[#ff5100]/20 outline-none"
+                                />
+                            </div>
+                        )}
                     </div>
                 );
 
@@ -181,6 +201,7 @@ export function PropertiesPanel({ selectedNode, onUpdate, onDelete, onClose }: P
                             <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">Tipo de Dado</label>
                             <select
                                 name="inputType"
+                                title="Tipo de Dado"
                                 value={data.inputType || "text"}
                                 onChange={handleChange}
                                 className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none"
@@ -190,6 +211,21 @@ export function PropertiesPanel({ selectedNode, onUpdate, onDelete, onClose }: P
                                 <option value="email">E-mail</option>
                                 <option value="phone">Telefone</option>
                             </select>
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">Tempo de Espera (s)</label>
+                            <div className="flex items-center gap-3">
+                                <input
+                                    name="timeout"
+                                    title="Tempo de Espera"
+                                    type="number"
+                                    value={data.timeout || 60}
+                                    onChange={handleChange}
+                                    className="flex-1 bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none"
+                                />
+                                <HelpCircle size={14} className="text-slate-300" />
+                            </div>
+                            <p className="text-[9px] text-slate-400">Se o usuário não responder neste tempo, o caminho de 'Timeout' será seguido.</p>
                         </div>
                     </div>
                 );

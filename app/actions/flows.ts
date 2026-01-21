@@ -86,13 +86,15 @@ export async function getFlowById(id: string) {
         edges: flow.edges.map((edge: any) => ({
             id: edge.id,
             source: edge.sourceId,
+            sourceHandle: edge.sourceHandle,
             target: edge.targetId,
+            targetHandle: edge.targetHandle,
             animated: true
         }))
     };
 }
 
-export async function saveFlow(id: string, nodes: any[], edges: any[]) {
+export async function saveFlow(id: string, nodes: any[], edges: any[], status?: "DRAFT" | "PUBLISHED") {
     const session = await auth();
     if (!session?.user?.id) return { error: "Unauthorized" };
 
@@ -107,7 +109,6 @@ export async function saveFlow(id: string, nodes: any[], edges: any[]) {
         // Transaction to update connection
         await prisma.$transaction(async (tx: any) => {
             // 1. Delete existing nodes and edges (simplest strategy for now)
-            // Note: In a real prod app, upserting would be better to preserve history/metrics
             await tx.edge.deleteMany({ where: { flowId: id } });
             await tx.flowNode.deleteMany({ where: { flowId: id } });
 
@@ -115,7 +116,7 @@ export async function saveFlow(id: string, nodes: any[], edges: any[]) {
             for (const node of nodes) {
                 await tx.flowNode.create({
                     data: {
-                        id: node.id, // Keep the same ID from frontend
+                        id: node.id,
                         flowId: id,
                         type: node.type,
                         positionX: node.position.x,
@@ -132,15 +133,20 @@ export async function saveFlow(id: string, nodes: any[], edges: any[]) {
                         id: edge.id,
                         flowId: id,
                         sourceId: edge.source,
-                        targetId: edge.target
+                        sourceHandle: edge.sourceHandle,
+                        targetId: edge.target,
+                        targetHandle: edge.targetHandle,
                     }
                 });
             }
 
-            // 4. Update Flow timestamp
+            // 4. Update Flow metadata
+            const updateData: any = { updatedAt: new Date() };
+            if (status) updateData.status = status;
+
             await tx.flow.update({
                 where: { id },
-                data: { updatedAt: new Date() }
+                data: updateData
             });
         });
 

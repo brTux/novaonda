@@ -41,7 +41,7 @@ export async function addBot(prevState: any, formData: FormData) {
         const { id, first_name, username } = data.result;
 
         // 2. Save to Database
-        await prisma.bot.create({
+        const bot = await prisma.bot.create({
             data: {
                 token,
                 name: first_name,
@@ -50,6 +50,23 @@ export async function addBot(prevState: any, formData: FormData) {
                 status: "ACTIVE", // Default to active for now
             },
         });
+
+        // 3. Register Webhook
+        const appUrl = process.env.AUTH_URL;
+        if (appUrl) {
+            const webhookUrl = `${appUrl}/api/webhooks/telegram/${bot.id}`;
+            const webhookResponse = await fetch(`https://api.telegram.org/bot${token}/setWebhook?url=${webhookUrl}`);
+            const webhookData = await webhookResponse.json();
+
+            if (!webhookData.ok) {
+                console.error("Failed to set webhook:", webhookData);
+                // Optional: rollback bot creation or warn user
+            } else {
+                console.log(`Webhook set to: ${webhookUrl}`);
+            }
+        } else {
+            console.warn("AUTH_URL not set, skipping webhook registration. Please configure this in production.");
+        }
 
         revalidatePath("/bots");
         return { success: true, message: `Bot @${username} conectado com sucesso!` };

@@ -157,7 +157,7 @@ async function executeNode(node: any, chatId: string, botId: string) {
         case 'MESSAGE':
             if (data.text) {
                 const replyMarkup = data.hasButtons && data.buttons?.length
-                    ? { inline_keyboard: [data.buttons.map(b => ({ text: b.label, url: b.url }))] }
+                    ? { inline_keyboard: [data.buttons.map((b: any) => ({ text: b.label, url: b.url }))] }
                     : undefined;
 
                 await sendTelegramRequest(bot.token, 'sendMessage', {

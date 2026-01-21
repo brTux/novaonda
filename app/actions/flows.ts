@@ -86,9 +86,9 @@ export async function getFlowById(id: string) {
         })),
         edges: flow.edges.map((edge: any) => ({
             id: edge.id,
-            source: edge.sourceId,
+            source: edge.sourceNodeId,
             sourceHandle: edge.sourceHandle,
-            target: edge.targetId,
+            target: edge.targetNodeId,
             targetHandle: edge.targetHandle,
             animated: true
         }))
@@ -133,9 +133,9 @@ export async function saveFlow(id: string, nodes: any[], edges: any[], status?: 
                     data: {
                         id: edge.id,
                         flowId: id,
-                        sourceId: edge.source,
+                        sourceNodeId: edge.source,
                         sourceHandle: edge.sourceHandle,
-                        targetId: edge.target,
+                        targetNodeId: edge.target,
                         targetHandle: edge.targetHandle,
                     }
                 });

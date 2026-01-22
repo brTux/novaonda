@@ -108,7 +108,26 @@ export async function processMessage(botId: string, telegramChatId: string, mess
     }
 }
 
-async function executeNextNodes(flowId: string, currentNodeId: string, chatId: string, botId: string, sourceHandle?: string) {
+export async function startFlow(flowId: string, botId: string, telegramChatId: string) {
+    console.log(`[FlowEngine] Starting flow ${flowId} for ${telegramChatId}`);
+
+    // 1. Find trigger nodes for this flow
+    const triggerNodes = await prisma.flowNode.findMany({
+        where: { flowId, type: 'TRIGGER' }
+    });
+
+    if (triggerNodes.length === 0) {
+        console.warn(`[FlowEngine] No trigger nodes found for flow ${flowId}`);
+        return;
+    }
+
+    // 2. Execute next nodes for each trigger (usually there is only one start trigger)
+    for (const triggerNode of triggerNodes) {
+        await executeNextNodes(flowId, triggerNode.id, telegramChatId, botId);
+    }
+}
+
+export async function executeNextNodes(flowId: string, currentNodeId: string, chatId: string, botId: string, sourceHandle?: string) {
     const edges = await prisma.flowEdge.findMany({
         where: {
             flowId,

@@ -1,7 +1,7 @@
 import { Worker, Job } from "bullmq";
 import { redisConnection } from "./redis";
 import { prisma } from "./prisma";
-import { processMessage } from "./flow-engine"; // We might need a modified version for automation
+import { processMessage, startFlow } from "./flow-engine"; // We might need a modified version for automation
 
 export const BROADCAST_QUEUE_NAME = "broadcast-queue";
 
@@ -19,11 +19,8 @@ export const broadcastWorker = new Worker(
 
             // 2. Either start a flow or send a raw message
             if (flowId) {
-                // To trigger a flow, we search for the first node after the trigger (or a specific start node)
-                // Actually, our FlowEngine.processMessage expects an incoming message.
-                // We might need an executeFlow function in flow-engine.ts
-                // For now, let's assume messageText is what we send as the "trigger"
-                await processMessage(botId, telegramChatId, messageText || "/start");
+                // Direct execution for campaigns
+                await startFlow(flowId, botId, telegramChatId);
             } else if (messageText) {
                 // Send raw message
                 await sendTelegramMessage(bot.token, telegramChatId, messageText);

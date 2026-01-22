@@ -10,9 +10,10 @@ interface ChatInterfaceProps {
     initialConversations: any[];
     bots?: any[];
     flows?: any[];
+    availableTags?: any[];
 }
 
-export function ChatInterface({ initialConversations, bots = [], flows = [] }: ChatInterfaceProps) {
+export function ChatInterface({ initialConversations, bots = [], flows = [], availableTags = [] }: ChatInterfaceProps) {
     const router = useRouter(); // Initialize router
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [selectedConversationId, setSelectedConversationId] = useState<string | null>(initialConversations[0]?.id || null);
@@ -26,8 +27,11 @@ export function ChatInterface({ initialConversations, bots = [], flows = [] }: C
     const [transactions, setTransactions] = useState<any[]>([]);
     const [isLoadingDetails, setIsLoadingDetails] = useState(false);
     const [newTag, setNewTag] = useState("");
+    const [showTagSuggestions, setShowTagSuggestions] = useState(false);
     const [selectedBotFilter, setSelectedBotFilter] = useState<string>("all");
     const [searchQuery, setSearchQuery] = useState("");
+    // ...
+    // ... in the return block for Tags Section:
 
     const selectedConversation = conversations.find(c => c.id === selectedConversationId);
 
@@ -413,18 +417,28 @@ export function ChatInterface({ initialConversations, bots = [], flows = [] }: C
                                 <Tag size={12} /> Tags do Lead
                             </h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {(selectedConversation.tags || []).map((tag: string) => (
-                                    <span key={tag} className="bg-orange-50 text-[#ff5100] text-[9px] font-bold px-2 py-1 rounded-lg border border-orange-100 flex items-center gap-1 group transition-all">
-                                        {tag}
-                                        <button
-                                            onClick={() => handleRemoveTag(tag)}
-                                            className="hover:text-red-500 opacity-50 hover:opacity-100"
-                                            title="Remover tag"
-                                        >
-                                            <X size={10} />
-                                        </button>
-                                    </span>
-                                ))}
+                                {(selectedConversation.tags || []).map((tag: string) => {
+                                    const tagInfo = availableTags.find((t: any) => t.name === tag);
+                                    const tagColor = tagInfo?.color || "#ff5100";
+                                    return (
+                                        <span key={tag}
+                                            className="text-[9px] font-bold px-2 py-1 rounded-lg border flex items-center gap-1 group transition-all"
+                                            style={{
+                                                backgroundColor: `${tagColor}15`,
+                                                borderColor: `${tagColor}30`,
+                                                color: tagColor
+                                            }}>
+                                            {tag}
+                                            <button
+                                                onClick={() => handleRemoveTag(tag)}
+                                                className="hover:text-red-500 opacity-50 hover:opacity-100"
+                                                title="Remover tag"
+                                            >
+                                                <X size={10} />
+                                            </button>
+                                        </span>
+                                    );
+                                })}
                                 {selectedConversation.tags?.length === 0 && (
                                     <span className="text-[10px] text-slate-400 font-medium italic">Nenhuma tag...</span>
                                 )}
@@ -434,7 +448,11 @@ export function ChatInterface({ initialConversations, bots = [], flows = [] }: C
                                     type="text"
                                     placeholder="Nova tag..."
                                     value={newTag}
-                                    onChange={(e) => setNewTag(e.target.value)}
+                                    onChange={(e) => {
+                                        setNewTag(e.target.value);
+                                        setShowTagSuggestions(true);
+                                    }}
+                                    onBlur={() => setTimeout(() => setShowTagSuggestions(false), 200)}
                                     onKeyDown={(e) => e.key === 'Enter' && handleAddTag()}
                                     className="w-full bg-slate-50 border border-slate-100 rounded-lg py-1.5 pl-3 pr-8 text-[10px] font-medium outline-none focus:ring-1 ring-orange-500/20"
                                     title="Nova tag"
@@ -446,6 +464,32 @@ export function ChatInterface({ initialConversations, bots = [], flows = [] }: C
                                 >
                                     <Plus size={14} />
                                 </button>
+
+                                {showTagSuggestions && newTag && (
+                                    <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-100 rounded-lg shadow-lg z-50 max-h-32 overflow-y-auto">
+                                        {availableTags
+                                            .filter((t: any) =>
+                                                t.name.toLowerCase().includes(newTag.toLowerCase()) &&
+                                                (!t.botId || t.botId === selectedConversation.botId)
+                                            )
+                                            .map((t: any) => (
+                                                <button
+                                                    key={t.id}
+                                                    onClick={() => {
+                                                        setNewTag(t.name);
+                                                        // Trigger add immediately? Or just fill input?
+                                                        // Let's fill input for now.
+                                                        setNewTag(t.name);
+                                                        setShowTagSuggestions(false);
+                                                    }}
+                                                    className="w-full text-left px-3 py-2 text-[10px] font-bold text-slate-600 hover:bg-slate-50 border-b border-slate-50 last:border-0 flex items-center gap-2"
+                                                >
+                                                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: t.color }} />
+                                                    {t.name}
+                                                </button>
+                                            ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
 

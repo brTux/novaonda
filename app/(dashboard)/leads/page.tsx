@@ -2,6 +2,7 @@ import React from "react";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { getLeads } from "@/app/actions/chat";
+import { getTags } from "@/app/actions/tags";
 import { LeadsTable } from "@/components/leads/LeadsTable";
 
 export default async function LeadsPage() {
@@ -9,11 +10,14 @@ export default async function LeadsPage() {
     if (!session?.user?.id) return null;
 
     // Fetch initial data
-    const leads = await getLeads({});
-    const bots = await prisma.bot.findMany({
-        where: { userId: session.user.id },
-        select: { id: true, name: true }
-    });
+    const [leads, bots, tags] = await Promise.all([
+        getLeads({}),
+        prisma.bot.findMany({
+            where: { userId: session.user.id },
+            select: { id: true, name: true }
+        }),
+        getTags()
+    ]);
 
     return (
         <div className="h-full overflow-hidden flex flex-col bg-[#f8fafc] animate-in fade-in duration-500">
@@ -23,7 +27,7 @@ export default async function LeadsPage() {
             </div>
 
             <div className="flex-1 overflow-hidden px-6 md:px-10 pb-10">
-                <LeadsTable initialLeads={leads} bots={bots} />
+                <LeadsTable initialLeads={leads} bots={bots} availableTags={tags} />
             </div>
         </div>
     );

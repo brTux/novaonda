@@ -10,6 +10,7 @@ export default auth((req) => {
         req.nextUrl.pathname.startsWith('/bots') ||
         req.nextUrl.pathname.startsWith('/chat') ||
         req.nextUrl.pathname.startsWith('/disparo') ||
+        req.nextUrl.pathname.startsWith('/tags') ||
         req.nextUrl.pathname.startsWith('/ferramentas') ||
         req.nextUrl.pathname.startsWith('/fluxos') ||
         req.nextUrl.pathname.startsWith('/settings') ||

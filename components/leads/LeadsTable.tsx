@@ -10,9 +10,10 @@ import Link from "next/link";
 interface LeadsTableProps {
     initialLeads: any[];
     bots: any[];
+    availableTags?: any[];
 }
 
-export function LeadsTable({ initialLeads, bots }: LeadsTableProps) {
+export function LeadsTable({ initialLeads, bots, availableTags = [] }: LeadsTableProps) {
     const [leads, setLeads] = useState(initialLeads);
     const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState("");
@@ -115,11 +116,22 @@ export function LeadsTable({ initialLeads, bots }: LeadsTableProps) {
                                     <td className="px-6 py-4">
                                         <div className="flex flex-wrap gap-1">
                                             {lead.tags.length > 0 ? (
-                                                lead.tags.map((tag: string) => (
-                                                    <span key={tag} className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[9px] font-bold border border-slate-200">
-                                                        {tag}
-                                                    </span>
-                                                ))
+                                                lead.tags.map((tag: string) => {
+                                                    const tagInfo = availableTags.find((t: any) => t.name === tag);
+                                                    const color = tagInfo?.color || "#64748b";
+                                                    return (
+                                                        <span key={tag}
+                                                            className="px-2 py-0.5 rounded text-[9px] font-bold border flex items-center gap-1"
+                                                            style={{
+                                                                color: color,
+                                                                borderColor: `${color}40`,
+                                                                backgroundColor: `${color}10`
+                                                            }}
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    );
+                                                })
                                             ) : (
                                                 <span className="text-[10px] text-slate-300">-</span>
                                             )}

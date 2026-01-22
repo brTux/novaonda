@@ -34,6 +34,29 @@ export async function POST(
         const username = message.from.username || "";
 
         // 3. Find or Create Conversation
+        let trackingData: any = {};
+        if (text.startsWith("/start tr_")) {
+            const trackingId = text.split(" ")[1].replace("tr_", "");
+            const tracking = await prisma.leadTracking.findUnique({
+                where: { id: trackingId }
+            });
+
+            if (tracking) {
+                trackingData = {
+                    ip: tracking.ip,
+                    city: tracking.city,
+                    state: tracking.state,
+                    latitude: tracking.latitude,
+                    longitude: tracking.longitude,
+                    utmSource: tracking.utmSource,
+                    utmMedium: tracking.utmMedium,
+                    utmCampaign: tracking.utmCampaign,
+                    utmContent: tracking.utmContent,
+                    utmTerm: tracking.utmTerm,
+                };
+            }
+        }
+
         const conversation = await prisma.conversation.upsert({
             where: {
                 botId_telegramChatId: {
@@ -43,9 +66,11 @@ export async function POST(
             },
             update: {
                 updatedAt: new Date(),
-                firstName, // Update user info in case they changed it
+                firstName,
                 lastName,
                 username,
+                // Only update tracking data if we actually have new data
+                ...(Object.keys(trackingData).length > 0 ? trackingData : {})
             },
             create: {
                 botId: bot.id,
@@ -55,6 +80,7 @@ export async function POST(
                 lastName,
                 username,
                 status: "OPEN",
+                ...trackingData
             },
         });
 

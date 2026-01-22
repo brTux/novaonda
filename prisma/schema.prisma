@@ -80,6 +80,7 @@ model User {
   
   bots          Bot[]
   campaigns     Campaign[]
+  pressells     Pressell[]
   
   @@map("users")
 }
@@ -139,6 +140,7 @@ model Bot {
   flows         Flow[]
   conversations Conversation[]
   campaigns     Campaign[]
+  pressells     Pressell[]
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -208,10 +210,23 @@ model Conversation {
   status        String?   // OPEN, CLOSED, WAITING_AGENT
   tags          String[]
   
-  waitingForNodeId String?
-  waitingTimeout DateTime?
+  waitingForNodeId String? // ID of the node that is waiting for input
+  waitingTimeout   DateTime?
   
-  messages      Message[]
+  // Tracking & Geo Details (Phase 5)
+  ip             String?
+  city           String?
+  state          String?
+  latitude       Float?
+  longitude      Float?
+  
+  utmSource      String?
+  utmMedium      String?
+  utmCampaign    String?
+  utmContent     String?
+  utmTerm        String?
+  
+  messages       Message[]
   
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -277,4 +292,43 @@ model CampaignLead {
 
   @@unique([campaignId, telegramChatId])
   @@map("campaign_leads")
+}
+
+model Pressell {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  vslUrl      String
+  buttonText  String   @default("Continuar no Telegram")
+  pixelId     String?
+  
+  botId       String
+  bot         Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("pressells")
+}
+
+model LeadTracking {
+  id             String   @id @default(cuid())
+  ip             String?
+  city           String?
+  state          String?
+  latitude       Float?
+  longitude      Float?
+  
+  utmSource      String?
+  utmMedium      String?
+  utmCampaign    String?
+  utmContent     String?
+  utmTerm        String?
+  
+  createdAt      DateTime @default(now())
+  
+  @@map("lead_tracking")
 }

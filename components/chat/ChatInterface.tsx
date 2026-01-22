@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react"; // Added useRef
-import { Search, Send, Bot, Phone, MoreVertical, Paperclip, Smile, Menu, User, Loader2 } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Search, Send, Bot, Phone, MoreVertical, Paperclip, Smile, Menu, User, Loader2, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getMessages, sendMessage } from "@/app/actions/chat";
 import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 
 interface ChatInterfaceProps {
     initialConversations: any[];
@@ -19,10 +18,8 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
     const [newMessage, setNewMessage] = useState("");
     const [isSending, setIsSending] = useState(false);
 
-    // Find selected conversation object
     const selectedConversation = initialConversations.find(c => c.id === selectedConversationId);
 
-    // Fetch messages when conversation changes
     useEffect(() => {
         if (selectedConversationId) {
             setIsLoadingMessages(true);
@@ -38,7 +35,6 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
         }
     }, [selectedConversationId]);
 
-    // Added Scroll to bottom functionality
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -47,12 +43,10 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
         scrollToBottom();
     }, [messages]);
 
-
     const handleSendMessage = async () => {
         if (!newMessage.trim() || !selectedConversationId) return;
 
         setIsSending(true);
-        // Optimistic UI update could go here, but keeping it simple for now
         const result = await sendMessage(selectedConversationId, newMessage);
 
         if (result.success && result.message) {
@@ -86,6 +80,7 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                             type="text"
                             placeholder="Buscar conversa..."
                             className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-8 pr-3 text-xs font-medium focus:ring-1 ring-[#ff5100]/20 outline-none transition-all shadow-sm"
+                            title="Buscar conversa"
                         />
                     </div>
                 </div>
@@ -107,6 +102,7 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                 "w-full p-2.5 rounded-lg flex items-center gap-2.5 transition-all text-left",
                                 selectedConversationId === conv.id ? "bg-white shadow-sm border border-slate-100" : "hover:bg-white/60"
                             )}
+                            title={`Conversa com ${conv.name}`}
                         >
                             <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#2d3339] font-bold text-[10px] shrink-0">
                                 {conv.avatar}
@@ -122,8 +118,6 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                 </div>
                                 <p className="text-[10px] text-[#555d66] truncate font-medium">{conv.lastMessage}</p>
                             </div>
-                            {/* Unread indicator placeholder */}
-                            {/* <div className="w-1.5 h-1.5 bg-[#ff5100] rounded-full shrink-0" /> */}
                         </button>
                     ))}
                 </div>
@@ -133,12 +127,12 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
             <main className="flex-1 flex flex-col min-w-0 bg-white relative h-full">
                 {selectedConversation ? (
                     <>
-                        {/* Header */}
                         <header className="h-14 border-b border-slate-100 px-4 flex items-center justify-between shrink-0 bg-white sticky top-0 z-20">
                             <div className="flex items-center gap-3">
                                 <button
                                     className="lg:hidden p-1.5 text-[#2d3339] hover:bg-slate-50 rounded-lg"
                                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                                    title="Menu"
                                 >
                                     <Menu size={18} />
                                 </button>
@@ -154,7 +148,6 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                             </div>
                         </header>
 
-                        {/* Messages Area */}
                         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/30">
                             {isLoadingMessages ? (
                                 <div className="flex justify-center items-center h-full">
@@ -174,27 +167,17 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                                         <User size={13} />
                                                     </div>
                                                 )}
-
                                                 <div className={cn(
                                                     "p-3 rounded-xl shadow-sm border",
-                                                    isAgent
-                                                        ? "bg-[#ff5100] border-[#ff5100] rounded-tr-none"
-                                                        : "bg-white border-slate-100 rounded-tl-none"
+                                                    isAgent ? "bg-[#ff5100] border-[#ff5100] rounded-tr-none" : "bg-white border-slate-100 rounded-tl-none"
                                                 )}>
-                                                    <p className={cn(
-                                                        "text-xs leading-relaxed font-medium",
-                                                        isAgent ? "text-white" : "text-[#2d3339]"
-                                                    )}>
+                                                    <p className={cn("text-xs leading-relaxed font-medium", isAgent ? "text-white" : "text-[#2d3339]")}>
                                                         {msg.content}
                                                     </p>
-                                                    <span className={cn(
-                                                        "text-[8px] font-bold mt-1.5 block opacity-50 text-right",
-                                                        isAgent ? "text-orange-100" : "text-[#555d66]"
-                                                    )}>
+                                                    <span className={cn("text-[8px] font-bold mt-1.5 block opacity-50 text-right", isAgent ? "text-orange-100" : "text-[#555d66]")}>
                                                         {format(new Date(msg.createdAt), "HH:mm")}
                                                     </span>
                                                 </div>
-
                                                 {isAgent && (
                                                     <div className="w-6 h-6 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[#2d3339] shrink-0 font-bold text-[9px]">
                                                         A
@@ -208,7 +191,6 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                             )}
                         </div>
 
-                        {/* Input Area */}
                         <footer className="p-3 bg-white border-t border-slate-100">
                             <div className="max-w-4xl mx-auto flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-xl p-1 focus-within:ring-1 ring-[#ff5100]/10 focus-within:border-[#ff5100] transition-all shadow-sm">
                                 <input
@@ -218,11 +200,13 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                                     placeholder="Digite sua resposta..."
                                     className="flex-1 bg-transparent border-none focus:outline-none text-xs px-1.5 font-medium text-[#2d3339]"
+                                    title="Nova mensagem"
                                 />
                                 <button
                                     onClick={handleSendMessage}
                                     disabled={isSending || !newMessage.trim()}
                                     className="w-8 h-8 rounded-lg bg-[#ff5100] flex items-center justify-center text-white shadow-md hover:bg-[#e64a00] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    title="Enviar"
                                 >
                                     {isSending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
                                 </button>
@@ -236,6 +220,72 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                     </div>
                 )}
             </main>
+
+            {selectedConversation && (
+                <aside className="w-72 border-l border-slate-100 bg-white flex flex-col shrink-0 hidden xl:flex animate-in slide-in-from-right duration-300">
+                    <div className="p-5 border-b border-slate-100 flex flex-col gap-1">
+                        <h3 className="text-sm font-bold text-[#2d3339]">Detalhes do Lead</h3>
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Informações de Origem</p>
+                    </div>
+
+                    <div className="p-5 space-y-6 overflow-y-auto">
+                        <div className="space-y-3">
+                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 opacity-60">
+                                <Globe size={12} /> Localização
+                            </h4>
+                            <div className="space-y-2.5">
+                                <div className="flex justify-between items-center text-[11px]">
+                                    <span className="text-slate-500 font-medium">Cidade/UF</span>
+                                    <span className="font-bold text-[#2d3339]">{selectedConversation.city || "Não detectado"}, {selectedConversation.state || "?"}</span>
+                                </div>
+                                <div className="flex justify-between items-center text-[11px]">
+                                    <span className="text-slate-500 font-medium">IP de Acesso</span>
+                                    <span className="font-bold text-[#2d3339] font-mono">{selectedConversation.ip || "---"}</span>
+                                </div>
+                                {selectedConversation.latitude && (
+                                    <div className="flex justify-between items-center text-[11px]">
+                                        <span className="text-slate-500 font-medium">Coordenadas</span>
+                                        <span className="font-bold text-[#2d3339] font-mono">{selectedConversation.latitude.toFixed(4)}, {selectedConversation.longitude.toFixed(4)}</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="space-y-3 pt-2">
+                            <h4 className="text-[10px] font-bold text-[#ff5100] uppercase tracking-widest flex items-center gap-1.5">
+                                <Search size={12} /> Marketing (UTMs)
+                            </h4>
+                            <div className="space-y-2">
+                                {[
+                                    { label: "Source", value: selectedConversation.utmSource },
+                                    { label: "Medium", value: selectedConversation.utmMedium },
+                                    { label: "Campaign", value: selectedConversation.utmCampaign },
+                                    { label: "Content", value: selectedConversation.utmContent },
+                                ].map(utm => (
+                                    <div key={utm.label} className="bg-slate-50 rounded-xl p-2.5 border border-slate-100 transition-all hover:bg-slate-100/50">
+                                        <span className="block text-[8px] font-bold text-slate-400 uppercase tracking-tighter mb-0.5">{utm.label}</span>
+                                        <span className="text-[11px] font-bold text-[#2d3339] break-all leading-tight">
+                                            {utm.value || "direto / orgânico"}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="pt-4 mt-4 border-t border-slate-50">
+                            <div className="bg-orange-50 rounded-xl p-4 flex flex-col gap-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[#ff5100] animate-pulse" />
+                                    <span className="text-[9px] font-bold text-[#ff5100] uppercase tracking-wide">Conversa Ativa</span>
+                                </div>
+                                <p className="text-[10px] text-orange-900/60 font-medium leading-relaxed">
+                                    Este lead veio através de uma Pressell e está atualmente em atendimento.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            )}
         </div>
     );
 }

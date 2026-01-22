@@ -24,6 +24,7 @@ export async function getFlows() {
         id: flow.id,
         name: flow.name,
         status: flow.status,
+        botId: flow.botId, // Added botId
         steps: flow.nodes.length,
         triggers: flow.keyword || "Sem gatilho",
         updatedAt: flow.updatedAt

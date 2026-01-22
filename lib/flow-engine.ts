@@ -324,28 +324,32 @@ async function executeNode(node: any, chatId: string, botId: string) {
                     const baseUrl = (process.env.NEXTAUTH_URL || 'https://novaonda.railway.app').replace(/\/$/, "");
                     const webhookUrl = `${baseUrl}/api/webhooks/payments/${credential.provider.toLowerCase()}`;
 
-                    console.log(`[FlowEngine] Using webhook URL: ${webhookUrl}`);
+                    console.log(`[FlowEngine] GENERATING PIX: amount=${amount} webhookUrl=${webhookUrl}`);
 
                     const pixResponse = await gateway.generatePix({
                         value: amount,
                         webhook_url: webhookUrl
                     });
 
+                    console.log(`[FlowEngine] GATEWAY RESPONSE: id=${pixResponse.id} status=${pixResponse.status}`);
+
                     // 3. Save Transaction
-                    await prisma.transaction.create({
+                    const transaction = await prisma.transaction.create({
                         data: {
-                            externalId: pixResponse.id,
+                            externalId: pixResponse.id.toString(),
                             provider: credential.provider,
                             amount: amount,
                             status: 'PENDING',
                             pixCopyPaste: pixResponse.pixCopyPaste,
                             pixQrCodeBase64: pixResponse.pixQrCodeBase64,
-                            paidTag: data.paidTag, // Save the automatic tag if configured
+                            paidTag: data.paidTag,
                             conversationId: (await prisma.conversation.findUnique({
                                 where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
                             }))?.id || ""
                         }
                     });
+
+                    console.log(`[FlowEngine] TRANSACTION CREATED: dbId=${transaction.id} externalId=${transaction.externalId}`);
 
                     const text = `💠 *Pagamento Pix Gerado*\n\nValor: R$ ${(amount / 100).toFixed(2)}\n\n*Copia e Cola:*\n\`${pixResponse.pixCopyPaste}\`\n\n_Copie o código acima e pague no seu banco._`;
 

@@ -5,28 +5,40 @@ import { handleTagTrigger } from "@/lib/flow-engine";
 export async function POST(request: Request) {
     try {
         const payload = await request.json();
-        console.log("[PushinPay Webhook] Received payload:", JSON.stringify(payload, null, 2));
+        console.log("[PushinPay Webhook] Received FULL payload:", JSON.stringify(payload, null, 2));
 
-        const { id, status, value } = payload;
+        // 1. Robust ID and Status extraction
+        // PushinPay might send payload directly or nested.
+        const data = payload.data || payload;
+        const id = data.id || data.transaction_id || data.external_id || (data.pix_details?.id);
+        const status = data.status;
         const externalId = id?.toString();
 
+        console.log(`[PushinPay Webhook] Extracted: externalId=${externalId}, status=${status}`);
+
         if (!status) {
-            console.error("[PushinPay Webhook] Missing status in payload");
+            console.error("[PushinPay Webhook] ERROR: Missing status in payload");
             return NextResponse.json({ error: "Missing status" }, { status: 400 });
         }
 
-        // 1. Find the transaction
+        if (!externalId) {
+            console.error("[PushinPay Webhook] ERROR: Could not find transaction ID in payload");
+            return NextResponse.json({ error: "Missing ID" }, { status: 400 });
+        }
+
+        // 2. Find the transaction
         const transaction = await prisma.transaction.findUnique({
             where: { externalId },
             include: { conversation: { include: { bot: true } } }
         });
 
         if (!transaction) {
-            console.warn(`[PushinPay Webhook] Transaction not found for externalId: ${externalId}`);
-            return NextResponse.json({ error: "Transaction not found" }, { status: 404 });
+            console.warn(`[PushinPay Webhook] WARNING: Transaction not found in DB for externalId: ${externalId}`);
+            // Return 200 to acknowledge receipt even if not found, to stop retries if it's a dead transaction
+            return NextResponse.json({ error: "Transaction not found", externalId }, { status: 200 });
         }
 
-        // 2. Update status mapping (robust check)
+        // 3. Update status mapping
         const isPaid = status.toLowerCase() === 'paid';
         const newStatus = isPaid ? 'PAID' : transaction.status;
 
@@ -38,7 +50,7 @@ export async function POST(request: Request) {
             }
         });
 
-        console.log(`[PushinPay Webhook] Updated transaction ${externalId} (DB ID: ${transaction.id}) to ${newStatus}`);
+        console.log(`[PushinPay Webhook] SUCCESS: Updated transaction ${externalId} (DB ID: ${transaction.id}) to ${newStatus}`);
 
         // 3. Trigger automation
         if (isPaid) {

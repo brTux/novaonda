@@ -156,6 +156,11 @@ model Bot {
   campaigns     Campaign[]
   pressells     Pressell[]
   
+  // Meta Tracking (Phase 5)
+  pixelId       String?
+  capiToken     String?
+  testEventCode String? // Use for Test Events in Events Manager
+  
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -239,6 +244,9 @@ model Conversation {
   utmCampaign    String?
   utmContent     String?
   utmTerm        String?
+  
+  fbc            String?   // Facebook Click ID
+  fbp            String?   // Facebook Browser ID
   
   messages       Message[]
   transactions   Transaction[]
@@ -328,6 +336,8 @@ model Pressell {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  leadTrackings LeadTracking[]
+  
   @@map("pressells")
 }
 
@@ -344,6 +354,12 @@ model LeadTracking {
   utmCampaign    String?
   utmContent     String?
   utmTerm        String?
+  
+  pressellId     String?
+  pressell       Pressell? @relation(fields: [pressellId], references: [id], onDelete: SetNull)
+  
+  fbc            String?
+  fbp            String?
   
   createdAt      DateTime @default(now())
   

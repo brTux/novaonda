@@ -53,6 +53,8 @@ export async function POST(
                     utmCampaign: tracking.utmCampaign,
                     utmContent: tracking.utmContent,
                     utmTerm: tracking.utmTerm,
+                    fbc: tracking.fbc,
+                    fbp: tracking.fbp,
                 };
             }
         }

@@ -1,55 +1,38 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export async function createPressell(data: {
-    slug: string;
-    title: string;
-    vslUrl: string;
-    buttonText: string;
-    botId: string;
-    pixelId?: string;
-    safeUrl?: string;
-}) {
-    const session = await auth();
-    if (!session?.user?.id) throw new Error("Unauthorized");
-
-    const pressell = await prisma.pressell.create({
-        data: {
-            ...data,
-            userId: session.user.id,
-            config: [] // Initial empty config
+export async function updateBotMarketing(botId: string, data: { pixelId: string, capiToken: string, testEventCode?: string }) {
+    try {
+        const session = await auth();
+        if (!session?.user?.id) {
+            return { success: false, message: "Não autorizado" };
         }
-    });
 
-    revalidatePath("/ferramentas/pressel");
-    return { success: true, pressell };
-}
+        // Verify ownership
+        const bot = await prisma.bot.findUnique({
+            where: { id: botId, userId: session.user.id }
+        });
 
-export async function updatePressell(id: string, data: any) {
-    const session = await auth();
-    if (!session?.user?.id) throw new Error("Unauthorized");
+        if (!bot) {
+            return { success: false, message: "Bot não encontrado" };
+        }
 
-    await prisma.pressell.update({
-        where: { id, userId: session.user.id },
-        data
-    });
+        await prisma.bot.update({
+            where: { id: botId },
+            data: {
+                pixelId: data.pixelId || null,
+                capiToken: data.capiToken || null,
+                testEventCode: data.testEventCode || null,
+            }
+        });
 
-    revalidatePath("/ferramentas/pressel");
-    revalidatePath(`/ferramentas/pressel/${id}/builder`);
-    return { success: true };
-}
-
-export async function deletePressell(id: string) {
-    const session = await auth();
-    if (!session?.user?.id) throw new Error("Unauthorized");
-
-    await prisma.pressell.delete({
-        where: { id, userId: session.user.id }
-    });
-
-    revalidatePath("/ferramentas/pressel");
-    return { success: true };
+        revalidatePath("/ferramentas/tracking");
+        return { success: true };
+    } catch (error) {
+        console.error("[updateBotMarketing] Error:", error);
+        return { success: false, message: "Erro ao atualizar" };
+    }
 }

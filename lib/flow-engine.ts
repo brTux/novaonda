@@ -334,6 +334,10 @@ async function executeNode(node: any, chatId: string, botId: string) {
                     console.log(`[FlowEngine] GATEWAY RESPONSE: id=${pixResponse.id} status=${pixResponse.status}`);
 
                     // 3. Save Transaction
+                    const conv = await prisma.conversation.findUnique({
+                        where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+                    });
+
                     const transaction = await prisma.transaction.create({
                         data: {
                             externalId: pixResponse.id.toString().toLowerCase(),
@@ -343,13 +347,38 @@ async function executeNode(node: any, chatId: string, botId: string) {
                             pixCopyPaste: pixResponse.pixCopyPaste,
                             pixQrCodeBase64: pixResponse.pixQrCodeBase64,
                             paidTag: data.paidTag,
-                            conversationId: (await prisma.conversation.findUnique({
-                                where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
-                            }))?.id || ""
+                            conversationId: conv?.id || ""
                         }
                     });
 
                     console.log(`[FlowEngine] TRANSACTION CREATED: dbId=${transaction.id} externalId=${transaction.externalId}`);
+
+                    // 4. Trigger Meta CAPI Event (InitiateCheckout)
+                    if (bot.pixelId && bot.capiToken && conv) {
+                        try {
+                            const { sendMetaEvent } = await import("@/lib/meta");
+                            await sendMetaEvent({
+                                eventName: "InitiateCheckout",
+                                pixelId: bot.pixelId,
+                                accessToken: bot.capiToken,
+                                testEventCode: bot.testEventCode,
+                                user: {
+                                    ip: conv.ip,
+                                    userAgent: "Telegram Bot", // We don't have the original web user agent here usually, but we have IP
+                                    fbc: conv.fbc,
+                                    fbp: conv.fbp,
+                                },
+                                customData: {
+                                    value: amount / 100,
+                                    currency: "BRL",
+                                    content_name: "Geração de Pix",
+                                    order_id: transaction.id
+                                }
+                            });
+                        } catch (capiErr) {
+                            console.error("[FlowEngine] CAPI Error:", capiErr);
+                        }
+                    }
 
                     const text = `💠 *Pagamento Pix Gerado*\n\nValor: R$ ${(amount / 100).toFixed(2)}\n\n*Copia e Cola:*\n\`${pixResponse.pixCopyPaste}\`\n\n_Copie o código acima e pague no seu banco._`;
 

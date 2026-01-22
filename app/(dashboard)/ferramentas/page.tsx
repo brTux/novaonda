@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Wrench, Layout, CheckCircle, CreditCard, ArrowRight, Sparkles, Wand2 } from "lucide-react";
+import { Wrench, Layout, CheckCircle, CreditCard, ArrowRight, Sparkles, Wand2, Facebook } from "lucide-react";
 
 const tools = [
     {
@@ -28,6 +28,14 @@ const tools = [
         icon: CreditCard,
         color: "text-[#ff5100] bg-[#fff5f0]",
         href: "/ferramentas/checkout"
+    },
+    {
+        id: "tracking",
+        name: "Meta Pixel & CAPI",
+        description: "Configure o rastreamento profissional e API de conversões para vender mais.",
+        icon: Facebook,
+        color: "text-blue-500 bg-blue-50",
+        href: "/ferramentas/tracking"
     }
 ];
 

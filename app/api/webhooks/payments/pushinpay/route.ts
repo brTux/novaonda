@@ -60,6 +60,37 @@ export async function POST(request: Request) {
             }
         });
 
+        // 4. Trigger Meta CAPI Event (Purchase)
+        if (isPaid && transaction.status !== 'PAID') { // Only if transition to PAID
+            const bot = transaction.conversation.bot;
+            const conv = transaction.conversation;
+
+            if (bot.pixelId && bot.capiToken) {
+                try {
+                    const { sendMetaEvent } = await import("@/lib/meta");
+                    await sendMetaEvent({
+                        eventName: "Purchase",
+                        pixelId: bot.pixelId,
+                        accessToken: bot.capiToken,
+                        testEventCode: bot.testEventCode,
+                        user: {
+                            ip: conv.ip,
+                            userAgent: "Server-side Webhook",
+                            fbc: conv.fbc,
+                            fbp: conv.fbp,
+                        },
+                        customData: {
+                            value: transaction.amount / 100,
+                            currency: "BRL",
+                            order_id: transaction.id
+                        }
+                    });
+                } catch (capiErr) {
+                    console.error("[PushinPay Webhook] CAPI Error:", capiErr);
+                }
+            }
+        }
+
         console.log(`[PushinPay Webhook] SUCCESS: Updated transaction ${externalId} (DB ID: ${transaction.id}) to ${newStatus}`);
 
         // 3. Trigger automation

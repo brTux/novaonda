@@ -38,7 +38,10 @@ export default function PressellRenderer({ pressell }: PressellRendererProps) {
             try {
                 const res = await fetch("/api/tracking/pressel", {
                     method: "POST",
-                    body: JSON.stringify({ utms }),
+                    body: JSON.stringify({
+                        utms,
+                        pressellId: pressell.id
+                    }),
                 });
                 const data = await res.json();
                 setTrackingId(data.trackingId);

@@ -9,9 +9,9 @@ export default async function DashboardLayout({
     const session = await auth();
 
     return (
-        <div className="h-screen flex flex-col bg-[#f8fafc] overflow-hidden">
+        <div className="min-h-screen flex flex-col bg-[#f8fafc]">
             <Navigation user={session?.user} />
-            <main className="flex-1 flex flex-col overflow-auto">
+            <main className="flex-1 flex flex-col">
                 {children}
             </main>
         </div>

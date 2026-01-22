@@ -27,7 +27,7 @@ interface DashboardClientProps {
 
 export default function DashboardClient({ stats, chartData, recentActivity }: DashboardClientProps) {
     return (
-        <div className="flex-1 overflow-auto p-6 md:p-10 space-y-10 animate-in fade-in duration-500">
+        <div className="p-6 md:p-10 space-y-10 animate-in fade-in duration-500">
             <div className="flex flex-col gap-1">
                 <h1 className="text-2xl font-bold text-[#2d3339]">Painel de Controle</h1>
                 <p className="text-sm text-[#555d66] font-medium">Bem-vindo à nova era da automação.</p>

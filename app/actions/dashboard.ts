@@ -12,14 +12,16 @@ export async function getDashboardStats() {
     const userId = session.user.id;
 
     // 1. Core Metrics & Activity
-    const [totalLeads, totalMessages, totalBots, activeBots, totalRevenueResult, totalSales] = await Promise.all([
-        prisma.leadTracking.count(),
-        prisma.message.count({ where: { conversation: { bot: { userId } } } }),
+    const [totalLeads, totalBots, activeBots, totalRevenueResult, pixGenerated, pixPaid] = await Promise.all([
+        prisma.conversation.count({ where: { bot: { userId } } }),
         prisma.bot.count({ where: { userId } }),
         prisma.bot.count({ where: { userId, status: "ACTIVE" } }),
         prisma.transaction.aggregate({
             _sum: { amount: true },
             where: { status: 'PAID', conversation: { bot: { userId } } }
+        }),
+        prisma.transaction.count({
+            where: { conversation: { bot: { userId } } }
         }),
         prisma.transaction.count({
             where: { status: 'PAID', conversation: { bot: { userId } } }
@@ -28,12 +30,14 @@ export async function getDashboardStats() {
 
     const totalRevenue = (totalRevenueResult._sum.amount || 0) / 100;
 
-    // 2. Recent Activity
-    const recentLeads = await prisma.leadTracking.findMany({
+    // 2. Recent Activity (Keep it as it is for now, maybe add more types if needed)
+    const recentLeads = await prisma.conversation.findMany({
+        where: { bot: { userId } },
         take: 3,
         orderBy: { createdAt: "desc" },
     });
 
+    // ... rest of the activity logic is fine as it uses recentPayments and recentLeads
     const recentPayments = await prisma.transaction.findMany({
         where: { status: 'PAID', conversation: { bot: { userId } } },
         take: 3,
@@ -44,8 +48,8 @@ export async function getDashboardStats() {
     const combinedActivity = [
         ...recentLeads.map(l => ({
             id: l.id,
-            title: "Novo lead rastreado",
-            description: `${l.city || "Localização desconhecida"} • ${l.utmSource || "Direto"}`,
+            title: "Novo lead interagiu",
+            description: `${l.firstName || "Cliente"} • ${l.username || "Telegram"}`,
             time: format(l.createdAt, "HH:mm"),
             date: format(l.createdAt, "dd/MM"),
             type: 'LEAD',
@@ -62,7 +66,7 @@ export async function getDashboardStats() {
         }))
     ].sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()).slice(0, 5);
 
-    // 3. Chart Data (Last 7 days)
+    // 3. Chart Data
     const chartData = [];
     for (let i = 6; i >= 0; i--) {
         const date = subDays(new Date(), i);
@@ -70,8 +74,8 @@ export async function getDashboardStats() {
         const nextDay = startOfDay(subDays(date, -1));
 
         const [dayLeads, dayRevenue] = await Promise.all([
-            prisma.leadTracking.count({
-                where: { createdAt: { gte: dayStart, lt: nextDay } }
+            prisma.conversation.count({
+                where: { createdAt: { gte: dayStart, lt: nextDay }, bot: { userId } }
             }),
             prisma.transaction.aggregate({
                 _sum: { amount: true },
@@ -90,14 +94,17 @@ export async function getDashboardStats() {
         });
     }
 
-    const conversionRate = totalLeads > 0 ? (totalSales / totalLeads * 100).toFixed(1) + "%" : "0%";
+    const conversionRate = totalLeads > 0 ? (pixPaid / totalLeads * 100).toFixed(1) + "%" : "0%";
 
     return {
         stats: {
             totalLeads,
-            totalMessages,
             totalRevenue: `R$ ${totalRevenue.toFixed(2)}`,
-            performance: conversionRate,
+            salesGenerated: pixGenerated, // For now Vendas = Transactions
+            salesPaid: pixPaid,
+            pixGenerated,
+            pixPaid,
+            conversionRate,
             activeBots,
         },
         recentActivity: combinedActivity,

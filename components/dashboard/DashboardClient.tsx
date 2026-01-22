@@ -36,10 +36,13 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { label: "Total de Leads", value: stats.totalLeads, change: "+0%", icon: Users, color: "text-[#ff5100] bg-[#fff5f0]" },
-                    { label: "Vendas Pix", value: stats.totalRevenue, change: "+0%", icon: Zap, color: "text-[#ffb800] bg-[#fffcf0]" },
-                    { label: "Mensagens", value: stats.totalMessages, change: "+0%", icon: MessageSquare, color: "text-blue-500 bg-blue-50" },
-                    { label: "Taxa Conversão", value: stats.performance, change: "+0%", icon: TrendingUp, color: "text-emerald-500 bg-emerald-50" },
+                    { label: "Faturamento", value: stats.totalRevenue, change: "+0%", icon: TrendingUp, color: "text-emerald-500 bg-emerald-50" },
+                    { label: "Taxa Conversão", value: stats.conversionRate, change: "+0%", icon: Zap, color: "text-[#ff5100] bg-[#fff5f0]" },
+                    { label: "Total de Leads", value: stats.totalLeads, change: "+0%", icon: Users, color: "text-blue-500 bg-blue-50" },
+                    { label: "Vendas Pagas", value: stats.salesPaid, change: "+0%", icon: Zap, color: "text-emerald-500 bg-emerald-50" },
+                    { label: "Vendas Geradas", value: stats.salesGenerated, change: "+0%", icon: MessageSquare, color: "text-slate-500 bg-slate-50" },
+                    { label: "Pix Gerados", value: stats.pixGenerated, change: "+0%", icon: Zap, color: "text-[#ffb800] bg-[#fffcf0]" },
+                    { label: "Pix Pagos", value: stats.pixPaid, change: "+0%", icon: Zap, color: "text-emerald-500 bg-emerald-50" },
                 ].map((item) => (
                     <div key={item.label} className="glass-card p-6 bg-white border border-slate-100 flex flex-col gap-4">
                         <div className="flex justify-between items-center">
@@ -114,8 +117,8 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
                         {recentActivity.map((activity) => (
                             <div key={activity.id} className="flex gap-4 group cursor-pointer border-b border-slate-50 pb-4 last:border-0 last:pb-0">
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${activity.type === 'SALE'
-                                        ? 'bg-emerald-50 text-emerald-500 group-hover:bg-emerald-100'
-                                        : 'bg-slate-50 text-[#ff5100] group-hover:bg-[#fff5f0]'
+                                    ? 'bg-emerald-50 text-emerald-500 group-hover:bg-emerald-100'
+                                    : 'bg-slate-50 text-[#ff5100] group-hover:bg-[#fff5f0]'
                                     }`}>
                                     {activity.type === 'SALE' ? <TrendingUp size={18} /> : <Zap size={18} />}
                                 </div>

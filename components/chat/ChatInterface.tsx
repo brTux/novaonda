@@ -172,7 +172,7 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
             </aside>
 
             {/* Main Chat */}
-            <main className="flex-1 flex flex-col min-w-0 bg-white relative h-full">
+            <main className="flex-1 flex flex-col min-w-0 bg-white relative overflow-hidden">
                 {selectedConversation ? (
                     <>
                         <header className="h-14 border-b border-slate-100 px-4 flex items-center justify-between shrink-0 bg-white sticky top-0 z-20">
@@ -204,31 +204,31 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                             ) : (
                                 <>
                                     {messages.map((msg) => {
-                                        const isAgent = msg.sender === 'AGENT';
+                                        const isFromBot = msg.sender === 'BOT' || msg.sender === 'AGENT';
                                         return (
                                             <div key={msg.id} className={cn(
                                                 "flex gap-2 items-start max-w-[80%]",
-                                                isAgent ? "justify-end ml-auto" : ""
+                                                isFromBot ? "justify-end ml-auto" : ""
                                             )}>
-                                                {!isAgent && (
+                                                {!isFromBot && (
                                                     <div className="w-6 h-6 rounded-lg bg-orange-50 flex items-center justify-center text-[#ff5100] shrink-0 border border-orange-100">
                                                         <User size={13} />
                                                     </div>
                                                 )}
                                                 <div className={cn(
                                                     "p-3 rounded-xl shadow-sm border",
-                                                    isAgent ? "bg-[#ff5100] border-[#ff5100] rounded-tr-none" : "bg-white border-slate-100 rounded-tl-none"
+                                                    isFromBot ? "bg-[#ff5100] border-[#ff5100] rounded-tr-none" : "bg-white border-slate-100 rounded-tl-none"
                                                 )}>
-                                                    <p className={cn("text-xs leading-relaxed font-medium", isAgent ? "text-white" : "text-[#2d3339]")}>
+                                                    <p className={cn("text-xs leading-relaxed font-medium", isFromBot ? "text-white" : "text-[#2d3339]")}>
                                                         {msg.content}
                                                     </p>
-                                                    <span className={cn("text-[8px] font-bold mt-1.5 block opacity-50 text-right", isAgent ? "text-orange-100" : "text-[#555d66]")}>
+                                                    <span className={cn("text-[8px] font-bold mt-1.5 block opacity-50 text-right", isFromBot ? "text-orange-100" : "text-[#555d66]")}>
                                                         {format(new Date(msg.createdAt), "HH:mm")}
                                                     </span>
                                                 </div>
-                                                {isAgent && (
+                                                {isFromBot && (
                                                     <div className="w-6 h-6 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-[#2d3339] shrink-0 font-bold text-[9px]">
-                                                        A
+                                                        {msg.sender === 'AGENT' ? 'A' : 'B'}
                                                     </div>
                                                 )}
                                             </div>

@@ -336,7 +336,7 @@ async function executeNode(node: any, chatId: string, botId: string) {
                     // 3. Save Transaction
                     const transaction = await prisma.transaction.create({
                         data: {
-                            externalId: pixResponse.id.toString(),
+                            externalId: pixResponse.id.toString().toLowerCase(),
                             provider: credential.provider,
                             amount: amount,
                             status: 'PENDING',

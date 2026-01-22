@@ -22,7 +22,7 @@ export async function POST(request: Request) {
         const data = payload.data || payload;
         const id = data.id || data.transaction_id || data.external_id || (data.pix_details?.id);
         const status = data.status;
-        const externalId = id?.toString();
+        const externalId = id?.toString().toLowerCase();
 
         console.log(`[PushinPay Webhook] Extracted: externalId=${externalId}, status=${status}`);
 

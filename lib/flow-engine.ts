@@ -321,7 +321,7 @@ async function executeNode(node: any, chatId: string, botId: string) {
                     const amount = data.amount ? Math.round(data.amount * 100) : 50; // default 0.50 cents if not set
 
                     // Robust URL Construction
-                    const baseUrl = (process.env.NEXTAUTH_URL || 'https://novaonda.railway.app').replace(/\/$/, "");
+                    const baseUrl = (process.env.NEXTAUTH_URL || 'https://novaonda-production.up.railway.app').replace(/\/$/, "");
                     const webhookUrl = `${baseUrl}/api/webhooks/payments/${credential.provider.toLowerCase()}`;
 
                     console.log(`[FlowEngine] GENERATING PIX: amount=${amount} webhookUrl=${webhookUrl}`);

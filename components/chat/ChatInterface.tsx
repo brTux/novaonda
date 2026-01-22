@@ -153,7 +153,7 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                             title={`Conversa com ${conv.name}`}
                         >
                             <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#2d3339] font-bold text-[10px] shrink-0">
-                                {conv.avatar}
+                                {conv.avatar || conv.firstName?.charAt(0)?.toUpperCase() || "?"}
                             </div>
                             <div className="flex-1 min-w-0">
                                 <div className="flex justify-between items-center mb-0.5">
@@ -185,7 +185,7 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                     <Menu size={18} />
                                 </button>
                                 <div className="w-8 h-8 rounded-full bg-[#ff5100] flex items-center justify-center text-white font-bold text-[10px] shadow-sm">
-                                    {selectedConversation.avatar}
+                                    {selectedConversation.avatar || selectedConversation.firstName?.charAt(0)?.toUpperCase() || "?"}
                                 </div>
                                 <div>
                                     <h2 className="font-bold text-[#2d3339] text-xs">{selectedConversation.name}</h2>

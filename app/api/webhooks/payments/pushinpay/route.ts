@@ -4,11 +4,21 @@ import { handleTagTrigger } from "@/lib/flow-engine";
 
 export async function POST(request: Request) {
     try {
-        const payload = await request.json();
-        console.log("[PushinPay Webhook] Received FULL payload:", JSON.stringify(payload, null, 2));
+        const contentType = request.headers.get("content-type") || "";
+        const rawText = await request.text();
+        console.log(`[PushinPay Webhook] Received raw body (Type: ${contentType}):`, rawText);
+
+        let payload: any;
+        try {
+            payload = JSON.parse(rawText);
+        } catch (e) {
+            // Fallback to URL-Encoded parsing
+            const params = new URLSearchParams(rawText);
+            payload = Object.fromEntries(params.entries());
+            console.log("[PushinPay Webhook] Parsed as Form-Encoded:", JSON.stringify(payload, null, 2));
+        }
 
         // 1. Robust ID and Status extraction
-        // PushinPay might send payload directly or nested.
         const data = payload.data || payload;
         const id = data.id || data.transaction_id || data.external_id || (data.pix_details?.id);
         const status = data.status;

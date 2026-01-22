@@ -1,9 +1,8 @@
 "use client";
-
 import React, { useState, useEffect, useRef } from "react";
-import { Search, Send, Bot, Phone, MoreVertical, Paperclip, Smile, Menu, User, Loader2, Globe } from "lucide-react";
+import { Search, Send, Bot, Phone, MoreVertical, Paperclip, Smile, Menu, User, Loader2, Globe, Tag, X, Plus, CreditCard, CheckCircle2, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getMessages, sendMessage } from "@/app/actions/chat";
+import { getMessages, sendMessage, getTransactions, updateConversationTags } from "@/app/actions/chat";
 import { format } from "date-fns";
 
 interface ChatInterfaceProps {
@@ -18,11 +17,20 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
     const [newMessage, setNewMessage] = useState("");
     const [isSending, setIsSending] = useState(false);
 
-    const selectedConversation = initialConversations.find(c => c.id === selectedConversationId);
+    // Advanced Lead States
+    const [conversations, setConversations] = useState(initialConversations);
+    const [transactions, setTransactions] = useState<any[]>([]);
+    const [isLoadingDetails, setIsLoadingDetails] = useState(false);
+    const [newTag, setNewTag] = useState("");
+
+    const selectedConversation = conversations.find(c => c.id === selectedConversationId);
 
     useEffect(() => {
         if (selectedConversationId) {
             setIsLoadingMessages(true);
+            setIsLoadingDetails(true);
+
+            // Fetch messages
             getMessages(selectedConversationId)
                 .then(data => {
                     setMessages(data);
@@ -32,13 +40,53 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                     console.error(err);
                     setIsLoadingMessages(false);
                 });
+
+            // Fetch Transactions
+            getTransactions(selectedConversationId)
+                .then(data => {
+                    setTransactions(data);
+                    setIsLoadingDetails(false);
+                })
+                .catch(err => {
+                    console.error(err);
+                    setIsLoadingDetails(false);
+                });
         }
     }, [selectedConversationId]);
 
+    const handleAddTag = async () => {
+        if (!newTag.trim() || !selectedConversationId || !selectedConversation) return;
+
+        const updatedTags = [...(selectedConversation.tags || []), newTag.trim()];
+        const result = await updateConversationTags(selectedConversationId, updatedTags);
+
+        if (result.success) {
+            setConversations(prev => prev.map(c =>
+                c.id === selectedConversationId ? { ...c, tags: updatedTags } : c
+            ));
+            setNewTag("");
+        }
+    };
+
+    const handleRemoveTag = async (tagName: string) => {
+        if (!selectedConversationId || !selectedConversation) return;
+
+        const updatedTags = (selectedConversation.tags || []).filter((t: string) => t !== tagName);
+        const result = await updateConversationTags(selectedConversationId, updatedTags);
+
+        if (result.success) {
+            setConversations(prev => prev.map(c =>
+                c.id === selectedConversationId ? { ...c, tags: updatedTags } : c
+            ));
+        }
+    };
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
@@ -228,7 +276,49 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Informações de Origem</p>
                     </div>
 
-                    <div className="p-5 space-y-6 overflow-y-auto">
+                    <div className="p-5 space-y-6 overflow-y-auto flex-1">
+                        {/* Tags Section */}
+                        <div className="space-y-3">
+                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 opacity-60">
+                                <Tag size={12} /> Tags do Lead
+                            </h4>
+                            <div className="flex flex-wrap gap-1.5">
+                                {(selectedConversation.tags || []).map((tag: string) => (
+                                    <span key={tag} className="bg-orange-50 text-[#ff5100] text-[9px] font-bold px-2 py-1 rounded-lg border border-orange-100 flex items-center gap-1 group transition-all">
+                                        {tag}
+                                        <button
+                                            onClick={() => handleRemoveTag(tag)}
+                                            className="hover:text-red-500 opacity-50 hover:opacity-100"
+                                            title="Remover tag"
+                                        >
+                                            <X size={10} />
+                                        </button>
+                                    </span>
+                                ))}
+                                {selectedConversation.tags?.length === 0 && (
+                                    <span className="text-[10px] text-slate-400 font-medium italic">Nenhuma tag...</span>
+                                )}
+                            </div>
+                            <div className="relative mt-2">
+                                <input
+                                    type="text"
+                                    placeholder="Nova tag..."
+                                    value={newTag}
+                                    onChange={(e) => setNewTag(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleAddTag()}
+                                    className="w-full bg-slate-50 border border-slate-100 rounded-lg py-1.5 pl-3 pr-8 text-[10px] font-medium outline-none focus:ring-1 ring-orange-500/20"
+                                    title="Nova tag"
+                                />
+                                <button
+                                    onClick={handleAddTag}
+                                    className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[#ff5100] hover:scale-110 transition-transform"
+                                    title="Adicionar"
+                                >
+                                    <Plus size={14} />
+                                </button>
+                            </div>
+                        </div>
+
                         <div className="space-y-3">
                             <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 opacity-60">
                                 <Globe size={12} /> Localização
@@ -242,16 +332,10 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                     <span className="text-slate-500 font-medium">IP de Acesso</span>
                                     <span className="font-bold text-[#2d3339] font-mono">{selectedConversation.ip || "---"}</span>
                                 </div>
-                                {selectedConversation.latitude && (
-                                    <div className="flex justify-between items-center text-[11px]">
-                                        <span className="text-slate-500 font-medium">Coordenadas</span>
-                                        <span className="font-bold text-[#2d3339] font-mono">{selectedConversation.latitude.toFixed(4)}, {selectedConversation.longitude.toFixed(4)}</span>
-                                    </div>
-                                )}
                             </div>
                         </div>
 
-                        <div className="space-y-3 pt-2">
+                        <div className="space-y-3">
                             <h4 className="text-[10px] font-bold text-[#ff5100] uppercase tracking-widest flex items-center gap-1.5">
                                 <Search size={12} /> Marketing (UTMs)
                             </h4>
@@ -267,6 +351,36 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                         <span className="text-[11px] font-bold text-[#2d3339] break-all leading-tight">
                                             {utm.value || "direto / orgânico"}
                                         </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Transactions Section */}
+                        <div className="space-y-3 pt-2">
+                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 opacity-60">
+                                <CreditCard size={12} /> Histórico de Transações
+                            </h4>
+                            <div className="space-y-2">
+                                {transactions.length === 0 && (
+                                    <p className="text-[10px] text-slate-400 font-medium italic">Nenhum pagamento gerado.</p>
+                                )}
+                                {transactions.map((t: any) => (
+                                    <div key={t.id} className="bg-white border border-slate-100 rounded-xl p-3 shadow-sm flex flex-col gap-2">
+                                        <div className="flex justify-between items-start">
+                                            <span className="text-xs font-bold text-[#2d3339]">R$ {(t.amount / 100).toFixed(2)}</span>
+                                            <div className={cn(
+                                                "px-1.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider flex items-center gap-1",
+                                                t.status === 'PAID' ? "bg-green-50 text-green-600" : "bg-orange-50 text-orange-600"
+                                            )}>
+                                                {t.status === 'PAID' ? <CheckCircle2 size={8} /> : <Clock size={8} />}
+                                                {t.status === 'PAID' ? "Pago" : "Pendente"}
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-between items-center text-[9px] text-slate-400 font-medium">
+                                            <span>{t.provider}</span>
+                                            <span>{format(new Date(t.createdAt), "dd/MM HH:mm")}</span>
+                                        </div>
                                     </div>
                                 ))}
                             </div>

@@ -302,6 +302,7 @@ async function executeNode(node: any, chatId: string, botId: string) {
                             status: 'PENDING',
                             pixCopyPaste: pixResponse.pixCopyPaste,
                             pixQrCodeBase64: pixResponse.pixQrCodeBase64,
+                            paidTag: data.paidTag, // Save the automatic tag if configured
                             conversationId: (await prisma.conversation.findUnique({
                                 where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
                             }))?.id || ""

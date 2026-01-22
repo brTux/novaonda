@@ -377,6 +377,9 @@ model Transaction {
   pixCopyPaste   String?
   pixQrCodeBase64 String?
   
+  paidTag        String?           // Tag to apply to the conversation when paid
+  metadata       Json?             // Additional data for the transaction
+  
   conversationId String
   conversation   Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   

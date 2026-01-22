@@ -45,8 +45,64 @@ export async function getConversations() {
         unread: 0, // TODO: Implement unread count later
         botName: conv.bot.name,
         botId: conv.botId,
-        telegramUserId: conv.telegramUserId
+        telegramUserId: conv.telegramUserId,
+        tags: conv.tags || [],
+        ip: conv.ip,
+        city: conv.city,
+        state: conv.state,
+        latitude: conv.latitude,
+        longitude: conv.longitude,
+        utmSource: conv.utmSource,
+        utmMedium: conv.utmMedium,
+        utmCampaign: conv.utmCampaign,
+        utmContent: conv.utmContent,
     }));
+}
+
+// Fetch transactions for a conversation
+export async function getTransactions(conversationId: string) {
+    const session = await auth();
+    if (!session?.user?.id) return [];
+
+    const transactions = await prisma.transaction.findMany({
+        where: { conversationId },
+        orderBy: { createdAt: "desc" },
+    });
+
+    return transactions.map((t: any) => ({
+        id: t.id,
+        amount: t.amount,
+        status: t.status,
+        provider: t.provider,
+        createdAt: t.createdAt,
+        paidAt: t.paidAt
+    }));
+}
+
+// Update conversation tags
+export async function updateConversationTags(conversationId: string, tags: string[]) {
+    const session = await auth();
+    if (!session?.user?.id) return { error: "Unauthorized" };
+
+    try {
+        const conversation = await prisma.conversation.findUnique({
+            where: { id: conversationId },
+            include: { bot: true }
+        });
+
+        if (!conversation || conversation.bot.userId !== session.user.id) {
+            return { error: "Unauthorized" };
+        }
+
+        await prisma.conversation.update({
+            where: { id: conversationId },
+            data: { tags: { set: tags } }
+        });
+        return { success: true };
+    } catch (error) {
+        console.error("UpdateTags Error:", error);
+        return { error: "Failed to update tags" };
+    }
 }
 
 // Fetch messages for a specific conversation

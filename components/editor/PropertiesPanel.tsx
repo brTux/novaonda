@@ -256,6 +256,20 @@ export function PropertiesPanel({ selectedNode, onUpdate, onDelete, onClose }: P
                                 />
                                 <p className="text-[9px] text-slate-400">O robô enviará o código Copia e Cola para o cliente.</p>
                             </div>
+
+                            <div className="space-y-2">
+                                <legend className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider text-[#ff5100]">Tag de Sucesso (Pós-Pagamento)</legend>
+                                <input
+                                    name="paidTag"
+                                    value={data.paidTag || ""}
+                                    onChange={handleChange}
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 ring-orange-500/20"
+                                    placeholder="ex: cliente_vip, pago_pix"
+                                />
+                                <p className="text-[9px] text-slate-400 leading-relaxed italic">
+                                    Esta tag será aplicada ao lead assim que o pagamento for confirmado.
+                                </p>
+                            </div>
                         </div>
                     )
                 }
@@ -269,8 +283,21 @@ export function PropertiesPanel({ selectedNode, onUpdate, onDelete, onClose }: P
                                     value={data.url || ""}
                                     onChange={handleChange}
                                     placeholder="https://checkout..."
-                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 ring-orange-500/20"
                                 />
+                            </div>
+                            <div className="space-y-2">
+                                <legend className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider text-[#ff5100]">Tag de Sucesso (Pós-Pagamento)</legend>
+                                <input
+                                    name="paidTag"
+                                    value={data.paidTag || ""}
+                                    onChange={handleChange}
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none focus:ring-2 ring-orange-500/20"
+                                    placeholder="ex: aluno_pago"
+                                />
+                                <p className="text-[9px] text-slate-400 leading-relaxed italic">
+                                    Nota: Funciona apenas para checkouts integrados via API futuramente.
+                                </p>
                             </div>
                         </div>
                     )

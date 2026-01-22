@@ -41,6 +41,23 @@ export async function POST(request: Request) {
             const bot = transaction.conversation.bot;
             const chatId = transaction.conversation.telegramChatId;
 
+            // Apply paidTag if it exists
+            if (transaction.paidTag) {
+                console.log(`[PushinPay Webhook] Applying tag '${transaction.paidTag}' to conversation ${transaction.conversationId}`);
+
+                const currentTags = transaction.conversation.tags || [];
+                if (!currentTags.includes(transaction.paidTag)) {
+                    await prisma.conversation.update({
+                        where: { id: transaction.conversationId },
+                        data: {
+                            tags: {
+                                set: [...currentTags, transaction.paidTag]
+                            }
+                        }
+                    });
+                }
+            }
+
             await fetch(`https://api.telegram.org/bot${bot.token}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

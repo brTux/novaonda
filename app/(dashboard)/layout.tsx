@@ -11,7 +11,7 @@ export default async function DashboardLayout({
     return (
         <div className="h-screen flex flex-col bg-[#f8fafc] overflow-hidden">
             <Navigation user={session?.user} />
-            <main className="flex-1 flex flex-col pt-16 overflow-hidden">
+            <main className="flex-1 flex flex-col overflow-auto">
                 {children}
             </main>
         </div>

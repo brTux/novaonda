@@ -8,8 +8,10 @@ export async function getTags() {
     const session = await auth();
     if (!session?.user?.id) return [];
 
+    const userId = session.user.id;
+
     const tags = await prisma.tag.findMany({
-        where: { userId: session.user.id },
+        where: { userId },
         include: { bot: true },
         orderBy: { createdAt: "desc" }
     });
@@ -23,7 +25,7 @@ export async function getTags() {
                 // Actually, if a tag is global, it counts everywhere. If bot-specific, it counts only for that bot?
                 // For simplicity and "sync", let's count occurrences of the name in the scope of the user's bots.
                 tags: { has: tag.name },
-                bot: tag.botId ? { id: tag.botId } : { userId: session.user.id }
+                bot: tag.botId ? { id: tag.botId } : { userId }
             }
         });
         return { ...tag, count };

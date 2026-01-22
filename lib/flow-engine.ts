@@ -1,4 +1,5 @@
 import { prisma } from "./prisma";
+import { PaymentGatewayFactory } from "./payments/factory";
 
 interface FlowNodeData {
     text?: string;
@@ -265,13 +266,62 @@ async function executeNode(node: any, chatId: string, botId: string) {
 
         case 'ACTION':
             if (data.subType === 'PIX' || data.subType === 'PIX_CUSTOM') {
-                const text = `💠 *Pagamento Pix Gerado*\n\nValor: R$ ${data.amount}\nChave: \`${data.pixKey || 'sua-chave-aqui'}\`\n\n_Copie a chave acima para pagar._`;
-                await sendTelegramRequest(bot.token, 'sendMessage', {
-                    chat_id: chatId,
-                    text,
-                    parse_mode: 'Markdown'
+                // 1. Find user and their active payment credential
+                const credential = await prisma.paymentCredential.findFirst({
+                    where: { userId: bot.userId, isActive: true }
                 });
-                await saveBotMessage(botId, chatId, text);
+
+                if (!credential) {
+                    const errorMsg = "❌ Erro: Configuração de pagamento não encontrada. Contacte o administrador.";
+                    await sendTelegramRequest(bot.token, 'sendMessage', { chat_id: chatId, text: errorMsg });
+                    return true;
+                }
+
+                try {
+                    // 2. Instantiate gateway and generate PIX
+                    const gateway = PaymentGatewayFactory.create(credential.provider, credential.token, credential.secret);
+                    const amount = data.amount ? Math.round(data.amount * 100) : 50; // default 0.50 cents if not set
+
+                    const pixResponse = await gateway.generatePix({
+                        value: amount,
+                        webhook_url: `${process.env.NEXTAUTH_URL}/api/webhooks/payments/${credential.provider.toLowerCase()}`
+                    });
+
+                    // 3. Save Transaction
+                    await prisma.transaction.create({
+                        data: {
+                            externalId: pixResponse.id,
+                            provider: credential.provider,
+                            amount: amount,
+                            status: 'PENDING',
+                            pixCopyPaste: pixResponse.pixCopyPaste,
+                            pixQrCodeBase64: pixResponse.pixQrCodeBase64,
+                            conversationId: (await prisma.conversation.findUnique({
+                                where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+                            }))?.id || ""
+                        }
+                    });
+
+                    const text = `💠 *Pagamento Pix Gerado*\n\nValor: R$ ${(amount / 100).toFixed(2)}\n\n*Copia e Cola:*\n\`${pixResponse.pixCopyPaste}\`\n\n_Copie o código acima e pague no seu banco._`;
+
+                    await sendTelegramRequest(bot.token, 'sendMessage', {
+                        chat_id: chatId,
+                        text,
+                        parse_mode: 'Markdown'
+                    });
+
+                    if (pixResponse.pixQrCodeBase64) {
+                        // We could send the image too, but for now Copy and Paste is most practical
+                    }
+
+                    await saveBotMessage(botId, chatId, text);
+                } catch (err) {
+                    console.error("[FlowEngine] Payment Generation Error:", err);
+                    await sendTelegramRequest(bot.token, 'sendMessage', {
+                        chat_id: chatId,
+                        text: "❌ Ocorreu um erro ao gerar seu PIX. Tente novamente em instantes."
+                    });
+                }
             } else if (data.subType === 'CHECKOUT') {
                 const text = `🛒 *Seu Link de Checkout*\n\nClique no botão abaixo para finalizar sua compra.`;
                 await sendTelegramRequest(bot.token, 'sendMessage', {

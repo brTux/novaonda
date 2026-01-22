@@ -14,7 +14,8 @@ import {
     X,
     Settings,
     User,
-    LogOut
+    LogOut,
+    CreditCard
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
@@ -128,7 +129,15 @@ export function Navigation({ user }: NavigationProps) {
                                         className="flex items-center gap-2 w-full px-3 py-2.5 text-sm font-medium text-[#555d66] hover:text-[#2d3339] hover:bg-slate-50 rounded-lg transition-colors"
                                     >
                                         <Settings size={16} />
-                                        Configurações
+                                        Perfil & Segurança
+                                    </Link>
+                                    <Link
+                                        href="/settings/payments"
+                                        onClick={() => setIsProfileOpen(false)}
+                                        className="flex items-center gap-2 w-full px-3 py-2.5 text-sm font-medium text-[#555d66] hover:text-[#2d3339] hover:bg-slate-50 rounded-lg transition-colors"
+                                    >
+                                        <CreditCard size={16} />
+                                        Pagamentos
                                     </Link>
                                     <button
                                         onClick={() => signOut()}
@@ -173,7 +182,15 @@ export function Navigation({ user }: NavigationProps) {
                             className="w-full px-4 py-4 rounded-xl text-md font-bold transition-all flex items-center gap-3 text-[#2d3339] border border-slate-50 hover:bg-slate-50"
                         >
                             <Settings size={20} />
-                            Configurações
+                            Perfil & Segurança
+                        </Link>
+                        <Link
+                            href="/settings/payments"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="w-full px-4 py-4 rounded-xl text-md font-bold transition-all flex items-center gap-3 text-[#2d3339] border border-slate-50 hover:bg-slate-50"
+                        >
+                            <CreditCard size={20} />
+                            Pagamentos
                         </Link>
                     </nav>
                 </div>

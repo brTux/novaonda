@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { X, Trash2, Settings2, HelpCircle, Plus, Trash } from "lucide-react";
+import { X, Trash2, Settings2, HelpCircle, Plus, Trash, Zap } from "lucide-react";
 
 interface PropertiesPanelProps {
     selectedNode: any;
@@ -234,24 +234,27 @@ export function PropertiesPanel({ selectedNode, onUpdate, onDelete, onClose }: P
                 if (data.subType === 'PIX' || data.subType === 'PIX_CUSTOM') {
                     return (
                         <div className="space-y-4">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">Chave Pix</label>
-                                <input
-                                    name="pixKey"
-                                    value={data.pixKey || ""}
-                                    onChange={handleChange}
-                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium outline-none"
-                                />
+                            <div className="p-4 bg-orange-50 border border-orange-100 rounded-xl space-y-2">
+                                <div className="flex items-center gap-2 text-[#ff5100]">
+                                    <Zap size={14} fill="currentColor" />
+                                    <span className="text-[10px] font-bold uppercase tracking-wider">Integração via API</span>
+                                </div>
+                                <p className="text-[9px] text-[#2d3339] leading-relaxed">
+                                    Este bloco gera um PIX dinâmico automaticamente usando o gateway configurado em suas **Configurações de Pagamento**.
+                                </p>
                             </div>
+
                             <div className="space-y-2">
-                                <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">Valor (R$)</label>
+                                <legend className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider">Valor da Cobrança (R$)</legend>
                                 <input
                                     name="amount"
                                     type="number"
                                     value={data.amount || 0}
                                     onChange={handleChange}
-                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold outline-none focus:ring-2 ring-orange-500/20"
+                                    placeholder="Ex: 49.90"
                                 />
+                                <p className="text-[9px] text-slate-400">O robô enviará o código Copia e Cola para o cliente.</p>
                             </div>
                         </div>
                     )

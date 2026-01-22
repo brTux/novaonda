@@ -13,8 +13,8 @@ export function ActionNode({ data, selected }: any) {
                     title: "Gerar Pix",
                     icon: <Zap size={18} strokeWidth={3} />,
                     color: "bg-[#ff5100]",
-                    label: "PIX",
-                    value: data.amount ? `R$ ${data.amount}` : "Configurar Valor"
+                    label: "PIX API",
+                    value: data.amount ? `R$ ${data.amount} (Auto)` : "Configurar Valor"
                 };
             case 'CHECKOUT':
                 return {

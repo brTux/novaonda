@@ -156,6 +156,7 @@ model Flow {
   
   nodes         FlowNode[]
   edges         FlowEdge[]
+  campaigns     Campaign[]
   
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
@@ -240,14 +241,36 @@ model Campaign {
   userId        String
   user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   
+  flowId        String?
+  flow          Flow?          @relation(fields: [flowId], references: [id], onDelete: SetNull)
+  
   totalLeads    Int            @default(0)
   sentCount     Int            @default(0)
   deliveredCount Int           @default(0)
   readCount     Int            @default(0)
   failedCount   Int            @default(0)
   
+  leads         CampaignLead[]
+  
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 
   @@map("campaigns")
+}
+
+model CampaignLead {
+  id            String    @id @default(cuid())
+  campaignId    String
+  campaign      Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  telegramChatId String
+  status        String    @default("PENDING") // PENDING, SENT, FAILED
+  error         String?
+  sentAt        DateTime?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([campaignId, telegramChatId])
+  @@map("campaign_leads")
 }

@@ -22,7 +22,7 @@ export default function BroadcastDashboard({ campaigns: initialCampaigns, bots, 
         try {
             await startCampaign(id);
             // Refresh local state (simplified)
-            setCampaigns(prev => prev.map(c => c.id === id ? { ...c, status: "PUBLISHED" } : c));
+            setCampaigns(prev => prev.map(c => c.id === id ? { ...c, status: "RUNNING" } : c));
         } catch (err) {
             alert("Erro ao iniciar campanha: " + err);
         } finally {
@@ -103,11 +103,11 @@ export default function BroadcastDashboard({ campaigns: initialCampaigns, bots, 
                                     <td className="px-6 py-5">
                                         <div className={cn(
                                             "inline-flex px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider",
-                                            camp.status === "PUBLISHED" ? "bg-emerald-50 text-emerald-600 border border-emerald-100 animate-pulse" :
+                                            camp.status === "RUNNING" ? "bg-emerald-50 text-emerald-600 border border-emerald-100 animate-pulse" :
                                                 camp.status === "COMPLETED" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" :
                                                     "bg-slate-50 text-slate-400 border border-slate-100"
                                         )}>
-                                            {camp.status === "PUBLISHED" ? "Enviando" : camp.status === "DRAFT" ? "Rascunho" : "Concluído"}
+                                            {camp.status === "RUNNING" ? "Enviando" : camp.status === "DRAFT" ? "Rascunho" : "Concluído"}
                                         </div>
                                     </td>
                                     <td className="px-6 py-5">

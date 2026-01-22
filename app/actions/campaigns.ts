@@ -57,10 +57,10 @@ export async function startCampaign(campaignId: string) {
 
     if (!campaign || !campaign.botId) throw new Error("Campaign or Bot not found");
 
-    // Update status to PUBLISHED (using as Active)
+    // Update status to RUNNING (using as Active)
     await prisma.campaign.update({
         where: { id: campaignId },
-        data: { status: "PUBLISHED" }
+        data: { status: "RUNNING" }
     });
 
     // Add jobs to queue

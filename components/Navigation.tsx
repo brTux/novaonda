@@ -14,6 +14,7 @@ import {
     X,
     Settings,
     User,
+    Users,
     LogOut,
     CreditCard
 } from "lucide-react";
@@ -22,6 +23,7 @@ import { signOut } from "next-auth/react";
 
 const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard, href: "/" },
+    { name: "Leads", icon: Users, href: "/leads" },
     { name: "Chat", icon: MessageSquare, href: "/chat" },
     { name: "Fluxos", icon: MessageSquare, href: "/fluxos" },
     { name: "Disparo", icon: Zap, href: "/disparo" },

@@ -1,15 +1,19 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { Search, Send, Bot, Phone, MoreVertical, Paperclip, Smile, Menu, User, Loader2, Globe, Tag, X, Plus, CreditCard, CheckCircle2, Clock } from "lucide-react";
+import { Search, Send, Bot, Phone, MoreVertical, Paperclip, Smile, Menu, User, Loader2, Globe, Tag, X, Plus, CreditCard, CheckCircle2, Clock, Trash2, Pause, Play, ChevronDown, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getMessages, sendMessage, getTransactions, updateConversationTags } from "@/app/actions/chat";
+import { getMessages, sendMessage, getTransactions, updateConversationTags, deleteConversation, togglePauseConversation, triggerFlowForUser } from "@/app/actions/chat";
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 
 interface ChatInterfaceProps {
     initialConversations: any[];
+    bots?: any[];
+    flows?: any[];
 }
 
-export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
+export function ChatInterface({ initialConversations, bots = [], flows = [] }: ChatInterfaceProps) {
+    const router = useRouter(); // Initialize router
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [selectedConversationId, setSelectedConversationId] = useState<string | null>(initialConversations[0]?.id || null);
     const [messages, setMessages] = useState<any[]>([]);
@@ -22,6 +26,8 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
     const [transactions, setTransactions] = useState<any[]>([]);
     const [isLoadingDetails, setIsLoadingDetails] = useState(false);
     const [newTag, setNewTag] = useState("");
+    const [selectedBotFilter, setSelectedBotFilter] = useState<string>("all");
+    const [searchQuery, setSearchQuery] = useState("");
 
     const selectedConversation = conversations.find(c => c.id === selectedConversationId);
 
@@ -113,6 +119,36 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
         setIsSending(false);
     };
 
+    const handlePauseToggle = async () => {
+        if (!selectedConversationId || !selectedConversation) return;
+        const newStatus = !selectedConversation.isPaused;
+        const result = await togglePauseConversation(selectedConversationId, newStatus);
+        if (result.success) {
+            setConversations(prev => prev.map(c =>
+                c.id === selectedConversationId ? { ...c, isPaused: newStatus } : c
+            ));
+        }
+    };
+
+    const handleDeleteConversation = async () => {
+        if (!selectedConversationId || !confirm("Tem certeza que deseja apagar esta conversa?")) return;
+        const result = await deleteConversation(selectedConversationId);
+        if (result.success) {
+            setConversations(prev => prev.filter(c => c.id !== selectedConversationId));
+            setSelectedConversationId(null);
+        }
+    };
+
+    const handleSendFlow = async (flowId: string) => {
+        if (!selectedConversationId || !selectedConversation) return;
+        const result = await triggerFlowForUser(selectedConversation.botId, selectedConversation.telegramUserId, flowId);
+        if (result.success) {
+            alert("Fluxo disparado com sucesso!");
+        } else {
+            alert("Erro ao disparar fluxo.");
+        }
+    };
+
     return (
         <div className="h-full flex overflow-hidden bg-white animate-in fade-in duration-500">
             {/* Sidebar */}
@@ -122,6 +158,36 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
             )}>
                 <div className="p-4 space-y-3">
                     <h1 className="text-sm font-bold text-[#2d3339]">Chat ao Vivo</h1>
+
+                    {/* Bot Filter Chips */}
+                    <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar shrink-0">
+                        <button
+                            onClick={() => setSelectedBotFilter("all")}
+                            className={cn(
+                                "px-3 py-1 rounded-full text-[9px] font-bold uppercase transition-all whitespace-nowrap border",
+                                selectedBotFilter === "all"
+                                    ? "bg-orange-600 text-white border-orange-600 shadow-sm"
+                                    : "bg-white text-slate-400 border-slate-100 hover:border-slate-200"
+                            )}
+                        >
+                            Todos
+                        </button>
+                        {bots.map((bot) => (
+                            <button
+                                key={bot.id}
+                                onClick={() => setSelectedBotFilter(bot.id)}
+                                className={cn(
+                                    "px-3 py-1 rounded-full text-[9px] font-bold uppercase transition-all whitespace-nowrap border",
+                                    selectedBotFilter === bot.id
+                                        ? "bg-orange-600 text-white border-orange-600 shadow-sm"
+                                        : "bg-white text-slate-400 border-slate-100 hover:border-slate-200"
+                                )}
+                            >
+                                {bot.name}
+                            </button>
+                        ))}
+                    </div>
+
                     <div className="relative">
                         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
                         <input
@@ -129,45 +195,53 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                             placeholder="Buscar conversa..."
                             className="w-full bg-white border border-slate-200 rounded-lg py-1.5 pl-8 pr-3 text-xs font-medium focus:ring-1 ring-[#ff5100]/20 outline-none transition-all shadow-sm"
                             title="Buscar conversa"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                     </div>
                 </div>
 
                 <div className="flex-1 overflow-y-auto px-2 space-y-1 pb-4">
-                    {initialConversations.length === 0 && (
-                        <div className="text-center p-4 text-slate-400 text-xs">
-                            Nenhuma conversa ainda.
-                        </div>
-                    )}
-                    {initialConversations.map((conv) => (
-                        <button
-                            key={conv.id}
-                            onClick={() => {
-                                setSelectedConversationId(conv.id);
-                                if (window.innerWidth < 1024) setIsSidebarOpen(false);
-                            }}
-                            className={cn(
-                                "w-full p-2.5 rounded-lg flex items-center gap-2.5 transition-all text-left",
-                                selectedConversationId === conv.id ? "bg-white shadow-sm border border-slate-100" : "hover:bg-white/60"
-                            )}
-                            title={`Conversa com ${conv.name}`}
-                        >
-                            <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#2d3339] font-bold text-[10px] shrink-0">
-                                {conv.avatar || conv.firstName?.charAt(0)?.toUpperCase() || "?"}
+                    {conversations
+                        .filter(c => selectedBotFilter === "all" || c.botId === selectedBotFilter)
+                        .filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                        .length === 0 && (
+                            <div className="text-center p-4 text-slate-400 text-xs">
+                                Nenhuma conversa encontrada.
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <div className="flex justify-between items-center mb-0.5">
-                                    <span className="font-bold text-[#2d3339] text-[11px] truncate">{conv.name}</span>
-                                    {conv.timestamp && (
-                                        <span className="text-[9px] text-slate-400">
-                                            {format(new Date(conv.timestamp), "HH:mm")}
-                                        </span>
-                                    )}
+                        )}
+                    {conversations
+                        .filter(c => selectedBotFilter === "all" || c.botId === selectedBotFilter)
+                        .filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                        .map((conv) => (
+                            <button
+                                key={conv.id}
+                                onClick={() => {
+                                    setSelectedConversationId(conv.id);
+                                    if (window.innerWidth < 1024) setIsSidebarOpen(false);
+                                }}
+                                className={cn(
+                                    "w-full p-2.5 rounded-lg flex items-center gap-2.5 transition-all text-left",
+                                    selectedConversationId === conv.id ? "bg-white shadow-sm border border-slate-100" : "hover:bg-white/60"
+                                )}
+                                title={`Conversa com ${conv.name}`}
+                            >
+                                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#2d3339] font-bold text-[10px] shrink-0">
+                                    {conv.avatar || conv.firstName?.charAt(0)?.toUpperCase() || "?"}
                                 </div>
-                                <p className="text-[10px] text-[#555d66] truncate font-medium">{conv.lastMessage}</p>
-                            </div>
-                        </button>
-                    ))}
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex justify-between items-center mb-0.5">
+                                        <span className="font-bold text-[#2d3339] text-[11px] truncate">{conv.name}</span>
+                                        {conv.timestamp && (
+                                            <span className="text-[9px] text-slate-400">
+                                                {format(new Date(conv.timestamp), "HH:mm")}
+                                            </span>
+                                        )}
+                                    </div>
+                                    <p className="text-[10px] text-[#555d66] truncate font-medium">{conv.lastMessage}</p>
+                                </div>
+                            </button>
+                        ))}
                 </div>
             </aside>
 
@@ -193,6 +267,62 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
                                         via {selectedConversation.botName}
                                     </p>
                                 </div>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                {/* Flow Controls */}
+                                <div className="hidden sm:flex items-center gap-1 bg-slate-50 border border-slate-100 rounded-lg p-1">
+                                    <button
+                                        onClick={handlePauseToggle}
+                                        className={cn(
+                                            "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold transition-all",
+                                            selectedConversation.isPaused
+                                                ? "bg-amber-100 text-amber-700 hover:bg-amber-200"
+                                                : "bg-white text-slate-600 hover:bg-slate-100 shadow-sm"
+                                        )}
+                                        title={selectedConversation.isPaused ? "Retomar Bot" : "Pausar Bot"}
+                                    >
+                                        {selectedConversation.isPaused ? <Play size={12} fill="currentColor" /> : <Pause size={12} fill="currentColor" />}
+                                        {selectedConversation.isPaused ? "Pausado" : "Pausar"}
+                                    </button>
+
+                                    <div className="relative group">
+                                        <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold text-slate-600 hover:bg-slate-100 transition-all">
+                                            <Zap size={12} className="text-orange-500" />
+                                            Enviar Fluxo
+                                            <ChevronDown size={10} />
+                                        </button>
+
+                                        <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-xl border border-slate-100 p-1 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
+                                            <div className="px-2 py-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 mb-1">
+                                                Escolha o Fluxo
+                                            </div>
+                                            {flows
+                                                .filter(f => f.botId === selectedConversation.botId)
+                                                .map(flow => (
+                                                    <button
+                                                        key={flow.id}
+                                                        onClick={() => handleSendFlow(flow.id)}
+                                                        className="w-full text-left px-3 py-2 text-[11px] font-bold text-slate-700 hover:bg-slate-50 rounded-lg transition-all"
+                                                    >
+                                                        {flow.name}
+                                                    </button>
+                                                ))
+                                            }
+                                            {flows.filter(f => f.botId === selectedConversation.botId).length === 0 && (
+                                                <div className="px-3 py-2 text-[10px] text-slate-400 italic">Sem fluxos publicados</div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button
+                                    onClick={handleDeleteConversation}
+                                    className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                                    title="Apagar Conversa"
+                                >
+                                    <Trash2 size={18} />
+                                </button>
                             </div>
                         </header>
 

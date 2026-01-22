@@ -56,7 +56,7 @@ export async function getConversations() {
         utmSource: conv.utmSource,
         utmMedium: conv.utmMedium,
         utmCampaign: conv.utmCampaign,
-        utmContent: conv.utmContent,
+        isPaused: conv.isPaused, // Added isPaused field
     }));
 }
 
@@ -195,4 +195,142 @@ export async function sendMessage(conversationId: string, content: string) {
         console.error("SendMessage Error:", error);
         return { error: "Internal Error" };
     }
+}
+
+// Toggle conversation pause status
+export async function togglePauseConversation(conversationId: string, isPaused: boolean) {
+    const session = await auth();
+    if (!session?.user?.id) return { error: "Unauthorized" };
+
+    try {
+        const conversation = await prisma.conversation.findUnique({
+            where: { id: conversationId },
+            include: { bot: true }
+        });
+
+        if (!conversation || conversation.bot.userId !== session.user.id) {
+            return { error: "Unauthorized" };
+        }
+
+        await prisma.conversation.update({
+            where: { id: conversationId },
+            data: { isPaused }
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error("TogglePause Error:", error);
+        return { error: "Internal Error" };
+    }
+}
+
+// Delete a conversation
+export async function deleteConversation(conversationId: string) {
+    const session = await auth();
+    if (!session?.user?.id) return { error: "Unauthorized" };
+
+    try {
+        const conversation = await prisma.conversation.findUnique({
+            where: { id: conversationId },
+            include: { bot: true }
+        });
+
+        if (!conversation || conversation.bot.userId !== session.user.id) {
+            return { error: "Unauthorized" };
+        }
+
+        // Deleting conversation will cascade delete messages and transactions
+        await prisma.conversation.delete({
+            where: { id: conversationId }
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error("DeleteConversation Error:", error);
+        return { error: "Internal Error" };
+    }
+}
+
+// Trigger a flow manually for a user
+export async function triggerFlowForUser(botId: string, telegramChatId: string, flowId: string) {
+    const session = await auth();
+    if (!session?.user?.id) return { error: "Unauthorized" };
+
+    try {
+        // Validation logic can be added here (check if user owns bot)
+        const { startFlow } = await import("@/lib/flow-engine");
+        await startFlow(flowId, botId, telegramChatId);
+
+        return { success: true };
+    } catch (error) {
+        console.error("TriggerFlow Error:", error);
+        return { error: "Internal Error" };
+    }
+}
+
+// Advanced Lead filtering for CRM
+export async function getLeads(filters: { botId?: string, tag?: string, search?: string }) {
+    const session = await auth();
+    if (!session?.user?.id) return [];
+
+    const where: any = {
+        bot: {
+            userId: session.user.id,
+        },
+    };
+
+    if (filters.botId) {
+        where.botId = filters.botId;
+    }
+
+    if (filters.tag) {
+        where.tags = {
+            has: filters.tag
+        };
+    }
+
+    if (filters.search) {
+        where.OR = [
+            { firstName: { contains: filters.search, mode: 'insensitive' } },
+            { lastName: { contains: filters.search, mode: 'insensitive' } },
+            { username: { contains: filters.search, mode: 'insensitive' } },
+            { telegramUserId: { contains: filters.search } },
+        ];
+    }
+
+    const conversations = await prisma.conversation.findMany({
+        where,
+        include: {
+            bot: {
+                select: {
+                    name: true,
+                },
+            },
+            messages: {
+                orderBy: {
+                    createdAt: "desc",
+                },
+                take: 1,
+            },
+        },
+        orderBy: {
+            updatedAt: "desc",
+        },
+    });
+
+    return conversations.map((conv) => ({
+        id: conv.id,
+        name: conv.firstName
+            ? `${conv.firstName} ${conv.lastName || ""}`.trim()
+            : conv.username || `User ${conv.telegramUserId}`,
+        lastMessage: conv.messages[0]?.content || "Iniciou",
+        timestamp: conv.messages[0]?.createdAt || conv.updatedAt,
+        botName: conv.bot.name,
+        botId: conv.botId,
+        telegramUserId: conv.telegramUserId,
+        tags: conv.tags || [],
+        status: conv.status,
+        isPaused: conv.isPaused,
+        createdAt: conv.createdAt
+    }));
 }

@@ -28,6 +28,12 @@ export async function processMessage(botId: string, telegramChatId: string, mess
         where: { botId_telegramChatId: { botId, telegramChatId } }
     });
 
+    // 0. Check if the conversation is paused (Manual Agent mode)
+    if (conversation?.isPaused) {
+        console.log(`[FlowEngine] Conversation ${telegramChatId} is PAUSED. Skipping bot processing.`);
+        return;
+    }
+
     // 1. Check if we are waiting for an input from a previous node
     if (conversation?.waitingForNodeId) {
         const waitingNode = await prisma.flowNode.findUnique({

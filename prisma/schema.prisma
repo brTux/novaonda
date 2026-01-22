@@ -248,6 +248,8 @@ model Conversation {
   fbc            String?   // Facebook Click ID
   fbp            String?   // Facebook Browser ID
   
+  isPaused      Boolean   @default(false)
+  
   messages       Message[]
   transactions   Transaction[]
   

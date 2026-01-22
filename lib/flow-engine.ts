@@ -282,9 +282,15 @@ async function executeNode(node: any, chatId: string, botId: string) {
                     const gateway = PaymentGatewayFactory.create(credential.provider, credential.token, credential.secret);
                     const amount = data.amount ? Math.round(data.amount * 100) : 50; // default 0.50 cents if not set
 
+                    // Robust URL Construction
+                    const baseUrl = (process.env.NEXTAUTH_URL || 'https://novaonda.railway.app').replace(/\/$/, "");
+                    const webhookUrl = `${baseUrl}/api/webhooks/payments/${credential.provider.toLowerCase()}`;
+
+                    console.log(`[FlowEngine] Using webhook URL: ${webhookUrl}`);
+
                     const pixResponse = await gateway.generatePix({
                         value: amount,
-                        webhook_url: `${process.env.NEXTAUTH_URL}/api/webhooks/payments/${credential.provider.toLowerCase()}`
+                        webhook_url: webhookUrl
                     });
 
                     // 3. Save Transaction

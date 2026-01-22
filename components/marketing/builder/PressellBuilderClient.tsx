@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import {
     Plus, Save, ChevronLeft, Smartphone, Monitor, ChevronRight,
-    Trash2, GripVertical, Settings, Rocket, HelpCircle, MousePointer2
+    Trash2, GripVertical, Settings, Rocket, HelpCircle, MousePointer2,
+    ArrowUp, ArrowDown, Image as ImageIcon, Loader2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -81,6 +82,18 @@ export default function PressellBuilderClient({ pressell }: PressellBuilderClien
 
     const updateBlockContent = (id: string, newContent: any) => {
         setBlocks(blocks.map(b => b.id === id ? { ...b, content: { ...b.content, ...newContent } } : b));
+    };
+
+    const moveBlock = (id: string, direction: "up" | "down") => {
+        const index = blocks.findIndex(b => b.id === id);
+        if (index === -1) return;
+        if (direction === "up" && index === 0) return;
+        if (direction === "down" && index === blocks.length - 1) return;
+
+        const newBlocks = [...blocks];
+        const targetIndex = direction === "up" ? index - 1 : index + 1;
+        [newBlocks[index], newBlocks[targetIndex]] = [newBlocks[targetIndex], newBlocks[index]];
+        setBlocks(newBlocks);
     };
 
     return (
@@ -192,8 +205,25 @@ export default function PressellBuilderClient({ pressell }: PressellBuilderClien
                                     {selectedBlockId === block.id && (
                                         <div className="absolute -top-3 -right-3 flex gap-1 z-30">
                                             <button
+                                                onClick={(e) => { e.stopPropagation(); moveBlock(block.id, "up"); }}
+                                                className="w-8 h-8 rounded-full bg-white text-slate-600 shadow-lg flex items-center justify-center hover:bg-slate-50 disabled:opacity-30"
+                                                disabled={idx === 0}
+                                                title="Mover para cima"
+                                            >
+                                                <ArrowUp size={14} />
+                                            </button>
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); moveBlock(block.id, "down"); }}
+                                                className="w-8 h-8 rounded-full bg-white text-slate-600 shadow-lg flex items-center justify-center hover:bg-slate-50 disabled:opacity-30"
+                                                disabled={idx === blocks.length - 1}
+                                                title="Mover para baixo"
+                                            >
+                                                <ArrowDown size={14} />
+                                            </button>
+                                            <button
                                                 onClick={(e) => { e.stopPropagation(); removeBlock(block.id); }}
                                                 className="w-8 h-8 rounded-full bg-white text-red-500 shadow-lg flex items-center justify-center hover:bg-red-50"
+                                                title="Remover bloco"
                                             >
                                                 <Trash2 size={14} />
                                             </button>
@@ -268,6 +298,18 @@ function BlockRenderer({ block }: { block: Block }) {
                     {block.content.text}
                 </button>
             );
+        case "IMAGE":
+            return (
+                <div className="w-full rounded-xl overflow-hidden border border-white/10">
+                    {block.content.url ? (
+                        <img src={block.content.url} alt="Componente" className="w-full h-auto object-cover" />
+                    ) : (
+                        <div className="aspect-video bg-slate-900 flex items-center justify-center text-[10px] text-slate-600">
+                            [ADICIONE A URL DA IMAGEM]
+                        </div>
+                    )}
+                </div>
+            );
         default:
             return null;
     }
@@ -336,6 +378,8 @@ function BlockSettings({ block, onUpdate }: { block: Block, onUpdate: (content: 
                                     onUpdate({ options: newOpts });
                                 }}
                                 className="w-full px-4 py-2 rounded-lg border border-slate-100 text-xs"
+                                title={`Opção ${i + 1}`}
+                                placeholder={`Opção ${i + 1}`}
                             />
                         ))}
                     </div>
@@ -353,12 +397,32 @@ function BlockSettings({ block, onUpdate }: { block: Block, onUpdate: (content: 
                             className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#ff5100] outline-none transition-all text-sm"
                         />
                     </div>
+                    <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider ml-1">Cor do Botão</label>
+                        <input
+                            type="color"
+                            value={block.content.color}
+                            onChange={(e) => onUpdate({ color: e.target.value })}
+                            className="w-full h-10 p-1 rounded-lg border border-slate-200 cursor-pointer"
+                        />
+                    </div>
                 </>
+            )}
+
+            {block.type === "IMAGE" && (
+                <div className="space-y-1">
+                    <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider ml-1">URL da Imagem</label>
+                    <input
+                        type="text"
+                        value={block.content.url}
+                        onChange={(e) => onUpdate({ url: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#ff5100] outline-none transition-all text-sm"
+                        placeholder="https://..."
+                    />
+                </div>
             )}
         </div>
     );
 }
 
-function Loader2(props: any) {
-    return <Rocket {...props} className={cn("animate-spin", props.className)} />
-}
+

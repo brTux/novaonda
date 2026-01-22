@@ -146,6 +146,14 @@ function BlockDisplay({ block, telegramLink, loading }: { block: any, telegramLi
                     {block.content.text}
                 </a>
             );
+        case "IMAGE":
+            return (
+                <div className="w-full rounded-2xl overflow-hidden shadow-xl border border-white/5">
+                    {block.content.url && (
+                        <img src={block.content.url} alt="Imagem" className="w-full h-auto" />
+                    )}
+                </div>
+            );
         default:
             return null;
     }

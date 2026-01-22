@@ -18,6 +18,7 @@ export default function NewPressellModal({ isOpen, onClose, bots, onCreated }: N
     const [buttonText, setButtonText] = useState("Continuar no Telegram");
     const [botId, setBotId] = useState("");
     const [pixelId, setPixelId] = useState("");
+    const [safeUrl, setSafeUrl] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -40,7 +41,8 @@ export default function NewPressellModal({ isOpen, onClose, bots, onCreated }: N
                 vslUrl,
                 buttonText,
                 botId,
-                pixelId
+                pixelId,
+                safeUrl
             });
             if (result.success) {
                 // Find selected bot for initial display
@@ -138,6 +140,18 @@ export default function NewPressellModal({ isOpen, onClose, bots, onCreated }: N
                                 title="Meta Pixel ID"
                             />
                         </div>
+                    </div>
+
+                    <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider ml-1">URL Branca (URL de Segurança / Cloaking)</label>
+                        <input
+                            type="text"
+                            value={safeUrl}
+                            onChange={(e) => setSafeUrl(e.target.value)}
+                            placeholder="https://google.com ou link seguro"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#ff5100] outline-none transition-all text-sm"
+                            title="URL Branca"
+                        />
                     </div>
 
                     <div className="space-y-1">

@@ -301,6 +301,8 @@ model Pressell {
   vslUrl      String
   buttonText  String   @default("Continuar no Telegram")
   pixelId     String?
+  safeUrl     String?  // URL Branca (Cloaking)
+  config      Json?    // Configurações do Builder (blocos, quiz, etc)
   
   botId       String
   bot         Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)

@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Globe, ExternalLink, Trash2, Copy, CheckCircle2 } from "lucide-react";
+import { Plus, Globe, ExternalLink, Trash2, Copy, CheckCircle2, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import NewPressellModal from "./NewPressellModal";
 import { deletePressell } from "@/app/actions/marketing";
 
@@ -85,14 +86,25 @@ export default function PressellList({ initialPressells, bots }: PressellListPro
                                         <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Bot de Destino</span>
                                         <span className="text-xs font-bold text-[#2d3339]">{p.bot?.name || "N/A"}</span>
                                     </div>
-                                    <a
-                                        href={`/p/${p.slug}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="bg-white p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-[#ff5100] hover:border-[#ff5100] shadow-sm transition-all"
-                                    >
-                                        <ExternalLink size={16} />
-                                    </a>
+                                    <div className="flex items-center gap-2">
+                                        <Link
+                                            href={`/ferramentas/pressell/${p.id}/builder`}
+                                            className="flex items-center gap-1.5 bg-slate-100 text-[#2d3339] px-3 py-1.5 rounded-lg font-bold text-[10px] hover:bg-slate-200 transition-all border border-slate-200"
+                                            title="Editar Layout"
+                                        >
+                                            <LayoutTemplate size={14} />
+                                            Editar Layout
+                                        </Link>
+                                        <a
+                                            href={`/p/${p.slug}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="bg-white p-2 rounded-lg border border-slate-200 text-slate-400 hover:text-[#ff5100] hover:border-[#ff5100] shadow-sm transition-all"
+                                            title="Ver Página"
+                                        >
+                                            <ExternalLink size={16} />
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

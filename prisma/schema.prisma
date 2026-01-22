@@ -154,6 +154,7 @@ model Bot {
   flows         Flow[]
   conversations Conversation[]
   campaigns     Campaign[]
+  campaignLeads CampaignLead[]
   pressells     Pressell[]
   
   // Meta Tracking (Phase 5)
@@ -307,6 +308,9 @@ model CampaignLead {
   campaignId    String
   campaign      Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   
+  botId         String?
+  bot           Bot?      @relation(fields: [botId], references: [id], onDelete: Cascade)
+
   telegramChatId String
   status        String    @default("PENDING") // PENDING, SENT, FAILED
   error         String?

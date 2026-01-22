@@ -10,9 +10,10 @@ interface NewCampaignModalProps {
     onClose: () => void;
     bots: any[];
     flows: any[];
+    availableTags?: any[];
 }
 
-export default function NewCampaignModal({ isOpen, onClose, bots, flows }: NewCampaignModalProps) {
+export default function NewCampaignModal({ isOpen, onClose, bots, flows, availableTags = [] }: NewCampaignModalProps) {
     const [name, setName] = useState("");
     const [targetRange, setTargetRange] = useState<"all" | "specific">("specific");
     const [selectedBotIds, setSelectedBotIds] = useState<string[]>([]);
@@ -21,6 +22,43 @@ export default function NewCampaignModal({ isOpen, onClose, bots, flows }: NewCa
     const [flowId, setFlowId] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    // Helper for suggestions
+    const renderTagSuggestions = (currentStr: string, setStr: (s: string) => void, colorClass: string) => {
+        const currentTags = currentStr.split(",").map(t => t.trim()).filter(Boolean);
+        const lastPart = currentStr.split(",").pop()?.trim().toLowerCase() || "";
+
+        if (!lastPart) return null;
+
+        const suggestions = availableTags.filter((t: any) =>
+            t.name.toLowerCase().includes(lastPart) &&
+            !currentTags.includes(t.name) &&
+            (!t.botId || selectedBotIds.includes(t.botId) || selectedBotIds.length === 0)
+        ).slice(0, 5);
+
+        if (suggestions.length === 0) return null;
+
+        return (
+            <div className="absolute left-0 right-0 mt-1 bg-white border border-slate-100 rounded-xl shadow-lg z-50 overflow-hidden">
+                {suggestions.map((t: any) => (
+                    <button
+                        key={t.id}
+                        type="button"
+                        onClick={() => {
+                            const parts = currentStr.split(",");
+                            parts.pop(); // Remove partial
+                            parts.push(t.name);
+                            setStr(parts.join(", ") + ", ");
+                        }}
+                        className="w-full text-left px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 border-b border-slate-50 last:border-0 flex items-center gap-2"
+                    >
+                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: t.color }} />
+                        {t.name}
+                    </button>
+                ))}
+            </div>
+        );
+    };
 
     if (!isOpen) return null;
 
@@ -169,7 +207,7 @@ export default function NewCampaignModal({ isOpen, onClose, bots, flows }: NewCa
                     )}
 
                     <div className="space-y-4 pt-2 border-t border-slate-50">
-                        <div className="space-y-1.5">
+                        <div className="space-y-1.5 relative">
                             <div className="flex items-center justify-between">
                                 <label className="text-[10px] font-bold text-emerald-600 uppercase tracking-wide ml-1">Incluir Tags</label>
                                 <span className="text-[9px] text-slate-400 font-medium">Opcional (separe por vírgulas)</span>
@@ -182,9 +220,10 @@ export default function NewCampaignModal({ isOpen, onClose, bots, flows }: NewCa
                                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/5 outline-none transition-all text-sm font-medium"
                                 title="Incluir Tags"
                             />
+                            {renderTagSuggestions(includeTagsStr, setIncludeTagsStr, "emerald")}
                         </div>
 
-                        <div className="space-y-1.5">
+                        <div className="space-y-1.5 relative">
                             <div className="flex items-center justify-between">
                                 <label className="text-[10px] font-bold text-red-500 uppercase tracking-wide ml-1">Excluir Tags</label>
                                 <span className="text-[9px] text-slate-400 font-medium">Opcional (separe por vírgulas)</span>
@@ -197,6 +236,7 @@ export default function NewCampaignModal({ isOpen, onClose, bots, flows }: NewCa
                                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-red-500 focus:ring-4 focus:ring-red-500/5 outline-none transition-all text-sm font-medium"
                                 title="Excluir Tags"
                             />
+                            {renderTagSuggestions(excludeTagsStr, setExcludeTagsStr, "red")}
                         </div>
                     </div>
 

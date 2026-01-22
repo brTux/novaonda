@@ -95,6 +95,7 @@ model User {
   campaigns     Campaign[]
   pressells     Pressell[]
   paymentCredentials PaymentCredential[]
+  tags          Tag[]
   
   @@map("users")
 }
@@ -156,6 +157,7 @@ model Bot {
   campaigns     Campaign[]
   campaignLeads CampaignLead[]
   pressells     Pressell[]
+  tags          Tag[] // Centralized tags
   
   // Meta Tracking (Phase 5)
   pixelId       String?
@@ -166,6 +168,26 @@ model Bot {
   updatedAt     DateTime  @updatedAt
 
   @@map("bots")
+}
+
+// ... existing models ...
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String
+  color     String?  @default("#ff5100")
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  botId     String?  // If null, it's a global tag
+  bot       Bot?     @relation(fields: [botId], references: [id], onDelete: SetNull)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, name, botId])
+  @@map("tags")
 }
 
 model Flow {

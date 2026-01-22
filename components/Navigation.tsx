@@ -16,7 +16,8 @@ import {
     User,
     Users,
     LogOut,
-    CreditCard
+    CreditCard,
+    Tag
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
@@ -24,6 +25,7 @@ import { signOut } from "next-auth/react";
 const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard, href: "/" },
     { name: "Leads", icon: Users, href: "/leads" },
+    { name: "Etiquetas", icon: Tag, href: "/tags" },
     { name: "Chat", icon: MessageSquare, href: "/chat" },
     { name: "Fluxos", icon: MessageSquare, href: "/fluxos" },
     { name: "Disparo", icon: Zap, href: "/disparo" },

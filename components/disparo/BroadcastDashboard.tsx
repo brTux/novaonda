@@ -10,9 +10,12 @@ interface BroadcastDashboardProps {
     campaigns: any[];
     bots: any[];
     flows: any[];
+    availableTags?: any[];
 }
 
-export default function BroadcastDashboard({ campaigns: initialCampaigns, bots, flows }: BroadcastDashboardProps) {
+export default function BroadcastDashboard({ campaigns: initialCampaigns, bots, flows, availableTags = [] }: BroadcastDashboardProps) {
+    // ...
+    // ... in return:
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [campaigns, setCampaigns] = useState(initialCampaigns);
     const [startingId, setStartingId] = useState<string | null>(null);

@@ -40,9 +40,6 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
                     { label: "Taxa Conversão", value: stats.conversionRate, change: "+0%", icon: Zap, color: "text-[#ff5100] bg-[#fff5f0]" },
                     { label: "Total de Leads", value: stats.totalLeads, change: "+0%", icon: Users, color: "text-blue-500 bg-blue-50" },
                     { label: "Vendas Pagas", value: stats.salesPaid, change: "+0%", icon: Zap, color: "text-emerald-500 bg-emerald-50" },
-                    { label: "Vendas Geradas", value: stats.salesGenerated, change: "+0%", icon: MessageSquare, color: "text-slate-500 bg-slate-50" },
-                    { label: "Pix Gerados", value: stats.pixGenerated, change: "+0%", icon: Zap, color: "text-[#ffb800] bg-[#fffcf0]" },
-                    { label: "Pix Pagos", value: stats.pixPaid, change: "+0%", icon: Zap, color: "text-emerald-500 bg-emerald-50" },
                 ].map((item) => (
                     <div key={item.label} className="glass-card p-6 bg-white border border-slate-100 flex flex-col gap-4">
                         <div className="flex justify-between items-center">

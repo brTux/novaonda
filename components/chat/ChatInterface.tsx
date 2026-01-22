@@ -114,7 +114,7 @@ export function ChatInterface({ initialConversations }: ChatInterfaceProps) {
     };
 
     return (
-        <div className="flex-1 flex overflow-hidden bg-white animate-in fade-in duration-500 h-full">
+        <div className="flex-1 flex overflow-hidden bg-white animate-in fade-in duration-500">
             {/* Sidebar */}
             <aside className={cn(
                 "fixed inset-y-16 lg:relative lg:inset-y-0 w-80 border-r border-slate-100 flex flex-col bg-slate-50/30 z-30 transition-transform duration-300",

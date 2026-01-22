@@ -11,25 +11,56 @@ export async function getDashboardStats() {
 
     const userId = session.user.id;
 
-    // 1. Core Metrics
-    const [totalLeads, totalMessages, totalBots, activeBots] = await Promise.all([
-        prisma.leadTracking.count(), // Lead tracking is global for now, but usually we'd filter by user's pressells
-        prisma.message.count({
-            where: {
-                conversation: {
-                    bot: { userId }
-                }
-            }
-        }),
+    // 1. Core Metrics & Activity
+    const [totalLeads, totalMessages, totalBots, activeBots, totalRevenueResult, totalSales] = await Promise.all([
+        prisma.leadTracking.count(),
+        prisma.message.count({ where: { conversation: { bot: { userId } } } }),
         prisma.bot.count({ where: { userId } }),
-        prisma.bot.count({ where: { userId, status: "ACTIVE" } })
+        prisma.bot.count({ where: { userId, status: "ACTIVE" } }),
+        prisma.transaction.aggregate({
+            _sum: { amount: true },
+            where: { status: 'PAID', conversation: { bot: { userId } } }
+        }),
+        prisma.transaction.count({
+            where: { status: 'PAID', conversation: { bot: { userId } } }
+        })
     ]);
 
-    // 2. Recent Activity (Last 5 leads or messages)
-    const recentActivity = await prisma.leadTracking.findMany({
-        take: 5,
+    const totalRevenue = (totalRevenueResult._sum.amount || 0) / 100;
+
+    // 2. Recent Activity
+    const recentLeads = await prisma.leadTracking.findMany({
+        take: 3,
         orderBy: { createdAt: "desc" },
     });
+
+    const recentPayments = await prisma.transaction.findMany({
+        where: { status: 'PAID', conversation: { bot: { userId } } },
+        take: 3,
+        orderBy: { paidAt: "desc" },
+        include: { conversation: true }
+    });
+
+    const combinedActivity = [
+        ...recentLeads.map(l => ({
+            id: l.id,
+            title: "Novo lead rastreado",
+            description: `${l.city || "Localização desconhecida"} • ${l.utmSource || "Direto"}`,
+            time: format(l.createdAt, "HH:mm"),
+            date: format(l.createdAt, "dd/MM"),
+            type: 'LEAD',
+            rawDate: l.createdAt
+        })),
+        ...recentPayments.map(p => ({
+            id: p.id,
+            title: "Pagamento confirmado!",
+            description: `R$ ${(p.amount / 100).toFixed(2)} • ${p.conversation.firstName || 'Cliente'}`,
+            time: format(p.paidAt || p.updatedAt, "HH:mm"),
+            date: format(p.paidAt || p.updatedAt, "dd/MM"),
+            type: 'SALE',
+            rawDate: p.paidAt || p.updatedAt
+        }))
+    ].sort((a, b) => b.rawDate.getTime() - a.rawDate.getTime()).slice(0, 5);
 
     // 3. Chart Data (Last 7 days)
     const chartData = [];
@@ -38,37 +69,38 @@ export async function getDashboardStats() {
         const dayStart = startOfDay(date);
         const nextDay = startOfDay(subDays(date, -1));
 
-        const dayLeads = await prisma.leadTracking.count({
-            where: {
-                createdAt: {
-                    gte: dayStart,
-                    lt: nextDay,
+        const [dayLeads, dayRevenue] = await Promise.all([
+            prisma.leadTracking.count({
+                where: { createdAt: { gte: dayStart, lt: nextDay } }
+            }),
+            prisma.transaction.aggregate({
+                _sum: { amount: true },
+                where: {
+                    status: 'PAID',
+                    paidAt: { gte: dayStart, lt: nextDay },
+                    conversation: { bot: { userId } }
                 }
-            }
-        });
+            })
+        ]);
 
-        // We could also count messages or sales if we had them
         chartData.push({
             name: format(date, "EEE", { locale: ptBR }),
             leads: dayLeads,
-            messages: Math.floor(dayLeads * 1.5), // Dummy multiplier for now until we have more real data
+            revenue: (dayRevenue._sum.amount || 0) / 100,
         });
     }
+
+    const conversionRate = totalLeads > 0 ? (totalSales / totalLeads * 100).toFixed(1) + "%" : "0%";
 
     return {
         stats: {
             totalLeads,
             totalMessages,
-            performance: totalBots > 0 ? (activeBots / totalBots * 100).toFixed(1) + "%" : "0%",
+            totalRevenue: `R$ ${totalRevenue.toFixed(2)}`,
+            performance: conversionRate,
             activeBots,
         },
-        recentActivity: recentActivity.map(item => ({
-            id: item.id,
-            title: "Novo lead rastreado",
-            description: `${item.city || "Localização desconhecida"} • ${item.utmSource || "Direto"}`,
-            time: format(item.createdAt, "HH:mm"),
-            date: format(item.createdAt, "dd/MM")
-        })),
+        recentActivity: combinedActivity,
         chartData
     };
 }

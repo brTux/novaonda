@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getGeoByIp } from "@/lib/geo";
 import { NextResponse } from "next/server";
+import { sendMetaEvent } from "@/lib/meta";
 
 export async function POST(request: Request) {
     try {
@@ -25,6 +26,21 @@ export async function POST(request: Request) {
                 utmContent: utms?.utm_content,
                 utmTerm: utms?.utm_term,
             }
+        });
+
+        // Trigger Meta CAPI Event (Lead)
+        // Note: Using 'Lead' for now as tracking is triggered when user interacts with Pressell
+        await sendMetaEvent({
+            eventName: "Lead",
+            user: {
+                ip,
+                userAgent: request.headers.get("user-agent") || "",
+            },
+            customData: {
+                utm_source: utms?.utm_source,
+                utm_campaign: utms?.utm_campaign,
+            },
+            eventSourceUrl: request.headers.get("referer") || "",
         });
 
         return NextResponse.json({ trackingId: tracking.id });

@@ -1,0 +1,58 @@
+# 🚀 Roadmap de Desenvolvimento - Isy Flow
+
+## 📋 Status Atual do Projeto (21/01/2026)
+
+### ✅ Concluído
+- [x] **Identidade Visual:** Rebranding para "Isy Flow", cores e tipografia atualizadas.
+- [x] **Frontend Base:** Layout Dashboard isolado, Páginas (Bots, Chat, etc.) criadas.
+- [x] **Autenticação:** Login/Registro com NextAuth, Prisma Adapter, Senha com Bcrypt.
+- [x] **Banco de Dados:** Schema Prisma definido (User, Bot, Flow, etc.), Migrações rodadas.
+- [x] **Infraestrutura:** Deploy no Railway com Docker, Variáveis de ambiente configuradas.
+- [x] **Segurança:** Middleware configurado, correção de Host Confiável e Segredos.
+- [x] **Configurações:** Alteração de senha, criação de usuário Admin via seed.
+
+---
+
+## 🎯 Próximos Passos (Imediatos)
+
+### 🤖 Fase 2: Integração com Telegram (Foco Atual)
+**Objetivo:** Permitir que o usuário conecte um bot real e troque mensagens.
+
+- [x] **Conexão de Bot:** Página para inserir Token do BotFather e salvar no banco.
+- [x] **Webhook:** Criar rota `/api/webhooks/telegram` para receber mensagens.
+- [x] **Processamento Básico:** Receber mensagem -> Salvar no banco (Tabelas [Conversations](file:///c:/Users/Brendon%20Freitas/Nova%20onda/app/actions/chat.ts#6-51) e [Messages](file:///c:/Users/Brendon%20Freitas/Nova%20onda/app/actions/chat.ts#52-80)).
+- [x] **Envio de Mensagem:** Função para responder o usuário via API do Telegram.
+- [x] **Motor de Fluxos:** Implementação do FlowEngine para interpretação de mensagens.
+
+### ✅ Fase 3: Construtor de Fluxos (Visual) - CONCLUÍDO
+**Objetivo:** Dar vida à tela de "Fluxos" com lógica real.
+
+- [x] **Salvar Fluxo:** API para persistir o JSON do React Flow no banco.
+- [x] **Carregar Fluxo:** Trazer o fluxo salvo para a tela de edição.
+- [x] **Engine de Execução:** Lógica no Backend para percorrer os nós do fluxo e executar ações.
+- [x] **Ramificações:** Suporte a caminhos condicionais e timeouts em blocos de entrada.
+
+---
+
+## 🎯 Próximos Passos (Imediatos)
+
+### [Fase 4: Disparos em Massa & Filas] [DONE]
+Escalabilidade para envio em massa sem bloqueios.
+
+- [x] Configuração de Redis e BullMQ para gestão de filas.
+- [x] Implementação de Workers para processamento assíncrono.
+- [x] Dashboard de acompanhamento de disparos em tempo real.
+- [x] Execução direta de fluxos ([startFlow](file:///c:/Users/Brendon%20Freitas/Nova%20onda/lib/flow-engine.ts#111-129)) para campanhas.
+
+### 💰 Fase 5: Ferramentas de Marketing & Pagamentos e Pix
+- [x] **Integração PIX:** Bloco para gerar cobranças instantâneas (Concluído).
+- [x] **Link de Checkout:** Botões integrados em mensagens (Concluído).
+- [ ] **Rastreamento Avançado:** Integração com Meta Pixel e API de Conversões.
+
+### 📊 Fases Futuras
+- [ ] **Dashboard de Métricas:** Analytics detalhado de vendas e conversão.
+- [ ] **IA Conversacional:** Integração com OpenAI/Gemini para respostas inteligentes.
+
+---
+**Notas:**
+- Stack Atual: Next.js 16, Prisma (v5 Stable), PostgreSQL, NextAuth v5.

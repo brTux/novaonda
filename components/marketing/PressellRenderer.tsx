@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Send, Volume2, ShieldCheck, Loader2, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackCtaClick } from "@/app/actions/tracking";
 
 interface PressellRendererProps {
     pressell: any;
@@ -50,6 +51,24 @@ export default function PressellRenderer({ pressell }: PressellRendererProps) {
         track();
     }, [pressell.safeUrl]);
 
+    const handleCtaClick = async () => {
+        if (!trackingId) return;
+
+        // Trigger Server-side tracking (CAPI)
+        await trackCtaClick({
+            pressellId: pressell.id,
+            trackingId: trackingId,
+            utmSource: new URLSearchParams(window.location.search).get("utm_source") || undefined,
+            utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") || undefined,
+            pixelId: pressell.pixelId || undefined
+        });
+
+        // Trigger Client-side tracking (Pixel)
+        if (typeof window !== "undefined" && (window as any).fbq) {
+            (window as any).fbq('track', 'InitiateCheckout');
+        }
+    };
+
     const telegramLink = pressell.bot?.username
         ? `https://t.me/${pressell.bot.username}?start=tr_${trackingId || ""}`
         : "#";
@@ -73,7 +92,11 @@ export default function PressellRenderer({ pressell }: PressellRendererProps) {
                     <VSLRenderer url={pressell.vslUrl} />
                 </div>
                 <div className="w-full space-y-4">
-                    <a href={telegramLink} className="w-full bg-[#ff5100] hover:bg-[#ff6a26] text-white py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all shadow-xl shadow-orange-500/20">
+                    <a
+                        href={telegramLink}
+                        onClick={handleCtaClick}
+                        className="w-full bg-[#ff5100] hover:bg-[#ff6a26] text-white py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all shadow-xl shadow-orange-500/20"
+                    >
                         {loading ? <Loader2 className="animate-spin" /> : <Send />}
                         {pressell.buttonText}
                     </a>
@@ -90,6 +113,7 @@ export default function PressellRenderer({ pressell }: PressellRendererProps) {
                         block={block}
                         telegramLink={telegramLink}
                         loading={loading}
+                        onCtaClick={handleCtaClick}
                     />
                 </div>
             ))}
@@ -116,7 +140,7 @@ function VSLRenderer({ url }: { url: string }) {
     );
 }
 
-function BlockDisplay({ block, telegramLink, loading }: { block: any, telegramLink: string, loading: boolean }) {
+function BlockDisplay({ block, telegramLink, loading, onCtaClick }: { block: any, telegramLink: string, loading: boolean, onCtaClick: () => void }) {
     switch (block.type) {
         case "TEXT":
             return (
@@ -134,11 +158,12 @@ function BlockDisplay({ block, telegramLink, loading }: { block: any, telegramLi
                 </div>
             );
         case "QUIZ":
-            return <QuizBlock content={block.content} telegramLink={telegramLink} />;
+            return <QuizBlock content={block.content} telegramLink={telegramLink} onChoice={onCtaClick} />;
         case "BUTTON":
             return (
                 <a
                     href={telegramLink}
+                    onClick={onCtaClick}
                     className="w-full py-5 rounded-2xl font-black text-lg text-white flex items-center justify-center gap-3 transition-all shadow-xl hover:brightness-110 active:scale-95"
                     style={{ backgroundColor: block.content.color || "#ff5100" }}
                 >
@@ -159,11 +184,12 @@ function BlockDisplay({ block, telegramLink, loading }: { block: any, telegramLi
     }
 }
 
-function QuizBlock({ content, telegramLink }: { content: any, telegramLink: string }) {
+function QuizBlock({ content, telegramLink, onChoice }: { content: any, telegramLink: string, onChoice: () => void }) {
     const [step, setStep] = useState(0);
 
     // Quiz is simple for now: it always leads to the button/redirect after any choice
     const handleChoice = () => {
+        onChoice();
         // Usually, the last choice redirects
         window.location.href = telegramLink;
     };

@@ -1,0 +1,77 @@
+# Plano de Implementação - Construtor de Fluxos SaaS para Telegram (Alternativa ao ManyChat)
+
+Este projeto visa construir um SaaS robusto e escalável para gerenciamento de bots do Telegram, construção de fluxos visuais e integração de pagamentos (PIX).
+
+## Arquitetura do Sistema
+
+O sistema segue uma arquitetura monolítica modular (Modular Monolith), projetada para ser dividida em microsserviços conforme a carga aumenta.
+
+```mermaid
+graph TD
+    User((Usuário)) -->|Navegador| FE[Next.js Frontend]
+    FE -->|API| BE[Node.js/TS Backend]
+    
+    TG((Telegram)) -->|Webhooks| BE
+    
+    BE --> DB[(PostgreSQL)]
+    BE --> RD[(Redis/BullMQ)]
+    
+    RD --> W[Workers - Motor de Fluxos]
+    W -->|Enviar Mensagem| TG
+    W -->|API| PG[Gateway de Pagamento - PIX]
+    W -->|Rastreamento| MP[Meta Pixel / Utmify]
+    
+    Admin[Painel Admin] -->|Gerenciar| BE
+```
+
+## Mudanças Propostas
+
+### 1. Backend (Node.js/TypeScript)
+- **Framework**: Fastify (Alta Performance) ou NestJS (Estrutura robusta).
+- **ORM**: Prisma ou Drizzle para PostgreSQL.
+- **Fila (Queue)**: BullMQ (Redis) para tarefas em segundo plano (Disparos em massa, execução de fluxos).
+- **Biblioteca de Bot**: GrammY ou Telegraf.
+
+### 2. Frontend (Next.js)
+- **Dashboard**: Shadcn/UI para um visual premium e moderno.
+- **Construtor de Fluxos**: React Flow para a experiência visual drag-and-drop.
+- **Gerenciamento de Estado**: Zustand ou React Query.
+
+### 3. Implementação de Funcionalidades Chave
+- **Construtor de Fluxos Visual**: Nós customizados para "Enviar Mensagem", "Aguardar", "Condição", "Pagamento PIX", "Definir Tag", "Adicionar ao Grupo".
+- **Integração PIX**: Recebimento de webhooks para confirmação de pagamento automatizada (Asaas/Mercado Pago).
+- **Disparo em Massa**: Escalonamento inteligente para evitar limites de taxa do Telegram (30 req/s).
+- **Rastreamento**: Integração com Meta Conversion API (lado do servidor) e captura de UTMs.
+
+## Componentes Propostos
+
+### Construtor de Fluxos Visual
+- Lógica para salvar a estrutura do grafo como JSON.
+- Parser no backend para executar os nós sequencialmente.
+
+### Módulo de Gateway de Pagamento
+- Interface padronizada para múltiplos gateways (Asaas, Mercado Pago).
+- Geração automática de QR Code PIX e validação via webhook.
+
+### Meta Pixel & Rastreamento
+- Integração nativa com a API do Meta Pixel para rastrear "InitiateCheckout", "Purchase", etc.
+- Suporte ao Utmify para atribuição completa de vendas.
+
+## Plano de Verificação
+
+### Testes Automatizados
+- Testes unitários para a lógica do parser de fluxos.
+- Testes de integração para confirmação de webhook de PIX.
+- Testes de carga para os workers de disparos em massa.
+
+### Verificação Manual
+- Criar um bot através do dashboard.
+- Desenhar um fluxo simples de "Bem-vindo".
+- Testar geração de PIX e simulação de pagamento em sandbox.
+- Verificar eventos do Meta Pixel no Gerenciador de Eventos.
+
+> [!IMPORTANT]
+> Para garantir alta entregabilidade e evitar banimentos, implementaremos atrasos "humanizados" nos disparos em massa e rotação de chaves de API se necessário.
+
+> [!WARNING]
+> Operações de alto volume exigem uma configuração robusta de Redis e consultas SQL otimizadas para marcação de leads.

@@ -109,6 +109,44 @@ export async function processMessage(botId: string, telegramChatId: string, mess
     }
 }
 
+export async function handleTagTrigger(botId: string, telegramChatId: string, tagName: string) {
+    console.log(`[FlowEngine] Checking TAG triggers for bot ${botId}, tag: ${tagName}`);
+
+    const triggerNodes = await prisma.flowNode.findMany({
+        where: {
+            flow: {
+                botId: botId,
+                status: 'PUBLISHED',
+            },
+            type: 'TRIGGER',
+        },
+        include: {
+            flow: true
+        }
+    });
+
+    for (const triggerNode of triggerNodes) {
+        let nodeData = triggerNode.data as any;
+        if (typeof nodeData === 'string') {
+            try {
+                nodeData = JSON.parse(nodeData);
+            } catch (e) {
+                continue;
+            }
+        }
+
+        const type = nodeData.triggerType;
+        const triggerTag = nodeData.trigger?.trim();
+
+        if (type === 'TAG' && triggerTag === tagName) {
+            console.log(`[FlowEngine] Tag trigger matched! Starting flow: ${triggerNode.flow.name}`);
+            await executeNextNodes(triggerNode.flowId, triggerNode.id, telegramChatId, botId);
+            // We return after first match? Or allow multiple? Usually one flow per trigger event.
+            return;
+        }
+    }
+}
+
 export async function startFlow(flowId: string, botId: string, telegramChatId: string) {
     console.log(`[FlowEngine] Starting flow ${flowId} for ${telegramChatId}`);
 

@@ -1,14 +1,17 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { handleTagTrigger } from "@/lib/flow-engine";
 
 export async function POST(request: Request) {
     try {
         const payload = await request.json();
-        console.log("[PushinPay Webhook] Received payload:", payload);
+        console.log("[PushinPay Webhook] Received payload:", JSON.stringify(payload, null, 2));
 
-        const { id: externalId, status, value } = payload;
+        const { id, status, value } = payload;
+        const externalId = id?.toString();
 
         if (!status) {
+            console.error("[PushinPay Webhook] Missing status in payload");
             return NextResponse.json({ error: "Missing status" }, { status: 400 });
         }
 
@@ -19,25 +22,26 @@ export async function POST(request: Request) {
         });
 
         if (!transaction) {
-            console.warn(`[PushinPay Webhook] Transaction not found: ${externalId}`);
+            console.warn(`[PushinPay Webhook] Transaction not found for externalId: ${externalId}`);
             return NextResponse.json({ error: "Transaction not found" }, { status: 404 });
         }
 
-        // 2. Update status
-        const newStatus = status === 'paid' ? 'PAID' : transaction.status;
+        // 2. Update status mapping (robust check)
+        const isPaid = status.toLowerCase() === 'paid';
+        const newStatus = isPaid ? 'PAID' : transaction.status;
 
         await prisma.transaction.update({
             where: { id: transaction.id },
             data: {
                 status: newStatus as any,
-                paidAt: status === 'paid' ? new Date() : undefined
+                paidAt: isPaid ? new Date() : undefined
             }
         });
 
-        console.log(`[PushinPay Webhook] Updated transaction ${externalId} to ${newStatus}`);
+        console.log(`[PushinPay Webhook] Updated transaction ${externalId} (DB ID: ${transaction.id}) to ${newStatus}`);
 
-        // 3. Optional: Trigger automation or notification to the user in Telegram
-        if (status === 'paid') {
+        // 3. Trigger automation
+        if (isPaid) {
             const bot = transaction.conversation.bot;
             const chatId = transaction.conversation.telegramChatId;
 
@@ -55,6 +59,10 @@ export async function POST(request: Request) {
                             }
                         }
                     });
+
+                    // TRIGGER FLOW BY TAG!
+                    console.log(`[PushinPay Webhook] Triggering flow for tag: ${transaction.paidTag}`);
+                    await handleTagTrigger(bot.id, chatId, transaction.paidTag);
                 }
             }
 
@@ -71,7 +79,7 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ success: true });
     } catch (error) {
-        console.error("[PushinPay Webhook] Error:", error);
+        console.error("[PushinPay Webhook] Critical Error:", error);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }

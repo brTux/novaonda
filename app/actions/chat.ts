@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { handleTagTrigger } from "@/lib/flow-engine";
 
 // Fetch list of conversations for the current user's bots
 export async function getConversations() {
@@ -94,10 +95,20 @@ export async function updateConversationTags(conversationId: string, tags: strin
             return { error: "Unauthorized" };
         }
 
+        const oldTags = conversation.tags || [];
+        const newTags = tags.filter(t => !oldTags.includes(t));
+
         await prisma.conversation.update({
             where: { id: conversationId },
             data: { tags: { set: tags } }
         });
+
+        // Trigger flows for EACH new tag added
+        for (const tag of newTags) {
+            console.log(`[ChatAction] Manual tag added: ${tag}. Triggering flows...`);
+            await handleTagTrigger(conversation.botId, conversation.telegramChatId, tag);
+        }
+
         return { success: true };
     } catch (error) {
         console.error("UpdateTags Error:", error);

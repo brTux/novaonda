@@ -88,7 +88,7 @@ export default function PressellList({ initialPressells, bots }: PressellListPro
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Link
-                                            href={`/ferramentas/pressell/${p.id}/builder`}
+                                            href={`/ferramentas/pressel/${p.id}/builder`}
                                             className="flex items-center gap-1.5 bg-slate-100 text-[#2d3339] px-3 py-1.5 rounded-lg font-bold text-[10px] hover:bg-slate-200 transition-all border border-slate-200"
                                             title="Editar Layout"
                                         >

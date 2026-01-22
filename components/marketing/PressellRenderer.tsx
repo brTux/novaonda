@@ -35,7 +35,7 @@ export default function PressellRenderer({ pressell }: PressellRendererProps) {
             };
 
             try {
-                const res = await fetch("/api/tracking/pressell", {
+                const res = await fetch("/api/tracking/pressel", {
                     method: "POST",
                     body: JSON.stringify({ utms }),
                 });

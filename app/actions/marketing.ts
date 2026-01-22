@@ -24,7 +24,7 @@ export async function createPressell(data: {
         }
     });
 
-    revalidatePath("/ferramentas/pressell");
+    revalidatePath("/ferramentas/pressel");
     return { success: true, pressell };
 }
 
@@ -37,8 +37,8 @@ export async function updatePressell(id: string, data: any) {
         data
     });
 
-    revalidatePath("/ferramentas/pressell");
-    revalidatePath(`/ferramentas/pressell/${id}/builder`);
+    revalidatePath("/ferramentas/pressel");
+    revalidatePath(`/ferramentas/pressel/${id}/builder`);
     return { success: true };
 }
 
@@ -50,6 +50,6 @@ export async function deletePressell(id: string) {
         where: { id, userId: session.user.id }
     });
 
-    revalidatePath("/ferramentas/pressell");
+    revalidatePath("/ferramentas/pressel");
     return { success: true };
 }

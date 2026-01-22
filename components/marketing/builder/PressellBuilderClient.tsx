@@ -101,7 +101,7 @@ export default function PressellBuilderClient({ pressell }: PressellBuilderClien
             {/* Top Bar */}
             <header className="h-16 bg-white border-b border-slate-100 flex items-center justify-between px-6 shrink-0 z-50">
                 <div className="flex items-center gap-4">
-                    <Link href="/ferramentas/pressell" className="p-2 hover:bg-slate-50 rounded-lg text-slate-400">
+                    <Link href="/ferramentas/pressel" className="p-2 hover:bg-slate-50 rounded-lg text-slate-400">
                         <ChevronLeft size={20} />
                     </Link>
                     <div>

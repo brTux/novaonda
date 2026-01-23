@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { handleTagTrigger } from "@/lib/flow-engine";
 import * as schema from "@/db/schema";
-import { eq, desc, and, like, arrayContains, or, isNull } from "drizzle-orm"; // Import operators
+import { eq, desc, and, like, arrayContains, or, isNull, exists } from "drizzle-orm"; // Import operators
 
 // Fetch list of conversations for the current user's bots
 export async function getConversations() {

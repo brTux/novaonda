@@ -80,6 +80,12 @@ export async function getFlowById(id: string) {
     if (!session?.user?.id) return null;
 
     const flow = await db.query.flows.findFirst({
+        columns: {
+            id: true,
+            name: true,
+            status: true,
+            botId: true,
+        },
         where: eq(schema.flows.id, id),
         with: {
             nodes: true,
@@ -266,9 +272,12 @@ export async function importFlow(botId: string, flowData: any) {
 
             try {
                 const nodeId = crypto.randomUUID();
+                // We MUST stringify data when using raw SQL for json columns
+                const jsonData = JSON.stringify(node.data || {});
+
                 await db.execute(sql`
                     INSERT INTO "flow_nodes" (id, "flowId", type, "positionX", "positionY", data, "updatedAt", "createdAt")
-                    VALUES (${nodeId}, ${flowId}, ${node.type}, ${node.position.x || 0}, ${node.position.y || 0}, ${node.data || {}}, NOW(), NOW())
+                    VALUES (${nodeId}, ${flowId}, ${node.type}, ${node.position.x || 0}, ${node.position.y || 0}, ${jsonData}, NOW(), NOW())
                 `);
                 nodeMapping[node.id] = nodeId;
             } catch (nodeError: any) {
@@ -310,6 +319,10 @@ export async function getFullFlowForExport(id: string) {
     if (!session?.user?.id) return null;
 
     const flow = await db.query.flows.findFirst({
+        columns: {
+            id: true,
+            name: true,
+        },
         where: eq(schema.flows.id, id),
         with: {
             nodes: true,

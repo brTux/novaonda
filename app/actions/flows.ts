@@ -241,47 +241,67 @@ export async function importFlow(botId: string, flowData: any) {
     const session = await auth();
     if (!session?.user?.id) return { error: "Unauthorized" };
 
+    if (!flowData || !flowData.nodes || !Array.isArray(flowData.nodes)) {
+        return { error: "Estrutura de fluxo inválida (nodes ausentes)" };
+    }
+
     try {
         const flowResult = await db.insert(schema.flows).values({
-            name: `${flowData.name} (Importado)`,
+            name: `${flowData.name || "Novo Fluxo"} (Importado)`,
             botId,
             status: "DRAFT",
             isDefault: false
-        }).returning();
+        }).returning({ id: schema.flows.id }); // Specific returning to avoid missing columns
 
         const flowId = flowResult[0].id;
         const nodeMapping: Record<string, string> = {};
 
         // 1. Insert Nodes
         for (const node of flowData.nodes) {
-            const [newNode] = await db.insert(schema.flowNodes).values({
-                flowId,
-                type: node.type,
-                positionX: node.position.x,
-                positionY: node.position.y,
-                data: node.data
-            }).returning();
-            nodeMapping[node.id] = newNode.id;
+            if (!node.type || !node.position) {
+                console.warn("Skipping invalid node in import:", node);
+                continue;
+            }
+
+            try {
+                const [newNode] = await db.insert(schema.flowNodes).values({
+                    flowId,
+                    type: node.type,
+                    positionX: node.position.x || 0,
+                    positionY: node.position.y || 0,
+                    data: node.data || {}
+                }).returning({ id: schema.flowNodes.id });
+                nodeMapping[node.id] = newNode.id;
+            } catch (nodeError) {
+                console.error("Error inserting node during import:", nodeError);
+                // Continue to try to import other nodes? Or fail fast?
+                // Let's fail fast to ensure data integrity
+                throw new Error(`Erro ao inserir nó do tipo ${node.type}`);
+            }
         }
 
         // 2. Insert Edges
         if (flowData.edges && flowData.edges.length > 0) {
-            await db.insert(schema.flowEdges).values(
-                flowData.edges.map((edge: any) => ({
-                    flowId,
-                    sourceNodeId: nodeMapping[edge.source] || edge.source,
-                    sourceHandle: edge.sourceHandle,
-                    targetNodeId: nodeMapping[edge.target] || edge.target,
-                    targetHandle: edge.targetHandle,
-                }))
-            );
+            const validEdges = flowData.edges.filter((edge: any) => edge.source && edge.target);
+
+            if (validEdges.length > 0) {
+                await db.insert(schema.flowEdges).values(
+                    validEdges.map((edge: any) => ({
+                        flowId,
+                        sourceNodeId: nodeMapping[edge.source] || edge.source,
+                        sourceHandle: edge.sourceHandle,
+                        targetNodeId: nodeMapping[edge.target] || edge.target,
+                        targetHandle: edge.targetHandle,
+                    }))
+                );
+            }
         }
 
         revalidatePath("/fluxos");
         return { success: true, flowId };
-    } catch (error) {
-        console.error("Import Flow Error", error);
-        return { error: "Failed to import flow" };
+    } catch (error: any) {
+        console.error("Import Flow Error Details:", error);
+        return { error: error.message || "Falha ao importar fluxo. Certifique-se de que o banco de dados está atualizado." };
     }
 }
 

@@ -270,8 +270,11 @@ export async function getLeads(filters: { botId?: string, tag?: string, search?:
     if (!session?.user?.id) return [];
 
     const conversations = await db.query.conversations.findMany({
-        where: (cols, { exists, and, eq, or, like }) => {
-            const conditions = [
+        where: (cols) => {
+            const conditions: any[] = [];
+
+            // 1. Ownership check (exists)
+            conditions.push(
                 exists(
                     db.select().from(schema.bots)
                         .where(and(
@@ -279,16 +282,19 @@ export async function getLeads(filters: { botId?: string, tag?: string, search?:
                             eq(schema.bots.userId, session.user!.id!)
                         ))
                 )
-            ];
+            );
 
+            // 2. Bot filter
             if (filters.botId) {
                 conditions.push(eq(cols.botId, filters.botId));
             }
 
+            // 3. Tag filter
             if (filters.tag) {
                 conditions.push(arrayContains(schema.conversations.tags, [filters.tag]));
             }
 
+            // 4. Search filter
             if (filters.search) {
                 const search = `%${filters.search}%`;
                 const searchConditions = [
@@ -296,16 +302,14 @@ export async function getLeads(filters: { botId?: string, tag?: string, search?:
                     like(cols.lastName, search),
                     like(cols.username, search),
                     like(cols.telegramUserId, search),
-                ].filter((c): c is any => c !== undefined);
+                ].filter(Boolean);
 
                 if (searchConditions.length > 0) {
-                    conditions.push(or(...searchConditions));
+                    conditions.push(or(...(searchConditions as any[])));
                 }
             }
 
-            const validConditions = conditions.filter((c): c is any => c !== undefined);
-
-            return validConditions.length > 0 ? and(...(validConditions as any)) : undefined;
+            return and(...(conditions as any[]));
         },
         with: {
             bot: {

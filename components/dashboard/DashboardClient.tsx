@@ -34,12 +34,14 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
                 {[
-                    { label: "Faturamento", value: stats.totalRevenue, change: "+0%", icon: TrendingUp, color: "text-emerald-500 bg-emerald-50" },
-                    { label: "Taxa Conversão", value: stats.conversionRate, change: "+0%", icon: Zap, color: "text-[#ff5100] bg-[#fff5f0]" },
-                    { label: "Total de Leads", value: stats.totalLeads, change: "+0%", icon: Users, color: "text-blue-500 bg-blue-50" },
-                    { label: "Vendas Pagas", value: stats.salesPaid, change: "+0%", icon: Zap, color: "text-emerald-500 bg-emerald-50" },
+                    { label: "Faturamento", value: stats.totalRevenue, icon: TrendingUp, color: "text-emerald-500 bg-emerald-50" },
+                    { label: "Ticket Médio", value: stats.averageTicket, icon: TrendingUp, color: "text-blue-500 bg-blue-50" },
+                    { label: "Taxa Conversão", value: stats.conversionRate, icon: Zap, color: "text-[#ff5100] bg-[#fff5f0]" },
+                    { label: "Eficiência Pix", value: stats.paymentEfficiency, icon: Zap, color: "text-emerald-500 bg-emerald-50" },
+                    { label: "Total Leads", value: stats.totalLeads, icon: Users, color: "text-blue-500 bg-blue-50" },
+                    { label: "Vendas Pagas", value: stats.salesPaid, icon: Zap, color: "text-emerald-500 bg-emerald-50" },
                 ].map((item) => (
                     <div key={item.label} className="glass-card p-6 bg-white border border-slate-100 flex flex-col gap-4">
                         <div className="flex justify-between items-center">
@@ -47,13 +49,12 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
                                 <item.icon size={20} />
                             </div>
                             <div className="flex items-center gap-1 text-emerald-600 font-bold text-xs">
-                                {item.change}
                                 <ArrowUpRight size={14} />
                             </div>
                         </div>
                         <div>
                             <p className="text-[10px] font-bold text-[#555d66] uppercase tracking-wider mb-0.5">{item.label}</p>
-                            <h3 className="text-2xl font-bold text-[#2d3339]">{item.value}</h3>
+                            <h3 className="text-xl font-bold text-[#2d3339]">{item.value}</h3>
                         </div>
                     </div>
                 ))}
@@ -63,7 +64,10 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
                 {/* Main Chart */}
                 <div className="lg:col-span-2 glass-card p-8 bg-white border border-slate-100">
                     <div className="flex items-center justify-between mb-8">
-                        <h3 className="text-lg font-bold text-[#2d3339]">Volume de Leads</h3>
+                        <div>
+                            <h3 className="text-lg font-bold text-[#2d3339]">Desempenho Geral</h3>
+                            <p className="text-xs text-[#555d66]">Correlação entre novos leads e faturamento bruto</p>
+                        </div>
                         <button className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 text-[#555d66] rounded-lg text-xs font-semibold hover:bg-slate-100 border border-slate-200 transition-all">
                             <Calendar size={14} /> Últimos 7 dias
                         </button>
@@ -72,9 +76,13 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={chartData}>
                                 <defs>
-                                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                                    <linearGradient id="colorLeads" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor="#ff5100" stopOpacity={0.1} />
                                         <stop offset="95%" stopColor="#ff5100" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.1} />
+                                        <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
@@ -85,7 +93,8 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
                                     tick={{ fill: "#555d66", fontSize: 11 }}
                                     dy={10}
                                 />
-                                <YAxis hide />
+                                <YAxis yAxisId="left" hide />
+                                <YAxis yAxisId="right" hide />
                                 <Tooltip
                                     contentStyle={{
                                         backgroundColor: '#ffffff',
@@ -95,12 +104,24 @@ export default function DashboardClient({ stats, chartData, recentActivity }: Da
                                     }}
                                 />
                                 <Area
+                                    yAxisId="left"
                                     type="monotone"
                                     dataKey="leads"
+                                    name="Leads"
                                     stroke="#ff5100"
                                     strokeWidth={3}
                                     fillOpacity={1}
-                                    fill="url(#colorValue)"
+                                    fill="url(#colorLeads)"
+                                />
+                                <Area
+                                    yAxisId="right"
+                                    type="monotone"
+                                    dataKey="revenue"
+                                    name="Faturamento (R$)"
+                                    stroke="#10b981"
+                                    strokeWidth={3}
+                                    fillOpacity={1}
+                                    fill="url(#colorRevenue)"
                                 />
                             </AreaChart>
                         </ResponsiveContainer>

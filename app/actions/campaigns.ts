@@ -16,14 +16,15 @@ export async function createCampaign(data: {
     excludeTags?: string[];
     targetAllBots?: boolean;
 }) {
-    const session = await auth();
-    if (!session?.user?.id) throw new Error("Unauthorized");
+    const checkSession = await auth();
+    if (!checkSession?.user?.id) throw new Error("Unauthorized");
+    const session = checkSession;
 
     // 1. Create Campaign entry
     const campaignResult = await db.insert(schema.campaigns).values({
         name: data.name,
         flowId: data.flowId || null,
-        userId: session.user.id,
+        userId: session.user!.id!,
         status: "DRAFT",
     }).returning();
     const campaign = campaignResult[0];
@@ -33,13 +34,13 @@ export async function createCampaign(data: {
 
     // Security: ensure conv.bot.userId == session.user.id
     conditions.push(
-        (conversations: any, { exists }: any) => exists(
+        ((conversations: any, { exists }: any) => exists(
             db.select().from(schema.bots)
                 .where(and(
                     eq(schema.bots.id, schema.conversations.botId),
-                    eq(schema.bots.userId, session.user.id!)
+                    eq(schema.bots.userId, session.user!.id!)
                 ))
-        )
+        )) as any
     );
 
     if (!data.targetAllBots && data.botIds && data.botIds.length > 0) {

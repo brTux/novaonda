@@ -35,13 +35,13 @@ export async function getTags() {
             // For global tags, we need to ensure we only count conversations from bots owned by this user
             // Subquery exists or join logic
             conditions.push(
-                (conversations: any, { exists }: any) => exists(
+                ((conversations: any, { exists }: any) => exists(
                     db.select().from(schema.bots)
                         .where(and(
                             eq(schema.bots.id, schema.conversations.botId),
                             eq(schema.bots.userId, userId)
                         ))
-                ) as any
+                )) as any
             );
         }
 
@@ -56,15 +56,16 @@ export async function getTags() {
 }
 
 export async function createTag(data: { name: string; color?: string; botId?: string }) {
-    const session = await auth();
-    if (!session?.user?.id) throw new Error("Unauthorized");
+    const checkSession = await auth();
+    if (!checkSession?.user?.id) throw new Error("Unauthorized");
+    const session = checkSession;
 
     try {
         const result = await db.insert(schema.tags).values({
             name: data.name,
             color: data.color || "#ff5100",
             botId: data.botId === "global" ? null : data.botId,
-            userId: session.user.id
+            userId: session.user!.id!
         }).returning();
 
         revalidatePath("/tags");

@@ -1,11 +1,11 @@
-'use server';
+"use server";
 
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import * as schema from "@/db/schema";
-import { eq, and, desc } from "drizzle-orm"; // Import desc
+import { eq, and, desc } from "drizzle-orm";
 
 const AddBotSchema = z.object({
     token: z.string().min(10, "Token inválido"),
@@ -13,10 +13,11 @@ const AddBotSchema = z.object({
 
 export async function addBot(prevState: any, formData: FormData) {
     try {
-        const session = await auth();
-        if (!session?.user?.id) {
+        const checkSession = await auth();
+        if (!checkSession?.user?.id) {
             return { message: "Não autorizado", errors: {} };
         }
+        const session = checkSession;
 
         const token = formData.get("token") as string;
         const validatedFields = AddBotSchema.safeParse({ token });
@@ -45,10 +46,10 @@ export async function addBot(prevState: any, formData: FormData) {
         let bot;
         try {
             const result = await db.insert(schema.bots).values({
-                token,
-                name: first_name,
-                username: username,
-                userId: session.user.id,
+                token: token,
+                name: first_name || "Bot sem nome",
+                username: username || null,
+                userId: session.user!.id!,
                 status: "ACTIVE",
             }).returning();
             bot = result[0];
@@ -90,7 +91,7 @@ export async function getBots() {
     if (!session?.user?.id) return [];
 
     return await db.query.bots.findMany({
-        where: eq(schema.bots.userId, session.user.id),
+        where: eq(schema.bots.userId, session.user.id!),
         orderBy: [desc(schema.bots.createdAt)],
     });
 }
@@ -103,7 +104,7 @@ export async function deleteBot(botId: string) {
         await db.delete(schema.bots)
             .where(and(
                 eq(schema.bots.id, botId),
-                eq(schema.bots.userId, session.user.id)
+                eq(schema.bots.userId, session.user.id!)
             ));
 
         revalidatePath("/bots");

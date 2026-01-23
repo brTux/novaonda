@@ -1,4 +1,6 @@
-import { prisma } from "./prisma";
+import { db } from "./db";
+import * as schema from "@/db/schema";
+import { eq, and } from "drizzle-orm";
 import { PaymentGatewayFactory } from "./payments/factory";
 
 interface FlowNodeData {
@@ -24,8 +26,11 @@ interface FlowNodeData {
 export async function processMessage(botId: string, telegramChatId: string, messageText: string) {
     console.log(`[FlowEngine] Processing message from ${telegramChatId}: ${messageText}`);
 
-    const conversation = await prisma.conversation.findUnique({
-        where: { botId_telegramChatId: { botId, telegramChatId } }
+    const conversation = await db.query.conversations.findFirst({
+        where: and(
+            eq(schema.conversations.botId, botId),
+            eq(schema.conversations.telegramChatId, telegramChatId)
+        )
     });
 
     // 0. Check if the conversation is paused (Manual Agent mode)
@@ -36,8 +41,8 @@ export async function processMessage(botId: string, telegramChatId: string, mess
 
     // 1. Check if we are waiting for an input from a previous node
     if (conversation?.waitingForNodeId) {
-        const waitingNode = await prisma.flowNode.findUnique({
-            where: { id: conversation.waitingForNodeId }
+        const waitingNode = await db.query.flowNodes.findFirst({
+            where: eq(schema.flowNodes.id, conversation.waitingForNodeId)
         });
 
         if (waitingNode) {
@@ -66,15 +71,16 @@ export async function processMessage(botId: string, telegramChatId: string, mess
     }
 
     // 2. Try to match triggers
-    const triggerNodes = await prisma.flowNode.findMany({
-        where: {
-            flow: {
-                botId: botId,
-                status: 'PUBLISHED',
-            },
-            type: 'TRIGGER',
-        },
-        include: {
+    const triggerNodes = await db.query.flowNodes.findMany({
+        where: ((flowNodes: any, { exists }: any) => exists(
+            db.select().from(schema.flows)
+                .where(and(
+                    eq(schema.flows.id, flowNodes.flowId),
+                    eq(schema.flows.botId, botId),
+                    eq(schema.flows.status, 'PUBLISHED')
+                ))
+        )) as any,
+        with: {
             flow: true
         }
     });
@@ -118,15 +124,16 @@ export async function processMessage(botId: string, telegramChatId: string, mess
 export async function handleTagTrigger(botId: string, telegramChatId: string, tagName: string) {
     console.log(`[FlowEngine] Checking TAG triggers for bot ${botId}, tag: ${tagName}`);
 
-    const triggerNodes = await prisma.flowNode.findMany({
-        where: {
-            flow: {
-                botId: botId,
-                status: 'PUBLISHED',
-            },
-            type: 'TRIGGER',
-        },
-        include: {
+    const triggerNodes = await db.query.flowNodes.findMany({
+        where: ((flowNodes: any, { exists }: any) => exists(
+            db.select().from(schema.flows)
+                .where(and(
+                    eq(schema.flows.id, flowNodes.flowId),
+                    eq(schema.flows.botId, botId),
+                    eq(schema.flows.status, 'PUBLISHED')
+                ))
+        )) as any,
+        with: {
             flow: true
         }
     });
@@ -157,8 +164,11 @@ export async function startFlow(flowId: string, botId: string, telegramChatId: s
     console.log(`[FlowEngine] Starting flow ${flowId} for ${telegramChatId}`);
 
     // 1. Find trigger nodes for this flow
-    const triggerNodes = await prisma.flowNode.findMany({
-        where: { flowId, type: 'TRIGGER' }
+    const triggerNodes = await db.query.flowNodes.findMany({
+        where: and(
+            eq(schema.flowNodes.flowId, flowId),
+            eq(schema.flowNodes.type, 'TRIGGER')
+        )
     });
 
     if (triggerNodes.length === 0) {
@@ -173,17 +183,22 @@ export async function startFlow(flowId: string, botId: string, telegramChatId: s
 }
 
 export async function executeNextNodes(flowId: string, currentNodeId: string, chatId: string, botId: string, sourceHandle?: string) {
-    const edges = await prisma.flowEdge.findMany({
-        where: {
-            flowId,
-            sourceNodeId: currentNodeId,
-            ...(sourceHandle ? { sourceHandle } : {})
-        }
+    const edges = await db.query.flowEdges.findMany({
+        where: sourceHandle
+            ? and(
+                eq(schema.flowEdges.flowId, flowId),
+                eq(schema.flowEdges.sourceNodeId, currentNodeId),
+                eq(schema.flowEdges.sourceHandle, sourceHandle)
+            )
+            : and(
+                eq(schema.flowEdges.flowId, flowId),
+                eq(schema.flowEdges.sourceNodeId, currentNodeId)
+            )
     });
 
     for (const edge of edges) {
-        const nextNode = await prisma.flowNode.findUnique({
-            where: { id: edge.targetNodeId }
+        const nextNode = await db.query.flowNodes.findFirst({
+            where: eq(schema.flowNodes.id, edge.targetNodeId)
         });
 
         if (nextNode) {
@@ -209,7 +224,10 @@ async function executeNode(node: any, chatId: string, botId: string) {
         }
     }
 
-    const bot = await prisma.bot.findUnique({ where: { id: botId } });
+    const bot = await db.query.bots.findFirst({
+        where: eq(schema.bots.id, botId)
+    });
+
     if (!bot) {
         console.error(`[FlowEngine] Bot not found: ${botId}`);
         return true;
@@ -286,18 +304,23 @@ async function executeNode(node: any, chatId: string, botId: string) {
             const timeoutSeconds = data.timeout || 60;
             const timeoutDate = new Date(Date.now() + timeoutSeconds * 1000);
 
-            await prisma.conversation.updateMany({
-                where: { botId, telegramChatId: chatId },
-                data: {
+            await db.update(schema.conversations)
+                .set({
                     waitingForNodeId: node.id,
                     waitingTimeout: timeoutDate
-                }
-            });
+                })
+                .where(and(
+                    eq(schema.conversations.botId, botId),
+                    eq(schema.conversations.telegramChatId, chatId)
+                ));
 
             // Start a timer for the timeout path (failsafe)
             setTimeout(async () => {
-                const conv = await prisma.conversation.findUnique({
-                    where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+                const conv = await db.query.conversations.findFirst({
+                    where: and(
+                        eq(schema.conversations.botId, botId),
+                        eq(schema.conversations.telegramChatId, chatId)
+                    )
                 });
                 if (conv && conv.waitingForNodeId === node.id) {
                     console.log(`[FlowEngine] Async Timeout reached for node ${node.id}`);
@@ -311,8 +334,11 @@ async function executeNode(node: any, chatId: string, botId: string) {
         case 'ACTION':
             if (data.subType === 'PIX' || data.subType === 'PIX_CUSTOM') {
                 // 1. Find user and their active payment credential
-                const credential = await prisma.paymentCredential.findFirst({
-                    where: { userId: bot.userId, isActive: true }
+                const credential = await db.query.paymentCredentials.findFirst({
+                    where: and(
+                        eq(schema.paymentCredentials.userId, bot.userId),
+                        eq(schema.paymentCredentials.isActive, true)
+                    )
                 });
 
                 if (!credential) {
@@ -323,7 +349,7 @@ async function executeNode(node: any, chatId: string, botId: string) {
 
                 try {
                     // 2. Instantiate gateway and generate PIX
-                    const gateway = PaymentGatewayFactory.create(credential.provider, credential.token, credential.secret);
+                    const gateway = PaymentGatewayFactory.create(credential.provider, credential.token, credential.secret || undefined);
                     const amount = data.amount ? Math.round(data.amount * 100) : 50; // default 0.50 cents if not set
 
                     // Robust URL Construction
@@ -340,22 +366,25 @@ async function executeNode(node: any, chatId: string, botId: string) {
                     console.log(`[FlowEngine] GATEWAY RESPONSE: id=${pixResponse.id} status=${pixResponse.status}`);
 
                     // 3. Save Transaction
-                    const conv = await prisma.conversation.findUnique({
-                        where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+                    const conv = await db.query.conversations.findFirst({
+                        where: and(
+                            eq(schema.conversations.botId, botId),
+                            eq(schema.conversations.telegramChatId, chatId)
+                        )
                     });
 
-                    const transaction = await prisma.transaction.create({
-                        data: {
-                            externalId: pixResponse.id.toString().toLowerCase(),
-                            provider: credential.provider,
-                            amount: amount,
-                            status: 'PENDING',
-                            pixCopyPaste: pixResponse.pixCopyPaste,
-                            pixQrCodeBase64: pixResponse.pixQrCodeBase64,
-                            paidTag: data.paidTag,
-                            conversationId: conv?.id || ""
-                        }
-                    });
+                    const transactionResult = await db.insert(schema.transactions).values({
+                        externalId: pixResponse.id.toString().toLowerCase(),
+                        provider: credential.provider,
+                        amount: amount,
+                        status: 'PENDING',
+                        pixCopyPaste: pixResponse.pixCopyPaste || null,
+                        pixQrCodeBase64: pixResponse.pixQrCodeBase64 || null,
+                        paidTag: data.paidTag || null,
+                        conversationId: conv?.id || ""
+                    }).returning();
+
+                    const transaction = transactionResult[0];
 
                     console.log(`[FlowEngine] TRANSACTION CREATED: dbId=${transaction.id} externalId=${transaction.externalId}`);
 
@@ -367,12 +396,12 @@ async function executeNode(node: any, chatId: string, botId: string) {
                                 eventName: "InitiateCheckout",
                                 pixelId: bot.pixelId,
                                 accessToken: bot.capiToken,
-                                testEventCode: bot.testEventCode,
+                                testEventCode: bot.testEventCode || undefined,
                                 user: {
-                                    ip: conv.ip,
+                                    ip: conv.ip || undefined,
                                     userAgent: "Telegram Bot", // We don't have the original web user agent here usually, but we have IP
-                                    fbc: conv.fbc,
-                                    fbp: conv.fbp,
+                                    fbc: conv.fbc || undefined,
+                                    fbp: conv.fbp || undefined,
                                 },
                                 customData: {
                                     value: amount / 100,
@@ -424,13 +453,12 @@ async function executeNode(node: any, chatId: string, botId: string) {
 }
 
 async function clearWaitingState(conversationId: string) {
-    await prisma.conversation.update({
-        where: { id: conversationId },
-        data: {
+    await db.update(schema.conversations)
+        .set({
             waitingForNodeId: null,
             waitingTimeout: null
-        }
-    });
+        })
+        .where(eq(schema.conversations.id, conversationId));
 }
 
 async function saveVariable(conversationId: string, name: string, value: string) {
@@ -439,17 +467,19 @@ async function saveVariable(conversationId: string, name: string, value: string)
 }
 
 async function saveBotMessage(botId: string, chatId: string, text: string) {
-    const conversation = await prisma.conversation.findUnique({
-        where: { botId_telegramChatId: { botId, telegramChatId: chatId } }
+    const conversation = await db.query.conversations.findFirst({
+        where: and(
+            eq(schema.conversations.botId, botId),
+            eq(schema.conversations.telegramChatId, chatId)
+        )
     });
+
     if (conversation) {
-        await prisma.message.create({
-            data: {
-                conversationId: conversation.id,
-                content: text,
-                sender: 'BOT',
-                type: 'TEXT'
-            }
+        await db.insert(schema.messages).values({
+            conversationId: conversation.id,
+            content: text,
+            sender: 'BOT',
+            type: 'TEXT'
         });
     }
 }

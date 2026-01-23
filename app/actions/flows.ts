@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import * as schema from "@/db/schema";
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc, and, sql } from "drizzle-orm";
 
 export async function getFlows() {
     const session = await auth();
@@ -246,14 +246,15 @@ export async function importFlow(botId: string, flowData: any) {
     }
 
     try {
-        const flowResult = await db.insert(schema.flows).values({
-            name: `${flowData.name || "Novo Fluxo"} (Importado)`,
-            botId,
-            status: "DRAFT",
-            isDefault: false
-        }).returning({ id: schema.flows.id }); // Specific returning to avoid missing columns
+        // Use raw SQL for the initial insert to avoiding listing columns that might not exist yet (shareCode)
+        const name = `${flowData.name || "Novo Fluxo"} (Importado)`;
+        const flowId = crypto.randomUUID();
 
-        const flowId = flowResult[0].id;
+        await db.execute(sql`
+            INSERT INTO flows (id, name, status, "botId", "isDefault", "updatedAt", "createdAt")
+            VALUES (${flowId}, ${name}, 'DRAFT', ${botId}, false, NOW(), NOW())
+        `);
+
         const nodeMapping: Record<string, string> = {};
 
         // 1. Insert Nodes

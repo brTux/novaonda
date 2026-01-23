@@ -54,7 +54,7 @@ export async function createFlow(name: string, botId: string) {
             botId,
             status: "DRAFT",
             isDefault: false
-        }).returning();
+        }).returning({ id: schema.flows.id });
 
         const flowId = flowResult[0].id;
 
@@ -125,6 +125,10 @@ export async function saveFlow(id: string, nodes: any[], edges: any[], status?: 
     try {
         // Verify ownership
         const flow = await db.query.flows.findFirst({
+            columns: {
+                id: true,
+                botId: true,
+            },
             where: eq(schema.flows.id, id),
             with: { bot: true }
         });

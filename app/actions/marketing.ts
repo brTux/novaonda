@@ -1,7 +1,9 @@
 "use server";
 
 import { auth } from "@/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
+import * as schema from "@/db/schema";
+import { eq, and } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function updateBotMarketing(botId: string, data: { pixelId: string, capiToken: string, testEventCode?: string }) {
@@ -12,24 +14,28 @@ export async function updateBotMarketing(botId: string, data: { pixelId: string,
         }
 
         // Verify ownership
-        const bot = await prisma.bot.findUnique({
-            where: { id: botId, userId: session.user.id }
+        const bot = await db.query.bots.findFirst({
+            where: and(
+                eq(schema.bots.id, botId),
+                eq(schema.bots.userId, session.user.id)
+            )
         });
 
         if (!bot) {
             return { success: false, message: "Bot não encontrado" };
         }
 
-        await prisma.bot.update({
-            where: { id: botId },
-            data: {
+        await db.update(schema.bots)
+            .set({
                 pixelId: data.pixelId || null,
                 capiToken: data.capiToken || null,
                 testEventCode: data.testEventCode || null,
-            }
-        });
+                updatedAt: new Date(),
+            })
+            .where(eq(schema.bots.id, botId));
 
         revalidatePath("/ferramentas/tracking");
+        revalidatePath("/integracoes");
         return { success: true };
     } catch (error) {
         console.error("[updateBotMarketing] Error:", error);
@@ -52,13 +58,13 @@ export async function createPressell(data: {
             throw new Error("Não autorizado");
         }
 
-        const pressell = await prisma.pressell.create({
-            data: {
+        const [pressell] = await db.insert(schema.pressells)
+            .values({
                 ...data,
                 userId: session.user.id,
-                config: [] // Empty config initially
-            }
-        });
+                config: [], // Empty config initially
+            })
+            .returning();
 
         revalidatePath("/ferramentas/pressel");
         return { success: true, pressell };
@@ -75,10 +81,20 @@ export async function updatePressell(id: string, data: any) {
             throw new Error("Não autorizado");
         }
 
-        const pressell = await prisma.pressell.update({
-            where: { id, userId: session.user.id },
-            data
-        });
+        const [pressell] = await db.update(schema.pressells)
+            .set({
+                ...data,
+                updatedAt: new Date(),
+            })
+            .where(and(
+                eq(schema.pressells.id, id),
+                eq(schema.pressells.userId, session.user.id)
+            ))
+            .returning();
+
+        if (!pressell) {
+            throw new Error("Pressell não encontrada ou não pertence ao usuário");
+        }
 
         revalidatePath("/ferramentas/pressel");
         revalidatePath(`/ferramentas/pressel/${id}/builder`);
@@ -96,9 +112,11 @@ export async function deletePressell(id: string) {
             throw new Error("Não autorizado");
         }
 
-        await prisma.pressell.delete({
-            where: { id, userId: session.user.id }
-        });
+        await db.delete(schema.pressells)
+            .where(and(
+                eq(schema.pressells.id, id),
+                eq(schema.pressells.userId, session.user.id)
+            ));
 
         revalidatePath("/ferramentas/pressel");
         return { success: true };

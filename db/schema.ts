@@ -348,3 +348,20 @@ export const campaignLeadsRelations = relations(campaignLeads, ({ one }) => ({
     campaign: one(campaigns, { fields: [campaignLeads.campaignId], references: [campaigns.id] }),
     bot: one(bots, { fields: [campaignLeads.botId], references: [bots.id] }),
 }));
+
+export const pressellsRelations = relations(pressells, ({ one }) => ({
+    bot: one(bots, { fields: [pressells.botId], references: [bots.id] }),
+    user: one(users, { fields: [pressells.userId], references: [users.id] }),
+}));
+
+export const leadTrackingRelations = relations(leadTracking, ({ one }) => ({
+    pressell: one(pressells, { fields: [leadTracking.pressellId], references: [pressells.id] }),
+}));
+
+export const paymentCredentialsRelations = relations(paymentCredentials, ({ one }) => ({
+    user: one(users, { fields: [paymentCredentials.userId], references: [users.id] }),
+}));
+
+export const transactionsRelations = relations(transactions, ({ one }) => ({
+    conversation: one(conversations, { fields: [transactions.conversationId], references: [conversations.id] }),
+}));

@@ -1,8 +1,10 @@
 'use server';
 
 import { auth } from "@/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { handleTagTrigger } from "@/lib/flow-engine";
+import * as schema from "@/db/schema";
+import { eq, desc, and, like, arrayContains, or, isNull } from "drizzle-orm"; // Import operators
 
 // Fetch list of conversations for the current user's bots
 export async function getConversations() {
@@ -10,28 +12,28 @@ export async function getConversations() {
     if (!session?.user?.id) return [];
 
     // Get conversations where the bot belongs to the user
-    const conversations = await prisma.conversation.findMany({
-        where: {
+    // We need to join with bots table to filter by userId
+    // Drizzle Query API handles relations nicely
+    const conversations = await db.query.conversations.findMany({
+        where: ((conversations: any, { exists }: any) => exists(
+            db.select().from(schema.bots)
+                .where(and(
+                    eq(schema.bots.id, conversations.botId),
+                    eq(schema.bots.userId, session.user!.id!)
+                ))
+        )) as any,
+        with: {
             bot: {
-                userId: session.user.id,
-            },
-        },
-        include: {
-            bot: {
-                select: {
+                columns: {
                     name: true,
-                },
+                }
             },
             messages: {
-                orderBy: {
-                    createdAt: "desc",
-                },
-                take: 1, // Get the last message for preview
-            },
+                orderBy: [desc(schema.messages.createdAt)],
+                limit: 1,
+            }
         },
-        orderBy: {
-            updatedAt: "desc",
-        },
+        orderBy: [desc(schema.conversations.updatedAt)],
     });
 
     // Serialize dates and structure for the UI
@@ -43,7 +45,7 @@ export async function getConversations() {
         avatar: conv.firstName ? conv.firstName[0].toUpperCase() : "?",
         lastMessage: conv.messages[0]?.content || "Iniciou uma conversa",
         timestamp: conv.messages[0]?.createdAt || conv.updatedAt,
-        unread: 0, // TODO: Implement unread count later
+        unread: 0,
         botName: conv.bot.name,
         botId: conv.botId,
         telegramUserId: conv.telegramUserId,
@@ -56,7 +58,7 @@ export async function getConversations() {
         utmSource: conv.utmSource,
         utmMedium: conv.utmMedium,
         utmCampaign: conv.utmCampaign,
-        isPaused: conv.isPaused, // Added isPaused field
+        isPaused: conv.isPaused,
     }));
 }
 
@@ -65,12 +67,12 @@ export async function getTransactions(conversationId: string) {
     const session = await auth();
     if (!session?.user?.id) return [];
 
-    const transactions = await prisma.transaction.findMany({
-        where: { conversationId },
-        orderBy: { createdAt: "desc" },
+    const transactions = await db.query.transactions.findMany({
+        where: eq(schema.transactions.conversationId, conversationId),
+        orderBy: [desc(schema.transactions.createdAt)],
     });
 
-    return transactions.map((t: any) => ({
+    return transactions.map((t) => ({
         id: t.id,
         amount: t.amount,
         status: t.status,
@@ -86,22 +88,21 @@ export async function updateConversationTags(conversationId: string, tags: strin
     if (!session?.user?.id) return { error: "Unauthorized" };
 
     try {
-        const conversation = await prisma.conversation.findUnique({
-            where: { id: conversationId },
-            include: { bot: true }
+        const conversation = await db.query.conversations.findFirst({
+            where: eq(schema.conversations.id, conversationId),
+            with: { bot: true }
         });
 
         if (!conversation || conversation.bot.userId !== session.user.id) {
             return { error: "Unauthorized" };
         }
 
-        const oldTags = conversation.tags || [];
+        const oldTags: string[] = (conversation.tags as string[]) || []; // Ensure typed as array
         const newTags = tags.filter(t => !oldTags.includes(t));
 
-        await prisma.conversation.update({
-            where: { id: conversationId },
-            data: { tags: { set: tags } }
-        });
+        await db.update(schema.conversations)
+            .set({ tags: tags as any }) // Cast as any because Drizzle array handling can be tricky with types sometimes
+            .where(eq(schema.conversations.id, conversationId));
 
         // Trigger flows for EACH new tag added
         for (const tag of newTags) {
@@ -122,38 +123,38 @@ export async function getMessages(conversationId: string) {
     if (!session?.user?.id) return [];
 
     // Verify ownership (security)
-    const conversation = await prisma.conversation.findUnique({
-        where: { id: conversationId },
-        include: { bot: true }
+    const conversation = await db.query.conversations.findFirst({
+        where: eq(schema.conversations.id, conversationId),
+        with: { bot: true }
     });
 
     if (!conversation || conversation.bot.userId !== session.user.id) {
         return [];
     }
 
-    const messages = await prisma.message.findMany({
-        where: { conversationId },
-        orderBy: { createdAt: "asc" },
+    const messages = await db.query.messages.findMany({
+        where: eq(schema.messages.conversationId, conversationId),
+        orderBy: (messages, { asc }) => [asc(messages.createdAt)],
     });
 
     return messages.map((msg) => ({
         id: msg.id,
         content: msg.content,
-        sender: msg.sender, // 'USER' | 'BOT' | 'AGENT'
+        sender: msg.sender,
         createdAt: msg.createdAt,
         type: msg.type,
     }));
 }
 
-// Send a text message (to be implemented with Telegram API later for real sending)
+// Send a text message
 export async function sendMessage(conversationId: string, content: string) {
     const session = await auth();
     if (!session?.user?.id) return { error: "Unauthorized" };
 
     try {
-        const conversation = await prisma.conversation.findUnique({
-            where: { id: conversationId },
-            include: { bot: true }
+        const conversation = await db.query.conversations.findFirst({
+            where: eq(schema.conversations.id, conversationId),
+            with: { bot: true }
         });
 
         if (!conversation || conversation.bot.userId !== session.user.id) {
@@ -161,17 +162,16 @@ export async function sendMessage(conversationId: string, content: string) {
         }
 
         // 1. Save to DB
-        const newMessage = await prisma.message.create({
-            data: {
-                conversationId,
-                content,
-                sender: "AGENT", // Sent by the dashboard user
-                type: "TEXT"
-            }
-        });
+        const result = await db.insert(schema.messages).values({
+            conversationId,
+            content,
+            sender: "AGENT",
+            type: "TEXT"
+        }).returning();
 
-        // 2. Send to Telegram (via API) - Placeholder for now
-        // await telegramClient.sendMessage(conversation.telegramChatId, content, token);
+        const newMessage = result[0];
+
+        // 2. Send to Telegram (via API)
         const botToken = conversation.bot.token;
         const chatId = conversation.telegramChatId;
 
@@ -203,19 +203,18 @@ export async function togglePauseConversation(conversationId: string, isPaused: 
     if (!session?.user?.id) return { error: "Unauthorized" };
 
     try {
-        const conversation = await prisma.conversation.findUnique({
-            where: { id: conversationId },
-            include: { bot: true }
+        const conversation = await db.query.conversations.findFirst({
+            where: eq(schema.conversations.id, conversationId),
+            with: { bot: true }
         });
 
         if (!conversation || conversation.bot.userId !== session.user.id) {
             return { error: "Unauthorized" };
         }
 
-        await prisma.conversation.update({
-            where: { id: conversationId },
-            data: { isPaused }
-        });
+        await db.update(schema.conversations)
+            .set({ isPaused })
+            .where(eq(schema.conversations.id, conversationId));
 
         return { success: true };
     } catch (error) {
@@ -230,19 +229,17 @@ export async function deleteConversation(conversationId: string) {
     if (!session?.user?.id) return { error: "Unauthorized" };
 
     try {
-        const conversation = await prisma.conversation.findUnique({
-            where: { id: conversationId },
-            include: { bot: true }
+        const conversation = await db.query.conversations.findFirst({
+            where: eq(schema.conversations.id, conversationId),
+            with: { bot: true }
         });
 
         if (!conversation || conversation.bot.userId !== session.user.id) {
             return { error: "Unauthorized" };
         }
 
-        // Deleting conversation will cascade delete messages and transactions
-        await prisma.conversation.delete({
-            where: { id: conversationId }
-        });
+        await db.delete(schema.conversations)
+            .where(eq(schema.conversations.id, conversationId));
 
         return { success: true };
     } catch (error) {
@@ -257,7 +254,6 @@ export async function triggerFlowForUser(botId: string, telegramChatId: string, 
     if (!session?.user?.id) return { error: "Unauthorized" };
 
     try {
-        // Validation logic can be added here (check if user owns bot)
         const { startFlow } = await import("@/lib/flow-engine");
         await startFlow(flowId, botId, telegramChatId);
 
@@ -270,52 +266,57 @@ export async function triggerFlowForUser(botId: string, telegramChatId: string, 
 
 // Advanced Lead filtering for CRM
 export async function getLeads(filters: { botId?: string, tag?: string, search?: string }) {
-    const session = await auth();
-    if (!session?.user?.id) return [];
+    const checkSession = await auth();
+    if (!checkSession?.user?.id) return [];
+    const session = checkSession;
 
-    const where: any = {
-        bot: {
-            userId: session.user.id,
-        },
-    };
+    let conditions: any[] = [];
+
+    // Ensure bot belongs to user
+    conditions.push(
+        ((conversations: any, { exists }: any) => exists(
+            db.select().from(schema.bots)
+                .where(and(
+                    eq(schema.bots.id, conversations.botId),
+                    eq(schema.bots.userId, session.user!.id!)
+                ))
+        )) as any
+    );
 
     if (filters.botId) {
-        where.botId = filters.botId;
+        conditions.push(eq(schema.conversations.botId, filters.botId));
     }
 
     if (filters.tag) {
-        where.tags = {
-            has: filters.tag
-        };
+        // arrayContains is the postgres operator for @>
+        // Make sure tags is treated as array column
+        conditions.push(arrayContains(schema.conversations.tags, [filters.tag]));
     }
 
     if (filters.search) {
-        where.OR = [
-            { firstName: { contains: filters.search, mode: 'insensitive' } },
-            { lastName: { contains: filters.search, mode: 'insensitive' } },
-            { username: { contains: filters.search, mode: 'insensitive' } },
-            { telegramUserId: { contains: filters.search } },
-        ];
+        const search = `%${filters.search}%`;
+        conditions.push(or(
+            like(schema.conversations.firstName, search),
+            like(schema.conversations.lastName, search),
+            like(schema.conversations.username, search),
+            like(schema.conversations.telegramUserId, search),
+        ));
     }
 
-    const conversations = await prisma.conversation.findMany({
-        where,
-        include: {
+    const conversations = await db.query.conversations.findMany({
+        where: and(...conditions),
+        with: {
             bot: {
-                select: {
+                columns: {
                     name: true,
-                },
+                }
             },
             messages: {
-                orderBy: {
-                    createdAt: "desc",
-                },
-                take: 1,
-            },
+                orderBy: [desc(schema.messages.createdAt)],
+                limit: 1,
+            }
         },
-        orderBy: {
-            updatedAt: "desc",
-        },
+        orderBy: [desc(schema.conversations.updatedAt)],
     });
 
     return conversations.map((conv) => ({

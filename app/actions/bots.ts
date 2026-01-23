@@ -1,9 +1,11 @@
 'use server';
 
 import { auth } from "@/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import * as schema from "@/db/schema";
+import { eq, and, desc } from "drizzle-orm"; // Import desc
 
 const AddBotSchema = z.object({
     token: z.string().min(10, "Token inválido"),
@@ -17,7 +19,6 @@ export async function addBot(prevState: any, formData: FormData) {
         }
 
         const token = formData.get("token") as string;
-
         const validatedFields = AddBotSchema.safeParse({ token });
 
         if (!validatedFields.success) {
@@ -41,15 +42,23 @@ export async function addBot(prevState: any, formData: FormData) {
         const { id, first_name, username } = data.result;
 
         // 2. Save to Database
-        const bot = await prisma.bot.create({
-            data: {
+        let bot;
+        try {
+            const result = await db.insert(schema.bots).values({
                 token,
                 name: first_name,
                 username: username,
                 userId: session.user.id,
-                status: "ACTIVE", // Default to active for now
-            },
-        });
+                status: "ACTIVE",
+            }).returning();
+            bot = result[0];
+        } catch (dbError: any) {
+            // Check for unique constraint violation (Postgres error code 23505)
+            if (dbError.code === '23505') {
+                return { message: "Este bot já está conectado a uma conta.", errors: { token: ["Token já em uso."] } };
+            }
+            throw dbError;
+        }
 
         // 3. Register Webhook
         const appUrl = process.env.AUTH_URL;
@@ -60,7 +69,6 @@ export async function addBot(prevState: any, formData: FormData) {
 
             if (!webhookData.ok) {
                 console.error("Failed to set webhook:", webhookData);
-                // Optional: rollback bot creation or warn user
             } else {
                 console.log(`Webhook set to: ${webhookUrl}`);
             }
@@ -72,9 +80,6 @@ export async function addBot(prevState: any, formData: FormData) {
         return { success: true, message: `Bot @${username} conectado com sucesso!` };
 
     } catch (error: any) {
-        if (error.code === 'P2002') {
-            return { message: "Este bot já está conectado a uma conta.", errors: { token: ["Token já em uso."] } };
-        }
         console.error("Erro ao adicionar bot:", error);
         return { message: "Erro interno ao conectar bot.", errors: {} };
     }
@@ -84,9 +89,9 @@ export async function getBots() {
     const session = await auth();
     if (!session?.user?.id) return [];
 
-    return await prisma.bot.findMany({
-        where: { userId: session.user.id },
-        orderBy: { createdAt: "desc" },
+    return await db.query.bots.findMany({
+        where: eq(schema.bots.userId, session.user.id),
+        orderBy: [desc(schema.bots.createdAt)],
     });
 }
 
@@ -95,12 +100,12 @@ export async function deleteBot(botId: string) {
     if (!session?.user?.id) return { message: "Unauthorized" };
 
     try {
-        await prisma.bot.delete({
-            where: {
-                id: botId,
-                userId: session.user.id // Security check
-            }
-        });
+        await db.delete(schema.bots)
+            .where(and(
+                eq(schema.bots.id, botId),
+                eq(schema.bots.userId, session.user.id)
+            ));
+
         revalidatePath("/bots");
         return { success: true };
     } catch (error) {

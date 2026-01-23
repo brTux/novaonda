@@ -291,17 +291,21 @@ export async function getLeads(filters: { botId?: string, tag?: string, search?:
 
             if (filters.search) {
                 const search = `%${filters.search}%`;
-                conditions.push(or(
+                const searchConditions = [
                     like(cols.firstName, search),
                     like(cols.lastName, search),
                     like(cols.username, search),
                     like(cols.telegramUserId, search),
-                ));
+                ].filter((c): c is any => c !== undefined);
+
+                if (searchConditions.length > 0) {
+                    conditions.push(or(...searchConditions));
+                }
             }
 
             const validConditions = conditions.filter((c): c is any => c !== undefined);
 
-            return and(...validConditions);
+            return validConditions.length > 0 ? and(...(validConditions as any)) : undefined;
         },
         with: {
             bot: {

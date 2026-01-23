@@ -53,7 +53,9 @@ export async function createFlow(name: string, botId: string) {
             name,
             botId,
             status: "DRAFT",
-            isDefault: false
+            isDefault: false,
+            createdAt: new Date(),
+            updatedAt: new Date()
         }).returning({ id: schema.flows.id });
 
         const flowId = flowResult[0].id;
@@ -64,7 +66,9 @@ export async function createFlow(name: string, botId: string) {
             type: "TRIGGER",
             data: { trigger: "start" },
             positionX: 100,
-            positionY: 100
+            positionY: 100,
+            createdAt: new Date(),
+            updatedAt: new Date()
         });
 
         revalidatePath("/fluxos");
@@ -150,7 +154,9 @@ export async function saveFlow(id: string, nodes: any[], edges: any[], status?: 
                         type: node.type,
                         positionX: node.position.x,
                         positionY: node.position.y,
-                        data: node.data
+                        data: node.data,
+                        createdAt: new Date(),
+                        updatedAt: new Date()
                     }))
                 );
             }
@@ -165,6 +171,8 @@ export async function saveFlow(id: string, nodes: any[], edges: any[], status?: 
                         sourceHandle: edge.sourceHandle,
                         targetNodeId: edge.target,
                         targetHandle: edge.targetHandle,
+                        createdAt: new Date(),
+                        updatedAt: new Date()
                     }))
                 );
             }

@@ -38,58 +38,87 @@ export default async function FluxosPage() {
                 </button>
             </div>
 
-            {/* Fluxos Grid */}
-            <div className="grid grid-cols-1 gap-4">
-                {flows.length === 0 && (
-                    <div className="py-20 flex flex-col items-center border-2 border-dashed border-slate-200 rounded-2xl bg-white">
-                        <MessageSquare size={40} className="text-slate-200 mb-4" />
-                        <p className="text-slate-400 font-bold text-sm">Nenhum fluxo criado ainda.</p>
-                    </div>
-                )}
-                {flows.map((fluxo: any) => (
-                    <div key={fluxo.id} className="glass-card bg-white p-6 rounded-xl group hover:border-[#ff5100]/20 transition-all duration-300">
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                            <div className="flex items-center gap-5">
-                                <div className="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center text-[#ff5100]">
-                                    <MessageSquare size={22} />
-                                </div>
-                                <div className="min-w-0">
-                                    <div className="flex items-center gap-3">
-                                        <h3 className="text-md font-bold text-[#2d3339] truncate">{fluxo.name}</h3>
-                                        <span className={fluxo.status === "PUBLISHED" ? "px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-bold uppercase tracking-wider border border-emerald-100" : "px-2 py-0.5 bg-slate-50 text-slate-500 rounded text-[10px] font-bold uppercase tracking-wider border border-slate-100"}>
-                                            {fluxo.status === "PUBLISHED" ? "Publicado" : "Rascunho"}
-                                        </span>
-                                    </div>
-                                    <p className="text-xs font-semibold text-[#555d66] mt-1 space-x-2">
-                                        <span>{fluxo.steps} Blocos</span>
-                                        <span className="text-slate-200">•</span>
-                                        <span>Gatilho: {fluxo.triggers}</span>
-                                        <span className="text-slate-200">•</span>
-                                        <span className="opacity-70">
-                                            {formatDistanceToNow(new Date(fluxo.updatedAt), { addSuffix: true, locale: ptBR })}
-                                        </span>
-                                    </p>
-                                </div>
+            {/* Fluxos Grouped by Bot */}
+            <div className="space-y-12">
+                {bots.map((bot: any) => {
+                    const botFlows = flows.filter((f: any) => f.botId === bot.id);
+                    if (botFlows.length === 0) return null;
+
+                    return (
+                        <div key={bot.id} className="space-y-6">
+                            <div className="flex items-center gap-3 px-1">
+                                <div className="w-1 h-6 bg-[#ff5100] rounded-full" />
+                                <h2 className="text-xl font-bold text-[#2d3339]">{bot.name}</h2>
+                                <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200 shadow-sm">
+                                    {botFlows.length} {botFlows.length === 1 ? 'Fluxo' : 'Fluxos'}
+                                </span>
                             </div>
 
-                            <div className="flex items-center gap-3">
-                                <Link
-                                    href={`/fluxos/${fluxo.id}`}
-                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#ff5100] text-white px-5 py-2.5 rounded-lg font-bold text-xs transition-all hover:bg-[#e64a00]"
-                                >
-                                    Editar Fluxo
-                                    <ArrowRight size={14} />
-                                </Link>
-                                <button
-                                    title="Mais opções"
-                                    className="p-2.5 bg-slate-50 text-slate-400 rounded-lg hover:text-[#2d3339] border border-slate-100"
-                                >
-                                    <MoreHorizontal size={18} />
-                                </button>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {botFlows.map((fluxo: any) => (
+                                    <div key={fluxo.id} className="glass-card bg-white p-6 rounded-2xl group hover:border-[#ff5100]/30 transition-all duration-300 flex flex-col h-full border border-slate-100 shadow-sm relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button
+                                                title="Mais opções"
+                                                className="p-1.5 hover:bg-slate-50 rounded-lg text-slate-400 transition-colors"
+                                            >
+                                                <MoreHorizontal size={18} />
+                                            </button>
+                                        </div>
+
+                                        <div className="flex flex-col gap-5 h-full">
+                                            <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-[#ff5100] group-hover:bg-[#ff5100] group-hover:text-white transition-all duration-300 shadow-sm">
+                                                <MessageSquare size={24} />
+                                            </div>
+
+                                            <div className="space-y-1.5">
+                                                <div className="flex items-center gap-2">
+                                                    <h3 className="text-sm font-bold text-[#2d3339] truncate max-w-[180px]">{fluxo.name}</h3>
+                                                    <span className={fluxo.status === "PUBLISHED"
+                                                        ? "w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                                                        : "w-2 h-2 rounded-full bg-slate-300"
+                                                    } />
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                                        {fluxo.status === "PUBLISHED" ? "Publicado" : "Rascunho"}
+                                                    </p>
+                                                    <span className="text-slate-200 text-[10px]">•</span>
+                                                    <span className="text-[10px] text-slate-400 font-bold opacity-60">
+                                                        {formatDistanceToNow(new Date(fluxo.updatedAt), { addSuffix: true, locale: ptBR })}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center justify-between mt-auto pt-5 border-t border-slate-50">
+                                                <div className="flex flex-col gap-0.5">
+                                                    <span className="text-[11px] font-bold text-[#2d3339]">{fluxo.steps} Blocos</span>
+                                                    <span className="text-[10px] text-slate-400 font-semibold truncate max-w-[120px]">Gatilho: {fluxo.triggers}</span>
+                                                </div>
+                                                <Link
+                                                    href={`/fluxos/${fluxo.id}`}
+                                                    className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 rounded-xl group-hover:bg-[#ff5100] group-hover:text-white transition-all duration-300 shadow-sm"
+                                                >
+                                                    <ArrowRight size={18} />
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
+                    );
+                })}
+
+                {flows.length === 0 && (
+                    <div className="py-20 flex flex-col items-center border-2 border-dashed border-slate-200 rounded-3xl bg-white shadow-inner">
+                        <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mb-4">
+                            <MessageSquare size={32} className="text-slate-200" />
+                        </div>
+                        <p className="text-slate-400 font-bold text-sm">Nenhum fluxo criado ainda.</p>
+                        <p className="text-slate-300 text-xs mt-1 font-medium">Clique no botão acima para começar.</p>
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );

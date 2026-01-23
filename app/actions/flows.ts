@@ -19,7 +19,8 @@ export async function getFlows() {
                 ))
         )) as any,
         with: {
-            nodes: true // We fetch all nodes just to count them in JS or use subquery
+            nodes: true,
+            bot: true
         },
         orderBy: [desc(schema.flows.updatedAt)],
     });
@@ -29,6 +30,7 @@ export async function getFlows() {
         name: flow.name,
         status: flow.status,
         botId: flow.botId,
+        botName: flow.bot.name,
         steps: flow.nodes.length,
         triggers: "Sem gatilho", // Keyword triggers not yet in schema?
         updatedAt: flow.updatedAt

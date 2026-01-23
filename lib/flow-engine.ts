@@ -81,7 +81,14 @@ export async function processMessage(botId: string, telegramChatId: string, mess
                 ))
         )) as any,
         with: {
-            flow: true
+            flow: {
+                columns: {
+                    id: true,
+                    name: true,
+                    status: true,
+                    botId: true,
+                }
+            }
         }
     });
 
@@ -134,7 +141,14 @@ export async function handleTagTrigger(botId: string, telegramChatId: string, ta
                 ))
         )) as any,
         with: {
-            flow: true
+            flow: {
+                columns: {
+                    id: true,
+                    name: true,
+                    status: true,
+                    botId: true,
+                }
+            }
         }
     });
 

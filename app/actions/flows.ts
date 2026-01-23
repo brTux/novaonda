@@ -1,32 +1,36 @@
 'use server';
 
 import { auth } from "@/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import * as schema from "@/db/schema";
+import { eq, desc, and } from "drizzle-orm";
 
 export async function getFlows() {
     const session = await auth();
     if (!session?.user?.id) return [];
 
-    const flows = await prisma.flow.findMany({
-        where: {
-            bot: {
-                userId: session.user.id
-            }
+    const flows = await db.query.flows.findMany({
+        where: ((flows: any, { exists }: any) => exists(
+            db.select().from(schema.bots)
+                .where(and(
+                    eq(schema.bots.id, flows.botId),
+                    eq(schema.bots.userId, session.user!.id!)
+                ))
+        )) as any,
+        with: {
+            nodes: true // We fetch all nodes just to count them in JS or use subquery
         },
-        orderBy: { updatedAt: 'desc' },
-        include: {
-            nodes: { select: { id: true } } // Just to count steps
-        }
+        orderBy: [desc(schema.flows.updatedAt)],
     });
 
-    return flows.map((flow: any) => ({
+    return flows.map((flow) => ({
         id: flow.id,
         name: flow.name,
         status: flow.status,
-        botId: flow.botId, // Added botId
+        botId: flow.botId,
         steps: flow.nodes.length,
-        triggers: flow.keyword || "Sem gatilho",
+        triggers: "Sem gatilho", // Keyword triggers not yet in schema?
         updatedAt: flow.updatedAt
     }));
 }
@@ -36,23 +40,26 @@ export async function createFlow(name: string, botId: string) {
     if (!session?.user?.id) return { error: "Unauthorized" };
 
     try {
-        const flow = await prisma.flow.create({
-            data: {
-                name,
-                botId,
-                status: "DRAFT",
-                nodes: {
-                    create: {
-                        type: "TRIGGER",
-                        data: JSON.stringify({ trigger: "start" }),
-                        positionX: 100,
-                        positionY: 100
-                    }
-                }
-            }
+        const flowResult = await db.insert(schema.flows).values({
+            name,
+            botId,
+            status: "DRAFT",
+            isDefault: false
+        }).returning();
+
+        const flowId = flowResult[0].id;
+
+        // Create default trigger node
+        await db.insert(schema.flowNodes).values({
+            flowId,
+            type: "TRIGGER",
+            data: { trigger: "start" },
+            positionX: 100,
+            positionY: 100
         });
+
         revalidatePath("/fluxos");
-        return { success: true, flowId: flow.id };
+        return { success: true, flowId };
     } catch (error) {
         console.error("Create Flow Error", error);
         return { error: "Failed to create flow" };
@@ -63,9 +70,9 @@ export async function getFlowById(id: string) {
     const session = await auth();
     if (!session?.user?.id) return null;
 
-    const flow = await prisma.flow.findUnique({
-        where: { id },
-        include: {
+    const flow = await db.query.flows.findFirst({
+        where: eq(schema.flows.id, id),
+        with: {
             nodes: true,
             edges: true,
             bot: true
@@ -79,13 +86,13 @@ export async function getFlowById(id: string) {
         id: flow.id,
         name: flow.name,
         status: flow.status,
-        nodes: flow.nodes.map((node: any) => ({
+        nodes: flow.nodes.map((node) => ({
             id: node.id,
             type: node.type,
             position: { x: node.positionX, y: node.positionY },
-            data: JSON.parse(node.data)
+            data: node.data as any
         })),
-        edges: flow.edges.map((edge: any) => ({
+        edges: flow.edges.map((edge) => ({
             id: edge.id,
             source: edge.sourceNodeId,
             sourceHandle: edge.sourceHandle,
@@ -102,54 +109,54 @@ export async function saveFlow(id: string, nodes: any[], edges: any[], status?: 
 
     try {
         // Verify ownership
-        const flow = await prisma.flow.findUnique({
-            where: { id },
-            include: { bot: true }
+        const flow = await db.query.flows.findFirst({
+            where: eq(schema.flows.id, id),
+            with: { bot: true }
         });
+
         if (!flow || flow.bot.userId !== session.user.id) return { error: "Unauthorized" };
 
         // Transaction to update connection
-        await prisma.$transaction(async (tx: any) => {
+        await db.transaction(async (tx) => {
             // 1. Delete existing nodes and edges (simplest strategy for now)
-            await tx.flowEdge.deleteMany({ where: { flowId: id } });
-            await tx.flowNode.deleteMany({ where: { flowId: id } });
+            await tx.delete(schema.flowEdges).where(eq(schema.flowEdges.flowId, id));
+            await tx.delete(schema.flowNodes).where(eq(schema.flowNodes.flowId, id));
 
             // 2. Insert Nodes
-            for (const node of nodes) {
-                await tx.flowNode.create({
-                    data: {
+            if (nodes.length > 0) {
+                await tx.insert(schema.flowNodes).values(
+                    nodes.map(node => ({
                         id: node.id,
                         flowId: id,
                         type: node.type,
                         positionX: node.position.x,
                         positionY: node.position.y,
-                        data: JSON.stringify(node.data)
-                    }
-                });
+                        data: node.data
+                    }))
+                );
             }
 
             // 3. Insert Edges
-            for (const edge of edges) {
-                await tx.flowEdge.create({
-                    data: {
+            if (edges.length > 0) {
+                await tx.insert(schema.flowEdges).values(
+                    edges.map(edge => ({
                         id: edge.id,
                         flowId: id,
                         sourceNodeId: edge.source,
                         sourceHandle: edge.sourceHandle,
                         targetNodeId: edge.target,
                         targetHandle: edge.targetHandle,
-                    }
-                });
+                    }))
+                );
             }
 
             // 4. Update Flow metadata
             const updateData: any = { updatedAt: new Date() };
             if (status) updateData.status = status;
 
-            await tx.flow.update({
-                where: { id },
-                data: updateData
-            });
+            await tx.update(schema.flows)
+                .set(updateData)
+                .where(eq(schema.flows.id, id));
         });
 
         revalidatePath(`/fluxos/${id}`);

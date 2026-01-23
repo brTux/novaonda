@@ -1,14 +1,18 @@
 import NextAuth from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/lib/prisma";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { db } from "@/lib/db";
 import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import * as schema from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 async function getUser(email: string) {
     try {
-        const user = await prisma.user.findUnique({ where: { email } });
+        const user = await db.query.users.findFirst({
+            where: eq(schema.users.email, email),
+        });
         return user;
     } catch (error) {
         console.error('Failed to fetch user:', error);
@@ -18,7 +22,7 @@ async function getUser(email: string) {
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
     ...authConfig,
-    adapter: PrismaAdapter(prisma),
+    adapter: DrizzleAdapter(db) as any, // Cast to any if type conflicts occur during migration
     session: { strategy: "jwt" },
     trustHost: true,
     secret: process.env.AUTH_SECRET,

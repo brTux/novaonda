@@ -17,7 +17,8 @@ import {
     Users,
     LogOut,
     CreditCard,
-    Tag
+    Tag,
+    Link2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
@@ -30,6 +31,7 @@ const menuItems = [
     { name: "Fluxos", icon: MessageSquare, href: "/fluxos" },
     { name: "Disparo", icon: Zap, href: "/disparo" },
     { name: "Bots", icon: Bot, href: "/bots" },
+    { name: "Integração", icon: Link2, href: "/integracoes" },
     { name: "Ferramentas", icon: Wrench, href: "/ferramentas" },
     // { name: "Configurações", icon: Settings, href: "/settings" }, // Moved to dropdown profile
 ];

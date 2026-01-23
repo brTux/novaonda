@@ -1,10 +1,12 @@
 'use server';
 
 import { z } from 'zod';
-import { prisma } from '@/lib/prisma';
+import { db } from '@/lib/db';
+import * as schema from '@/db/schema';
 import { auth } from '@/auth';
 import bcrypt from 'bcryptjs';
 import { revalidatePath } from 'next/cache';
+import { eq } from 'drizzle-orm';
 
 const ChangePasswordSchema = z.object({
     currentPassword: z.string().min(1, { message: 'Senha atual é obrigatória.' }),
@@ -37,8 +39,8 @@ export async function updatePassword(prevState: any, formData: FormData) {
 
     const { currentPassword, newPassword } = validatedFields.data;
 
-    const user = await prisma.user.findUnique({
-        where: { email: session.user.email },
+    const user = await db.query.users.findFirst({
+        where: eq(schema.users.email, session.user.email),
     });
 
     if (!user || !user.password) {
@@ -56,10 +58,12 @@ export async function updatePassword(prevState: any, formData: FormData) {
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    await prisma.user.update({
-        where: { email: session.user.email },
-        data: { password: hashedPassword },
-    });
+    await db.update(schema.users)
+        .set({
+            password: hashedPassword,
+            updatedAt: new Date()
+        })
+        .where(eq(schema.users.email, session.user.email));
 
     revalidatePath('/settings');
     return { message: 'Senha atualizada com sucesso!', success: true };

@@ -11,6 +11,13 @@ export async function getFlows() {
     if (!session?.user?.id) return [];
 
     const flows = await db.query.flows.findMany({
+        columns: {
+            id: true,
+            name: true,
+            status: true,
+            botId: true,
+            updatedAt: true,
+        },
         where: ((flows: any, { exists }: any) => exists(
             db.select().from(schema.bots)
                 .where(and(
@@ -175,6 +182,11 @@ export async function generateShareCode(id: string) {
 
     try {
         const flow = await db.query.flows.findFirst({
+            columns: {
+                id: true,
+                shareCode: true,
+                botId: true,
+            },
             where: eq(schema.flows.id, id),
             with: { bot: true }
         });
@@ -197,6 +209,9 @@ export async function generateShareCode(id: string) {
 
 export async function getFlowByShareCode(shareCode: string) {
     const flow = await db.query.flows.findFirst({
+        columns: {
+            name: true,
+        },
         where: eq(schema.flows.shareCode, shareCode),
         with: {
             nodes: true,

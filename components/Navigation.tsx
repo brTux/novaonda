@@ -49,6 +49,10 @@ export function Navigation({ user }: NavigationProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
+    // Don't show the main navigation when in the flow editor
+    const isFlowEditor = pathname.startsWith("/fluxos/") && pathname.split("/").length === 3;
+    if (isFlowEditor) return null;
+
     return (
         <header className="sticky top-0 z-50 w-full h-16 bg-white border-b border-slate-200 shadow-sm flex-none">
             <div className="h-full px-4 md:px-6 lg:px-8 flex items-center justify-between gap-4">

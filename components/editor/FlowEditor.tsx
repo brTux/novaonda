@@ -171,6 +171,8 @@ function FlowEditorInner({ initialData }: FlowEditorProps) {
                     onNodeClick={(_, node) => setSelectedNodeId(node.id)}
                     onPaneClick={() => setSelectedNodeId(null)}
                     fitView
+                    minZoom={0.05}
+                    maxZoom={2}
                 >
                     <Background color="#cbd5e1" gap={20} />
                     <Controls />

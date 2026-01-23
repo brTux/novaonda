@@ -4,6 +4,8 @@ import { Plus, Search, MessageSquare, ArrowRight, Filter, MoreHorizontal } from 
 import { getFlows } from "@/app/actions/flows";
 import { getBots } from "@/app/actions/bots";
 import { NewFlowModal } from "@/components/fluxos/NewFlowModal";
+import { ImportFlowModal } from "@/components/fluxos/ImportFlowModal";
+import { FlowMenu } from "@/components/fluxos/FlowMenu";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -20,7 +22,10 @@ export default async function FluxosPage() {
                     <h1 className="text-2xl font-bold text-[#2d3339]">Automação de Fluxos</h1>
                     <p className="text-sm text-[#555d66] font-medium">Crie sequências inteligentes para vender mais.</p>
                 </div>
-                <NewFlowModal bots={bots} />
+                <div className="flex items-center gap-3">
+                    <ImportFlowModal bots={bots} />
+                    <NewFlowModal bots={bots} />
+                </div>
             </div>
 
             {/* Filter Bar */}
@@ -58,12 +63,7 @@ export default async function FluxosPage() {
                                 {botFlows.map((fluxo: any) => (
                                     <div key={fluxo.id} className="glass-card bg-white p-6 rounded-2xl group hover:border-[#ff5100]/30 transition-all duration-300 flex flex-col h-full border border-slate-100 shadow-sm relative overflow-hidden">
                                         <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <button
-                                                title="Mais opções"
-                                                className="p-1.5 hover:bg-slate-50 rounded-lg text-slate-400 transition-colors"
-                                            >
-                                                <MoreHorizontal size={18} />
-                                            </button>
+                                            <FlowMenu flowId={fluxo.id} flowName={fluxo.name} />
                                         </div>
 
                                         <div className="flex flex-col gap-5 h-full">

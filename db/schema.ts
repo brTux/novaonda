@@ -108,6 +108,7 @@ export const flows = pgTable("flows", {
     isDefault: boolean("isDefault").default(false).notNull(),
     status: flowStatusEnum("status").default("DRAFT"),
     botId: text("botId").notNull().references(() => bots.id, { onDelete: "cascade" }),
+    shareCode: text("shareCode").unique(),
 
     createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
     updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),

@@ -1,0 +1,6272 @@
+{
+  "name": " FLUXO V4  + IA + GP TEMPORARIO + Proibido  (importado)",
+  "nodes": [
+    {
+      "id": "2cb56bd3-83ea-4e16-9b75-4d19da3ac7f9",
+      "type": "TRIGGER",
+      "position": {
+        "x": -72.54637320214476,
+        "y": -4501.703279863303
+      },
+      "data": {
+        "trigger": "start",
+        "triggerType": "NEW_LEAD"
+      }
+    },
+    {
+      "id": "5bdf5e70-b539-419b-90b8-9adf735b86d2",
+      "type": "DELAY",
+      "position": {
+        "x": -170.99124875874253,
+        "y": -4311.358231119017
+      },
+      "data": {
+        "delay": 15,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "0f01d493-4a89-4fe6-a5ae-2fc0db674c9d",
+      "type": "DELAY",
+      "position": {
+        "x": -170.99124875874253,
+        "y": -4161.358231119017
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "e550b7b5-d6e6-425f-8d67-a6143b4251d3",
+      "type": "MESSAGE",
+      "position": {
+        "x": -170.99124875874253,
+        "y": -4011.3582311190166
+      },
+      "data": {
+        "text": "Oie nego❤️\nvocê foi o primeiro a me mandar mensagem hoje bb🙈"
+      }
+    },
+    {
+      "id": "73ac88cf-9541-4d01-81d0-96db55a9ed97",
+      "type": "DELAY",
+      "position": {
+        "x": -170.99124875874253,
+        "y": -3861.3582311190166
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2da6ef44-44e1-480f-82fc-9286a26b94a6",
+      "type": "DELAY",
+      "position": {
+        "x": -170.99124875874253,
+        "y": -3711.3582311190166
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "09413379-8de7-47c6-bd8c-2dde7e8733d3",
+      "type": "INPUT",
+      "position": {
+        "x": -47.032237747226645,
+        "y": -3642.2178958354016
+      },
+      "data": {
+        "prompt": "Tudo bem com você? ",
+        "variable": "input_1769181888931",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "b79cd6cb-b9af-48e8-8083-b491fd56416b",
+      "type": "DELAY",
+      "position": {
+        "x": 747.1522599453286,
+        "y": -3703.129321635751
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "c43b721f-01b3-4183-b596-0197a11572f9",
+      "type": "DELAY",
+      "position": {
+        "x": 1170.346493140445,
+        "y": -3539.8576842015586
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "19054f9c-cdcd-4e7e-9ccb-b71f0eadec09",
+      "type": "DELAY",
+      "position": {
+        "x": 1436.3961981385937,
+        "y": -3201.0246479561024
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "7fe07b32-6129-47b2-8a0b-8227926b1c82",
+      "type": "INPUT",
+      "position": {
+        "x": 985.6982059774583,
+        "y": -3195.91238912612
+      },
+      "data": {
+        "prompt": "eai bb, to esperando voce me responder kkkk",
+        "variable": "input_1769181888931",
+        "timeout": 6,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "619fca0f-f777-4bec-9370-a1927c5c3ea9",
+      "type": "INPUT",
+      "position": {
+        "x": 543.7798342817019,
+        "y": -2956.4416485447173
+      },
+      "data": {
+        "prompt": "Não quer falar comigo?",
+        "variable": "input_1769181888931",
+        "timeout": 3,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "6782f35b-48fa-46b9-94da-850ed90cd953",
+      "type": "INPUT",
+      "position": {
+        "x": 571.6506172445349,
+        "y": -3386.1587923320767
+      },
+      "data": {
+        "prompt": "Oiiii, vai me deixar no vacuo kkkk",
+        "variable": "input_1769181888931",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "ed70f75f-989d-4692-beb3-10255ccb710c",
+      "type": "DELAY",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -3082.4185380778217
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "fc7ac1f6-2b91-420b-8d52-540bda7568e6",
+      "type": "DELAY",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -2932.4185380778217
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "4a90ee84-fd71-4bac-879c-e8d001e87b93",
+      "type": "AUDIO",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -2782.4185380778217
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1767928594/Isabela-_Oie-m......o-ta%CC%81__pwwgpv.ogg"
+      }
+    },
+    {
+      "id": "589dae7a-71e7-4706-bd3c-68dec6dff40b",
+      "type": "DELAY",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -2632.4185380778217
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "373b640e-2a57-4b51-bcb9-64af3c7e47fc",
+      "type": "MESSAGE",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -2482.4185380778217
+      },
+      "data": {
+        "text": "Oi amor, meu nome é Manuzinhaa ta?\nCompletei 20 aninhos antes de ontem kkkk🙈"
+      }
+    },
+    {
+      "id": "8b507fb1-fcd1-4247-a4fe-d30a214c264e",
+      "type": "DELAY",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -2332.4185380778217
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "4b43e0e6-4c3f-4830-b8b3-996ccdae1b04",
+      "type": "AUDIO",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -2182.4185380778217
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1765855750/Isabela-__exci......hing__veotc6.ogg"
+      }
+    },
+    {
+      "id": "3d020bc0-ea86-4b52-8100-7640ee5377a8",
+      "type": "DELAY",
+      "position": {
+        "x": -3.295948422203651,
+        "y": -2032.4185380778217
+      },
+      "data": {
+        "delay": 20,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "d4e296e4-f5e2-49a5-8b4d-375aa140a483",
+      "type": "INPUT",
+      "position": {
+        "x": 388.02775838006414,
+        "y": 1323.1598880620677
+      },
+      "data": {
+        "prompt": "Posso te mandar uma prévia pra vc me ver melhor ?\n\nvocê gosta de morena ?",
+        "variable": "input_1769181888931",
+        "timeout": 3,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "1b631613-be03-4765-9194-c58c8dffb87d",
+      "type": "DELAY",
+      "position": {
+        "x": -1670.0041291928578,
+        "y": 2425.4251947011344
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "5a5db09b-2f0e-4467-a0a5-7390cde5666a",
+      "type": "DELAY",
+      "position": {
+        "x": -631.376542087511,
+        "y": 949.927229486716
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "47f30ce9-70cd-4022-bf1d-c26afe68e617",
+      "type": "AUDIO",
+      "position": {
+        "x": -631.376542087511,
+        "y": 1099.927229486716
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1765742643/Isabela-_me-re......-boa__glvyor.ogg"
+      }
+    },
+    {
+      "id": "ea2eb721-d601-4da3-ac33-5a19514b6ffc",
+      "type": "DELAY",
+      "position": {
+        "x": -631.376542087511,
+        "y": 1249.927229486716
+      },
+      "data": {
+        "delay": 3,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "602f6de4-e3ed-49bd-af6d-dd89c0e9b18a",
+      "type": "DELAY",
+      "position": {
+        "x": -631.376542087511,
+        "y": 1399.927229486716
+      },
+      "data": {
+        "delay": 3,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "ca9ba30f-10e6-4208-897a-b743669419e8",
+      "type": "DELAY",
+      "position": {
+        "x": -1483.417166614866,
+        "y": 1780.2839215353215
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "a1693157-2a90-4f55-bc01-97f16b9bfdfc",
+      "type": "INPUT",
+      "position": {
+        "x": -846.9501071374701,
+        "y": 1659.4111918919964
+      },
+      "data": {
+        "prompt": "Não quer ver um videozinho me exibindo?",
+        "variable": "input_1769181888931",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "b5c83eff-52b2-4c3f-8073-588a89db6cfa",
+      "type": "INPUT",
+      "position": {
+        "x": -1407.3573611532563,
+        "y": 2101.641102762409
+      },
+      "data": {
+        "prompt": "Eu tenho variooos videos, não quer?",
+        "variable": "input_1769181888931",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "e8a85d7d-7a67-433b-86b7-0cc9d1851f2c",
+      "type": "INPUT",
+      "position": {
+        "x": -1631.19225014467,
+        "y": 2726.108326814164
+      },
+      "data": {
+        "prompt": "Vai me deixar no vacuoo?",
+        "variable": "input_1769181888931",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "8d99a77c-ad1e-4d1e-a196-b4e00f8da314",
+      "type": "DELAY",
+      "position": {
+        "x": -531.2279642292178,
+        "y": 2541.564997451635
+      },
+      "data": {
+        "delay": 8,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "811acb4d-8565-41e6-82d1-1df8b0c465ef",
+      "type": "DELAY",
+      "position": {
+        "x": -531.2279642292178,
+        "y": 2691.564997451635
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "476ec528-354f-48bd-be0c-6959693495f1",
+      "type": "AUDIO",
+      "position": {
+        "x": -531.2279642292178,
+        "y": 2841.564997451635
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1767930846/Isabela-_Ai-ai......voce%CC%82__lswqql.ogg"
+      }
+    },
+    {
+      "id": "7f0c7c46-a702-486f-b956-3ef1961a0a11",
+      "type": "DELAY",
+      "position": {
+        "x": -531.2279642292178,
+        "y": 2991.564997451635
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2702d594-aca5-4a1c-828a-de036b55616c",
+      "type": "DELAY",
+      "position": {
+        "x": 1264.535940135341,
+        "y": 2639.71847347872
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "77c6995a-f43e-4b52-8e35-195c2e747bf0",
+      "type": "DELAY",
+      "position": {
+        "x": 1264.535940135341,
+        "y": 2789.71847347872
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "cb1d7ec2-19b0-4b41-a246-f6c4e1c74686",
+      "type": "MESSAGE",
+      "position": {
+        "x": 1264.535940135341,
+        "y": 2939.71847347872
+      },
+      "data": {
+        "text": "To te mandando uma Prévia do que vc vai ter todo dia com vc agora... 😌"
+      }
+    },
+    {
+      "id": "c5899c52-c7cb-4410-ac68-26a051af0fc2",
+      "type": "DELAY",
+      "position": {
+        "x": 1264.535940135341,
+        "y": 3089.71847347872
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "1ba2d298-abb3-432c-abf1-34e58d19c36a",
+      "type": "VIDEO",
+      "position": {
+        "x": 1264.535940135341,
+        "y": 3239.71847347872
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768357729/video_1_xcg7mx.mp4",
+        "caption": "Gravei agora pra você, sou muito safadinha amor 🥰\nOlha que delicinha"
+      }
+    },
+    {
+      "id": "b050a8da-1154-4e1e-bea6-c9733adac582",
+      "type": "DELAY",
+      "position": {
+        "x": 1264.535940135341,
+        "y": 3389.71847347872
+      },
+      "data": {
+        "delay": 15,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "77551ae0-153e-4fb6-aca3-a033fe93040b",
+      "type": "INPUT",
+      "position": {
+        "x": 1547.6824736102653,
+        "y": 3460.02177050544
+      },
+      "data": {
+        "prompt": "Quer mais um video mais picante amor, ? 😈\n\neu mando pra você nego🙈",
+        "variable": "input_1769181888931",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "f1aa6830-a673-4840-af76-21fa3470d599",
+      "type": "DELAY",
+      "position": {
+        "x": 2130.1291318709314,
+        "y": 3009.643691005772
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "bbff7e8c-3cc2-4402-885c-1d187404e973",
+      "type": "DELAY",
+      "position": {
+        "x": 1571.5108240554412,
+        "y": 3956.8258422756317
+      },
+      "data": {
+        "delay": 6,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "cfe02a66-5e20-45f5-b763-babdbaae4e73",
+      "type": "DELAY",
+      "position": {
+        "x": 1571.5108240554412,
+        "y": 4106.825842275632
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "22f7a641-69cf-4c2f-8c59-4926453e93d5",
+      "type": "MESSAGE",
+      "position": {
+        "x": 1571.5108240554412,
+        "y": 4256.825842275632
+      },
+      "data": {
+        "text": "Vou te mandar mais um video, olha só {lead.nome} 😈"
+      }
+    },
+    {
+      "id": "cf92d8cd-8dae-4bdb-a79a-868a7b26c7c6",
+      "type": "DELAY",
+      "position": {
+        "x": 1571.5108240554412,
+        "y": 4406.825842275632
+      },
+      "data": {
+        "delay": 8,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "152e028e-f871-4d2a-bc3c-138ae20f6b4a",
+      "type": "VIDEO",
+      "position": {
+        "x": 1571.5108240554412,
+        "y": 4556.825842275632
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768358144/video_2_lzadrr.mp4",
+        "caption": "não manda pra ninguem bb, to confiando em você🙌🏻"
+      }
+    },
+    {
+      "id": "05ff7cb9-348c-4ebc-a22e-68e9a50830f2",
+      "type": "DELAY",
+      "position": {
+        "x": 1571.5108240554412,
+        "y": 4706.825842275632
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "0920618b-b063-4080-83b9-1af7bef24f96",
+      "type": "DELAY",
+      "position": {
+        "x": 2520.31408919847,
+        "y": 3011.8966512034012
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "678adf99-c8df-482f-be02-37ea1c1f6dcb",
+      "type": "DELAY",
+      "position": {
+        "x": 2939.679909949294,
+        "y": 3010.966475414206
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "6e19d733-2699-4226-999d-3118fcdc2d4b",
+      "type": "INPUT",
+      "position": {
+        "x": 2407.8620438858134,
+        "y": 3332.2816900402086
+      },
+      "data": {
+        "prompt": "Não vai querer outro? ",
+        "variable": "input_1769181888932",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "a2d8c1cb-1d2b-41d9-9600-6d681d6344c6",
+      "type": "INPUT",
+      "position": {
+        "x": 2804.793943326937,
+        "y": 3329.264392094654
+      },
+      "data": {
+        "prompt": "Eu gravei outro bem gostoso, to esperando voce avisar pra eu mandar....",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "4f786b7e-aa71-4cb8-8ffa-75d19c3e85b4",
+      "type": "INPUT",
+      "position": {
+        "x": 3206.0434831619905,
+        "y": 3321.6917033729032
+      },
+      "data": {
+        "prompt": "Vai me deixar falando sozinha?",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "4855b374-f243-431d-93b2-c96390c2424e",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 4549.469051092028
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2076c3c7-4b42-47dd-b095-799cdaaa6439",
+      "type": "MESSAGE",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 4699.469051092028
+      },
+      "data": {
+        "text": "Teenho muuuuuuito mais amor, o vip que eu to vendendo tem vaaaaarios videozinhos, e ja vou te avisando que eu gosto de dar muito meu cuzinho 🤤"
+      }
+    },
+    {
+      "id": "83124042-12f6-4932-b6f8-a0bddb2eadda",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 4849.469051092028
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "9c02e2e6-66af-4b5d-a0d4-7fb44df9a2a7",
+      "type": "IMAGE",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 4999.469051092028
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/image/upload/v1768358396/2_oi3azj.png",
+        "caption": "Olha só o tanto de video e fotinho minha pra fazer você gozar amor💦"
+      }
+    },
+    {
+      "id": "9399a521-b413-4beb-b97d-5aa9209559cc",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 5149.469051092028
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "83c8b94c-7648-4ddb-bd00-9563d4208cbc",
+      "type": "MESSAGE",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 5299.469051092028
+      },
+      "data": {
+        "text": "São mais de 70 conteúdos e varias fotinhas \n\nDando muito o cuzinho\nMasturbando até gozar\nVideo com minhas amiguinhas\ne muuuuito mais 🥵"
+      }
+    },
+    {
+      "id": "7f896012-085a-4222-9043-bb9fcfa9af44",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 5449.469051092028
+      },
+      "data": {
+        "delay": 6,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "97ddccdb-48b4-42b6-ad30-c38d603c19b5",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 5599.469051092028
+      },
+      "data": {
+        "delay": 6,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "75da2eb8-d07c-4c07-9e13-e3d8cd4bfdac",
+      "type": "IMAGE",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 5749.469051092028
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/image/upload/v1768358498/3_iuzs46.png",
+        "caption": "Pra você olhar mais um pouquinho antes de entrar amor 🙈"
+      }
+    },
+    {
+      "id": "a8eff427-d95c-4485-b7f0-d470e67cada6",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 5899.469051092028
+      },
+      "data": {
+        "delay": 6,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "fa60f57c-ba41-4bb7-82b5-679488139925",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 6049.469051092028
+      },
+      "data": {
+        "delay": 6,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "7fe15aaf-3df3-4ab9-886c-ff871fcd9bd4",
+      "type": "AUDIO",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 6199.469051092028
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1765758830/Isabela-_vou-t......-VIP_-_1__ohpp1w.ogg"
+      }
+    },
+    {
+      "id": "8909966b-a905-48f8-9172-5193630e7625",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 6349.469051092028
+      },
+      "data": {
+        "delay": 6,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "b3aeb366-ddc0-4ef4-a41b-8c472e177269",
+      "type": "DELAY",
+      "position": {
+        "x": 1552.4287106487425,
+        "y": 6499.469051092028
+      },
+      "data": {
+        "delay": 6,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "7baf0f32-3ef8-405e-84cb-537ae04083fa",
+      "type": "DELAY",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 6314.052748422997
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "de2ab375-0f02-4175-8b30-f97bb89a72d2",
+      "type": "MESSAGE",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 6464.052748422997
+      },
+      "data": {
+        "text": "Ta custando R$19,00 reais, e se você comprar agora podemos marcar uma chamadinha de video pra mais tarde ❤️"
+      }
+    },
+    {
+      "id": "9eab9d11-9520-4ebe-9841-0ac6c033da45",
+      "type": "DELAY",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 6614.052748422997
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "50b72d59-a2da-4a42-a011-b9927557690a",
+      "type": "ACTION",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 6764.052748422997
+      },
+      "data": {
+        "subType": "PIX",
+        "amount": 19.99,
+        "description": "Vou fazer Vitalício pagando agora,amor🎁",
+        "paidTag": "pagou_front"
+      }
+    },
+    {
+      "id": "0bf617f3-1a0c-4dd1-88d3-fd91120e3b06",
+      "type": "DELAY",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 6914.052748422997
+      },
+      "data": {
+        "delay": 15,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "1d986529-0374-414e-a0cc-df5952548a8c",
+      "type": "AUDIO",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 7064.052748422997
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1766191404/Isabela-_Se-vo......nome_-_1__paevwn.ogg"
+      }
+    },
+    {
+      "id": "67f9ea34-e78a-4737-8663-d587a2028f0c",
+      "type": "DELAY",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 7214.052748422997
+      },
+      "data": {
+        "delay": 15,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "3575d374-3f4d-4001-9d62-c1f9a447854f",
+      "type": "MESSAGE",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 7364.052748422997
+      },
+      "data": {
+        "text": "Me manda o comprovante que em seguida eu te mando o acesso do grupo VIP ❤️"
+      }
+    },
+    {
+      "id": "78ee3b9b-a544-4916-a93e-5e96365165e4",
+      "type": "DELAY",
+      "position": {
+        "x": 1490.0721187832946,
+        "y": 7514.052748422997
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "ff1144fd-cdd8-4e85-ac4b-95211e39d9f9",
+      "type": "INPUT",
+      "position": {
+        "x": 1603.9118151172174,
+        "y": 7009.408422668046
+      },
+      "data": {
+        "prompt": "Conseguiu amor ?\n",
+        "variable": "input_1769181888932",
+        "timeout": 2,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "92c6e7a4-0d4b-4610-a730-31609752dd04",
+      "type": "DELAY",
+      "position": {
+        "x": 2507.214978557852,
+        "y": 6529.743865442951
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "6ea61ee5-b650-4c0f-b1df-3cf5ba7197a3",
+      "type": "DELAY",
+      "position": {
+        "x": 2969.784673942503,
+        "y": 6503.8158749761
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2fb28842-a334-4c81-85f5-c949405712f3",
+      "type": "DELAY",
+      "position": {
+        "x": 3481.756565843951,
+        "y": 6458.929552998594
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "b5ffc50a-6333-44ff-a3bf-5fbf04aa9984",
+      "type": "DELAY",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 8025.433701096704
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "d86107dc-8e0c-4681-8846-494e67df7041",
+      "type": "DELAY",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 8175.433701096704
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "c3cf9429-2d32-450b-9920-eedda5da092c",
+      "type": "MESSAGE",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 8325.433701096703
+      },
+      "data": {
+        "text": "{lead.nome} meu amor, é esse grupo que vc vai entrar 👇"
+      }
+    },
+    {
+      "id": "e08ae798-f90e-4703-b8c9-2cedeee8d834",
+      "type": "DELAY",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 8475.433701096703
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "3cf60bb3-e84f-40bd-a615-ab5a1fae700b",
+      "type": "IMAGE",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 8625.433701096703
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/image/upload/v1768360128/Captura_de_tela_2026-01-14_000828_bkupuh.png",
+        "caption": ""
+      }
+    },
+    {
+      "id": "af27421f-7bd4-4800-af50-b8df66cfb80d",
+      "type": "DELAY",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 8775.433701096703
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "96307f3c-b22a-421e-ae06-40ab37766845",
+      "type": "AUDIO",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 8925.433701096703
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1767934811/Isabela-__exci......da...-_2__pqm2vx.ogg"
+      }
+    },
+    {
+      "id": "9fd486d1-17cc-4fe3-a664-813b13495fda",
+      "type": "DELAY",
+      "position": {
+        "x": 2451.5322644751554,
+        "y": 9075.433701096703
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "41eb0751-7393-4456-b756-21e8d3f93303",
+      "type": "INPUT",
+      "position": {
+        "x": 2597.5962553189484,
+        "y": 6888.046413871729
+      },
+      "data": {
+        "prompt": "To prontinha pra te fazer gozar muuuuuito, só esperando o comprovante mesmo amor",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "6d1554af-02d0-4f2b-938f-e501acb314a4",
+      "type": "INPUT",
+      "position": {
+        "x": 3159.402204154254,
+        "y": 6835.640591870933
+      },
+      "data": {
+        "prompt": "Amor, vc ja foi enganado ??",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "5750b992-c310-4fea-9ccd-570aaef8d06d",
+      "type": "INPUT",
+      "position": {
+        "x": 3579.7576928513345,
+        "y": 6840.519555206117
+      },
+      "data": {
+        "prompt": "Já Caiu em algum golpe amor? 🥺🧐🤨",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "10cc1389-c50e-4c02-b364-76cf92b3d287",
+      "type": "DELAY",
+      "position": {
+        "x": 3297.342791108656,
+        "y": 7195.299075557984
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "613f17b2-20d6-46ce-84a1-e8da62389de9",
+      "type": "DELAY",
+      "position": {
+        "x": 3297.342791108656,
+        "y": 7345.299075557984
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "83915866-fd1c-4dc4-a354-a8ed563bc4bf",
+      "type": "AUDIO",
+      "position": {
+        "x": 3297.342791108656,
+        "y": 7495.299075557984
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1767933875/Isabela-_nego.......-bom_-_1__cenkdz.ogg"
+      }
+    },
+    {
+      "id": "7f5b1696-8a25-4052-a896-b3a4f11f2221",
+      "type": "DELAY",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 8597.98003960468
+      },
+      "data": {
+        "delay": 8,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "6465215a-886d-4f5b-b827-1dacfe8247df",
+      "type": "DELAY",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 8747.98003960468
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "8ef7d664-edac-48c8-b2ca-ffe60fb16cbb",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 8897.98003960468
+      },
+      "data": {
+        "text": "Vou te fazer por só $17 reais pra vc viraar o meu cliente logo {lead.nome} 🥰 "
+      }
+    },
+    {
+      "id": "98876505-323c-44e2-ab0b-0399e21ee882",
+      "type": "DELAY",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 9047.98003960468
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "792e4a39-5510-48ba-98c9-8177ded57909",
+      "type": "ACTION",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 9197.98003960468
+      },
+      "data": {
+        "subType": "PIX",
+        "amount": 17.99,
+        "description": "É só copiar e colar lá ",
+        "paidTag": "pagou_front"
+      }
+    },
+    {
+      "id": "fe01e62b-369b-400a-a658-b090c8e4a67b",
+      "type": "DELAY",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 9347.98003960468
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "952b13c2-511f-4ec4-9e5a-96cabf944be9",
+      "type": "AUDIO",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 9497.98003960468
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1767935009/Isabela-__exci......voce%CC%82__r4mgcu.ogg"
+      }
+    },
+    {
+      "id": "3eaea8ac-6f55-4c14-94c7-87380e9bc7b9",
+      "type": "DELAY",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 9647.98003960468
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "8cfc2e55-2989-4621-8156-1abd983c3b1b",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 9797.98003960468
+      },
+      "data": {
+        "text": "❤️"
+      }
+    },
+    {
+      "id": "b1531c70-6640-4e4d-8300-7caed80a8097",
+      "type": "DELAY",
+      "position": {
+        "x": 3229.8009979353237,
+        "y": 9947.98003960468
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "22bd65ca-a981-4e4e-92cb-205a2518892a",
+      "type": "DELAY",
+      "position": {
+        "x": 3211.5026497902118,
+        "y": 9189.101890869939
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "a14dcb7e-f125-4223-8026-acd43df14399",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3211.5026497902118,
+        "y": 9339.101890869939
+      },
+      "data": {
+        "text": "Ainda to esperando amor, prometo que sou certinha 😔"
+      }
+    },
+    {
+      "id": "55dff1f3-a019-4dcf-bb46-8b7eb61d1f1e",
+      "type": "DELAY",
+      "position": {
+        "x": 3211.5026497902118,
+        "y": 9489.101890869939
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "67084007-2d34-4976-a53d-bf7fd4b25ff0",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3211.5026497902118,
+        "y": 9639.101890869939
+      },
+      "data": {
+        "text": "Hoje mesmo eu gravei um video com um cliente que coloquei no vip vou te mostrar..."
+      }
+    },
+    {
+      "id": "223f68ff-2dd4-411a-95bc-21605f14ab06",
+      "type": "DELAY",
+      "position": {
+        "x": 3211.5026497902118,
+        "y": 9789.101890869939
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "9e2bc803-0d4e-4545-a6a5-5b479aa09dda",
+      "type": "IMAGE",
+      "position": {
+        "x": 3211.5026497902118,
+        "y": 9939.101890869939
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768360402/video_4_filtsg.mp4",
+        "caption": "As vezes quando eu to muito safadinha eu gosto de encontrar quem está no meu grupo pra dar um presentinho pessoalmente 😈 Já pensou se dá essa sorte bb? só precisa estár lá 🔥\n"
+      }
+    },
+    {
+      "id": "bde7d53b-fa9f-4b92-bddb-45ccbc83abf7",
+      "type": "DELAY",
+      "position": {
+        "x": 3211.5026497902118,
+        "y": 10089.101890869939
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2fca7842-791b-4f9c-a396-66a636ab58e9",
+      "type": "ACTION",
+      "position": {
+        "x": 3318.702663297138,
+        "y": 9871.92422042106
+      },
+      "data": {
+        "subType": "PIX",
+        "amount": 16.99,
+        "description": "Apenas $16 reais amor, copie e cole meu pix",
+        "paidTag": "pagou_front"
+      }
+    },
+    {
+      "id": "cd2435fe-0969-43b1-aa6d-3f6cc09f0f95",
+      "type": "DELAY",
+      "position": {
+        "x": 3318.702663297138,
+        "y": 10021.92422042106
+      },
+      "data": {
+        "delay": 15,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "7125748b-33fa-4fb9-80a2-4bc8b883df24",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3318.702663297138,
+        "y": 10171.92422042106
+      },
+      "data": {
+        "text": "Tai meu pix amor, me manda o comprovante quando vc pagar ta?"
+      }
+    },
+    {
+      "id": "2f9a1ea2-5db7-4f34-8bd8-b3cd59aab04c",
+      "type": "DELAY",
+      "position": {
+        "x": 3318.702663297138,
+        "y": 10321.92422042106
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "1d3caf0e-d031-491e-b3ae-236b862bf561",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3318.702663297138,
+        "y": 10471.92422042106
+      },
+      "data": {
+        "text": "Prometo que vou ser sua namoradinha se me ajudar 💕"
+      }
+    },
+    {
+      "id": "a4ba8030-0207-4f41-97eb-33a7f32d65a8",
+      "type": "DELAY",
+      "position": {
+        "x": 3318.702663297138,
+        "y": 10621.92422042106
+      },
+      "data": {
+        "delay": 4,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "4916729f-8298-4308-b411-1cb4f9b0e066",
+      "type": "INPUT",
+      "position": {
+        "x": 3429.6208487091953,
+        "y": 10429.417782181292
+      },
+      "data": {
+        "prompt": "Conseguiu pagar amor ?",
+        "variable": "input_1769181888932",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "e8abe76c-7b33-4d12-9370-cffcd3dc1e5d",
+      "type": "DELAY",
+      "position": {
+        "x": 3856.9163336849865,
+        "y": 10420.557781569694
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "f796b994-4f96-4fea-8ddb-66294f5eef88",
+      "type": "DELAY",
+      "position": {
+        "x": 4234.045719396796,
+        "y": 10425.62599736234
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "9b7555cc-2490-4e18-9001-05dd926a2496",
+      "type": "INPUT",
+      "position": {
+        "x": 4438.592241121206,
+        "y": 10692.629056256985
+      },
+      "data": {
+        "prompt": "Você não pode comprar nem que seja só pra me ajudar ?",
+        "variable": "input_1769181888932",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "e44f6880-d8f9-4b3d-bd86-5e8c27cbba73",
+      "type": "INPUT",
+      "position": {
+        "x": 3984.314865312293,
+        "y": 10681.090953349447
+      },
+      "data": {
+        "prompt": "Eu juro que sou certinha amor😔",
+        "variable": "input_1769181888932",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "830eacd4-4c6e-4b96-b463-d96d14cdf23b",
+      "type": "DELAY",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 11201.674257881536
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "0705921f-cf46-418b-b3b3-4fc57ded4cc9",
+      "type": "DELAY",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 11351.674257881536
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "d9ba693a-8961-437a-9836-97edf9f248ca",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 11501.674257881536
+      },
+      "data": {
+        "text": "Comecei a morar sozinha aqui em {lead.cidade} , se você comprar meu grupo VIP eu te passo meu whatsapp pessoal e mais 10 minutos de chamadinha de video, nego 🎁"
+      }
+    },
+    {
+      "id": "a5aea749-3c41-4043-bb2a-1aeab115162b",
+      "type": "DELAY",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 11651.674257881536
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "a656ff92-bc0b-40ee-9345-7690e4b7903e",
+      "type": "VIDEO",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 11801.674257881536
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1766702095/e8ljVox7_720p_u4u9eb.mp4",
+        "caption": "No VIP, Já tem varios videos pra vc ver quantas vezes quiser amor"
+      }
+    },
+    {
+      "id": "19d34d0a-ed86-479a-8c2a-d170de7c60f3",
+      "type": "DELAY",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 11951.674257881536
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "b1207186-1a40-40c9-9242-dfcc87a0e5b1",
+      "type": "MESSAGE",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 12101.674257881536
+      },
+      "data": {
+        "text": "Me mande só $15 reais que vou te mandar o acesso do VIP amor\n\nvou te mandar meu pix abaixo"
+      }
+    },
+    {
+      "id": "fd60ec66-12a5-45c5-928d-4ee8db0a212f",
+      "type": "DELAY",
+      "position": {
+        "x": 3738.731595405908,
+        "y": 12251.674257881536
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "205850b4-b6b1-477b-bd88-d5a09575c0a6",
+      "type": "DELAY",
+      "position": {
+        "x": 4034.594931718446,
+        "y": 11786.56614510869
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "0b50cba2-0fef-4c5c-b220-ad7ea945a718",
+      "type": "ACTION",
+      "position": {
+        "x": 4034.594931718446,
+        "y": 11936.56614510869
+      },
+      "data": {
+        "subType": "PIX",
+        "amount": 14.99,
+        "description": "É só copiar e colar a chave🔑 ",
+        "paidTag": "pagou_front"
+      }
+    },
+    {
+      "id": "bb72efe6-7e46-4467-bb46-2be24f2f2361",
+      "type": "DELAY",
+      "position": {
+        "x": 4034.594931718446,
+        "y": 12086.56614510869
+      },
+      "data": {
+        "delay": 25,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "cc2ba17e-a255-464f-8d15-39e0ef801986",
+      "type": "INPUT",
+      "position": {
+        "x": 4405.000576837843,
+        "y": 12662.09975743024
+      },
+      "data": {
+        "prompt": "Eiiii?",
+        "variable": "input_1769181888932",
+        "timeout": 3,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "f109a5c5-20f3-4a8f-bfa6-5bde02d40401",
+      "type": "DELAY",
+      "position": {
+        "x": 4741.221688561386,
+        "y": 13242.296054345195
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "788efec5-b026-402b-9188-988ec954edd6",
+      "type": "DELAY",
+      "position": {
+        "x": 4805.357155554367,
+        "y": 12646.511968827337
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "54b0984a-8144-4359-ba2a-69c6dba91ed9",
+      "type": "AUDIO",
+      "position": {
+        "x": 4805.357155554367,
+        "y": 12796.511968827337
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/dfv5kanmt/video/upload/v1766549831/32_-_amor_VC_ta_ai_xidzfv.ogg"
+      }
+    },
+    {
+      "id": "cc0d136c-1d53-420b-af1d-cc28c50d3492",
+      "type": "INPUT",
+      "position": {
+        "x": 5225.2188485254555,
+        "y": 12665.433848310242
+      },
+      "data": {
+        "prompt": "Posso te mandar uma coisa ?\nta podendo ver agora ???👀",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "1d111794-d211-4565-a6d2-ad25c8e1477d",
+      "type": "MESSAGE",
+      "position": {
+        "x": 4184.433040711364,
+        "y": 12167.913445964648
+      },
+      "data": {
+        "text": "🎁Assim que eu verificar o comprovante eu vou te mandar mais um PACOTE ESPECIAL... Mas esse so pra vc bb"
+      }
+    },
+    {
+      "id": "9d72088b-4f5d-404f-a96b-9324f74827d9",
+      "type": "DELAY",
+      "position": {
+        "x": 4184.433040711364,
+        "y": 12317.913445964648
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "ae4f2a09-9deb-4bee-ab59-c4be489f474b",
+      "type": "AUDIO",
+      "position": {
+        "x": 4184.433040711364,
+        "y": 12467.913445964648
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1765760554/Isabela-_eu-ol......é-vei_obwd0i.ogg"
+      }
+    },
+    {
+      "id": "a647d30a-7b60-47d9-8ab6-89a8c9ea08c0",
+      "type": "DELAY",
+      "position": {
+        "x": 4184.433040711364,
+        "y": 12617.913445964648
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "6e95d5dd-dc2b-4a25-a655-4893990d4e53",
+      "type": "DELAY",
+      "position": {
+        "x": 2659.8267789767056,
+        "y": 7293.555310991656
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "98c91ccb-74b8-4f24-ac7f-b94a82ab0622",
+      "type": "DELAY",
+      "position": {
+        "x": 2659.8267789767056,
+        "y": 7443.555310991656
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "44017613-2644-4856-990d-3a8515a15366",
+      "type": "AUDIO",
+      "position": {
+        "x": 2659.8267789767056,
+        "y": 7593.555310991656
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1767933875/Isabela-_nego.......-bom_-_1__cenkdz.ogg"
+      }
+    },
+    {
+      "id": "bdf80ced-6444-48c0-9227-249a049ac879",
+      "type": "DELAY",
+      "position": {
+        "x": 2659.8267789767056,
+        "y": 7743.555310991656
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "11feee40-3e2e-4191-be9a-d633c62dfcf5",
+      "type": "IMAGE",
+      "position": {
+        "x": 2659.8267789767056,
+        "y": 7893.555310991656
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/image/upload/v1764097905/WhatsApp_Image_2025-11-25_at_16.11.26_eezsfs.jpg",
+        "caption": "não me deixa assim amor, vem brincar cmg no vip🍼"
+      }
+    },
+    {
+      "id": "3e856831-a2e4-4552-ab66-a160401f8496",
+      "type": "DELAY",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -1865.003127207739
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "99a401bd-079a-4f32-82dc-25a2ac00609e",
+      "type": "DELAY",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -1715.003127207739
+      },
+      "data": {
+        "delay": 10,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2acfc929-55b9-4bc1-a5b6-2521030a59ed",
+      "type": "MESSAGE",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -1565.003127207739
+      },
+      "data": {
+        "text": "Comecei a morar sozinha aqui em {lead.cidade} e faço faculdade online de enfermagem, como não tenho muito tempo pra sair de casa por conta das aulas comecei a vender meus videozinhos e fotos aqui no telegram pra pagar minhas continhas 😋"
+      }
+    },
+    {
+      "id": "091d1d9f-f82b-426e-a02e-b5121128710e",
+      "type": "DELAY",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -1415.003127207739
+      },
+      "data": {
+        "delay": 20,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "3351d1b6-a682-4923-808d-d8c1fd8b06b9",
+      "type": "IMAGE",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -1265.003127207739
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/image/upload/v1768357257/Captura_de_tela_2026-01-13_184658_yb8txd.png",
+        "caption": "pra você nego ❤️"
+      }
+    },
+    {
+      "id": "d28584df-c3d0-4f17-8754-277b13253432",
+      "type": "DELAY",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -1115.003127207739
+      },
+      "data": {
+        "delay": 20,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "3a0899d9-8767-4013-8a2e-c7d0be850f13",
+      "type": "AUDIO",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -965.003127207739
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1765741753/Isabela-_me-ac......osta__n0lhgm.ogg"
+      }
+    },
+    {
+      "id": "120aef65-2d37-4e13-a3a3-06de39dac504",
+      "type": "DELAY",
+      "position": {
+        "x": 93.6379286256199,
+        "y": -815.003127207739
+      },
+      "data": {
+        "delay": 20,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "5d9a2e15-cc9b-4f3a-ac27-bc68bdc15752",
+      "type": "INPUT",
+      "position": {
+        "x": 121.40709311742836,
+        "y": -2113.579663275193
+      },
+      "data": {
+        "prompt": "❤️🙈😏",
+        "variable": "input_1769181888932",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "c086b7d6-1cf3-4f9b-916b-9c2be77ff564",
+      "type": "INPUT",
+      "position": {
+        "x": 1608.997898226119,
+        "y": 5291.136281545635
+      },
+      "data": {
+        "prompt": "Posso mandar agora nego?",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "13479cc1-f47b-4de1-91e5-797accf617d2",
+      "type": "DELAY",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 5624.344751346049
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "47648788-6558-4876-a635-7f06d3cc3e3b",
+      "type": "DELAY",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 5774.344751346049
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "35b611e0-4243-4ccd-9d39-e9bc3eed022a",
+      "type": "MESSAGE",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 5924.344751346049
+      },
+      "data": {
+        "text": "safado kkkk"
+      }
+    },
+    {
+      "id": "52268ae9-9ab0-4065-b165-6bd1216e77ad",
+      "type": "DELAY",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 6074.344751346049
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "e1466142-7cbc-4b71-97c5-4c950901e242",
+      "type": "IMAGE",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 6224.344751346049
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768358860/video_3_hgzlev.mp4",
+        "caption": "Mandei um presentinho melhor amor 🙈"
+      }
+    },
+    {
+      "id": "adb7e623-d861-4902-8f11-b04d3aa561c4",
+      "type": "DELAY",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 6374.344751346049
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "f52753db-95ab-43ed-998d-852a36f2a4fe",
+      "type": "DELAY",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 6524.344751346049
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "a92c2fda-c540-4f4c-a4e0-f63a5ad9768b",
+      "type": "AUDIO",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 6674.344751346049
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1765754521/Isabela-_La%CC%81-no......abia_-5_jebqtj.ogg"
+      }
+    },
+    {
+      "id": "64a7f4a1-364c-474a-8435-8ec234a1c6cf",
+      "type": "DELAY",
+      "position": {
+        "x": 1557.4070974748186,
+        "y": 6824.344751346049
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "1ff9ef5b-3194-4737-b421-896a5a9f90f5",
+      "type": "DELAY",
+      "position": {
+        "x": -67.18755488155466,
+        "y": 4971.725291889103
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "0db46278-6c73-45ea-9e96-3b4492c2ad90",
+      "type": "DELAY",
+      "position": {
+        "x": -483.452950866906,
+        "y": 4995.22322056894
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "76d34df6-0d79-438e-a08c-b57af79bf1b6",
+      "type": "DELAY",
+      "position": {
+        "x": -896.714229682524,
+        "y": 5158.536861385878
+      },
+      "data": {
+        "delay": 7,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "a3ed0302-a670-4bec-836e-c43659a8b9d7",
+      "type": "INPUT",
+      "position": {
+        "x": -35.064184382006346,
+        "y": 5258.874505835197
+      },
+      "data": {
+        "prompt": "Não vai querer outro? ",
+        "variable": "input_1769181888932",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "0eb6dcd1-50e2-4f9c-8278-1ddf0350b692",
+      "type": "INPUT",
+      "position": {
+        "x": -305.61646252492415,
+        "y": 5481.386245120316
+      },
+      "data": {
+        "prompt": "Eu gravei outro bem gostoso, to esperando voce avisar pra eu mandar....",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "1a87ed19-29d1-4acb-a97e-ee71b6f3adfd",
+      "type": "INPUT",
+      "position": {
+        "x": -682.7481661659355,
+        "y": 5544.6703701482575
+      },
+      "data": {
+        "prompt": "Vai me deixar falando sozinha?",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "abb349d8-c5ed-432a-8579-df7656b10ecb",
+      "type": "MESSAGE",
+      "position": {
+        "x": 4744.8881153646125,
+        "y": 13585.628904072815
+      },
+      "data": {
+        "text": "bb 👀"
+      }
+    },
+    {
+      "id": "f578d77c-360e-437b-bb63-070d6bf1929c",
+      "type": "DELAY",
+      "position": {
+        "x": 4744.8881153646125,
+        "y": 13735.628904072815
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "342c3a82-5d64-4853-8af3-851da0a3210f",
+      "type": "MESSAGE",
+      "position": {
+        "x": 4744.8881153646125,
+        "y": 13885.628904072815
+      },
+      "data": {}
+    },
+    {
+      "id": "a4e0d217-92aa-45a7-8e50-73ce345ce9db",
+      "type": "DELAY",
+      "position": {
+        "x": 4744.8881153646125,
+        "y": 14035.628904072815
+      },
+      "data": {
+        "delay": 8,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2338ebe4-a834-4cf8-9c42-ce269aae8bd5",
+      "type": "MESSAGE",
+      "position": {
+        "x": 4744.8881153646125,
+        "y": 14185.628904072815
+      },
+      "data": {
+        "text": "você não entrou no meu vip porque amor?\n\nacha que vou dar golpe em você é?👀"
+      }
+    },
+    {
+      "id": "cda809c5-3d87-4693-9533-986aaa6a0252",
+      "type": "DELAY",
+      "position": {
+        "x": 4744.8881153646125,
+        "y": 14335.628904072815
+      },
+      "data": {
+        "delay": 8,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "803eae74-1e8d-466b-b63a-5b3fb421cee1",
+      "type": "INPUT",
+      "position": {
+        "x": 5754.454399220755,
+        "y": 16146.874267283763
+      },
+      "data": {
+        "prompt": "pode ser amor ?",
+        "variable": "input_1769181888932",
+        "timeout": 10,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "dbf7b0f2-6765-4455-b5e3-23f51e4b7806",
+      "type": "INPUT",
+      "position": {
+        "x": 4879.563113243202,
+        "y": 14382.65032064346
+      },
+      "data": {
+        "prompt": "posso te adicionar no meu vip, só por 1 minuto, ora você vêr que ão é golpe ?",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "37f50f2d-55ca-4129-9d14-e829cf51dedd",
+      "type": "DELAY",
+      "position": {
+        "x": 5646.668183174874,
+        "y": 15597.350902235796
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "37422316-0df6-4adf-8d94-1c105fb92c73",
+      "type": "DELAY",
+      "position": {
+        "x": 5646.668183174874,
+        "y": 15747.350902235796
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "05a05135-2a1c-4f4f-8699-805a11952371",
+      "type": "MESSAGE",
+      "position": {
+        "x": 5646.668183174874,
+        "y": 15897.350902235796
+      },
+      "data": {
+        "text": "mas depois eu te removo viu kkk\né só pra voce saber que ão vou dar golpe amor "
+      }
+    },
+    {
+      "id": "6dcd6d02-9ac1-4e58-99a8-21189fdaa459",
+      "type": "DELAY",
+      "position": {
+        "x": 5646.668183174874,
+        "y": 16047.350902235796
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "11fd5c60-1d05-497d-95a7-ba8751569bfc",
+      "type": "DELAY",
+      "position": {
+        "x": 6140.684538114434,
+        "y": 16981.135725025604
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "7784ebd8-6f70-4f76-b64c-cc9c15eb95c0",
+      "type": "DELAY",
+      "position": {
+        "x": 6140.684538114434,
+        "y": 17131.135725025604
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "a9ec0567-dbcf-43ba-9001-b1c6c9ac52d0",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6140.684538114434,
+        "y": 17281.135725025604
+      },
+      "data": {
+        "text": "vou te mandar o convite agora, ai você já entra pra vê viu ? por que é só 1 minutinho pra você ver que eu não dou golpe"
+      }
+    },
+    {
+      "id": "f748586f-5b3c-400e-9e6e-e98ccb4f4945",
+      "type": "DELAY",
+      "position": {
+        "x": 6140.684538114434,
+        "y": 17431.135725025604
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2e62c578-dce6-4484-b66b-b7e60ed22076",
+      "type": "INPUT",
+      "position": {
+        "x": 6037.258795078957,
+        "y": 17477.79460011809
+      },
+      "data": {
+        "prompt": "ta bom nego?",
+        "variable": "input_1769181888932",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "0f1e8fa1-413c-4129-9237-807ce77a0a25",
+      "type": "DELAY",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 18354.890276191076
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "7f80a3ef-6224-48f1-8980-863afcdd6f1e",
+      "type": "DELAY",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 18504.890276191076
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "b2995fde-a9fe-4752-91b9-fd779c49521d",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 18654.890276191076
+      },
+      "data": {
+        "text": "entra ai amor, pra você ver um pouquinho🙈"
+      }
+    },
+    {
+      "id": "9708343e-4f1f-4897-b2bc-ebbce7ad4b24",
+      "type": "DELAY",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 18804.890276191076
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "63f20b8e-c18a-43f6-beb6-e49b401b98cc",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 18954.890276191076
+      },
+      "data": {}
+    },
+    {
+      "id": "344caf9d-2936-4b18-8261-076192489c46",
+      "type": "DELAY",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 19104.890276191076
+      },
+      "data": {
+        "delay": 60,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "550013fa-1711-4ac5-86b8-ae8bf354cbef",
+      "type": "DELAY",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 19254.890276191076
+      },
+      "data": {
+        "delay": 11,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "c210f65e-4c27-4733-9af4-549751ad9b72",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 19404.890276191076
+      },
+      "data": {
+        "text": "vem bb, vou fazer por 10 reais pra você entrar agoraaaa!"
+      }
+    },
+    {
+      "id": "82416a50-0f36-403a-8fe6-c031c4b2abb9",
+      "type": "DELAY",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 19554.890276191076
+      },
+      "data": {
+        "delay": 3,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "b080dd22-72a2-4860-9329-ce51d2b601eb",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 19704.890276191076
+      },
+      "data": {}
+    },
+    {
+      "id": "f6207985-c48f-4ebd-9550-7a89ea250edf",
+      "type": "DELAY",
+      "position": {
+        "x": 6248.046519341412,
+        "y": 19854.890276191076
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "fa9cd283-1a83-4f49-8c8b-e162ccaae796",
+      "type": "INPUT",
+      "position": {
+        "x": 6394.291003374077,
+        "y": 19124.108593324963
+      },
+      "data": {
+        "prompt": "ai me manda o comprovante aqui amor pra eu te entregar meu vipp ta bóm?",
+        "variable": "input_1769181888933",
+        "timeout": 4,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "7bbdbf7c-4e09-4a41-bdec-49dcca5c040f",
+      "type": "DELAY",
+      "position": {
+        "x": 5411.9371052066645,
+        "y": 16651.72576825841
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "50f59a17-b426-4d8f-89bf-7e68d715e24d",
+      "type": "DELAY",
+      "position": {
+        "x": 5411.9371052066645,
+        "y": 16801.72576825841
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "096623e2-d4e6-426c-9319-10eb745c369e",
+      "type": "MESSAGE",
+      "position": {
+        "x": 5411.9371052066645,
+        "y": 16951.72576825841
+      },
+      "data": {
+        "text": "Poxa bb, não me deixa no vacuo..."
+      }
+    },
+    {
+      "id": "4c74761b-45c6-457a-99d7-232d3b109d8f",
+      "type": "DELAY",
+      "position": {
+        "x": 5411.9371052066645,
+        "y": 17101.72576825841
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "3d4e7229-8bea-441e-9a47-a2bb9d8848af",
+      "type": "INPUT",
+      "position": {
+        "x": 5430.2147098982505,
+        "y": 17136.292474114256
+      },
+      "data": {
+        "prompt": "vai querer ou não?",
+        "variable": "input_1769181888933",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "5aa28390-0f39-4719-9317-f9c3b3c86417",
+      "type": "DELAY",
+      "position": {
+        "x": 5622.040767839043,
+        "y": 17880.411709235887
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "0d86e5ee-05c4-4020-878b-c3cb04eead55",
+      "type": "DELAY",
+      "position": {
+        "x": 5622.040767839043,
+        "y": 18030.411709235887
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "12b4a459-3778-4a0c-9124-7d46a418e228",
+      "type": "MESSAGE",
+      "position": {
+        "x": 5622.040767839043,
+        "y": 18180.411709235887
+      },
+      "data": {
+        "text": "posso mandar agora amor ?"
+      }
+    },
+    {
+      "id": "0fc4f82c-bd4c-4603-b0b2-a317003b9d61",
+      "type": "DELAY",
+      "position": {
+        "x": 5622.040767839043,
+        "y": 18330.411709235887
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "a4c63983-0fc2-48bd-8777-b68f2057c985",
+      "type": "INPUT",
+      "position": {
+        "x": 5807.259553110778,
+        "y": 18376.75979839813
+      },
+      "data": {
+        "prompt": "to so esperando você responder nego🥺",
+        "variable": "input_1769181888933",
+        "timeout": 1400,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "bec993ac-8e4b-4ebc-bf5f-3f018b944426",
+      "type": "DELAY",
+      "position": {
+        "x": 6353.390877818184,
+        "y": 19693.698914186585
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "2d2279e9-0e69-4e25-953e-a09b68ea37d5",
+      "type": "DELAY",
+      "position": {
+        "x": 6353.390877818184,
+        "y": 19843.698914186585
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "6c267e81-02dc-4c00-b7e2-73cc1afe9d04",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6353.390877818184,
+        "y": 19993.698914186585
+      },
+      "data": {
+        "text": "aproveita que hoje tem live lá no grupo, to com uma amiga bem safadinha aqui kkkk"
+      }
+    },
+    {
+      "id": "21a6eda9-71e1-40cd-9e4e-e261062556c4",
+      "type": "DELAY",
+      "position": {
+        "x": 6353.390877818184,
+        "y": 20143.698914186585
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "95cf949a-0d66-4871-8793-966dedfd72d9",
+      "type": "IMAGE",
+      "position": {
+        "x": 6353.390877818184,
+        "y": 20293.698914186585
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1766426633/1222_tzznvy.mp4",
+        "caption": "Olha ai amor, a putaria hoje vai ser grande, todo mundo vai gozar em😏"
+      }
+    },
+    {
+      "id": "7877115f-8514-4ff6-9e34-fdee77297465",
+      "type": "DELAY",
+      "position": {
+        "x": 6353.390877818184,
+        "y": 20443.698914186585
+      },
+      "data": {
+        "delay": 4,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "61a81fbd-44dd-4efa-b5ad-18bd8a26e494",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6353.390877818184,
+        "y": 20593.698914186585
+      },
+      "data": {
+        "text": "manda o comprovante vida "
+      }
+    },
+    {
+      "id": "344aef66-d2e9-4d0d-b184-90d94ef3f113",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6431.440663123355,
+        "y": 27923.543431548846
+      },
+      "data": {}
+    },
+    {
+      "id": "0e0a78b9-5746-499d-bcc9-8c2ca68be7d2",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6431.440663123355,
+        "y": 28073.543431548846
+      },
+      "data": {
+        "text": "oii"
+      }
+    },
+    {
+      "id": "b34ab8fd-f7eb-4248-bee0-1e4305a0d6dd",
+      "type": "DELAY",
+      "position": {
+        "x": 6431.440663123355,
+        "y": 28223.543431548846
+      },
+      "data": {
+        "delay": 54,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "76a5d2be-e1ce-454a-b076-b31bb16cb173",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6431.440663123355,
+        "y": 28373.543431548846
+      },
+      "data": {
+        "text": "oii"
+      }
+    },
+    {
+      "id": "913c5cbf-b6fe-4367-ac18-535a2f180614",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6247.25801384834,
+        "y": 22286.752046125643
+      },
+      "data": {
+        "text": "BB, você curte uns conteúdos bem gostosos de umas gostosas assim?"
+      }
+    },
+    {
+      "id": "82d9cac2-5d0f-45e6-89c3-e4844b15d236",
+      "type": "DELAY",
+      "position": {
+        "x": 6247.25801384834,
+        "y": 22436.752046125643
+      },
+      "data": {
+        "delay": 11,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "5a7901eb-3b0f-4003-a95d-0b3daee55747",
+      "type": "IMAGE",
+      "position": {
+        "x": 6247.25801384834,
+        "y": 22586.752046125643
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768528181/2_v2wk3u.mp4",
+        "caption": "Desse jeito amor, com carinha de quem gosta de kikar muito "
+      }
+    },
+    {
+      "id": "6c87db6d-ab6a-406e-8a0a-ec8dd7055dbf",
+      "type": "DELAY",
+      "position": {
+        "x": 6247.25801384834,
+        "y": 22736.752046125643
+      },
+      "data": {
+        "delay": 17,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "4e81b3b2-5417-410a-a8e5-83600e7ee5fe",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6247.25801384834,
+        "y": 22886.752046125643
+      },
+      "data": {
+        "text": "olha aqui"
+      }
+    },
+    {
+      "id": "c111824e-e910-46bd-bc5e-699744be4d19",
+      "type": "DELAY",
+      "position": {
+        "x": 6247.25801384834,
+        "y": 23036.752046125643
+      },
+      "data": {
+        "delay": 11,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "48269298-5700-4727-a591-739bbea5d34e",
+      "type": "INPUT",
+      "position": {
+        "x": 5999.917853111376,
+        "y": 24606.00882238176
+      },
+      "data": {
+        "prompt": "Posso te mandar o convite do  meu grupo só desses videos com elas sentando muito , pra ver se você curte?😈",
+        "variable": "input_1769181888933",
+        "timeout": 10,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "2ecf8fd2-770d-4e3f-b194-d6c89b30b037",
+      "type": "DELAY",
+      "position": {
+        "x": 5301.293294267227,
+        "y": 24499.707792067453
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "c3c51e80-5bf6-4bc8-bb26-9dc08ca550d9",
+      "type": "DELAY",
+      "position": {
+        "x": 5301.293294267227,
+        "y": 24649.707792067453
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "40735706-94a4-4c01-8dd1-50f0efe0bff8",
+      "type": "INPUT",
+      "position": {
+        "x": 5672.993058782869,
+        "y": 24862.22261708907
+      },
+      "data": {
+        "prompt": "Responde bb, porque só vou liberar esse grupo hoje, e ele é secreto, nada de compartilhar 🙊🤫",
+        "variable": "input_1769181888933",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "6dcfeabd-5dcb-4ebc-be08-2816bc81ffe4",
+      "type": "DELAY",
+      "position": {
+        "x": 6375.01190538805,
+        "y": 25102.836463093758
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "603feefe-6d2c-430e-b2c7-e7e699ebb87b",
+      "type": "DELAY",
+      "position": {
+        "x": 6375.01190538805,
+        "y": 25252.836463093758
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "e4dc5746-1238-43b0-82cd-8d6ca63774a9",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6375.01190538805,
+        "y": 25402.836463093758
+      },
+      "data": {
+        "text": "vou te mandar o link de convite agora..."
+      }
+    },
+    {
+      "id": "50bf6737-d68a-4349-beb1-4ba8b4e3185d",
+      "type": "DELAY",
+      "position": {
+        "x": 6375.01190538805,
+        "y": 25552.836463093758
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "8260e35d-bd62-4fea-ad10-a808deed98f8",
+      "type": "INPUT",
+      "position": {
+        "x": 6846.1309853158,
+        "y": 25801.531124981128
+      },
+      "data": {
+        "prompt": "ai você já entra porque só vou deixar aberto por 1 minuto viu ?",
+        "variable": "input_1769181888933",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "5b2424e3-cc0a-46e9-9739-7d771ce9481c",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 26892.63031708512
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "f46f0425-9c3f-40f1-9eb4-f1bc060de8cc",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 27042.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "973b59bb-0c98-4ec7-82cd-dec97fe9e5cd",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 27192.63031708512
+      },
+      "data": {}
+    },
+    {
+      "id": "c21c4d2b-047b-48ef-a147-beb4b8e091bd",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 27342.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "0d0e53b6-8298-43b5-84ed-51cd0e4d2baf",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 27492.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "578a734d-d843-431a-a84e-8d1c8dc8091d",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 27642.63031708512
+      },
+      "data": {}
+    },
+    {
+      "id": "68402ece-0701-4063-96e1-82e93c9227fe",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 27792.63031708512
+      },
+      "data": {
+        "delay": 70,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "a38dd99c-df7b-4d53-ae03-145854f31bef",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 27942.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "b161c674-5451-4dea-9a9e-3e814cb23c25",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 28092.63031708512
+      },
+      "data": {
+        "text": "amor, se quiser ficar lá dentro eu faço por 15 reais...\nmas tem que ser agora, porque lá eu só vou liberar hoje..."
+      }
+    },
+    {
+      "id": "0f0def99-9855-4b18-85b3-a25eb7fe9f9a",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 28242.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "777d6d74-3f1c-4327-9efa-daae07e6d44a",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 28392.63031708512
+      },
+      "data": {
+        "text": "pra quem entrar agora, porque ali tem conteúdo novo todos os dias de várias gostosas pra você gozar gostoso com a gente bb 🙈🔥"
+      }
+    },
+    {
+      "id": "6f5108ae-3e17-49c7-90d1-71fe8f3e64cd",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 28542.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "4968c504-50c7-457a-af83-e47f164a77b8",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 28692.63031708512
+      },
+      "data": {}
+    },
+    {
+      "id": "1617fe71-614f-4884-bc87-f7c8ad0404ac",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 28842.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "51ce7344-198a-4f8d-b935-0a53c774c43b",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 28992.63031708512
+      },
+      "data": {
+        "text": "Só vou liberar hoje porque gostei de você...\ndepois que eu fechar o grupo, quem não entrou não entra mais 🥺"
+      }
+    },
+    {
+      "id": "9355cb52-ace3-4a42-8f88-89a42a25413c",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 29142.63031708512
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "7cc37f32-97a6-4154-b93d-a85c84599ff1",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 29292.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "23b6f836-d42a-481e-b2cc-6e0fac6378ce",
+      "type": "IMAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 29442.63031708512
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768528917/10_f3sj5y.mp4",
+        "caption": "Vou dar mais uma chance amor ...."
+      }
+    },
+    {
+      "id": "1e6acb33-b88d-4627-a5dc-236a7d42e61b",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 29592.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "9322c46d-cb50-4071-a3c0-dc863f43dc02",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 29742.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "ade52550-ded1-4b56-82ba-bc8f63814cd4",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 29892.63031708512
+      },
+      "data": {}
+    },
+    {
+      "id": "fc2610ec-ca06-4b36-b303-0a47eb02053e",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 30042.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "80363de2-e211-40b0-bb77-25d61bc47eaa",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 30192.63031708512
+      },
+      "data": {
+        "text": "só copiar meu pix aqui e enviar...👇🏻"
+      }
+    },
+    {
+      "id": "001e3bc8-8738-4fd7-8171-a87b46981ac5",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 30342.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "72bffd3a-efdf-4178-b2fb-c191578b52a0",
+      "type": "ACTION",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 30492.63031708512
+      },
+      "data": {
+        "subType": "PIX",
+        "amount": 15,
+        "description": "",
+        "paidTag": "pagou_amiguinhas"
+      }
+    },
+    {
+      "id": "b84c44d5-cd19-48fe-a3a7-6b2da39f9a9e",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 30642.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "f0f82f11-c471-4169-b23d-77809c6ff3c8",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 30792.63031708512
+      },
+      "data": {
+        "text": "quando enviar me manda o comprovante rapido viu\n"
+      }
+    },
+    {
+      "id": "f982f5df-edea-479f-95a1-7b383457c352",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 30942.63031708512
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "49aa280c-b3d4-407f-af1e-d8755b20de0f",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 31092.63031708512
+      },
+      "data": {
+        "text": "Conseguiu bb?"
+      }
+    },
+    {
+      "id": "d53986e8-6b7b-4d7e-be4d-366dea94e7b2",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 31242.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "88e74217-0f6b-4658-a303-1ea5cf84d3b3",
+      "type": "IMAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 31392.63031708512
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768529028/13_m8ypqv.mp4",
+        "caption": "To fechando as vagas do grupo agora viu?"
+      }
+    },
+    {
+      "id": "4e2bdf53-cb77-4074-b36f-b9629dc5a006",
+      "type": "DELAY",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 31542.63031708512
+      },
+      "data": {
+        "delay": 12,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "d680c810-660a-441b-b8c1-4db0fc982d28",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 31692.63031708512
+      },
+      "data": {
+        "text": "te mandei meu pix 2 vezes , se for querer entrar manda logo bb"
+      }
+    },
+    {
+      "id": "204b4885-2f0c-4fd5-908e-13b57ba8e5e1",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 31842.63031708512
+      },
+      "data": {
+        "text": "se quiser pode enviar qualquer valor amor, oque vale a intenção, ai te libero o grupo...\n\nvou te mandar meu telegram pay"
+      }
+    },
+    {
+      "id": "9ad45f57-9c9a-4677-81ba-f6d0a446c541",
+      "type": "MESSAGE",
+      "position": {
+        "x": 7041.617496583162,
+        "y": 31992.63031708512
+      },
+      "data": {}
+    },
+    {
+      "id": "dd1f5a95-c348-4cd1-9f9f-04f2d22f2b42",
+      "type": "DELAY",
+      "position": {
+        "x": 5327.143269543791,
+        "y": 25411.382835416778
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "e5a10787-6dcb-4687-8d20-82a2351b43ed",
+      "type": "IMAGE",
+      "position": {
+        "x": 5327.143269543791,
+        "y": 25561.382835416778
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768528582/9_auh8ot.mp4",
+        "caption": ""
+      }
+    },
+    {
+      "id": "f9453e65-48e3-43c7-b5f7-0e1f3117b412",
+      "type": "DELAY",
+      "position": {
+        "x": 5327.143269543791,
+        "y": 25711.382835416778
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "771397e8-f869-4a13-96f2-95eda42b5478",
+      "type": "INPUT",
+      "position": {
+        "x": 5736.12249689571,
+        "y": 26073.674922426115
+      },
+      "data": {
+        "prompt": "vai perder mesmo ...",
+        "variable": "input_1769181888933",
+        "timeout": 14404,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "b61c9bc4-f849-4ab1-9dfa-fade3d80f9cf",
+      "type": "DELAY",
+      "position": {
+        "x": 5421.77970174188,
+        "y": 26390.199103718936
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "07863d1e-cd66-4ef7-9658-316263922fd2",
+      "type": "IMAGE",
+      "position": {
+        "x": 5421.77970174188,
+        "y": 26540.199103718936
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768361605/video_5_n2zvh3.mp4",
+        "caption": "paga o pix que te mandei bb"
+      }
+    },
+    {
+      "id": "5c1707cd-ccf7-4ea1-a981-8f87848a4a18",
+      "type": "DELAY",
+      "position": {
+        "x": 5421.77970174188,
+        "y": 26690.199103718936
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "b6febe7c-690f-41d4-9727-5fd9cddd724b",
+      "type": "MESSAGE",
+      "position": {
+        "x": 5421.77970174188,
+        "y": 26840.199103718936
+      },
+      "data": {
+        "text": "vou mandar dnv vida \nsó mandar pelo telegram pay ❤️"
+      }
+    },
+    {
+      "id": "0479ad3d-d89d-42a9-b49b-23d149cf4207",
+      "type": "DELAY",
+      "position": {
+        "x": 5421.77970174188,
+        "y": 26990.199103718936
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "15456747-18ee-4a91-bc0e-76c2ee04a589",
+      "type": "MESSAGE",
+      "position": {
+        "x": 5421.77970174188,
+        "y": 27140.199103718936
+      },
+      "data": {}
+    },
+    {
+      "id": "6fc17584-5a46-401e-a345-a80ca2a11b3c",
+      "type": "DELAY",
+      "position": {
+        "x": 6366.268126067997,
+        "y": 25955.29884751871
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "4c88a173-18b6-46e8-aaf0-fbc45459ff1e",
+      "type": "DELAY",
+      "position": {
+        "x": 6366.268126067997,
+        "y": 26105.29884751871
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "18c30be9-e8d3-4641-be5b-7a88c0fcdd48",
+      "type": "INPUT",
+      "position": {
+        "x": 6468.565454789001,
+        "y": 26396.462282921733
+      },
+      "data": {
+        "prompt": "Responde bb, porque só vou liberar esse grupo proibido hoje",
+        "variable": "input_1769181888933",
+        "timeout": 10,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "f50482ba-9204-42ef-a731-e71aae84754c",
+      "type": "DELAY",
+      "position": {
+        "x": 6226.372332570843,
+        "y": 26933.910840320474
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "92a7e027-ff87-4f14-8f36-d7b1e6ac3028",
+      "type": "IMAGE",
+      "position": {
+        "x": 6226.372332570843,
+        "y": 27083.910840320474
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1766716323/48a96da1-16d1-4ca8-b1b3-01ee2747ccde_gjncaw.mp4",
+        "caption": ""
+      }
+    },
+    {
+      "id": "fdc9c3f0-3662-4af7-acad-17c597edc845",
+      "type": "DELAY",
+      "position": {
+        "x": 6226.372332570843,
+        "y": 27233.910840320474
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2d56b437-e4ea-4a08-901b-154e05c1980b",
+      "type": "INPUT",
+      "position": {
+        "x": 6546.152775510618,
+        "y": 27380.369390368887
+      },
+      "data": {
+        "prompt": "vai perder mesmo ...",
+        "variable": "input_1769181888933",
+        "timeout": 14404,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "1196f405-2d86-4e56-b376-977692ba4e94",
+      "type": "DELAY",
+      "position": {
+        "x": 5990.668308383015,
+        "y": 27582.050676507515
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "68a2ab74-b39a-483c-b9bc-5a033039e662",
+      "type": "IMAGE",
+      "position": {
+        "x": 5990.668308383015,
+        "y": 27732.050676507515
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/image/upload/v1768529149/Captura_de_tela_2026-01-13_182109_kcwez2.png",
+        "caption": "paga o pix que te mandei bb"
+      }
+    },
+    {
+      "id": "7ca1bad3-40d1-407a-b199-40a59e159948",
+      "type": "DELAY",
+      "position": {
+        "x": 5990.668308383015,
+        "y": 27882.050676507515
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "86009cf2-8314-4fba-90b8-0bfa2dfb3427",
+      "type": "MESSAGE",
+      "position": {
+        "x": 5990.668308383015,
+        "y": 28032.050676507515
+      },
+      "data": {
+        "text": "só enviar pelo telegram bb, o valor que você puder, daí me avisa viu?"
+      }
+    },
+    {
+      "id": "5452eb54-8b52-4f47-a62b-de2fa0e1ffaa",
+      "type": "DELAY",
+      "position": {
+        "x": 5990.668308383015,
+        "y": 28182.050676507515
+      },
+      "data": {
+        "delay": 9,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "d5c1d2f2-667b-4531-9dda-a1a20083f906",
+      "type": "MESSAGE",
+      "position": {
+        "x": 5990.668308383015,
+        "y": 28332.050676507515
+      },
+      "data": {}
+    },
+    {
+      "id": "c2658f15-b280-4c43-8eea-63f704d39fb6",
+      "type": "IMAGE",
+      "position": {
+        "x": 6565.424836109278,
+        "y": 23430.792728235592
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/du5emz03j/video/upload/v1768528407/6_ubwlfu.mp4",
+        "caption": "vou te mostrar muito mais que isso agora bb🔞"
+      }
+    },
+    {
+      "id": "a32ea425-7f10-47dc-8602-c1c54c6b55d1",
+      "type": "DELAY",
+      "position": {
+        "x": 6565.424836109278,
+        "y": 23580.792728235592
+      },
+      "data": {
+        "delay": 11,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "7157f0ec-abe1-4f50-ae1b-680be586d63e",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6565.424836109278,
+        "y": 23730.792728235592
+      },
+      "data": {}
+    },
+    {
+      "id": "31a9ba25-88e6-4546-8246-a0a095e2735d",
+      "type": "DELAY",
+      "position": {
+        "x": 6565.424836109278,
+        "y": 23880.792728235592
+      },
+      "data": {
+        "delay": 11,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "8e96d920-cabc-4ac5-af74-a625b067b91d",
+      "type": "MESSAGE",
+      "position": {
+        "x": 6565.424836109278,
+        "y": 24030.792728235592
+      },
+      "data": {}
+    },
+    {
+      "id": "0bd6af45-9644-48e9-af55-2964a7211b23",
+      "type": "AUDIO",
+      "position": {
+        "x": -85.82907800584582,
+        "y": -1111.9489808565068
+      },
+      "data": {
+        "url": "https://res.cloudinary.com/drvzfczlp/video/upload/v1765738120/Isabela-_e-voc......smo-__a5lt8k.ogg"
+      }
+    },
+    {
+      "id": "396e0d26-9ca9-4173-a476-b5e3df2f1f6f",
+      "type": "DELAY",
+      "position": {
+        "x": -85.82907800584582,
+        "y": -961.9489808565068
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "9c0d00cb-7506-4b4d-a17d-9dd3563c4d6f",
+      "type": "DELAY",
+      "position": {
+        "x": -85.82907800584582,
+        "y": -811.9489808565068
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "fac87d47-69f6-4ca7-82f7-6a67c75ae9fe",
+      "type": "INPUT",
+      "position": {
+        "x": -15.610063920014682,
+        "y": -676.0604831884771
+      },
+      "data": {
+        "prompt": "Diz ai bb",
+        "variable": "input_1769181888933",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "e320c714-491f-4b66-befe-6859c3f9f186",
+      "type": "DELAY",
+      "position": {
+        "x": -33.99344424712808,
+        "y": -336.7579819225307
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "8b44c081-9e8c-4670-90b7-16db3cc214f8",
+      "type": "DELAY",
+      "position": {
+        "x": -33.99344424712808,
+        "y": -186.7579819225307
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "e2f4f830-e1b4-4dc6-9f63-029d20d51bc9",
+      "type": "MESSAGE",
+      "position": {
+        "x": -33.99344424712808,
+        "y": -36.75798192253069
+      },
+      "data": {
+        "text": "ei ta bb, vou mandar minha localização pra você ver que eu to por aqui mesmo 🤩"
+      }
+    },
+    {
+      "id": "f833545c-6e3a-4623-95df-40e45e239d4a",
+      "type": "DELAY",
+      "position": {
+        "x": -33.99344424712808,
+        "y": 113.24201807746931
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "8b9fb57f-11c5-41ba-8fed-e74fcebe5a0d",
+      "type": "INPUT",
+      "position": {
+        "x": 94.8093359917543,
+        "y": 178.44110311245174
+      },
+      "data": {
+        "prompt": "nao manda pra ninguem viu?",
+        "variable": "input_1769181888934",
+        "timeout": 5,
+        "inputType": "text"
+      }
+    },
+    {
+      "id": "ffbea399-223f-4b75-85ba-8ddee97fd060",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 517.2415729941018
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": false
+      }
+    },
+    {
+      "id": "13631426-8e15-4b05-8f97-13a00f99eb46",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 667.2415729941018
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "1dec9d4c-a516-4b0b-8b34-41204867950e",
+      "type": "MESSAGE",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 817.2415729941018
+      },
+      "data": {
+        "text": "olha ai vida, pra você ver que eu não minto..."
+      }
+    },
+    {
+      "id": "df0f156d-d47f-454f-a002-e5d904f12907",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 967.2415729941018
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "2b290ec6-b90c-4823-bfda-3cb57765b4a6",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 1117.2415729941017
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "732c6877-e0d2-4e92-973c-cd7a1511ce78",
+      "type": "MESSAGE",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 1267.2415729941017
+      },
+      "data": {}
+    },
+    {
+      "id": "86d9d54c-b1de-4dc6-93c3-69a4445e641c",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 1417.2415729941017
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "9df4400d-ecb1-4720-8ed9-76903f7e8aef",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 1567.2415729941017
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "185be088-5ae1-475e-8576-0e4af78ad0a6",
+      "type": "MESSAGE",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 1717.2415729941017
+      },
+      "data": {
+        "text": "acho que você deu sorte em nego kkkk\n"
+      }
+    },
+    {
+      "id": "1e8173b9-c860-4c59-b568-0a9243cbafbd",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 1867.2415729941017
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    },
+    {
+      "id": "e5377a38-6c1c-4436-b817-b9e3497abced",
+      "type": "DELAY",
+      "position": {
+        "x": 41.598730182322186,
+        "y": 2017.2415729941017
+      },
+      "data": {
+        "delay": 5,
+        "showTyping": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "d1585fc5-1a64-411f-998a-2008b4f5f429",
+      "source": "5bdf5e70-b539-419b-90b8-9adf735b86d2",
+      "target": "0f01d493-4a89-4fe6-a5ae-2fc0db674c9d",
+      "animated": true
+    },
+    {
+      "id": "c8680a3d-78a2-4519-bd61-5c486e7282de",
+      "source": "0f01d493-4a89-4fe6-a5ae-2fc0db674c9d",
+      "target": "e550b7b5-d6e6-425f-8d67-a6143b4251d3",
+      "animated": true
+    },
+    {
+      "id": "6bce4271-6394-4d60-8afb-e8f46205854a",
+      "source": "e550b7b5-d6e6-425f-8d67-a6143b4251d3",
+      "target": "73ac88cf-9541-4d01-81d0-96db55a9ed97",
+      "animated": true
+    },
+    {
+      "id": "a9f78c0d-e32b-48f7-9d1c-6257bfab6e97",
+      "source": "73ac88cf-9541-4d01-81d0-96db55a9ed97",
+      "target": "2da6ef44-44e1-480f-82fc-9286a26b94a6",
+      "animated": true
+    },
+    {
+      "id": "d555557f-5c07-4e77-9c77-cc3178d156fa",
+      "source": "ed70f75f-989d-4692-beb3-10255ccb710c",
+      "target": "fc7ac1f6-2b91-420b-8d52-540bda7568e6",
+      "animated": true
+    },
+    {
+      "id": "493d3a07-cc00-4902-a309-b459411816bc",
+      "source": "fc7ac1f6-2b91-420b-8d52-540bda7568e6",
+      "target": "4a90ee84-fd71-4bac-879c-e8d001e87b93",
+      "animated": true
+    },
+    {
+      "id": "53489175-1b9d-4e43-a0e5-3b91842872f5",
+      "source": "4a90ee84-fd71-4bac-879c-e8d001e87b93",
+      "target": "589dae7a-71e7-4706-bd3c-68dec6dff40b",
+      "animated": true
+    },
+    {
+      "id": "32b46d2c-3bb5-46f3-b763-6370604b1ef7",
+      "source": "589dae7a-71e7-4706-bd3c-68dec6dff40b",
+      "target": "373b640e-2a57-4b51-bcb9-64af3c7e47fc",
+      "animated": true
+    },
+    {
+      "id": "40fcad13-8cc6-459b-ac1a-cdd9e3e59cd3",
+      "source": "373b640e-2a57-4b51-bcb9-64af3c7e47fc",
+      "target": "8b507fb1-fcd1-4247-a4fe-d30a214c264e",
+      "animated": true
+    },
+    {
+      "id": "3fcba1ca-5ab1-47ca-951e-fcd15d84a106",
+      "source": "8b507fb1-fcd1-4247-a4fe-d30a214c264e",
+      "target": "4b43e0e6-4c3f-4830-b8b3-996ccdae1b04",
+      "animated": true
+    },
+    {
+      "id": "ae3889dc-bdb9-40ed-8a45-07f9f2dc8b68",
+      "source": "4b43e0e6-4c3f-4830-b8b3-996ccdae1b04",
+      "target": "3d020bc0-ea86-4b52-8100-7640ee5377a8",
+      "animated": true
+    },
+    {
+      "id": "fcc089ab-8bfe-4ec4-82a9-53417210524d",
+      "source": "5a5db09b-2f0e-4467-a0a5-7390cde5666a",
+      "target": "47f30ce9-70cd-4022-bf1d-c26afe68e617",
+      "animated": true
+    },
+    {
+      "id": "48c12d44-63ab-402c-9f98-6765586d0b26",
+      "source": "47f30ce9-70cd-4022-bf1d-c26afe68e617",
+      "target": "ea2eb721-d601-4da3-ac33-5a19514b6ffc",
+      "animated": true
+    },
+    {
+      "id": "9b94c97f-88d3-4f71-bfd9-39acde821f7d",
+      "source": "ea2eb721-d601-4da3-ac33-5a19514b6ffc",
+      "target": "602f6de4-e3ed-49bd-af6d-dd89c0e9b18a",
+      "animated": true
+    },
+    {
+      "id": "52140f00-8276-4ef0-b60c-564663fbbfc1",
+      "source": "8d99a77c-ad1e-4d1e-a196-b4e00f8da314",
+      "target": "811acb4d-8565-41e6-82d1-1df8b0c465ef",
+      "animated": true
+    },
+    {
+      "id": "5e1cdbce-c0c2-4962-afbd-596c2c0f7e19",
+      "source": "811acb4d-8565-41e6-82d1-1df8b0c465ef",
+      "target": "476ec528-354f-48bd-be0c-6959693495f1",
+      "animated": true
+    },
+    {
+      "id": "ba875ea2-5558-41c3-84af-b0a58a9408a5",
+      "source": "476ec528-354f-48bd-be0c-6959693495f1",
+      "target": "7f0c7c46-a702-486f-b956-3ef1961a0a11",
+      "animated": true
+    },
+    {
+      "id": "a46ce2b7-4353-4bae-b413-0b44481f8b1e",
+      "source": "2702d594-aca5-4a1c-828a-de036b55616c",
+      "target": "77c6995a-f43e-4b52-8e35-195c2e747bf0",
+      "animated": true
+    },
+    {
+      "id": "66cefdd0-42ef-4dae-89f5-8ca24e8fe224",
+      "source": "77c6995a-f43e-4b52-8e35-195c2e747bf0",
+      "target": "cb1d7ec2-19b0-4b41-a246-f6c4e1c74686",
+      "animated": true
+    },
+    {
+      "id": "66256ad4-3b18-49a4-a6c8-6272b614b6d0",
+      "source": "cb1d7ec2-19b0-4b41-a246-f6c4e1c74686",
+      "target": "c5899c52-c7cb-4410-ac68-26a051af0fc2",
+      "animated": true
+    },
+    {
+      "id": "2cf2e417-6e6e-4519-b6e8-3319546d811c",
+      "source": "c5899c52-c7cb-4410-ac68-26a051af0fc2",
+      "target": "1ba2d298-abb3-432c-abf1-34e58d19c36a",
+      "animated": true
+    },
+    {
+      "id": "1ce78fd0-7fb1-4d21-bc97-646bc4350ce2",
+      "source": "1ba2d298-abb3-432c-abf1-34e58d19c36a",
+      "target": "b050a8da-1154-4e1e-bea6-c9733adac582",
+      "animated": true
+    },
+    {
+      "id": "f56356ea-2f16-435c-b0ae-c08b7bdfc0d0",
+      "source": "bbff7e8c-3cc2-4402-885c-1d187404e973",
+      "target": "cfe02a66-5e20-45f5-b763-babdbaae4e73",
+      "animated": true
+    },
+    {
+      "id": "62fa17ea-ed90-4f3f-bc48-1c84933069b9",
+      "source": "cfe02a66-5e20-45f5-b763-babdbaae4e73",
+      "target": "22f7a641-69cf-4c2f-8c59-4926453e93d5",
+      "animated": true
+    },
+    {
+      "id": "076a9188-6613-4e6b-ae53-63a2c74b9deb",
+      "source": "22f7a641-69cf-4c2f-8c59-4926453e93d5",
+      "target": "cf92d8cd-8dae-4bdb-a79a-868a7b26c7c6",
+      "animated": true
+    },
+    {
+      "id": "31f671f8-300f-4a61-924f-5a17fda0eb3e",
+      "source": "cf92d8cd-8dae-4bdb-a79a-868a7b26c7c6",
+      "target": "152e028e-f871-4d2a-bc3c-138ae20f6b4a",
+      "animated": true
+    },
+    {
+      "id": "cc1d98d8-6351-4d88-a39b-0b7c896f6c99",
+      "source": "152e028e-f871-4d2a-bc3c-138ae20f6b4a",
+      "target": "05ff7cb9-348c-4ebc-a22e-68e9a50830f2",
+      "animated": true
+    },
+    {
+      "id": "e7035d71-7882-4177-9b1e-9486ec2d7fcf",
+      "source": "4855b374-f243-431d-93b2-c96390c2424e",
+      "target": "2076c3c7-4b42-47dd-b095-799cdaaa6439",
+      "animated": true
+    },
+    {
+      "id": "6c3195f7-8b91-484e-8948-b6137a7dcd9c",
+      "source": "2076c3c7-4b42-47dd-b095-799cdaaa6439",
+      "target": "83124042-12f6-4932-b6f8-a0bddb2eadda",
+      "animated": true
+    },
+    {
+      "id": "f0bc62b5-f5bf-4a04-adc5-04af666d636b",
+      "source": "83124042-12f6-4932-b6f8-a0bddb2eadda",
+      "target": "9c02e2e6-66af-4b5d-a0d4-7fb44df9a2a7",
+      "animated": true
+    },
+    {
+      "id": "eccd5218-4cd8-446d-b5b3-52c1645bcefb",
+      "source": "9c02e2e6-66af-4b5d-a0d4-7fb44df9a2a7",
+      "target": "9399a521-b413-4beb-b97d-5aa9209559cc",
+      "animated": true
+    },
+    {
+      "id": "71587098-4ffd-4da7-a16d-2d256810e4fb",
+      "source": "9399a521-b413-4beb-b97d-5aa9209559cc",
+      "target": "83c8b94c-7648-4ddb-bd00-9563d4208cbc",
+      "animated": true
+    },
+    {
+      "id": "d9a80c60-2e37-4a75-a201-7951527d54f1",
+      "source": "83c8b94c-7648-4ddb-bd00-9563d4208cbc",
+      "target": "7f896012-085a-4222-9043-bb9fcfa9af44",
+      "animated": true
+    },
+    {
+      "id": "2cd76e8e-7092-41a3-ad27-33e03a08fec1",
+      "source": "7f896012-085a-4222-9043-bb9fcfa9af44",
+      "target": "97ddccdb-48b4-42b6-ad30-c38d603c19b5",
+      "animated": true
+    },
+    {
+      "id": "c8ee2d9b-ff90-4be1-a9a8-01dc0cdf5ced",
+      "source": "97ddccdb-48b4-42b6-ad30-c38d603c19b5",
+      "target": "75da2eb8-d07c-4c07-9e13-e3d8cd4bfdac",
+      "animated": true
+    },
+    {
+      "id": "96f6c1a5-37ac-4a92-90fa-e6b63d465971",
+      "source": "75da2eb8-d07c-4c07-9e13-e3d8cd4bfdac",
+      "target": "a8eff427-d95c-4485-b7f0-d470e67cada6",
+      "animated": true
+    },
+    {
+      "id": "95316210-10d8-42f7-8111-30ed53407c88",
+      "source": "a8eff427-d95c-4485-b7f0-d470e67cada6",
+      "target": "fa60f57c-ba41-4bb7-82b5-679488139925",
+      "animated": true
+    },
+    {
+      "id": "8c4a0d5d-d6bb-400f-9659-3a081f44e4fe",
+      "source": "fa60f57c-ba41-4bb7-82b5-679488139925",
+      "target": "7fe15aaf-3df3-4ab9-886c-ff871fcd9bd4",
+      "animated": true
+    },
+    {
+      "id": "e8a0f846-2165-4992-9815-ef536bc44591",
+      "source": "7fe15aaf-3df3-4ab9-886c-ff871fcd9bd4",
+      "target": "8909966b-a905-48f8-9172-5193630e7625",
+      "animated": true
+    },
+    {
+      "id": "f01994f7-c607-471d-a170-0461faeb37a2",
+      "source": "8909966b-a905-48f8-9172-5193630e7625",
+      "target": "b3aeb366-ddc0-4ef4-a41b-8c472e177269",
+      "animated": true
+    },
+    {
+      "id": "0194a1de-de4a-4517-bc50-43ef76249643",
+      "source": "7baf0f32-3ef8-405e-84cb-537ae04083fa",
+      "target": "de2ab375-0f02-4175-8b30-f97bb89a72d2",
+      "animated": true
+    },
+    {
+      "id": "c28fa135-ffbd-4d7d-9ba7-f19fdad8d451",
+      "source": "de2ab375-0f02-4175-8b30-f97bb89a72d2",
+      "target": "9eab9d11-9520-4ebe-9841-0ac6c033da45",
+      "animated": true
+    },
+    {
+      "id": "5ab38296-ef90-40c0-87a6-e9616cf7d4fe",
+      "source": "9eab9d11-9520-4ebe-9841-0ac6c033da45",
+      "target": "50b72d59-a2da-4a42-a011-b9927557690a",
+      "animated": true
+    },
+    {
+      "id": "ea9c42cf-1d8e-4270-8f78-43fb15d51a81",
+      "source": "50b72d59-a2da-4a42-a011-b9927557690a",
+      "target": "0bf617f3-1a0c-4dd1-88d3-fd91120e3b06",
+      "animated": true
+    },
+    {
+      "id": "f3c565bb-adcd-48ad-8264-e99d5452d452",
+      "source": "0bf617f3-1a0c-4dd1-88d3-fd91120e3b06",
+      "target": "1d986529-0374-414e-a0cc-df5952548a8c",
+      "animated": true
+    },
+    {
+      "id": "bb7c1b95-afca-45bc-880d-d59cbad3a272",
+      "source": "1d986529-0374-414e-a0cc-df5952548a8c",
+      "target": "67f9ea34-e78a-4737-8663-d587a2028f0c",
+      "animated": true
+    },
+    {
+      "id": "9eae7f94-abc5-4ef0-99eb-0328ac1697b4",
+      "source": "67f9ea34-e78a-4737-8663-d587a2028f0c",
+      "target": "3575d374-3f4d-4001-9d62-c1f9a447854f",
+      "animated": true
+    },
+    {
+      "id": "ff059748-7cd0-4db5-af43-94998d9c2c34",
+      "source": "3575d374-3f4d-4001-9d62-c1f9a447854f",
+      "target": "78ee3b9b-a544-4916-a93e-5e96365165e4",
+      "animated": true
+    },
+    {
+      "id": "6245f922-8a47-476d-a9e7-b6ec0ff52365",
+      "source": "b5ffc50a-6333-44ff-a3bf-5fbf04aa9984",
+      "target": "d86107dc-8e0c-4681-8846-494e67df7041",
+      "animated": true
+    },
+    {
+      "id": "b02ea6e7-c9be-49aa-9bbf-1d0897c2acd8",
+      "source": "d86107dc-8e0c-4681-8846-494e67df7041",
+      "target": "c3cf9429-2d32-450b-9920-eedda5da092c",
+      "animated": true
+    },
+    {
+      "id": "50a0eeda-7432-4614-8c1c-04a65dec968e",
+      "source": "c3cf9429-2d32-450b-9920-eedda5da092c",
+      "target": "e08ae798-f90e-4703-b8c9-2cedeee8d834",
+      "animated": true
+    },
+    {
+      "id": "cec1a53f-6219-460e-8f6a-27462c7602ad",
+      "source": "e08ae798-f90e-4703-b8c9-2cedeee8d834",
+      "target": "3cf60bb3-e84f-40bd-a615-ab5a1fae700b",
+      "animated": true
+    },
+    {
+      "id": "00542b83-fd78-45d4-8a27-d90c1255a43f",
+      "source": "3cf60bb3-e84f-40bd-a615-ab5a1fae700b",
+      "target": "af27421f-7bd4-4800-af50-b8df66cfb80d",
+      "animated": true
+    },
+    {
+      "id": "fced0b8e-5d22-4d3c-b9dd-a26fb8df3d9e",
+      "source": "af27421f-7bd4-4800-af50-b8df66cfb80d",
+      "target": "96307f3c-b22a-421e-ae06-40ab37766845",
+      "animated": true
+    },
+    {
+      "id": "db917037-f546-405f-904b-640abaea52b0",
+      "source": "96307f3c-b22a-421e-ae06-40ab37766845",
+      "target": "9fd486d1-17cc-4fe3-a664-813b13495fda",
+      "animated": true
+    },
+    {
+      "id": "4b29eefe-a99f-4172-8c6b-573ca839a5c0",
+      "source": "10cc1389-c50e-4c02-b364-76cf92b3d287",
+      "target": "613f17b2-20d6-46ce-84a1-e8da62389de9",
+      "animated": true
+    },
+    {
+      "id": "9f2d34ab-5fb4-4c4e-ba60-587e5d4a2af9",
+      "source": "613f17b2-20d6-46ce-84a1-e8da62389de9",
+      "target": "83915866-fd1c-4dc4-a354-a8ed563bc4bf",
+      "animated": true
+    },
+    {
+      "id": "a7bd649b-ebee-42b0-ade1-31123036568b",
+      "source": "7f5b1696-8a25-4052-a896-b3a4f11f2221",
+      "target": "6465215a-886d-4f5b-b827-1dacfe8247df",
+      "animated": true
+    },
+    {
+      "id": "e9492e1c-aa18-43ad-8390-43313d4fe5f9",
+      "source": "6465215a-886d-4f5b-b827-1dacfe8247df",
+      "target": "8ef7d664-edac-48c8-b2ca-ffe60fb16cbb",
+      "animated": true
+    },
+    {
+      "id": "5de16d86-54af-4ec1-8e7a-2fdebac06151",
+      "source": "8ef7d664-edac-48c8-b2ca-ffe60fb16cbb",
+      "target": "98876505-323c-44e2-ab0b-0399e21ee882",
+      "animated": true
+    },
+    {
+      "id": "512f3a4c-6559-4e23-90f6-4f767c17aaf9",
+      "source": "98876505-323c-44e2-ab0b-0399e21ee882",
+      "target": "792e4a39-5510-48ba-98c9-8177ded57909",
+      "animated": true
+    },
+    {
+      "id": "95ae550f-b786-4ac5-9b4a-2b557663a996",
+      "source": "792e4a39-5510-48ba-98c9-8177ded57909",
+      "target": "fe01e62b-369b-400a-a658-b090c8e4a67b",
+      "animated": true
+    },
+    {
+      "id": "d88085e0-e753-49d8-a44c-5be15ee8d2fd",
+      "source": "fe01e62b-369b-400a-a658-b090c8e4a67b",
+      "target": "952b13c2-511f-4ec4-9e5a-96cabf944be9",
+      "animated": true
+    },
+    {
+      "id": "9c4a1b9e-7038-4f6c-b215-3a7a6fc8c846",
+      "source": "952b13c2-511f-4ec4-9e5a-96cabf944be9",
+      "target": "3eaea8ac-6f55-4c14-94c7-87380e9bc7b9",
+      "animated": true
+    },
+    {
+      "id": "aaf89dfc-2d0f-4590-abb6-b2870642d8ce",
+      "source": "3eaea8ac-6f55-4c14-94c7-87380e9bc7b9",
+      "target": "8cfc2e55-2989-4621-8156-1abd983c3b1b",
+      "animated": true
+    },
+    {
+      "id": "012b9d64-fa73-47f2-8728-c97abe3d5d9a",
+      "source": "8cfc2e55-2989-4621-8156-1abd983c3b1b",
+      "target": "b1531c70-6640-4e4d-8300-7caed80a8097",
+      "animated": true
+    },
+    {
+      "id": "99981098-1e3e-4db7-ada9-2966def93671",
+      "source": "22bd65ca-a981-4e4e-92cb-205a2518892a",
+      "target": "a14dcb7e-f125-4223-8026-acd43df14399",
+      "animated": true
+    },
+    {
+      "id": "ab5c0e6f-a88b-42b1-aea3-b14f2df4e1ec",
+      "source": "a14dcb7e-f125-4223-8026-acd43df14399",
+      "target": "55dff1f3-a019-4dcf-bb46-8b7eb61d1f1e",
+      "animated": true
+    },
+    {
+      "id": "825dcede-a815-46bf-a6d7-1767e78dc187",
+      "source": "55dff1f3-a019-4dcf-bb46-8b7eb61d1f1e",
+      "target": "67084007-2d34-4976-a53d-bf7fd4b25ff0",
+      "animated": true
+    },
+    {
+      "id": "4ad9b06d-e199-412e-a93a-8e68d293731e",
+      "source": "67084007-2d34-4976-a53d-bf7fd4b25ff0",
+      "target": "223f68ff-2dd4-411a-95bc-21605f14ab06",
+      "animated": true
+    },
+    {
+      "id": "c2b64552-278b-427b-a912-150f83e3d179",
+      "source": "223f68ff-2dd4-411a-95bc-21605f14ab06",
+      "target": "9e2bc803-0d4e-4545-a6a5-5b479aa09dda",
+      "animated": true
+    },
+    {
+      "id": "93511258-5787-486b-8c37-f92d5287c84c",
+      "source": "9e2bc803-0d4e-4545-a6a5-5b479aa09dda",
+      "target": "bde7d53b-fa9f-4b92-bddb-45ccbc83abf7",
+      "animated": true
+    },
+    {
+      "id": "c3d90c43-65e5-4793-8719-e57856e5918f",
+      "source": "2fca7842-791b-4f9c-a396-66a636ab58e9",
+      "target": "cd2435fe-0969-43b1-aa6d-3f6cc09f0f95",
+      "animated": true
+    },
+    {
+      "id": "f8d76ee8-d8a7-4acc-89e5-790daf89dcfb",
+      "source": "cd2435fe-0969-43b1-aa6d-3f6cc09f0f95",
+      "target": "7125748b-33fa-4fb9-80a2-4bc8b883df24",
+      "animated": true
+    },
+    {
+      "id": "d78e1fe5-8e4c-4ead-8c19-13517e2f58ab",
+      "source": "7125748b-33fa-4fb9-80a2-4bc8b883df24",
+      "target": "2f9a1ea2-5db7-4f34-8bd8-b3cd59aab04c",
+      "animated": true
+    },
+    {
+      "id": "5d4cdbd3-6d4a-4fc0-be8f-cb7e38b8babc",
+      "source": "2f9a1ea2-5db7-4f34-8bd8-b3cd59aab04c",
+      "target": "1d3caf0e-d031-491e-b3ae-236b862bf561",
+      "animated": true
+    },
+    {
+      "id": "f39847ac-b444-479c-8b94-6aadff67264b",
+      "source": "1d3caf0e-d031-491e-b3ae-236b862bf561",
+      "target": "a4ba8030-0207-4f41-97eb-33a7f32d65a8",
+      "animated": true
+    },
+    {
+      "id": "5d1dbc3e-33e0-4953-afca-5b4e3d9212b9",
+      "source": "830eacd4-4c6e-4b96-b463-d96d14cdf23b",
+      "target": "0705921f-cf46-418b-b3b3-4fc57ded4cc9",
+      "animated": true
+    },
+    {
+      "id": "72813d1b-54f7-441c-96b5-e2695ccb4038",
+      "source": "0705921f-cf46-418b-b3b3-4fc57ded4cc9",
+      "target": "d9ba693a-8961-437a-9836-97edf9f248ca",
+      "animated": true
+    },
+    {
+      "id": "46b61f8f-cfbb-4979-8d9d-32b291ce6836",
+      "source": "d9ba693a-8961-437a-9836-97edf9f248ca",
+      "target": "a5aea749-3c41-4043-bb2a-1aeab115162b",
+      "animated": true
+    },
+    {
+      "id": "1d9c9168-dc31-4940-91dc-4349b881d541",
+      "source": "a5aea749-3c41-4043-bb2a-1aeab115162b",
+      "target": "a656ff92-bc0b-40ee-9345-7690e4b7903e",
+      "animated": true
+    },
+    {
+      "id": "ece26ca8-2e99-4c7c-8f93-bb246dae1a77",
+      "source": "a656ff92-bc0b-40ee-9345-7690e4b7903e",
+      "target": "19d34d0a-ed86-479a-8c2a-d170de7c60f3",
+      "animated": true
+    },
+    {
+      "id": "15b96a31-34d7-476b-862a-7faec02ea172",
+      "source": "19d34d0a-ed86-479a-8c2a-d170de7c60f3",
+      "target": "b1207186-1a40-40c9-9242-dfcc87a0e5b1",
+      "animated": true
+    },
+    {
+      "id": "aa28833f-9cd7-4d69-a3b6-f917d3b6a4be",
+      "source": "b1207186-1a40-40c9-9242-dfcc87a0e5b1",
+      "target": "fd60ec66-12a5-45c5-928d-4ee8db0a212f",
+      "animated": true
+    },
+    {
+      "id": "280e7ff0-da6e-4932-aadf-9a5979702a9d",
+      "source": "205850b4-b6b1-477b-bd88-d5a09575c0a6",
+      "target": "0b50cba2-0fef-4c5c-b220-ad7ea945a718",
+      "animated": true
+    },
+    {
+      "id": "d6052e1e-d64b-4e7d-8552-d72ac5dc8013",
+      "source": "0b50cba2-0fef-4c5c-b220-ad7ea945a718",
+      "target": "bb72efe6-7e46-4467-bb46-2be24f2f2361",
+      "animated": true
+    },
+    {
+      "id": "82b09a28-7c02-47ba-83d7-9e387acfb9f5",
+      "source": "788efec5-b026-402b-9188-988ec954edd6",
+      "target": "54b0984a-8144-4359-ba2a-69c6dba91ed9",
+      "animated": true
+    },
+    {
+      "id": "7ef843f5-7d61-46a0-80ef-1f1b30371758",
+      "source": "1d111794-d211-4565-a6d2-ad25c8e1477d",
+      "target": "9d72088b-4f5d-404f-a96b-9324f74827d9",
+      "animated": true
+    },
+    {
+      "id": "f4c19407-8e21-4842-9073-bf986b02ea2c",
+      "source": "9d72088b-4f5d-404f-a96b-9324f74827d9",
+      "target": "ae4f2a09-9deb-4bee-ab59-c4be489f474b",
+      "animated": true
+    },
+    {
+      "id": "26ec8d25-b4c6-4209-8138-0a156b2a6158",
+      "source": "ae4f2a09-9deb-4bee-ab59-c4be489f474b",
+      "target": "a647d30a-7b60-47d9-8ab6-89a8c9ea08c0",
+      "animated": true
+    },
+    {
+      "id": "44df1799-381a-4083-8fbe-5120a25b7cc6",
+      "source": "6e95d5dd-dc2b-4a25-a655-4893990d4e53",
+      "target": "98c91ccb-74b8-4f24-ac7f-b94a82ab0622",
+      "animated": true
+    },
+    {
+      "id": "93d9b322-6236-4c78-a4fb-701e7617107e",
+      "source": "98c91ccb-74b8-4f24-ac7f-b94a82ab0622",
+      "target": "44017613-2644-4856-990d-3a8515a15366",
+      "animated": true
+    },
+    {
+      "id": "d5695b23-62e4-41dc-83c5-d9cfa8af81be",
+      "source": "44017613-2644-4856-990d-3a8515a15366",
+      "target": "bdf80ced-6444-48c0-9227-249a049ac879",
+      "animated": true
+    },
+    {
+      "id": "51ec2bbd-9b09-43d4-8d20-f1793f2b5a6e",
+      "source": "bdf80ced-6444-48c0-9227-249a049ac879",
+      "target": "11feee40-3e2e-4191-be9a-d633c62dfcf5",
+      "animated": true
+    },
+    {
+      "id": "d469e104-4315-4d90-a9d3-2cd21f0e0593",
+      "source": "3e856831-a2e4-4552-ab66-a160401f8496",
+      "target": "99a401bd-079a-4f32-82dc-25a2ac00609e",
+      "animated": true
+    },
+    {
+      "id": "73749925-a9ca-4dbc-8995-32cd723c084e",
+      "source": "99a401bd-079a-4f32-82dc-25a2ac00609e",
+      "target": "2acfc929-55b9-4bc1-a5b6-2521030a59ed",
+      "animated": true
+    },
+    {
+      "id": "0c1fbb24-85c1-466e-9312-dd4a1484f92b",
+      "source": "2acfc929-55b9-4bc1-a5b6-2521030a59ed",
+      "target": "091d1d9f-f82b-426e-a02e-b5121128710e",
+      "animated": true
+    },
+    {
+      "id": "3a120cce-f6b3-4b8e-9935-32ba65976d07",
+      "source": "091d1d9f-f82b-426e-a02e-b5121128710e",
+      "target": "3351d1b6-a682-4923-808d-d8c1fd8b06b9",
+      "animated": true
+    },
+    {
+      "id": "d4700f6d-b8dc-48c9-99da-7910c1d41a41",
+      "source": "3351d1b6-a682-4923-808d-d8c1fd8b06b9",
+      "target": "d28584df-c3d0-4f17-8754-277b13253432",
+      "animated": true
+    },
+    {
+      "id": "b7464417-4699-4d0d-a44a-e08f04469bc7",
+      "source": "d28584df-c3d0-4f17-8754-277b13253432",
+      "target": "3a0899d9-8767-4013-8a2e-c7d0be850f13",
+      "animated": true
+    },
+    {
+      "id": "5c21c309-08da-4913-828b-dba59c4f2ff5",
+      "source": "3a0899d9-8767-4013-8a2e-c7d0be850f13",
+      "target": "120aef65-2d37-4e13-a3a3-06de39dac504",
+      "animated": true
+    },
+    {
+      "id": "260eba19-be34-45d4-a47d-5a64eeec1057",
+      "source": "13479cc1-f47b-4de1-91e5-797accf617d2",
+      "target": "47648788-6558-4876-a635-7f06d3cc3e3b",
+      "animated": true
+    },
+    {
+      "id": "3380f500-a67c-402d-addc-9b8f6eb03ef1",
+      "source": "47648788-6558-4876-a635-7f06d3cc3e3b",
+      "target": "35b611e0-4243-4ccd-9d39-e9bc3eed022a",
+      "animated": true
+    },
+    {
+      "id": "d48c7cb2-e982-41c7-9207-2ad12371c987",
+      "source": "35b611e0-4243-4ccd-9d39-e9bc3eed022a",
+      "target": "52268ae9-9ab0-4065-b165-6bd1216e77ad",
+      "animated": true
+    },
+    {
+      "id": "2da23602-6c6a-46b7-95c2-616283230097",
+      "source": "52268ae9-9ab0-4065-b165-6bd1216e77ad",
+      "target": "e1466142-7cbc-4b71-97c5-4c950901e242",
+      "animated": true
+    },
+    {
+      "id": "b74424fa-b419-4ab8-9193-860f55c4c22d",
+      "source": "e1466142-7cbc-4b71-97c5-4c950901e242",
+      "target": "adb7e623-d861-4902-8f11-b04d3aa561c4",
+      "animated": true
+    },
+    {
+      "id": "382207ab-7ce6-4b21-b162-0294c87dc6e0",
+      "source": "adb7e623-d861-4902-8f11-b04d3aa561c4",
+      "target": "f52753db-95ab-43ed-998d-852a36f2a4fe",
+      "animated": true
+    },
+    {
+      "id": "da498a3f-15cc-488b-86f4-cc3d8b215dbe",
+      "source": "f52753db-95ab-43ed-998d-852a36f2a4fe",
+      "target": "a92c2fda-c540-4f4c-a4e0-f63a5ad9768b",
+      "animated": true
+    },
+    {
+      "id": "abd04e61-28ab-430f-b507-ba781194ed57",
+      "source": "a92c2fda-c540-4f4c-a4e0-f63a5ad9768b",
+      "target": "64a7f4a1-364c-474a-8435-8ec234a1c6cf",
+      "animated": true
+    },
+    {
+      "id": "ceefc17c-137d-43b8-8d3e-4fe7c2e1f213",
+      "source": "abb349d8-c5ed-432a-8579-df7656b10ecb",
+      "target": "f578d77c-360e-437b-bb63-070d6bf1929c",
+      "animated": true
+    },
+    {
+      "id": "4d4329f3-479c-42bb-866a-cfb5a5ad3f7b",
+      "source": "f578d77c-360e-437b-bb63-070d6bf1929c",
+      "target": "342c3a82-5d64-4853-8af3-851da0a3210f",
+      "animated": true
+    },
+    {
+      "id": "068efdf4-12c1-4c02-8937-aa3ab40ffecf",
+      "source": "342c3a82-5d64-4853-8af3-851da0a3210f",
+      "target": "a4e0d217-92aa-45a7-8e50-73ce345ce9db",
+      "animated": true
+    },
+    {
+      "id": "59dfa028-5529-4a03-89e0-ad1d10628e1c",
+      "source": "a4e0d217-92aa-45a7-8e50-73ce345ce9db",
+      "target": "2338ebe4-a834-4cf8-9c42-ce269aae8bd5",
+      "animated": true
+    },
+    {
+      "id": "d9818915-f372-4a65-b547-8f33bce784ea",
+      "source": "2338ebe4-a834-4cf8-9c42-ce269aae8bd5",
+      "target": "cda809c5-3d87-4693-9533-986aaa6a0252",
+      "animated": true
+    },
+    {
+      "id": "feaf2d1c-9b33-4dc0-ba1b-bfe410426345",
+      "source": "37f50f2d-55ca-4129-9d14-e829cf51dedd",
+      "target": "37422316-0df6-4adf-8d94-1c105fb92c73",
+      "animated": true
+    },
+    {
+      "id": "b2cf3064-40da-4ba8-8b1a-779e3664b77d",
+      "source": "37422316-0df6-4adf-8d94-1c105fb92c73",
+      "target": "05a05135-2a1c-4f4f-8699-805a11952371",
+      "animated": true
+    },
+    {
+      "id": "d33ba41d-6fef-4e21-9260-cc818b427e53",
+      "source": "05a05135-2a1c-4f4f-8699-805a11952371",
+      "target": "6dcd6d02-9ac1-4e58-99a8-21189fdaa459",
+      "animated": true
+    },
+    {
+      "id": "3916b3d4-617d-4ada-a883-e46f5a2eeb69",
+      "source": "11fd5c60-1d05-497d-95a7-ba8751569bfc",
+      "target": "7784ebd8-6f70-4f76-b64c-cc9c15eb95c0",
+      "animated": true
+    },
+    {
+      "id": "faa2c47b-e5be-483f-bee8-9ea04af80a20",
+      "source": "7784ebd8-6f70-4f76-b64c-cc9c15eb95c0",
+      "target": "a9ec0567-dbcf-43ba-9001-b1c6c9ac52d0",
+      "animated": true
+    },
+    {
+      "id": "c1229c1c-80a8-4769-9d3f-d5cb0d661474",
+      "source": "a9ec0567-dbcf-43ba-9001-b1c6c9ac52d0",
+      "target": "f748586f-5b3c-400e-9e6e-e98ccb4f4945",
+      "animated": true
+    },
+    {
+      "id": "194fa508-9239-4131-b2f9-a58faffdae0a",
+      "source": "0f1e8fa1-413c-4129-9237-807ce77a0a25",
+      "target": "7f80a3ef-6224-48f1-8980-863afcdd6f1e",
+      "animated": true
+    },
+    {
+      "id": "48eef533-c830-4825-aac7-2f1dd433c411",
+      "source": "7f80a3ef-6224-48f1-8980-863afcdd6f1e",
+      "target": "b2995fde-a9fe-4752-91b9-fd779c49521d",
+      "animated": true
+    },
+    {
+      "id": "df78ad5f-3274-49f4-9a3b-43d60060ffd8",
+      "source": "b2995fde-a9fe-4752-91b9-fd779c49521d",
+      "target": "9708343e-4f1f-4897-b2bc-ebbce7ad4b24",
+      "animated": true
+    },
+    {
+      "id": "86fa4f54-73ad-40ba-bfb4-d01979bbfac8",
+      "source": "9708343e-4f1f-4897-b2bc-ebbce7ad4b24",
+      "target": "63f20b8e-c18a-43f6-beb6-e49b401b98cc",
+      "animated": true
+    },
+    {
+      "id": "5678d442-3edb-4125-a63c-0959a6984122",
+      "source": "63f20b8e-c18a-43f6-beb6-e49b401b98cc",
+      "target": "344caf9d-2936-4b18-8261-076192489c46",
+      "animated": true
+    },
+    {
+      "id": "5f405608-4267-409b-875b-b70cea6a49fa",
+      "source": "344caf9d-2936-4b18-8261-076192489c46",
+      "target": "550013fa-1711-4ac5-86b8-ae8bf354cbef",
+      "animated": true
+    },
+    {
+      "id": "e926d11f-1cc9-45b7-b2ad-aabd7166c188",
+      "source": "550013fa-1711-4ac5-86b8-ae8bf354cbef",
+      "target": "c210f65e-4c27-4733-9af4-549751ad9b72",
+      "animated": true
+    },
+    {
+      "id": "08e4ee3e-8567-4f86-b8c0-989ab39c757f",
+      "source": "c210f65e-4c27-4733-9af4-549751ad9b72",
+      "target": "82416a50-0f36-403a-8fe6-c031c4b2abb9",
+      "animated": true
+    },
+    {
+      "id": "465e2edb-181a-41a1-a4ba-b8e092265ee1",
+      "source": "82416a50-0f36-403a-8fe6-c031c4b2abb9",
+      "target": "b080dd22-72a2-4860-9329-ce51d2b601eb",
+      "animated": true
+    },
+    {
+      "id": "0c29bf66-87fc-4f63-8d2c-f98cc9810579",
+      "source": "b080dd22-72a2-4860-9329-ce51d2b601eb",
+      "target": "f6207985-c48f-4ebd-9550-7a89ea250edf",
+      "animated": true
+    },
+    {
+      "id": "0e9a8323-0820-4283-994b-02b75e62318c",
+      "source": "7bbdbf7c-4e09-4a41-bdec-49dcca5c040f",
+      "target": "50f59a17-b426-4d8f-89bf-7e68d715e24d",
+      "animated": true
+    },
+    {
+      "id": "6740cd56-79a3-42e5-9a15-8d3a2db18320",
+      "source": "50f59a17-b426-4d8f-89bf-7e68d715e24d",
+      "target": "096623e2-d4e6-426c-9319-10eb745c369e",
+      "animated": true
+    },
+    {
+      "id": "f3f171ec-92af-4560-9bae-cd345050fa86",
+      "source": "096623e2-d4e6-426c-9319-10eb745c369e",
+      "target": "4c74761b-45c6-457a-99d7-232d3b109d8f",
+      "animated": true
+    },
+    {
+      "id": "c4eeada9-f61c-4e11-a614-e04a5061eaff",
+      "source": "5aa28390-0f39-4719-9317-f9c3b3c86417",
+      "target": "0d86e5ee-05c4-4020-878b-c3cb04eead55",
+      "animated": true
+    },
+    {
+      "id": "6a30a490-a63f-460f-8205-da0d4dd1afe6",
+      "source": "0d86e5ee-05c4-4020-878b-c3cb04eead55",
+      "target": "12b4a459-3778-4a0c-9124-7d46a418e228",
+      "animated": true
+    },
+    {
+      "id": "49dac96c-4256-47cf-a8bf-940808fc6e6a",
+      "source": "12b4a459-3778-4a0c-9124-7d46a418e228",
+      "target": "0fc4f82c-bd4c-4603-b0b2-a317003b9d61",
+      "animated": true
+    },
+    {
+      "id": "8aa777ff-7a45-470a-b8f4-481129dbc515",
+      "source": "bec993ac-8e4b-4ebc-bf5f-3f018b944426",
+      "target": "2d2279e9-0e69-4e25-953e-a09b68ea37d5",
+      "animated": true
+    },
+    {
+      "id": "872d16b7-73b2-4bf5-adec-2319d36cf0f7",
+      "source": "2d2279e9-0e69-4e25-953e-a09b68ea37d5",
+      "target": "6c267e81-02dc-4c00-b7e2-73cc1afe9d04",
+      "animated": true
+    },
+    {
+      "id": "ffeb544a-93f4-41a3-90b5-25bcdb349574",
+      "source": "6c267e81-02dc-4c00-b7e2-73cc1afe9d04",
+      "target": "21a6eda9-71e1-40cd-9e4e-e261062556c4",
+      "animated": true
+    },
+    {
+      "id": "6af79a3d-8a4a-49af-857b-f1e1306e4401",
+      "source": "21a6eda9-71e1-40cd-9e4e-e261062556c4",
+      "target": "95cf949a-0d66-4871-8793-966dedfd72d9",
+      "animated": true
+    },
+    {
+      "id": "22202580-6ca6-4612-9385-555a6c703ca7",
+      "source": "95cf949a-0d66-4871-8793-966dedfd72d9",
+      "target": "7877115f-8514-4ff6-9e34-fdee77297465",
+      "animated": true
+    },
+    {
+      "id": "ac343d7b-f55f-48c0-b7be-1cc1acd2b9b1",
+      "source": "7877115f-8514-4ff6-9e34-fdee77297465",
+      "target": "61a81fbd-44dd-4efa-b5ad-18bd8a26e494",
+      "animated": true
+    },
+    {
+      "id": "4626c546-7cae-4f50-a9c1-a3c8aab43ce6",
+      "source": "344aef66-d2e9-4d0d-b184-90d94ef3f113",
+      "target": "0e0a78b9-5746-499d-bcc9-8c2ca68be7d2",
+      "animated": true
+    },
+    {
+      "id": "02faf1e7-07bf-444d-aff7-805b40d9a17f",
+      "source": "0e0a78b9-5746-499d-bcc9-8c2ca68be7d2",
+      "target": "b34ab8fd-f7eb-4248-bee0-1e4305a0d6dd",
+      "animated": true
+    },
+    {
+      "id": "34a2676a-8485-4b71-8286-e5603ad8ffa4",
+      "source": "b34ab8fd-f7eb-4248-bee0-1e4305a0d6dd",
+      "target": "76a5d2be-e1ce-454a-b076-b31bb16cb173",
+      "animated": true
+    },
+    {
+      "id": "0fd5775f-827f-47e2-99df-c76c0fd28081",
+      "source": "913c5cbf-b6fe-4367-ac18-535a2f180614",
+      "target": "82d9cac2-5d0f-45e6-89c3-e4844b15d236",
+      "animated": true
+    },
+    {
+      "id": "38c1aa15-4ab6-4808-bf74-ace5e0d56364",
+      "source": "82d9cac2-5d0f-45e6-89c3-e4844b15d236",
+      "target": "5a7901eb-3b0f-4003-a95d-0b3daee55747",
+      "animated": true
+    },
+    {
+      "id": "d1e9f975-9f15-4c58-b621-b7a98a4d6cc0",
+      "source": "5a7901eb-3b0f-4003-a95d-0b3daee55747",
+      "target": "6c87db6d-ab6a-406e-8a0a-ec8dd7055dbf",
+      "animated": true
+    },
+    {
+      "id": "3a5438aa-9390-4828-8a75-5ede38327d9d",
+      "source": "6c87db6d-ab6a-406e-8a0a-ec8dd7055dbf",
+      "target": "4e81b3b2-5417-410a-a8e5-83600e7ee5fe",
+      "animated": true
+    },
+    {
+      "id": "1e7dcdee-b355-4721-91af-9e65d4a7d7cb",
+      "source": "4e81b3b2-5417-410a-a8e5-83600e7ee5fe",
+      "target": "c111824e-e910-46bd-bc5e-699744be4d19",
+      "animated": true
+    },
+    {
+      "id": "9f0faebf-1e1c-4f88-b99f-f07d995a64de",
+      "source": "2ecf8fd2-770d-4e3f-b194-d6c89b30b037",
+      "target": "c3c51e80-5bf6-4bc8-bb26-9dc08ca550d9",
+      "animated": true
+    },
+    {
+      "id": "c23eda7a-ceb6-49b3-9528-f690d81299f9",
+      "source": "6dcfeabd-5dcb-4ebc-be08-2816bc81ffe4",
+      "target": "603feefe-6d2c-430e-b2c7-e7e699ebb87b",
+      "animated": true
+    },
+    {
+      "id": "361100cc-b005-4575-85c3-5ef8e9b5ed5c",
+      "source": "603feefe-6d2c-430e-b2c7-e7e699ebb87b",
+      "target": "e4dc5746-1238-43b0-82cd-8d6ca63774a9",
+      "animated": true
+    },
+    {
+      "id": "cbb9238c-ee14-4484-975d-99974640e393",
+      "source": "e4dc5746-1238-43b0-82cd-8d6ca63774a9",
+      "target": "50bf6737-d68a-4349-beb1-4ba8b4e3185d",
+      "animated": true
+    },
+    {
+      "id": "d2cf7fb2-99cd-401d-88fb-72cd231538b4",
+      "source": "5b2424e3-cc0a-46e9-9739-7d771ce9481c",
+      "target": "f46f0425-9c3f-40f1-9eb4-f1bc060de8cc",
+      "animated": true
+    },
+    {
+      "id": "0d8b6883-4a0a-45f3-8761-e3818307f645",
+      "source": "f46f0425-9c3f-40f1-9eb4-f1bc060de8cc",
+      "target": "973b59bb-0c98-4ec7-82cd-dec97fe9e5cd",
+      "animated": true
+    },
+    {
+      "id": "2a8e1cad-3ec6-4788-a142-6ae2cd8f6c0d",
+      "source": "973b59bb-0c98-4ec7-82cd-dec97fe9e5cd",
+      "target": "c21c4d2b-047b-48ef-a147-beb4b8e091bd",
+      "animated": true
+    },
+    {
+      "id": "ac5d2bbe-8b9a-42bb-8847-dc353c192fcd",
+      "source": "c21c4d2b-047b-48ef-a147-beb4b8e091bd",
+      "target": "0d0e53b6-8298-43b5-84ed-51cd0e4d2baf",
+      "animated": true
+    },
+    {
+      "id": "b3b3b0d8-c41a-4f92-8488-3bb70c5ea925",
+      "source": "0d0e53b6-8298-43b5-84ed-51cd0e4d2baf",
+      "target": "578a734d-d843-431a-a84e-8d1c8dc8091d",
+      "animated": true
+    },
+    {
+      "id": "728f8c93-ace0-4b03-8f2d-ff4405a15c4c",
+      "source": "578a734d-d843-431a-a84e-8d1c8dc8091d",
+      "target": "68402ece-0701-4063-96e1-82e93c9227fe",
+      "animated": true
+    },
+    {
+      "id": "bbddcf5c-54ea-4deb-a1d8-56387a00c27c",
+      "source": "68402ece-0701-4063-96e1-82e93c9227fe",
+      "target": "a38dd99c-df7b-4d53-ae03-145854f31bef",
+      "animated": true
+    },
+    {
+      "id": "035afbfe-177d-4ffc-afca-2fdaadef5843",
+      "source": "a38dd99c-df7b-4d53-ae03-145854f31bef",
+      "target": "b161c674-5451-4dea-9a9e-3e814cb23c25",
+      "animated": true
+    },
+    {
+      "id": "5302dc01-b379-4914-815c-1c16e27d3ce6",
+      "source": "b161c674-5451-4dea-9a9e-3e814cb23c25",
+      "target": "0f0def99-9855-4b18-85b3-a25eb7fe9f9a",
+      "animated": true
+    },
+    {
+      "id": "ed8f1aed-c735-43da-be6b-4215bf7e5e63",
+      "source": "0f0def99-9855-4b18-85b3-a25eb7fe9f9a",
+      "target": "777d6d74-3f1c-4327-9efa-daae07e6d44a",
+      "animated": true
+    },
+    {
+      "id": "17715b69-805d-49ee-983e-38262ddac09d",
+      "source": "777d6d74-3f1c-4327-9efa-daae07e6d44a",
+      "target": "6f5108ae-3e17-49c7-90d1-71fe8f3e64cd",
+      "animated": true
+    },
+    {
+      "id": "5a215747-5ca0-45a7-8199-8b1689dea120",
+      "source": "6f5108ae-3e17-49c7-90d1-71fe8f3e64cd",
+      "target": "4968c504-50c7-457a-af83-e47f164a77b8",
+      "animated": true
+    },
+    {
+      "id": "4420e751-4b2f-4bb1-a925-467bd365c932",
+      "source": "4968c504-50c7-457a-af83-e47f164a77b8",
+      "target": "1617fe71-614f-4884-bc87-f7c8ad0404ac",
+      "animated": true
+    },
+    {
+      "id": "b653e523-5e8a-4169-81a1-a77ddb7e94ac",
+      "source": "1617fe71-614f-4884-bc87-f7c8ad0404ac",
+      "target": "51ce7344-198a-4f8d-b935-0a53c774c43b",
+      "animated": true
+    },
+    {
+      "id": "cb47d9a8-828c-412f-b3d2-ec76b3557eab",
+      "source": "51ce7344-198a-4f8d-b935-0a53c774c43b",
+      "target": "9355cb52-ace3-4a42-8f88-89a42a25413c",
+      "animated": true
+    },
+    {
+      "id": "b2afb4b7-f1a0-43ba-a85f-d41046daa4ac",
+      "source": "9355cb52-ace3-4a42-8f88-89a42a25413c",
+      "target": "7cc37f32-97a6-4154-b93d-a85c84599ff1",
+      "animated": true
+    },
+    {
+      "id": "9d12b49d-8c2c-4762-aff2-bacff247a9a2",
+      "source": "7cc37f32-97a6-4154-b93d-a85c84599ff1",
+      "target": "23b6f836-d42a-481e-b2cc-6e0fac6378ce",
+      "animated": true
+    },
+    {
+      "id": "713adf46-d5e7-4896-88e6-d7b7a88412d6",
+      "source": "23b6f836-d42a-481e-b2cc-6e0fac6378ce",
+      "target": "1e6acb33-b88d-4627-a5dc-236a7d42e61b",
+      "animated": true
+    },
+    {
+      "id": "64e77454-5fa8-4d12-b8f7-5c90228be9f7",
+      "source": "1e6acb33-b88d-4627-a5dc-236a7d42e61b",
+      "target": "9322c46d-cb50-4071-a3c0-dc863f43dc02",
+      "animated": true
+    },
+    {
+      "id": "ba256e6a-e5ac-4a03-b7b6-6c0c79ed68b1",
+      "source": "9322c46d-cb50-4071-a3c0-dc863f43dc02",
+      "target": "ade52550-ded1-4b56-82ba-bc8f63814cd4",
+      "animated": true
+    },
+    {
+      "id": "43521d79-dc82-4968-97a9-77ecbd1849d0",
+      "source": "ade52550-ded1-4b56-82ba-bc8f63814cd4",
+      "target": "fc2610ec-ca06-4b36-b303-0a47eb02053e",
+      "animated": true
+    },
+    {
+      "id": "f97dcedc-0770-4015-ae2b-06cd4d80f82a",
+      "source": "fc2610ec-ca06-4b36-b303-0a47eb02053e",
+      "target": "80363de2-e211-40b0-bb77-25d61bc47eaa",
+      "animated": true
+    },
+    {
+      "id": "92f65d1d-b086-4860-9928-eb8cec50138f",
+      "source": "80363de2-e211-40b0-bb77-25d61bc47eaa",
+      "target": "001e3bc8-8738-4fd7-8171-a87b46981ac5",
+      "animated": true
+    },
+    {
+      "id": "1c1d31ec-8339-4d68-8d86-e9a17161ea87",
+      "source": "001e3bc8-8738-4fd7-8171-a87b46981ac5",
+      "target": "72bffd3a-efdf-4178-b2fb-c191578b52a0",
+      "animated": true
+    },
+    {
+      "id": "4d4d5b5e-c4db-4841-9ea4-96da679704c8",
+      "source": "72bffd3a-efdf-4178-b2fb-c191578b52a0",
+      "target": "b84c44d5-cd19-48fe-a3a7-6b2da39f9a9e",
+      "animated": true
+    },
+    {
+      "id": "aa9cecf6-f45e-4b29-8c77-587ff7ef9c96",
+      "source": "b84c44d5-cd19-48fe-a3a7-6b2da39f9a9e",
+      "target": "f0f82f11-c471-4169-b23d-77809c6ff3c8",
+      "animated": true
+    },
+    {
+      "id": "35df1d71-b6c3-495d-901e-9224492ed3a6",
+      "source": "f0f82f11-c471-4169-b23d-77809c6ff3c8",
+      "target": "f982f5df-edea-479f-95a1-7b383457c352",
+      "animated": true
+    },
+    {
+      "id": "2304f57d-3dec-4e3a-924d-2875d7bf5ad2",
+      "source": "f982f5df-edea-479f-95a1-7b383457c352",
+      "target": "49aa280c-b3d4-407f-af1e-d8755b20de0f",
+      "animated": true
+    },
+    {
+      "id": "02c3768b-6b9f-4447-9854-dcad3df685a0",
+      "source": "49aa280c-b3d4-407f-af1e-d8755b20de0f",
+      "target": "d53986e8-6b7b-4d7e-be4d-366dea94e7b2",
+      "animated": true
+    },
+    {
+      "id": "b146716a-dca0-41af-a398-280e95e81e91",
+      "source": "d53986e8-6b7b-4d7e-be4d-366dea94e7b2",
+      "target": "88e74217-0f6b-4658-a303-1ea5cf84d3b3",
+      "animated": true
+    },
+    {
+      "id": "dc54a298-cced-4ff9-9516-a3c451c1df07",
+      "source": "88e74217-0f6b-4658-a303-1ea5cf84d3b3",
+      "target": "4e2bdf53-cb77-4074-b36f-b9629dc5a006",
+      "animated": true
+    },
+    {
+      "id": "7c59dd68-e5b4-49a7-8141-14467e78790c",
+      "source": "4e2bdf53-cb77-4074-b36f-b9629dc5a006",
+      "target": "d680c810-660a-441b-b8c1-4db0fc982d28",
+      "animated": true
+    },
+    {
+      "id": "243abedf-bc83-433f-b8dc-17492fbb737e",
+      "source": "d680c810-660a-441b-b8c1-4db0fc982d28",
+      "target": "204b4885-2f0c-4fd5-908e-13b57ba8e5e1",
+      "animated": true
+    },
+    {
+      "id": "e2417938-c70c-449d-bd2f-b7082c4c5c48",
+      "source": "204b4885-2f0c-4fd5-908e-13b57ba8e5e1",
+      "target": "9ad45f57-9c9a-4677-81ba-f6d0a446c541",
+      "animated": true
+    },
+    {
+      "id": "bf01e8a0-71c4-4e25-a4b6-52a1ebc5b426",
+      "source": "dd1f5a95-c348-4cd1-9f9f-04f2d22f2b42",
+      "target": "e5a10787-6dcb-4687-8d20-82a2351b43ed",
+      "animated": true
+    },
+    {
+      "id": "5e716b9a-0898-4c03-8fc7-e92d13d94af1",
+      "source": "e5a10787-6dcb-4687-8d20-82a2351b43ed",
+      "target": "f9453e65-48e3-43c7-b5f7-0e1f3117b412",
+      "animated": true
+    },
+    {
+      "id": "07bd766a-e7bc-4786-9d7d-f8e1865436b1",
+      "source": "b61c9bc4-f849-4ab1-9dfa-fade3d80f9cf",
+      "target": "07863d1e-cd66-4ef7-9658-316263922fd2",
+      "animated": true
+    },
+    {
+      "id": "5606f6fa-1b51-40b2-b8c9-6a094c5dc99b",
+      "source": "07863d1e-cd66-4ef7-9658-316263922fd2",
+      "target": "5c1707cd-ccf7-4ea1-a981-8f87848a4a18",
+      "animated": true
+    },
+    {
+      "id": "bcefeb31-c7f5-40cb-a50e-cc12cb977b2c",
+      "source": "5c1707cd-ccf7-4ea1-a981-8f87848a4a18",
+      "target": "b6febe7c-690f-41d4-9727-5fd9cddd724b",
+      "animated": true
+    },
+    {
+      "id": "62403e2f-2374-401c-9d2e-43e6ef9ad3a0",
+      "source": "b6febe7c-690f-41d4-9727-5fd9cddd724b",
+      "target": "0479ad3d-d89d-42a9-b49b-23d149cf4207",
+      "animated": true
+    },
+    {
+      "id": "1929c950-41fd-46f5-af05-ffc88630fa12",
+      "source": "0479ad3d-d89d-42a9-b49b-23d149cf4207",
+      "target": "15456747-18ee-4a91-bc0e-76c2ee04a589",
+      "animated": true
+    },
+    {
+      "id": "b88a77c4-6134-4991-b509-8f6b0ee9f43b",
+      "source": "6fc17584-5a46-401e-a345-a80ca2a11b3c",
+      "target": "4c88a173-18b6-46e8-aaf0-fbc45459ff1e",
+      "animated": true
+    },
+    {
+      "id": "fd79fb7e-2d66-44d4-a074-79b585900613",
+      "source": "f50482ba-9204-42ef-a731-e71aae84754c",
+      "target": "92a7e027-ff87-4f14-8f36-d7b1e6ac3028",
+      "animated": true
+    },
+    {
+      "id": "3b90f4a3-2aaa-428a-90e3-afaf411cf710",
+      "source": "92a7e027-ff87-4f14-8f36-d7b1e6ac3028",
+      "target": "fdc9c3f0-3662-4af7-acad-17c597edc845",
+      "animated": true
+    },
+    {
+      "id": "c79fb48e-75a6-4fe5-8d95-bf2b485b24dc",
+      "source": "1196f405-2d86-4e56-b376-977692ba4e94",
+      "target": "68a2ab74-b39a-483c-b9bc-5a033039e662",
+      "animated": true
+    },
+    {
+      "id": "a70f6739-2bd2-4e7c-a38d-edb7fc0e11cf",
+      "source": "68a2ab74-b39a-483c-b9bc-5a033039e662",
+      "target": "7ca1bad3-40d1-407a-b199-40a59e159948",
+      "animated": true
+    },
+    {
+      "id": "dc99449b-09b9-4416-b061-9c145322a8ef",
+      "source": "7ca1bad3-40d1-407a-b199-40a59e159948",
+      "target": "86009cf2-8314-4fba-90b8-0bfa2dfb3427",
+      "animated": true
+    },
+    {
+      "id": "a0e95c8d-9db2-44a9-a09a-56351267a12b",
+      "source": "86009cf2-8314-4fba-90b8-0bfa2dfb3427",
+      "target": "5452eb54-8b52-4f47-a62b-de2fa0e1ffaa",
+      "animated": true
+    },
+    {
+      "id": "535c2d67-ce8d-4347-9aca-9607f02cda4c",
+      "source": "5452eb54-8b52-4f47-a62b-de2fa0e1ffaa",
+      "target": "d5c1d2f2-667b-4531-9dda-a1a20083f906",
+      "animated": true
+    },
+    {
+      "id": "52e392f0-db0e-4e4c-86b3-e577cd1947ee",
+      "source": "c2658f15-b280-4c43-8eea-63f704d39fb6",
+      "target": "a32ea425-7f10-47dc-8602-c1c54c6b55d1",
+      "animated": true
+    },
+    {
+      "id": "b3b5b1ab-c09a-470b-997e-c8aaa753791d",
+      "source": "a32ea425-7f10-47dc-8602-c1c54c6b55d1",
+      "target": "7157f0ec-abe1-4f50-ae1b-680be586d63e",
+      "animated": true
+    },
+    {
+      "id": "9f5070dd-e4b7-4694-82c1-3ed22ac1324e",
+      "source": "7157f0ec-abe1-4f50-ae1b-680be586d63e",
+      "target": "31a9ba25-88e6-4546-8246-a0a095e2735d",
+      "animated": true
+    },
+    {
+      "id": "a22b6aeb-f679-411e-8cbe-09e0bd8b06c0",
+      "source": "31a9ba25-88e6-4546-8246-a0a095e2735d",
+      "target": "8e96d920-cabc-4ac5-af74-a625b067b91d",
+      "animated": true
+    },
+    {
+      "id": "978a6c9a-6c56-4253-927d-9c2c0c31135d",
+      "source": "0bd6af45-9644-48e9-af55-2964a7211b23",
+      "target": "396e0d26-9ca9-4173-a476-b5e3df2f1f6f",
+      "animated": true
+    },
+    {
+      "id": "a20fefe6-2e9e-4471-b699-6d43e2c0031f",
+      "source": "396e0d26-9ca9-4173-a476-b5e3df2f1f6f",
+      "target": "9c0d00cb-7506-4b4d-a17d-9dd3563c4d6f",
+      "animated": true
+    },
+    {
+      "id": "8011d7f1-abe5-4da1-baac-18a43429f0b4",
+      "source": "e320c714-491f-4b66-befe-6859c3f9f186",
+      "target": "8b44c081-9e8c-4670-90b7-16db3cc214f8",
+      "animated": true
+    },
+    {
+      "id": "09f737d6-eaba-4f96-8c3a-ab593419eab4",
+      "source": "8b44c081-9e8c-4670-90b7-16db3cc214f8",
+      "target": "e2f4f830-e1b4-4dc6-9f63-029d20d51bc9",
+      "animated": true
+    },
+    {
+      "id": "37b20185-5462-47a6-a921-acf91e3b5c81",
+      "source": "e2f4f830-e1b4-4dc6-9f63-029d20d51bc9",
+      "target": "f833545c-6e3a-4623-95df-40e45e239d4a",
+      "animated": true
+    },
+    {
+      "id": "cbed7746-9cec-4669-8609-0137ac71429f",
+      "source": "ffbea399-223f-4b75-85ba-8ddee97fd060",
+      "target": "13631426-8e15-4b05-8f97-13a00f99eb46",
+      "animated": true
+    },
+    {
+      "id": "96141274-af4a-4a0c-aaa1-4fff37d33965",
+      "source": "13631426-8e15-4b05-8f97-13a00f99eb46",
+      "target": "1dec9d4c-a516-4b0b-8b34-41204867950e",
+      "animated": true
+    },
+    {
+      "id": "7b0db74a-1c5d-4228-aa93-dca26e281fbd",
+      "source": "1dec9d4c-a516-4b0b-8b34-41204867950e",
+      "target": "df0f156d-d47f-454f-a002-e5d904f12907",
+      "animated": true
+    },
+    {
+      "id": "0d68718b-5e63-4bd2-b289-931c164b864a",
+      "source": "df0f156d-d47f-454f-a002-e5d904f12907",
+      "target": "2b290ec6-b90c-4823-bfda-3cb57765b4a6",
+      "animated": true
+    },
+    {
+      "id": "eab3f650-8699-4e66-946e-a21f559ed17e",
+      "source": "2b290ec6-b90c-4823-bfda-3cb57765b4a6",
+      "target": "732c6877-e0d2-4e92-973c-cd7a1511ce78",
+      "animated": true
+    },
+    {
+      "id": "000d0bf3-2ef0-4445-a401-ef01cd667797",
+      "source": "732c6877-e0d2-4e92-973c-cd7a1511ce78",
+      "target": "86d9d54c-b1de-4dc6-93c3-69a4445e641c",
+      "animated": true
+    },
+    {
+      "id": "2ab58f25-c49c-43d3-92b7-a7a8c6361f06",
+      "source": "86d9d54c-b1de-4dc6-93c3-69a4445e641c",
+      "target": "9df4400d-ecb1-4720-8ed9-76903f7e8aef",
+      "animated": true
+    },
+    {
+      "id": "ea65bed2-f02c-4955-bef6-b396c24e58d4",
+      "source": "9df4400d-ecb1-4720-8ed9-76903f7e8aef",
+      "target": "185be088-5ae1-475e-8576-0e4af78ad0a6",
+      "animated": true
+    },
+    {
+      "id": "eccbf882-6d42-4fd7-9025-7e87db62e74a",
+      "source": "185be088-5ae1-475e-8576-0e4af78ad0a6",
+      "target": "1e8173b9-c860-4c59-b568-0a9243cbafbd",
+      "animated": true
+    },
+    {
+      "id": "b180479d-8195-4084-9ed4-563fe8f4d225",
+      "source": "1e8173b9-c860-4c59-b568-0a9243cbafbd",
+      "target": "e5377a38-6c1c-4436-b817-b9e3497abced",
+      "animated": true
+    },
+    {
+      "id": "16fdecd1-1b09-4c34-be7e-a0dbbfd33d84",
+      "source": "2cb56bd3-83ea-4e16-9b75-4d19da3ac7f9",
+      "sourceHandle": null,
+      "target": "5bdf5e70-b539-419b-90b8-9adf735b86d2",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "044a041c-bfac-4c3b-8a56-b9a47bfb8438",
+      "source": "2da6ef44-44e1-480f-82fc-9286a26b94a6",
+      "sourceHandle": null,
+      "target": "09413379-8de7-47c6-bd8c-2dde7e8733d3",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "06a9a006-fdf9-4af5-8c74-8b733e7b5b73",
+      "source": "09413379-8de7-47c6-bd8c-2dde7e8733d3",
+      "sourceHandle": "timeout",
+      "target": "b79cd6cb-b9af-48e8-8083-b491fd56416b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "c9ced410-7c3a-488f-a8a1-f0f2bd43ad62",
+      "source": "6782f35b-48fa-46b9-94da-850ed90cd953",
+      "sourceHandle": "timeout",
+      "target": "c43b721f-01b3-4183-b596-0197a11572f9",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "cdda63d9-4e32-4aca-9a95-80e40d9c3391",
+      "source": "7fe07b32-6129-47b2-8a0b-8227926b1c82",
+      "sourceHandle": "timeout",
+      "target": "19054f9c-cdcd-4e7e-9ccb-b71f0eadec09",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "ed374e05-da6b-47c9-b32d-ce203eedbdd5",
+      "source": "b79cd6cb-b9af-48e8-8083-b491fd56416b",
+      "sourceHandle": null,
+      "target": "6782f35b-48fa-46b9-94da-850ed90cd953",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "7802a9a4-6550-491a-998c-cdbcce5e902a",
+      "source": "c43b721f-01b3-4183-b596-0197a11572f9",
+      "sourceHandle": null,
+      "target": "7fe07b32-6129-47b2-8a0b-8227926b1c82",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "1c5e1487-5986-41f6-8ec4-8e7b126fc888",
+      "source": "19054f9c-cdcd-4e7e-9ccb-b71f0eadec09",
+      "sourceHandle": null,
+      "target": "619fca0f-f777-4bec-9370-a1927c5c3ea9",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "f9369b6a-7b65-46fe-b058-be9fcfaade21",
+      "source": "09413379-8de7-47c6-bd8c-2dde7e8733d3",
+      "sourceHandle": "success",
+      "target": "ed70f75f-989d-4692-beb3-10255ccb710c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "94b5bf89-8b9d-4be3-a0fa-0ec1d76b11a1",
+      "source": "6782f35b-48fa-46b9-94da-850ed90cd953",
+      "sourceHandle": "success",
+      "target": "ed70f75f-989d-4692-beb3-10255ccb710c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "dc761694-577c-4fdf-ab5c-ec383fe085aa",
+      "source": "7fe07b32-6129-47b2-8a0b-8227926b1c82",
+      "sourceHandle": "success",
+      "target": "ed70f75f-989d-4692-beb3-10255ccb710c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "cfadb60f-0df5-44f7-967d-2ea35f0be69a",
+      "source": "619fca0f-f777-4bec-9370-a1927c5c3ea9",
+      "sourceHandle": "timeout",
+      "target": "ed70f75f-989d-4692-beb3-10255ccb710c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "024200bb-9398-4910-b0f1-e42d86fe73bb",
+      "source": "619fca0f-f777-4bec-9370-a1927c5c3ea9",
+      "sourceHandle": "success",
+      "target": "ed70f75f-989d-4692-beb3-10255ccb710c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "9f837003-16c4-4a4f-8796-e253ae1d99f6",
+      "source": "ca9ba30f-10e6-4208-897a-b743669419e8",
+      "sourceHandle": null,
+      "target": "b5c83eff-52b2-4c3f-8073-588a89db6cfa",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "45f01228-09c3-47b9-ba62-2dd6d22841cd",
+      "source": "a1693157-2a90-4f55-bc01-97f16b9bfdfc",
+      "sourceHandle": "timeout",
+      "target": "ca9ba30f-10e6-4208-897a-b743669419e8",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "98d90348-cb70-4a31-bf6a-73afddedb3fc",
+      "source": "a1693157-2a90-4f55-bc01-97f16b9bfdfc",
+      "sourceHandle": "success",
+      "target": "8d99a77c-ad1e-4d1e-a196-b4e00f8da314",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "b60b2009-72ff-4cea-824f-c4461c24f436",
+      "source": "b5c83eff-52b2-4c3f-8073-588a89db6cfa",
+      "sourceHandle": "success",
+      "target": "8d99a77c-ad1e-4d1e-a196-b4e00f8da314",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "8754340e-94e0-411f-8c26-79cd6f80f1b8",
+      "source": "e8a85d7d-7a67-433b-86b7-0cc9d1851f2c",
+      "sourceHandle": "timeout",
+      "target": "8d99a77c-ad1e-4d1e-a196-b4e00f8da314",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "bb863af0-f972-4252-a70f-54f36dbbf3cc",
+      "source": "e8a85d7d-7a67-433b-86b7-0cc9d1851f2c",
+      "sourceHandle": "success",
+      "target": "8d99a77c-ad1e-4d1e-a196-b4e00f8da314",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "b3dba49f-dc81-4f4f-abd7-d4d188f6dd66",
+      "source": "602f6de4-e3ed-49bd-af6d-dd89c0e9b18a",
+      "sourceHandle": null,
+      "target": "a1693157-2a90-4f55-bc01-97f16b9bfdfc",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "7441af11-efcd-443d-a771-7f6daa905108",
+      "source": "b5c83eff-52b2-4c3f-8073-588a89db6cfa",
+      "sourceHandle": "timeout",
+      "target": "1b631613-be03-4765-9194-c58c8dffb87d",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "ba725c63-153c-467d-8184-f81209641828",
+      "source": "1b631613-be03-4765-9194-c58c8dffb87d",
+      "sourceHandle": null,
+      "target": "e8a85d7d-7a67-433b-86b7-0cc9d1851f2c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "3ac9afcb-f32d-46f2-a50d-401a7e02d42a",
+      "source": "7f0c7c46-a702-486f-b956-3ef1961a0a11",
+      "sourceHandle": null,
+      "target": "2702d594-aca5-4a1c-828a-de036b55616c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "529044b1-2f83-4620-a6fa-1873dbfe66c9",
+      "source": "b050a8da-1154-4e1e-bea6-c9733adac582",
+      "sourceHandle": null,
+      "target": "77551ae0-153e-4fb6-aca3-a033fe93040b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "c87a0f37-7ba2-4937-a681-4b2f3a2170e9",
+      "source": "77551ae0-153e-4fb6-aca3-a033fe93040b",
+      "sourceHandle": "timeout",
+      "target": "f1aa6830-a673-4840-af76-21fa3470d599",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "1b8219b9-ac8b-4f76-81bc-db00275cd68e",
+      "source": "77551ae0-153e-4fb6-aca3-a033fe93040b",
+      "sourceHandle": "success",
+      "target": "bbff7e8c-3cc2-4402-885c-1d187404e973",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "a8716978-0644-418b-895b-f2a1c45b2576",
+      "source": "f1aa6830-a673-4840-af76-21fa3470d599",
+      "sourceHandle": null,
+      "target": "6e19d733-2699-4226-999d-3118fcdc2d4b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "fb6a6610-e72a-49c0-98ac-102fec5f76fd",
+      "source": "0920618b-b063-4080-83b9-1af7bef24f96",
+      "sourceHandle": null,
+      "target": "a2d8c1cb-1d2b-41d9-9600-6d681d6344c6",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "8ef94253-aede-409d-97c4-c7bd7826df18",
+      "source": "678adf99-c8df-482f-be02-37ea1c1f6dcb",
+      "sourceHandle": null,
+      "target": "4f786b7e-aa71-4cb8-8ffa-75d19c3e85b4",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "e9a53ce4-faef-49f3-ac48-a361f50804cf",
+      "source": "6e19d733-2699-4226-999d-3118fcdc2d4b",
+      "sourceHandle": "timeout",
+      "target": "0920618b-b063-4080-83b9-1af7bef24f96",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "615429c8-2571-4d7f-8866-d81624ea731d",
+      "source": "a2d8c1cb-1d2b-41d9-9600-6d681d6344c6",
+      "sourceHandle": "timeout",
+      "target": "678adf99-c8df-482f-be02-37ea1c1f6dcb",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "d83ebe55-177b-42ad-a0c7-12ea33e267ee",
+      "source": "6e19d733-2699-4226-999d-3118fcdc2d4b",
+      "sourceHandle": "success",
+      "target": "bbff7e8c-3cc2-4402-885c-1d187404e973",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "c8825996-5c14-4a19-b813-cabd5bd97041",
+      "source": "a2d8c1cb-1d2b-41d9-9600-6d681d6344c6",
+      "sourceHandle": "success",
+      "target": "bbff7e8c-3cc2-4402-885c-1d187404e973",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "c95d7477-bc91-4f8e-b522-5cf1f7746c12",
+      "source": "4f786b7e-aa71-4cb8-8ffa-75d19c3e85b4",
+      "sourceHandle": "timeout",
+      "target": "bbff7e8c-3cc2-4402-885c-1d187404e973",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "4ae099d3-8940-4285-afa4-527b2e9ab831",
+      "source": "4f786b7e-aa71-4cb8-8ffa-75d19c3e85b4",
+      "sourceHandle": "success",
+      "target": "bbff7e8c-3cc2-4402-885c-1d187404e973",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "250a6933-289c-493b-946f-1b67d3601437",
+      "source": "05ff7cb9-348c-4ebc-a22e-68e9a50830f2",
+      "sourceHandle": null,
+      "target": "4855b374-f243-431d-93b2-c96390c2424e",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "bc2be65a-051d-4974-b46c-b5cb974d912a",
+      "source": "78ee3b9b-a544-4916-a93e-5e96365165e4",
+      "sourceHandle": null,
+      "target": "ff1144fd-cdd8-4e85-ac4b-95211e39d9f9",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "71ff1253-7a99-454b-8121-3b432f9071b8",
+      "source": "ff1144fd-cdd8-4e85-ac4b-95211e39d9f9",
+      "sourceHandle": "success",
+      "target": "b5ffc50a-6333-44ff-a3bf-5fbf04aa9984",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "d6fc692a-32c4-4534-832f-b8cb99d2a4f9",
+      "source": "ff1144fd-cdd8-4e85-ac4b-95211e39d9f9",
+      "sourceHandle": "timeout",
+      "target": "92c6e7a4-0d4b-4610-a730-31609752dd04",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "67337268-ee4f-4371-92f1-ee8926dc9230",
+      "source": "92c6e7a4-0d4b-4610-a730-31609752dd04",
+      "sourceHandle": null,
+      "target": "41eb0751-7393-4456-b756-21e8d3f93303",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "b4756fe1-c996-4d16-84f3-fb867c1bec08",
+      "source": "6ea61ee5-b650-4c0f-b1df-3cf5ba7197a3",
+      "sourceHandle": null,
+      "target": "6d1554af-02d0-4f2b-938f-e501acb314a4",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "c3593de0-7d9f-4553-a952-a71fcd3c682b",
+      "source": "2fb28842-a334-4c81-85f5-c949405712f3",
+      "sourceHandle": null,
+      "target": "5750b992-c310-4fea-9ccd-570aaef8d06d",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "c37e583b-0e75-4a4a-9dda-09a68fdff1b2",
+      "source": "41eb0751-7393-4456-b756-21e8d3f93303",
+      "sourceHandle": "timeout",
+      "target": "6ea61ee5-b650-4c0f-b1df-3cf5ba7197a3",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "ebe76bc7-b302-40e4-87c5-aead5b4bb5d1",
+      "source": "6d1554af-02d0-4f2b-938f-e501acb314a4",
+      "sourceHandle": "timeout",
+      "target": "2fb28842-a334-4c81-85f5-c949405712f3",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "67f873d8-a483-470e-a3e7-a1911e47cafd",
+      "source": "6d1554af-02d0-4f2b-938f-e501acb314a4",
+      "sourceHandle": "success",
+      "target": "10cc1389-c50e-4c02-b364-76cf92b3d287",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "52b84aaf-95b0-4161-9bfa-6e2cb373c8c8",
+      "source": "83915866-fd1c-4dc4-a354-a8ed563bc4bf",
+      "sourceHandle": null,
+      "target": "b5ffc50a-6333-44ff-a3bf-5fbf04aa9984",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "9d1d1d4b-f41f-42d9-aa7b-7a52ab93f040",
+      "source": "9fd486d1-17cc-4fe3-a664-813b13495fda",
+      "sourceHandle": null,
+      "target": "7f5b1696-8a25-4052-a896-b3a4f11f2221",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "5a7c210e-b68a-45c8-b6e5-a65fd6f4ab2a",
+      "source": "b1531c70-6640-4e4d-8300-7caed80a8097",
+      "sourceHandle": null,
+      "target": "22bd65ca-a981-4e4e-92cb-205a2518892a",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "d5e74f7f-3511-4cc8-92f6-b61512b22ba8",
+      "source": "bde7d53b-fa9f-4b92-bddb-45ccbc83abf7",
+      "sourceHandle": null,
+      "target": "2fca7842-791b-4f9c-a396-66a636ab58e9",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "aff1d863-d463-454f-9fe2-2d13029d0481",
+      "source": "a4ba8030-0207-4f41-97eb-33a7f32d65a8",
+      "sourceHandle": null,
+      "target": "4916729f-8298-4308-b411-1cb4f9b0e066",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "baefe271-1eda-4698-8170-ef78aa34e003",
+      "source": "4916729f-8298-4308-b411-1cb4f9b0e066",
+      "sourceHandle": "timeout",
+      "target": "e8abe76c-7b33-4d12-9370-cffcd3dc1e5d",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "ef7c382b-287e-4f6e-8111-fe1ef0d14d75",
+      "source": "e8abe76c-7b33-4d12-9370-cffcd3dc1e5d",
+      "sourceHandle": null,
+      "target": "e44f6880-d8f9-4b3d-bd86-5e8c27cbba73",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "4ff948bd-d982-4f51-970d-8b00ba99fb9a",
+      "source": "e44f6880-d8f9-4b3d-bd86-5e8c27cbba73",
+      "sourceHandle": "timeout",
+      "target": "f796b994-4f96-4fea-8ddb-66294f5eef88",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "7aaa1b8e-ece3-4111-b351-9dec8646ef46",
+      "source": "f796b994-4f96-4fea-8ddb-66294f5eef88",
+      "sourceHandle": null,
+      "target": "9b7555cc-2490-4e18-9001-05dd926a2496",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "295790da-9afb-4879-ab14-6ea17249a314",
+      "source": "4916729f-8298-4308-b411-1cb4f9b0e066",
+      "sourceHandle": "success",
+      "target": "830eacd4-4c6e-4b96-b463-d96d14cdf23b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "ded8deef-ebb1-455a-a909-b8cf10eaa960",
+      "source": "e44f6880-d8f9-4b3d-bd86-5e8c27cbba73",
+      "sourceHandle": "success",
+      "target": "830eacd4-4c6e-4b96-b463-d96d14cdf23b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "b849645d-08bc-48f6-b1c0-9ebe8bdb344c",
+      "source": "9b7555cc-2490-4e18-9001-05dd926a2496",
+      "sourceHandle": "success",
+      "target": "830eacd4-4c6e-4b96-b463-d96d14cdf23b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "905e2a3e-90d6-4991-b544-78308237029d",
+      "source": "9b7555cc-2490-4e18-9001-05dd926a2496",
+      "sourceHandle": "timeout",
+      "target": "830eacd4-4c6e-4b96-b463-d96d14cdf23b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "62359048-dd38-4e83-97cd-47a08f95b52d",
+      "source": "fd60ec66-12a5-45c5-928d-4ee8db0a212f",
+      "sourceHandle": null,
+      "target": "205850b4-b6b1-477b-bd88-d5a09575c0a6",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "4cb58a99-2247-4ff1-b6c8-4c3fc510bf89",
+      "source": "cc2ba17e-a255-464f-8d15-39e0ef801986",
+      "sourceHandle": "success",
+      "target": "f109a5c5-20f3-4a8f-bfa6-5bde02d40401",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "e8ab29ea-b144-49e7-bc15-5ca18e726a75",
+      "source": "cc2ba17e-a255-464f-8d15-39e0ef801986",
+      "sourceHandle": "timeout",
+      "target": "788efec5-b026-402b-9188-988ec954edd6",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "89e3da5e-4e95-435b-af54-9847a96985ac",
+      "source": "54b0984a-8144-4359-ba2a-69c6dba91ed9",
+      "sourceHandle": null,
+      "target": "cc0d136c-1d53-420b-af1d-cc28c50d3492",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "c6d19ac7-f566-4a7f-872f-747723571007",
+      "source": "cc0d136c-1d53-420b-af1d-cc28c50d3492",
+      "sourceHandle": "timeout",
+      "target": "f109a5c5-20f3-4a8f-bfa6-5bde02d40401",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "2348e08c-1925-4e42-a385-9ec644aa5243",
+      "source": "cc0d136c-1d53-420b-af1d-cc28c50d3492",
+      "sourceHandle": "success",
+      "target": "f109a5c5-20f3-4a8f-bfa6-5bde02d40401",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "d98ac1f0-f42e-468c-9c66-1d6c928dd5cb",
+      "source": "d4e296e4-f5e2-49a5-8b4d-375aa140a483",
+      "sourceHandle": "success",
+      "target": "2702d594-aca5-4a1c-828a-de036b55616c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "32f61d22-76d3-4b50-b604-aa5400a60343",
+      "source": "d4e296e4-f5e2-49a5-8b4d-375aa140a483",
+      "sourceHandle": "timeout",
+      "target": "5a5db09b-2f0e-4467-a0a5-7390cde5666a",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "8475ab03-06e6-466c-90a6-2f69540df805",
+      "source": "5750b992-c310-4fea-9ccd-570aaef8d06d",
+      "sourceHandle": "timeout",
+      "target": "10cc1389-c50e-4c02-b364-76cf92b3d287",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "6fbe3f59-4302-45fc-abb5-936ed9fb816f",
+      "source": "5750b992-c310-4fea-9ccd-570aaef8d06d",
+      "sourceHandle": "success",
+      "target": "10cc1389-c50e-4c02-b364-76cf92b3d287",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "9a5a53de-7dec-4d11-8d6d-8bd8a6002e23",
+      "source": "bb72efe6-7e46-4467-bb46-2be24f2f2361",
+      "sourceHandle": null,
+      "target": "1d111794-d211-4565-a6d2-ad25c8e1477d",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "f53edc9e-1cbd-4e39-8bca-134274364bb4",
+      "source": "a647d30a-7b60-47d9-8ab6-89a8c9ea08c0",
+      "sourceHandle": null,
+      "target": "cc2ba17e-a255-464f-8d15-39e0ef801986",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "2b3e3fdf-5579-4f76-88dc-a066bb8bf466",
+      "source": "41eb0751-7393-4456-b756-21e8d3f93303",
+      "sourceHandle": "success",
+      "target": "6e95d5dd-dc2b-4a25-a655-4893990d4e53",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "db07f150-2f2f-46b6-8493-c2d7e3853945",
+      "source": "11feee40-3e2e-4191-be9a-d633c62dfcf5",
+      "sourceHandle": null,
+      "target": "b5ffc50a-6333-44ff-a3bf-5fbf04aa9984",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "af7db11e-b430-43da-b1f7-0df056c985b5",
+      "source": "3d020bc0-ea86-4b52-8100-7640ee5377a8",
+      "sourceHandle": null,
+      "target": "5d9a2e15-cc9b-4f3a-ac27-bc68bdc15752",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "5d2e2f89-a7ee-4e59-90df-b06fd819a708",
+      "source": "5d9a2e15-cc9b-4f3a-ac27-bc68bdc15752",
+      "sourceHandle": "success",
+      "target": "3e856831-a2e4-4552-ab66-a160401f8496",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "26e560d4-08f0-4625-af8a-2a7dd46a409b",
+      "source": "5d9a2e15-cc9b-4f3a-ac27-bc68bdc15752",
+      "sourceHandle": "timeout",
+      "target": "3e856831-a2e4-4552-ab66-a160401f8496",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "5f2358ac-4330-440e-8452-fdbd4d177bde",
+      "source": "b3aeb366-ddc0-4ef4-a41b-8c472e177269",
+      "sourceHandle": null,
+      "target": "c086b7d6-1cf3-4f9b-916b-9c2be77ff564",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "06577f85-3459-4155-bc4e-c601646eed2c",
+      "source": "c086b7d6-1cf3-4f9b-916b-9c2be77ff564",
+      "sourceHandle": "success",
+      "target": "13479cc1-f47b-4de1-91e5-797accf617d2",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "f14eb7a8-0ce7-4ff4-8057-6548b404e802",
+      "source": "64a7f4a1-364c-474a-8435-8ec234a1c6cf",
+      "sourceHandle": null,
+      "target": "7baf0f32-3ef8-405e-84cb-537ae04083fa",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "3c6681a4-99f4-4d02-87d0-860e012c36f2",
+      "source": "1ff9ef5b-3194-4737-b421-896a5a9f90f5",
+      "sourceHandle": null,
+      "target": "a3ed0302-a670-4bec-836e-c43659a8b9d7",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "8d27996b-9037-4fcb-bc18-7ce3577cf24c",
+      "source": "0db46278-6c73-45ea-9e96-3b4492c2ad90",
+      "sourceHandle": null,
+      "target": "0eb6dcd1-50e2-4f9c-8278-1ddf0350b692",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "7bc37b04-475e-41eb-8eb3-223bbfa3d989",
+      "source": "76d34df6-0d79-438e-a08c-b57af79bf1b6",
+      "sourceHandle": null,
+      "target": "1a87ed19-29d1-4acb-a97e-ee71b6f3adfd",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "caa86ecd-c70c-4c76-b93b-0493ebb93d2e",
+      "source": "a3ed0302-a670-4bec-836e-c43659a8b9d7",
+      "sourceHandle": "timeout",
+      "target": "0db46278-6c73-45ea-9e96-3b4492c2ad90",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "1dc70e73-911c-4253-b105-3835b080ac89",
+      "source": "0eb6dcd1-50e2-4f9c-8278-1ddf0350b692",
+      "sourceHandle": "timeout",
+      "target": "76d34df6-0d79-438e-a08c-b57af79bf1b6",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "4b90901e-405b-45eb-b0b0-5872ab77d237",
+      "source": "c086b7d6-1cf3-4f9b-916b-9c2be77ff564",
+      "sourceHandle": "timeout",
+      "target": "1ff9ef5b-3194-4737-b421-896a5a9f90f5",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "047220d6-ea3a-4726-a330-29fff9a4c658",
+      "source": "a3ed0302-a670-4bec-836e-c43659a8b9d7",
+      "sourceHandle": "success",
+      "target": "13479cc1-f47b-4de1-91e5-797accf617d2",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "bb81c694-f605-4cc7-9ef7-338bdc698a0e",
+      "source": "0eb6dcd1-50e2-4f9c-8278-1ddf0350b692",
+      "sourceHandle": "success",
+      "target": "13479cc1-f47b-4de1-91e5-797accf617d2",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "df55916e-1386-4a8d-bc1e-4d26a258ee97",
+      "source": "1a87ed19-29d1-4acb-a97e-ee71b6f3adfd",
+      "sourceHandle": "success",
+      "target": "13479cc1-f47b-4de1-91e5-797accf617d2",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "b8198129-0666-443a-8415-c5ae7d1f6ca5",
+      "source": "1a87ed19-29d1-4acb-a97e-ee71b6f3adfd",
+      "sourceHandle": "timeout",
+      "target": "13479cc1-f47b-4de1-91e5-797accf617d2",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "dc29d1c7-9dfb-4cff-8b88-0f2d0643de9c",
+      "source": "cda809c5-3d87-4693-9533-986aaa6a0252",
+      "sourceHandle": null,
+      "target": "dbf7b0f2-6765-4455-b5e3-23f51e4b7806",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "0981048a-5bf4-4bee-bc9e-48ce98986932",
+      "source": "dbf7b0f2-6765-4455-b5e3-23f51e4b7806",
+      "sourceHandle": "success",
+      "target": "37f50f2d-55ca-4129-9d14-e829cf51dedd",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "b24e2ab4-e5e9-4896-ab6c-0bc46531dc51",
+      "source": "dbf7b0f2-6765-4455-b5e3-23f51e4b7806",
+      "sourceHandle": "timeout",
+      "target": "37f50f2d-55ca-4129-9d14-e829cf51dedd",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "760b4b00-a6b1-4621-bc42-fa21a522101d",
+      "source": "6dcd6d02-9ac1-4e58-99a8-21189fdaa459",
+      "sourceHandle": null,
+      "target": "803eae74-1e8d-466b-b63a-5b3fb421cee1",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "19d710f2-d380-4f03-8cd3-177002af798d",
+      "source": "803eae74-1e8d-466b-b63a-5b3fb421cee1",
+      "sourceHandle": "success",
+      "target": "11fd5c60-1d05-497d-95a7-ba8751569bfc",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "f3f4dc00-f599-44a8-9c19-1441b13d0749",
+      "source": "f748586f-5b3c-400e-9e6e-e98ccb4f4945",
+      "sourceHandle": null,
+      "target": "2e62c578-dce6-4484-b66b-b7e60ed22076",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "fb53a133-c3a0-4c75-8e92-9f175aea2d7c",
+      "source": "2e62c578-dce6-4484-b66b-b7e60ed22076",
+      "sourceHandle": "success",
+      "target": "0f1e8fa1-413c-4129-9237-807ce77a0a25",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "145312d2-5580-414e-b848-7c922bdc115b",
+      "source": "f6207985-c48f-4ebd-9550-7a89ea250edf",
+      "sourceHandle": null,
+      "target": "fa9cd283-1a83-4f49-8c8b-e162ccaae796",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "bce6773e-4d7b-4290-b30b-c09dfd327ec8",
+      "source": "803eae74-1e8d-466b-b63a-5b3fb421cee1",
+      "sourceHandle": "timeout",
+      "target": "7bbdbf7c-4e09-4a41-bdec-49dcca5c040f",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "958f0273-0f99-4f6e-b947-658e56e9c4b2",
+      "source": "4c74761b-45c6-457a-99d7-232d3b109d8f",
+      "sourceHandle": null,
+      "target": "3d4e7229-8bea-441e-9a47-a2bb9d8848af",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "423278d4-a23d-41ce-bb08-092d9c7fbf9c",
+      "source": "3d4e7229-8bea-441e-9a47-a2bb9d8848af",
+      "sourceHandle": "success",
+      "target": "11fd5c60-1d05-497d-95a7-ba8751569bfc",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "e9c6cca8-a226-48dd-bb6e-470b5bfe4b06",
+      "source": "3d4e7229-8bea-441e-9a47-a2bb9d8848af",
+      "sourceHandle": "timeout",
+      "target": "11fd5c60-1d05-497d-95a7-ba8751569bfc",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "087aaf40-cf44-4473-a68f-f084cecb29a4",
+      "source": "0fc4f82c-bd4c-4603-b0b2-a317003b9d61",
+      "sourceHandle": null,
+      "target": "a4c63983-0fc2-48bd-8777-b68f2057c985",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "8c2d70fa-b80f-4908-912f-60575aa528c2",
+      "source": "2e62c578-dce6-4484-b66b-b7e60ed22076",
+      "sourceHandle": "timeout",
+      "target": "5aa28390-0f39-4719-9317-f9c3b3c86417",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "a38ba45a-4c12-4756-a985-888963edea65",
+      "source": "a4c63983-0fc2-48bd-8777-b68f2057c985",
+      "sourceHandle": "success",
+      "target": "0f1e8fa1-413c-4129-9237-807ce77a0a25",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "411faa33-c82b-4985-881d-0dbc287f2702",
+      "source": "a4c63983-0fc2-48bd-8777-b68f2057c985",
+      "sourceHandle": "timeout",
+      "target": "0f1e8fa1-413c-4129-9237-807ce77a0a25",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "d5e9f69c-fbd6-4829-a916-2f3be183c350",
+      "source": "f109a5c5-20f3-4a8f-bfa6-5bde02d40401",
+      "sourceHandle": null,
+      "target": "abb349d8-c5ed-432a-8579-df7656b10ecb",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "998c5e64-cbfe-469f-98c4-142cf21ae8cf",
+      "source": "48269298-5700-4727-a591-739bbea5d34e",
+      "sourceHandle": "timeout",
+      "target": "2ecf8fd2-770d-4e3f-b194-d6c89b30b037",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "d2215526-9ce3-46fa-ac2e-c3a62ed36df6",
+      "source": "c3c51e80-5bf6-4bc8-bb26-9dc08ca550d9",
+      "sourceHandle": null,
+      "target": "40735706-94a4-4c01-8dd1-50f0efe0bff8",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "17110a12-3e32-463b-9d35-8ff2d1019abb",
+      "source": "48269298-5700-4727-a591-739bbea5d34e",
+      "sourceHandle": "success",
+      "target": "6dcfeabd-5dcb-4ebc-be08-2816bc81ffe4",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "17547fc1-0568-4d2d-a0f6-9039b280d93a",
+      "source": "50bf6737-d68a-4349-beb1-4ba8b4e3185d",
+      "sourceHandle": null,
+      "target": "8260e35d-bd62-4fea-ad10-a808deed98f8",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "091e3a56-f625-4fbf-897c-4b522a112486",
+      "source": "8260e35d-bd62-4fea-ad10-a808deed98f8",
+      "sourceHandle": "success",
+      "target": "5b2424e3-cc0a-46e9-9739-7d771ce9481c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "82630db1-4451-4850-9f53-2e2e2d40c309",
+      "source": "40735706-94a4-4c01-8dd1-50f0efe0bff8",
+      "sourceHandle": "success",
+      "target": "6dcfeabd-5dcb-4ebc-be08-2816bc81ffe4",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "e2635527-0e4f-4cc3-8b3c-7be4e363f427",
+      "source": "f9453e65-48e3-43c7-b5f7-0e1f3117b412",
+      "sourceHandle": null,
+      "target": "771397e8-f869-4a13-96f2-95eda42b5478",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "a303145c-1910-4868-ad79-25c472dd0b9c",
+      "source": "40735706-94a4-4c01-8dd1-50f0efe0bff8",
+      "sourceHandle": "timeout",
+      "target": "dd1f5a95-c348-4cd1-9f9f-04f2d22f2b42",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "f9f33de6-d47d-4d1d-b611-c8f882e7581c",
+      "source": "771397e8-f869-4a13-96f2-95eda42b5478",
+      "sourceHandle": "success",
+      "target": "6dcfeabd-5dcb-4ebc-be08-2816bc81ffe4",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "a37ba8de-2d48-429e-a056-ab26d38922db",
+      "source": "771397e8-f869-4a13-96f2-95eda42b5478",
+      "sourceHandle": "timeout",
+      "target": "b61c9bc4-f849-4ab1-9dfa-fade3d80f9cf",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "bc939aae-e6f6-4c70-9ae1-8ac6a4257a24",
+      "source": "4c88a173-18b6-46e8-aaf0-fbc45459ff1e",
+      "sourceHandle": null,
+      "target": "18c30be9-e8d3-4641-be5b-7a88c0fcdd48",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "083ee65f-cf2e-42df-8755-8bf47564a7b8",
+      "source": "fdc9c3f0-3662-4af7-acad-17c597edc845",
+      "sourceHandle": null,
+      "target": "2d56b437-e4ea-4a08-901b-154e05c1980b",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "cdacfede-4839-441f-b11a-f05012d0e890",
+      "source": "18c30be9-e8d3-4641-be5b-7a88c0fcdd48",
+      "sourceHandle": "timeout",
+      "target": "f50482ba-9204-42ef-a731-e71aae84754c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "411cba89-afbb-4cb0-8b85-d64ade0953da",
+      "source": "2d56b437-e4ea-4a08-901b-154e05c1980b",
+      "sourceHandle": "timeout",
+      "target": "1196f405-2d86-4e56-b376-977692ba4e94",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "53dd9035-c6c2-4083-b440-1d489da6b030",
+      "source": "8260e35d-bd62-4fea-ad10-a808deed98f8",
+      "sourceHandle": "timeout",
+      "target": "6fc17584-5a46-401e-a345-a80ca2a11b3c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "452901f1-ebd8-41a5-8012-78dc8f787a00",
+      "source": "18c30be9-e8d3-4641-be5b-7a88c0fcdd48",
+      "sourceHandle": "success",
+      "target": "5b2424e3-cc0a-46e9-9739-7d771ce9481c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "633c9a8f-04ac-4644-9b3f-0881945487c2",
+      "source": "2d56b437-e4ea-4a08-901b-154e05c1980b",
+      "sourceHandle": "success",
+      "target": "5b2424e3-cc0a-46e9-9739-7d771ce9481c",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "f25bdbea-aa7a-445a-92d8-ecf107677bdf",
+      "source": "c111824e-e910-46bd-bc5e-699744be4d19",
+      "sourceHandle": null,
+      "target": "c2658f15-b280-4c43-8eea-63f704d39fb6",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "df8419c6-991b-44af-a856-9c5933799155",
+      "source": "8e96d920-cabc-4ac5-af74-a625b067b91d",
+      "sourceHandle": null,
+      "target": "48269298-5700-4727-a591-739bbea5d34e",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "d0a3bd61-3c6e-48eb-a6b2-f639c59b9347",
+      "source": "9ad45f57-9c9a-4677-81ba-f6d0a446c541",
+      "sourceHandle": null,
+      "target": "344aef66-d2e9-4d0d-b184-90d94ef3f113",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "29188d44-e625-4bc0-8c9a-795eabb48300",
+      "source": "d5c1d2f2-667b-4531-9dda-a1a20083f906",
+      "sourceHandle": null,
+      "target": "344aef66-d2e9-4d0d-b184-90d94ef3f113",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "2b095c75-f2d1-4748-9f79-0a3ac84c73e7",
+      "source": "61a81fbd-44dd-4efa-b5ad-18bd8a26e494",
+      "sourceHandle": null,
+      "target": "913c5cbf-b6fe-4367-ac18-535a2f180614",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "91eff4fd-6b5a-4c1d-a416-3fc0f3e96f4b",
+      "source": "fa9cd283-1a83-4f49-8c8b-e162ccaae796",
+      "sourceHandle": "success",
+      "target": "bec993ac-8e4b-4ebc-bf5f-3f018b944426",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "496940a3-280a-4f7a-b426-660160284489",
+      "source": "fa9cd283-1a83-4f49-8c8b-e162ccaae796",
+      "sourceHandle": "timeout",
+      "target": "bec993ac-8e4b-4ebc-bf5f-3f018b944426",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "281619d7-9046-43cf-8634-01518433dfc5",
+      "source": "120aef65-2d37-4e13-a3a3-06de39dac504",
+      "sourceHandle": null,
+      "target": "0bd6af45-9644-48e9-af55-2964a7211b23",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "74d285bf-367d-4705-a72d-928234645837",
+      "source": "9c0d00cb-7506-4b4d-a17d-9dd3563c4d6f",
+      "sourceHandle": null,
+      "target": "fac87d47-69f6-4ca7-82f7-6a67c75ae9fe",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "05d11559-1118-421f-a083-80a9798060ae",
+      "source": "fac87d47-69f6-4ca7-82f7-6a67c75ae9fe",
+      "sourceHandle": "timeout",
+      "target": "e320c714-491f-4b66-befe-6859c3f9f186",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "9f0dd6fe-81d8-4f00-8a0e-dbd5f670d8f1",
+      "source": "fac87d47-69f6-4ca7-82f7-6a67c75ae9fe",
+      "sourceHandle": "success",
+      "target": "e320c714-491f-4b66-befe-6859c3f9f186",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "0ec295d4-6144-4cd0-9ce0-c71580c53bf2",
+      "source": "f833545c-6e3a-4623-95df-40e45e239d4a",
+      "sourceHandle": null,
+      "target": "8b9fb57f-11c5-41ba-8fed-e74fcebe5a0d",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "98aab294-5610-4abc-8f7d-8825dacd8ff8",
+      "source": "8b9fb57f-11c5-41ba-8fed-e74fcebe5a0d",
+      "sourceHandle": "timeout",
+      "target": "ffbea399-223f-4b75-85ba-8ddee97fd060",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "3f784cf6-c692-4eba-9b4e-157e4900b837",
+      "source": "8b9fb57f-11c5-41ba-8fed-e74fcebe5a0d",
+      "sourceHandle": "success",
+      "target": "ffbea399-223f-4b75-85ba-8ddee97fd060",
+      "targetHandle": null,
+      "animated": true
+    },
+    {
+      "id": "60ab34cc-15d7-4d70-bd11-7c5113c6d361",
+      "source": "e5377a38-6c1c-4436-b817-b9e3497abced",
+      "sourceHandle": null,
+      "target": "d4e296e4-f5e2-49a5-8b4d-375aa140a483",
+      "targetHandle": null,
+      "animated": true
+    }
+  ]
+}

@@ -265,19 +265,15 @@ export async function importFlow(botId: string, flowData: any) {
             }
 
             try {
-                const [newNode] = await db.insert(schema.flowNodes).values({
-                    flowId,
-                    type: node.type,
-                    positionX: node.position.x || 0,
-                    positionY: node.position.y || 0,
-                    data: node.data || {}
-                }).returning({ id: schema.flowNodes.id });
-                nodeMapping[node.id] = newNode.id;
-            } catch (nodeError) {
+                const nodeId = crypto.randomUUID();
+                await db.execute(sql`
+                    INSERT INTO "flow_nodes" (id, "flowId", type, "positionX", "positionY", data, "updatedAt", "createdAt")
+                    VALUES (${nodeId}, ${flowId}, ${node.type}, ${node.position.x || 0}, ${node.position.y || 0}, ${node.data || {}}, NOW(), NOW())
+                `);
+                nodeMapping[node.id] = nodeId;
+            } catch (nodeError: any) {
                 console.error("Error inserting node during import:", nodeError);
-                // Continue to try to import other nodes? Or fail fast?
-                // Let's fail fast to ensure data integrity
-                throw new Error(`Erro ao inserir nó do tipo ${node.type}`);
+                throw new Error(`Erro ao inserir nó ${node.type}: ${nodeError.message}`);
             }
         }
 
@@ -285,16 +281,19 @@ export async function importFlow(botId: string, flowData: any) {
         if (flowData.edges && flowData.edges.length > 0) {
             const validEdges = flowData.edges.filter((edge: any) => edge.source && edge.target);
 
-            if (validEdges.length > 0) {
-                await db.insert(schema.flowEdges).values(
-                    validEdges.map((edge: any) => ({
-                        flowId,
-                        sourceNodeId: nodeMapping[edge.source] || edge.source,
-                        sourceHandle: edge.sourceHandle,
-                        targetNodeId: nodeMapping[edge.target] || edge.target,
-                        targetHandle: edge.targetHandle,
-                    }))
-                );
+            for (const edge of validEdges) {
+                try {
+                    const edgeId = crypto.randomUUID();
+                    const sourceId = nodeMapping[edge.source] || edge.source;
+                    const targetId = nodeMapping[edge.target] || edge.target;
+
+                    await db.execute(sql`
+                        INSERT INTO "flow_edges" (id, "flowId", "sourceNodeId", "sourceHandle", "targetNodeId", "targetHandle", "updatedAt", "createdAt")
+                        VALUES (${edgeId}, ${flowId}, ${sourceId}, ${edge.sourceHandle || null}, ${targetId}, ${edge.targetHandle || null}, NOW(), NOW())
+                    `);
+                } catch (edgeError: any) {
+                    console.error("Error inserting edge during import:", edgeError);
+                }
             }
         }
 

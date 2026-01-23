@@ -266,45 +266,43 @@ export async function triggerFlowForUser(botId: string, telegramChatId: string, 
 
 // Advanced Lead filtering for CRM
 export async function getLeads(filters: { botId?: string, tag?: string, search?: string }) {
-    const checkSession = await auth();
-    if (!checkSession?.user?.id) return [];
-    const session = checkSession;
-
-    let conditions: any[] = [];
-
-    // Ensure bot belongs to user
-    conditions.push(
-        ((conversations: any, { exists }: any) => exists(
-            db.select().from(schema.bots)
-                .where(and(
-                    eq(schema.bots.id, conversations.botId),
-                    eq(schema.bots.userId, session.user!.id!)
-                ))
-        )) as any
-    );
-
-    if (filters.botId) {
-        conditions.push(eq(schema.conversations.botId, filters.botId));
-    }
-
-    if (filters.tag) {
-        // arrayContains is the postgres operator for @>
-        // Make sure tags is treated as array column
-        conditions.push(arrayContains(schema.conversations.tags, [filters.tag]));
-    }
-
-    if (filters.search) {
-        const search = `%${filters.search}%`;
-        conditions.push(or(
-            like(schema.conversations.firstName, search),
-            like(schema.conversations.lastName, search),
-            like(schema.conversations.username, search),
-            like(schema.conversations.telegramUserId, search),
-        ));
-    }
+    const session = await auth();
+    if (!session?.user?.id) return [];
 
     const conversations = await db.query.conversations.findMany({
-        where: and(...conditions),
+        where: (cols, { exists, and, eq, or, like }) => {
+            const conditions = [
+                exists(
+                    db.select().from(schema.bots)
+                        .where(and(
+                            eq(schema.bots.id, cols.botId),
+                            eq(schema.bots.userId, session.user!.id!)
+                        ))
+                )
+            ];
+
+            if (filters.botId) {
+                conditions.push(eq(cols.botId, filters.botId));
+            }
+
+            if (filters.tag) {
+                conditions.push(arrayContains(schema.conversations.tags, [filters.tag]));
+            }
+
+            if (filters.search) {
+                const search = `%${filters.search}%`;
+                conditions.push(or(
+                    like(cols.firstName, search),
+                    like(cols.lastName, search),
+                    like(cols.username, search),
+                    like(cols.telegramUserId, search),
+                ));
+            }
+
+            const validConditions = conditions.filter((c): c is any => c !== undefined);
+
+            return and(...validConditions);
+        },
         with: {
             bot: {
                 columns: {

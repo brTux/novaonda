@@ -1,6 +1,8 @@
 import React from "react";
 import { auth } from "@/auth";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/db";
+import * as schema from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { getLeads } from "@/app/actions/chat";
 import { getTags } from "@/app/actions/tags";
 import { LeadsTable } from "@/components/leads/LeadsTable";
@@ -12,9 +14,9 @@ export default async function LeadsPage() {
     // Fetch initial data
     const [leads, bots, tags] = await Promise.all([
         getLeads({}),
-        prisma.bot.findMany({
-            where: { userId: session.user.id },
-            select: { id: true, name: true }
+        db.query.bots.findMany({
+            where: eq(schema.bots.userId, session.user.id),
+            columns: { id: true, name: true }
         }),
         getTags()
     ]);

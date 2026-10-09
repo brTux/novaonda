@@ -130,27 +130,35 @@ function corrigirDemandGen() {
       });
     });
     const logo = image(lib, '02_DemandGen_Lojista/logos/PMF-B2B_logo_1200x1200.png');
-    const body = tall => {
+    // Ad.name NÃO é aceito em anúncios Demand Gen (só display/vídeo) — por isso não é enviado.
+    const body = (tall, oneEach) => {
+      const pick = arr => oneEach ? arr.slice(0, 1) : arr;
       const m = {
-        marketingImages: imgs['1200x628'], squareMarketingImages: imgs['1200x1200'],
-        portraitMarketingImages: imgs['960x1200'], logoImages: logo ? [{ asset: logo }] : [],
+        marketingImages: pick(imgs['1200x628']), squareMarketingImages: pick(imgs['1200x1200']),
+        portraitMarketingImages: pick(imgs['960x1200']), logoImages: logo ? [{ asset: logo }] : [],
         headlines: cfg.heads.map(t => ({ text: t })), descriptions: D_DG.map(t => ({ text: t })),
         businessName: 'Pietro Moda Fitness',
       };
-      if (tall) m.tallPortraitMarketingImages = imgs['1080x1920'];
+      if (tall) m.tallPortraitMarketingImages = pick(imgs['1080x1920']);
       return { adGroupAdOperation: { create: { adGroup: ag, status: 'ENABLED',
-        ad: { name: name + ' [ imagens ]', finalUrls: [SITE + '/'], demandGenMultiAssetAd: m } } } };
+        ad: { finalUrls: [SITE + '/'], demandGenMultiAssetAd: m } } } };
     };
-    let err = mutate(body(true));
-    if (!err) { LOG.feito.push('Anúncio Demand Gen criado em ' + name + ' (com 9:16)'); return; }
-    Logger.log('Com 9:16 recusado em ' + name + ': ' + err);
-    err = mutate(body(false));
-    if (!err) {
-      LOG.feito.push('Anúncio Demand Gen criado em ' + name + ' (sem 9:16)');
-      LOG.manual.push(name + ': adicione as imagens 1080x1920 pela interface.');
-      return;
+    Logger.log(name + ': imagens encontradas ' + FORMATS.map(f => f + '=' + imgs[f].length).join(' ') + ' | logo=' + (logo ? 'ok' : 'FALTANDO'));
+    const tries = [
+      [true, false, 'completo com 9:16'],
+      [false, false, 'completo sem 9:16'],
+      [false, true, 'mínimo (1 imagem por formato)'],
+    ];
+    for (let i = 0; i < tries.length; i++) {
+      const err = mutate(body(tries[i][0], tries[i][1]));
+      if (!err) {
+        LOG.feito.push('Anúncio Demand Gen criado em ' + name + ' (' + tries[i][2] + ')');
+        if (i > 0) LOG.manual.push(name + ': complete as imagens que faltaram pela interface (versão usada: ' + tries[i][2] + ').');
+        return;
+      }
+      Logger.log('Tentativa "' + tries[i][2] + '" recusada em ' + name + ': ' + err);
+      if (i === tries.length - 1) LOG.erro.push('Anúncio Demand Gen em ' + name + ': ' + err);
     }
-    LOG.erro.push('Anúncio Demand Gen em ' + name + ': ' + err);
   });
 }
 

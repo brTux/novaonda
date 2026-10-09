@@ -381,7 +381,7 @@ function buildDemandGen() {
         businessName: DG.businessName,
       };
       if (tall) multi.tallPortraitMarketingImages = imgs['1080x1920'];
-      return { adGroup: ag, status: 'ENABLED', ad: { name: g.name + ' [ imagens ]', finalUrls: [DG.url], demandGenMultiAssetAd: multi } };
+      return { adGroup: ag, status: 'ENABLED', ad: { finalUrls: [DG.url], demandGenMultiAssetAd: multi } };
     };
     const ad = createFirst('adGroupAdOperation', [adBody(true), adBody(false)], 'anúncio de imagem ' + g.name);
     if (ad && REPORT._lastVariant === 1) {

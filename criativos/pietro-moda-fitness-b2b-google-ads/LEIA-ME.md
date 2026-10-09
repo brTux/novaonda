@@ -117,3 +117,18 @@ Lance: Maximizar conversões (meta: Compra). **Nunca maximizar cliques.** Segmen
 | C4 | Transparência zero | AG1 |
 | C5 | Conjuntos que sua cliente quer | AG2 |
 | C6 | Reponha sua vitrine | AG2 |
+
+---
+
+## Publicação automática — Script do Google Ads
+
+Arquivo: `google-ads-script/pietro-b2b-campanhas.js`
+
+1. Google Ads (conta da Pietro) > **Ferramentas > Ações em massa > Scripts** > **+ Novo script**.
+2. Apague o conteúdo padrão, cole o arquivo inteiro e dê um nome (ex.: "PMF B2B – criação").
+3. Clique em **Autorizar** e permita o acesso.
+4. **Visualizar** só confere se as 38 imagens estão acessíveis. Para criar, clique em **Executar**.
+5. Leia o **Log** no final: ele lista o que foi criado e os itens de **AJUSTE MANUAL**.
+
+Tudo é criado **pausado**. As imagens vêm direto deste repositório (links fixos num commit).
+Se rodar de novo, campanhas com o mesmo nome são puladas, mas imagens soltas podem ser duplicadas na biblioteca de recursos.

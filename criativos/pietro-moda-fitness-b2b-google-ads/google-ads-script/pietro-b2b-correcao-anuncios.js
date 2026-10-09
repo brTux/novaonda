@@ -73,14 +73,13 @@ const LOG = { feito: [], erro: [], manual: [] };
 
 function main() {
   if (AdsApp.getExecutionInfo().isPreview()) {
-    diagnostico();
+    try { diagnostico(); } catch (e) { Logger.log('ERRO no diagnóstico: ' + e); }
     Logger.log('\nModo Visualizar: só diagnóstico. Clique em "Executar" para corrigir.');
     return;
   }
-  corrigirSearch();
-  corrigirDemandGen();
-  trocarCallout();
-  diagnostico();
+  [corrigirSearch, corrigirDemandGen, trocarCallout, diagnostico].forEach(step => {
+    try { step(); } catch (e) { LOG.erro.push(step.name + ': ' + e); Logger.log('ERRO em ' + step.name + ': ' + e); }
+  });
   Logger.log('\n================ RESUMO DA CORREÇÃO ================');
   LOG.feito.forEach(m => Logger.log('OK: ' + m));
   LOG.erro.forEach(m => Logger.log('ERRO: ' + m));
@@ -94,7 +93,7 @@ function corrigirSearch() {
   Object.keys(SEARCH_GROUPS).forEach(name => {
     const ag = groups[name];
     if (!ag) { LOG.erro.push('Grupo não encontrado: ' + name); return; }
-    if (adCount(ag) > 0) { Logger.log('Já tem anúncio, pulado: ' + name); return; }
+    if (adCount(ag) > 0) { Logger.log('Já tem anúncio, pulado: ' + name + ' -> ' + adList(ag).join(' ; ')); return; }
     const cfg = SEARCH_GROUPS[name];
     const variants = [cfg.heads, cfg.heads.filter(h => SUSPEITOS.indexOf(h) < 0)];
     for (let i = 0; i < variants.length; i++) {
@@ -119,7 +118,7 @@ function corrigirDemandGen() {
   Object.keys(DG_GROUPS).forEach(name => {
     const ag = groups[name];
     if (!ag) { LOG.erro.push('Grupo não encontrado: ' + name); return; }
-    if (adCount(ag) > 0) { Logger.log('Já tem anúncio, pulado: ' + name); return; }
+    if (adCount(ag) > 0) { Logger.log('Já tem anúncio, pulado: ' + name + ' -> ' + adList(ag).join(' ; ')); return; }
     const cfg = DG_GROUPS[name];
     const imgs = {};
     FORMATS.forEach(f => {
@@ -164,7 +163,7 @@ function corrigirDemandGen() {
 
 function imageLibrary() {
   const lib = {};
-  const it = AdsApp.search("SELECT asset.resource_name, asset.name FROM asset WHERE asset.type = 'IMAGE' AND asset.name LIKE 'PMF-B2B_%'");
+  const it = AdsApp.search("SELECT asset.resource_name, asset.name, asset.type FROM asset WHERE asset.type = 'IMAGE' AND asset.name LIKE 'PMF-B2B_%'");
   while (it.hasNext()) {
     const r = it.next();
     lib[String(r.asset.name).split(' | ')[0]] = r.asset.resourceName;
@@ -193,7 +192,7 @@ function trocarCallout() {
   const camp = campaignRn(SEARCH_NAME);
   if (!camp) return;
   Object.keys(CALLOUTS).forEach(oldText => {
-    const it = AdsApp.search("SELECT campaign_asset.resource_name FROM campaign_asset WHERE campaign.resource_name = '" + camp +
+    const it = AdsApp.search("SELECT campaign_asset.resource_name, campaign.resource_name, campaign_asset.field_type, campaign_asset.status, asset.callout_asset.callout_text FROM campaign_asset WHERE campaign.resource_name = '" + camp +
       "' AND campaign_asset.field_type = 'CALLOUT' AND asset.callout_asset.callout_text = '" + oldText + "' AND campaign_asset.status != 'REMOVED'");
     let removed = false;
     while (it.hasNext()) {
@@ -214,22 +213,24 @@ function diagnostico() {
   [SEARCH_NAME, DG_NAME].forEach(cn => {
     const camp = campaignRn(cn);
     if (!camp) { Logger.log('Campanha NÃO encontrada: ' + cn); return; }
-    const c = AdsApp.search("SELECT campaign.status, campaign_budget.amount_micros FROM campaign WHERE campaign.resource_name = '" + camp + "'").next();
+    const c = AdsApp.search("SELECT campaign.resource_name, campaign.status, campaign_budget.amount_micros FROM campaign WHERE campaign.resource_name = '" + camp + "'").next();
     Logger.log('\n' + cn + ' | status ' + c.campaign.status + ' | R$ ' + (c.campaignBudget.amountMicros / 1e6) + '/dia');
     const crit = {};
-    const ci = AdsApp.search("SELECT campaign_criterion.type, campaign_criterion.negative FROM campaign_criterion WHERE campaign.resource_name = '" + camp + "'");
+    const ci = AdsApp.search("SELECT campaign.resource_name, campaign_criterion.type, campaign_criterion.negative FROM campaign_criterion WHERE campaign.resource_name = '" + camp + "'");
     while (ci.hasNext()) { const r = ci.next().campaignCriterion; const k = r.type + (r.negative ? ' (negativa)' : ''); crit[k] = (crit[k] || 0) + 1; }
     Logger.log('  Critérios da campanha: ' + JSON.stringify(crit));
     const ca = {};
-    const ai = AdsApp.search("SELECT campaign_asset.field_type FROM campaign_asset WHERE campaign.resource_name = '" + camp + "' AND campaign_asset.status != 'REMOVED'");
+    const ai = AdsApp.search("SELECT campaign.resource_name, campaign_asset.field_type, campaign_asset.status FROM campaign_asset WHERE campaign.resource_name = '" + camp + "' AND campaign_asset.status != 'REMOVED'");
     while (ai.hasNext()) { const t = ai.next().campaignAsset.fieldType; ca[t] = (ca[t] || 0) + 1; }
     Logger.log('  Recursos da campanha: ' + JSON.stringify(ca));
     const groups = adGroups(cn);
     Object.keys(groups).forEach(g => {
       const gc = {};
-      const gi = AdsApp.search("SELECT ad_group_criterion.type FROM ad_group_criterion WHERE ad_group.resource_name = '" + groups[g] + "' AND ad_group_criterion.status != 'REMOVED'");
+      const gi = AdsApp.search("SELECT ad_group.resource_name, ad_group_criterion.type, ad_group_criterion.status FROM ad_group_criterion WHERE ad_group.resource_name = '" + groups[g] + "' AND ad_group_criterion.status != 'REMOVED'");
       while (gi.hasNext()) { const t = gi.next().adGroupCriterion.type; gc[t] = (gc[t] || 0) + 1; }
-      Logger.log('  Grupo ' + g + ' | anúncios: ' + adCount(groups[g]) + ' | critérios: ' + JSON.stringify(gc));
+      const ads = adList(groups[g]);
+      Logger.log('  Grupo ' + g + ' | critérios: ' + JSON.stringify(gc) + ' | anúncios: ' + ads.length);
+      ads.forEach(x => Logger.log('      - ' + x));
     });
   });
 }
@@ -244,21 +245,31 @@ function mutate(op) {
 }
 
 function campaignRn(name) {
-  const it = AdsApp.search("SELECT campaign.resource_name FROM campaign WHERE campaign.name = '" + name + "' AND campaign.status != 'REMOVED'");
+  const it = AdsApp.search("SELECT campaign.resource_name, campaign.name, campaign.status FROM campaign WHERE campaign.name = '" + name + "' AND campaign.status != 'REMOVED'");
   return it.hasNext() ? it.next().campaign.resourceName : null;
 }
 
 function adGroups(campaignName) {
   const out = {};
-  const it = AdsApp.search("SELECT ad_group.resource_name, ad_group.name FROM ad_group WHERE campaign.name = '" +
+  const it = AdsApp.search("SELECT ad_group.resource_name, ad_group.name, ad_group.status, campaign.name FROM ad_group WHERE campaign.name = '" +
     campaignName + "' AND ad_group.status != 'REMOVED'");
   while (it.hasNext()) { const r = it.next(); out[r.adGroup.name] = r.adGroup.resourceName; }
   return out;
 }
 
+function adList(agRn) {
+  const out = [];
+  const it = AdsApp.search("SELECT ad_group.resource_name, ad_group_ad.resource_name, ad_group_ad.status, ad_group_ad.ad.type, " +
+    "ad_group_ad.policy_summary.approval_status, ad_group_ad.policy_summary.review_status FROM ad_group_ad WHERE ad_group.resource_name = '" +
+    agRn + "' AND ad_group_ad.status != 'REMOVED'");
+  while (it.hasNext()) {
+    const r = it.next().adGroupAd;
+    const p = r.policySummary || {};
+    out.push(r.ad.type + ' | ' + r.status + ' | aprovação: ' + (p.approvalStatus || '?') + ' / revisão: ' + (p.reviewStatus || '?'));
+  }
+  return out;
+}
+
 function adCount(agRn) {
-  const it = AdsApp.search("SELECT ad_group_ad.resource_name FROM ad_group_ad WHERE ad_group.resource_name = '" + agRn +
-    "' AND ad_group_ad.status != 'REMOVED'");
-  let n = 0; while (it.hasNext()) { it.next(); n++; }
-  return n;
+  return adList(agRn).length;
 }

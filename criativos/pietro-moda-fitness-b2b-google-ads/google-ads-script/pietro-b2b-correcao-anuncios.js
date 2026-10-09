@@ -6,7 +6,7 @@
  *      para a política editorial: sem "OFF" em caixa alta e sem a abreviação "p/".
  *      Se o Google recusar de novo, tenta uma versão mais enxuta e registra no Log.
  *   2. Demand Gen: reaproveita as imagens já enviadas (não duplica a biblioteca).
- *   3. Troca a frase de destaque "5% OFF no PIX" por "5% de Desconto no PIX".
+ *   3. Troca as frases de destaque "5% OFF no PIX" e "Envio p/ Todo o Brasil".
  *   4. Faz um diagnóstico das duas campanhas (grupos, anúncios, públicos, local).
  *
  * Seguro para rodar de novo: só cria anúncio em grupo que ainda não tem anúncio.
@@ -179,21 +179,24 @@ function image(lib, path) {
 
 // ------------------------------ Callout ------------------------------
 
+const CALLOUTS = { '5% OFF no PIX': '5% de Desconto no PIX', 'Envio p/ Todo o Brasil': 'Envio Para Todo o Brasil' };
+
 function trocarCallout() {
   const camp = campaignRn(SEARCH_NAME);
   if (!camp) return;
-  const it = AdsApp.search("SELECT campaign_asset.resource_name FROM campaign_asset WHERE campaign.resource_name = '" + camp +
-    "' AND campaign_asset.field_type = 'CALLOUT' AND asset.callout_asset.callout_text = '5% OFF no PIX' AND campaign_asset.status != 'REMOVED'");
-  let removed = false;
-  while (it.hasNext()) {
-    const rn = it.next().campaignAsset.resourceName;
-    if (!mutate({ campaignAssetOperation: { remove: rn } })) removed = true;
-  }
-  if (!removed) return;
-  const res = AdsApp.mutate({ assetOperation: { create: { calloutAsset: { calloutText: '5% de Desconto no PIX' } } } });
-  if (res.isSuccessful() && !mutate({ campaignAssetOperation: { create: { campaign: camp, asset: res.getResourceName(), fieldType: 'CALLOUT' } } })) {
-    LOG.feito.push('Frase de destaque trocada para "5% de Desconto no PIX"');
-  } else LOG.manual.push('Troque a frase de destaque "5% OFF no PIX" por "5% de Desconto no PIX".');
+  Object.keys(CALLOUTS).forEach(oldText => {
+    const it = AdsApp.search("SELECT campaign_asset.resource_name FROM campaign_asset WHERE campaign.resource_name = '" + camp +
+      "' AND campaign_asset.field_type = 'CALLOUT' AND asset.callout_asset.callout_text = '" + oldText + "' AND campaign_asset.status != 'REMOVED'");
+    let removed = false;
+    while (it.hasNext()) {
+      if (!mutate({ campaignAssetOperation: { remove: it.next().campaignAsset.resourceName } })) removed = true;
+    }
+    if (!removed) return;
+    const res = AdsApp.mutate({ assetOperation: { create: { calloutAsset: { calloutText: CALLOUTS[oldText] } } } });
+    if (res.isSuccessful() && !mutate({ campaignAssetOperation: { create: { campaign: camp, asset: res.getResourceName(), fieldType: 'CALLOUT' } } })) {
+      LOG.feito.push('Frase de destaque "' + oldText + '" trocada por "' + CALLOUTS[oldText] + '"');
+    } else LOG.manual.push('Troque a frase de destaque "' + oldText + '" por "' + CALLOUTS[oldText] + '".');
+  });
 }
 
 // ---------------------------- Diagnóstico ----------------------------

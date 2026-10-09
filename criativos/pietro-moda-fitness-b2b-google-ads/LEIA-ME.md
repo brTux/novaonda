@@ -68,7 +68,7 @@ Lance: Maximizar conversões (meta: Compra). Rede: só Pesquisa. Local: Brasil (
 | Moda Fitness Masculina | Shorts e regatas dry fit | Amplie o mix da sua loja |
 | Fale no WhatsApp | Atendimento a lojistas | Atendimento até as 15h *(confirmar horário)* |
 
-**Frases de destaque:** Fábrica Própria · Grade Aberta · Mínimo 10 Peças · Pronta Entrega · 5% de Desconto no PIX · 4x Sem Juros · Envio p/ Todo o Brasil · Loja Física no Brás
+**Frases de destaque:** Fábrica Própria · Grade Aberta · Mínimo 10 Peças · Pronta Entrega · 5% de Desconto no PIX · 4x Sem Juros · Envio Para Todo o Brasil · Loja Física no Brás
 
 **Snippet "Tipos":** Leggings, Conjuntos, Shorts, Tops, Jaquetas, Masculino, Plus Size
 

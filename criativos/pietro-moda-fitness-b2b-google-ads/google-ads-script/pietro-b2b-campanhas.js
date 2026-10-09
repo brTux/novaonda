@@ -124,7 +124,7 @@ const SEARCH = {
     { text: 'Linha Plus Size', d1: 'Tamanhos do P ao G3', d2: 'Conjuntos, leggings e tops', url: SITE + '/plus-size/c' },
   ],
   callouts: ['Fábrica Própria', 'Grade Aberta', 'Mínimo 10 Peças', 'Pronta Entrega',
-    '5% de Desconto no PIX', '4x Sem Juros', 'Envio p/ Todo o Brasil', 'Loja Física no Brás'],
+    '5% de Desconto no PIX', '4x Sem Juros', 'Envio Para Todo o Brasil', 'Loja Física no Brás'],
   snippet: { header: 'Tipos', values: ['Leggings', 'Conjuntos', 'Shorts', 'Tops', 'Jaquetas', 'Masculino', 'Plus Size'] },
   images: [
     '01_Search_Atacado/imagens-sem-texto/PMF-B2B_SEARCH_conjunto-vermelho_1200x1200.jpg',

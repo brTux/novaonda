@@ -2,9 +2,9 @@
  * PIETRO MODA FITNESS B2B — criação das campanhas no Google Ads
  *
  * Cria (TUDO PAUSADO):
- *   1. PMF B2B | Search | Atacado      — 3 grupos, palavras-chave, RSA, negativas,
+ *   1. 03_conv-bf-search [ Atacado Lojista ]           — 3 grupos, palavras-chave, RSA, negativas,
  *                                        sitelinks, frases de destaque, snippet, imagens, logo
- *   2. PMF B2B | Demand Gen | Lojista  — AG1 Prospecção (segmento personalizado) e
+ *   2. 02_conv-bf-geração de demanda [ Lojista ]       — AG1 Prospecção (segmento personalizado) e
  *                                        AG2 Remarketing 90d, anúncios com todos os criativos
  *
  * Como usar:
@@ -26,7 +26,7 @@ const BRASIL = 'geoTargetConstants/2076';
 const PORTUGUES = 'languageConstants/1014';
 
 const SEARCH = {
-  name: 'PMF B2B | Search | Atacado',
+  name: '03_conv-bf-search [ Atacado Lojista ]',
   budgetReais: 45,
   finalUrlSuffix: 'utm_source=google&utm_medium=cpc&utm_campaign=pmf-b2b-search-atacado&utm_content={adgroupid}&utm_term={keyword}',
   path1: 'atacado',
@@ -70,7 +70,7 @@ const SEARCH = {
   ],
   adGroups: [
     {
-      name: 'Marca',
+      name: '01_conv-bf-marca',
       brand: true,
       url: SITE + '/',
       keywords: [
@@ -82,7 +82,7 @@ const SEARCH = {
       ],
     },
     {
-      name: 'Atacado Genérico',
+      name: '02_conv-bf-atacado-generico',
       url: SITE + '/',
       keywords: [
         ['moda fitness atacado', 'PHRASE'], ['moda fitness atacado', 'EXACT'],
@@ -99,7 +99,7 @@ const SEARCH = {
       ],
     },
     {
-      name: 'Produto Atacado',
+      name: '03_conv-bf-produto-atacado',
       url: SITE + '/feminino/leggings-e-calcas/c',
       keywords: [
         ['legging atacado', 'PHRASE'], ['legging atacado', 'EXACT'],
@@ -140,7 +140,7 @@ const SEARCH = {
 };
 
 const DG = {
-  name: 'PMF B2B | Demand Gen | Lojista',
+  name: '02_conv-bf-geração de demanda [ Lojista ]',
   budgetReais: 40,
   finalUrlSuffix: 'utm_source=google&utm_medium=demandgen&utm_campaign=pmf-b2b-demandgen-lojista&utm_content={adgroupid}',
   url: SITE + '/',
@@ -154,16 +154,16 @@ const DG = {
     'Sua loja com moda fitness que gira: flare, canelada, conjuntos e masculino. Atacado.',
   ],
   customSegment: {
-    name: 'PMF B2B | Pesquisou atacado moda fitness',
+    name: 'conv-bf-segmento [ pesquisou atacado moda fitness ]',
     keywords: ['moda fitness atacado', 'roupa fitness atacado', 'legging atacado', 'conjunto fitness atacado',
       'fornecedor de roupa fitness', 'fornecedor moda fitness', 'fábrica de roupa fitness',
       'atacado fitness brás', 'moda fitness brás atacado', 'roupa de academia para revender',
       'revenda moda fitness', 'atacado roupa academia', 'roupa fitness para lojista', 'comprar roupa fitness para revender'],
   },
-  remarketing: { name: 'PMF B2B | Visitantes site 90d', days: 90, urlContains: 'pietromodafitness.com.br' },
+  remarketing: { name: 'conv-bf-remarketing [ visitantes site 90d ]', days: 90, urlContains: 'pietromodafitness.com.br' },
   adGroups: [
     {
-      name: 'AG1 Prospecção Lojista',
+      name: '01_conv-bf-prospecção-lojista',
       audience: 'custom',
       headlines: [
         'Moda fitness atacado, direto da fábrica',
@@ -176,7 +176,7 @@ const DG = {
       concepts: ['C1-fabrica-bras', 'C2-flare', 'C3-minimo-10-pecas', 'C4-transparencia-zero'],
     },
     {
-      name: 'AG2 Remarketing 90d',
+      name: '02_conv-bf-remarketing-90d',
       audience: 'remarketing',
       headlines: [
         'Sua grade fitness está te esperando',
@@ -226,7 +226,7 @@ function main() {
 function buildSearch() {
   Logger.log('\n--- ' + SEARCH.name + ' ---');
   const budget = create('campaignBudgetOperation', {
-    name: SEARCH.name + ' | Orçamento',
+    name: SEARCH.name + ' [ orçamento ]',
     amountMicros: SEARCH.budgetReais * 1e6,
     deliveryMethod: 'STANDARD',
     explicitlyShared: false,
@@ -325,7 +325,7 @@ function searchCampaignBody(budget, withEuField) {
 function buildDemandGen() {
   Logger.log('\n--- ' + DG.name + ' ---');
   const budget = create('campaignBudgetOperation', {
-    name: DG.name + ' | Orçamento',
+    name: DG.name + ' [ orçamento ]',
     amountMicros: DG.budgetReais * 1e6,
     deliveryMethod: 'STANDARD',
     explicitlyShared: false,
@@ -381,7 +381,7 @@ function buildDemandGen() {
         businessName: DG.businessName,
       };
       if (tall) multi.tallPortraitMarketingImages = imgs['1080x1920'];
-      return { adGroup: ag, status: 'ENABLED', ad: { name: 'PMF B2B | ' + g.name + ' | Imagens', finalUrls: [DG.url], demandGenMultiAssetAd: multi } };
+      return { adGroup: ag, status: 'ENABLED', ad: { name: g.name + ' [ imagens ]', finalUrls: [DG.url], demandGenMultiAssetAd: multi } };
     };
     const ad = createFirst('adGroupAdOperation', [adBody(true), adBody(false)], 'anúncio de imagem ' + g.name);
     if (ad && REPORT._lastVariant === 1) {
@@ -426,7 +426,7 @@ function attachAudience(ag, agName, segment, segRn, critType) {
   if (!segment) return;
   // Caminho 1: recurso Audience (padrão do Demand Gen)
   const aud = create('audienceOperation', {
-    name: 'PMF B2B | ' + agName,
+    name: 'conv-bf-público [ ' + agName + ' ]',
     dimensions: [{ audienceSegments: { segments: [segment] } }],
   }, 'público ' + agName, true);
   if (aud && create('adGroupCriterionOperation', { adGroup: ag, audience: { audience: aud } }, 'público no grupo ' + agName, true)) return;

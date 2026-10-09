@@ -44,7 +44,7 @@ Lance: Maximizar conversões (meta: Compra). Rede: só Pesquisa. Local: Brasil (
 6. Leggings Poliamida Blackout
 7. Pronta Entrega para Lojistas
 8. Cadastre Seu CNPJ e Compre
-9. Preço de Fábrica p/ Revenda
+9. Preço de Fábrica Para Revenda
 10. Legging Flare Mais Vendida
 11. Até 4x Sem Juros no Cartão
 12. Enviamos Para Todo o Brasil
@@ -56,7 +56,7 @@ Lance: Maximizar conversões (meta: Compra). Rede: só Pesquisa. Local: Brasil (
 1. Fábrica própria no Brás. Leggings, conjuntos e shorts em poliamida blackout para revenda.
 2. Pedido mínimo de 10 peças com grade aberta. Monte o mix ideal para a sua loja.
 3. Cadastre seu CNPJ, veja os preços de atacado e faça seu pedido online em minutos.
-4. Pronta entrega e reposição rápida dos campeões de venda. 4x sem juros ou 5% OFF no PIX.
+4. Pronta entrega e reposição rápida. 4x sem juros ou 5% de desconto no PIX.
 
 ### Sitelinks
 | Título | Descrição 1 | Descrição 2 |
@@ -68,7 +68,7 @@ Lance: Maximizar conversões (meta: Compra). Rede: só Pesquisa. Local: Brasil (
 | Moda Fitness Masculina | Shorts e regatas dry fit | Amplie o mix da sua loja |
 | Fale no WhatsApp | Atendimento a lojistas | Atendimento até as 15h *(confirmar horário)* |
 
-**Frases de destaque:** Fábrica Própria · Grade Aberta · Mínimo 10 Peças · Pronta Entrega · 5% OFF no PIX · 4x Sem Juros · Envio p/ Todo o Brasil · Loja Física no Brás
+**Frases de destaque:** Fábrica Própria · Grade Aberta · Mínimo 10 Peças · Pronta Entrega · 5% de Desconto no PIX · 4x Sem Juros · Envio p/ Todo o Brasil · Loja Física no Brás
 
 **Snippet "Tipos":** Leggings, Conjuntos, Shorts, Tops, Jaquetas, Masculino, Plus Size
 
@@ -102,8 +102,8 @@ Lance: Maximizar conversões (meta: Compra). **Nunca maximizar cliques.** Segmen
 ### Descrições (90) — usar nos dois grupos
 - Fábrica própria no Brás. Leggings, conjuntos e shorts para revender. Mínimo de 10 peças.
 - Monte seu mix com grade aberta e pronta entrega. Cadastre seu CNPJ e libere os preços.
-- Poliamida blackout que não marca: o tecido que sua cliente procura. Exclusivo p/ lojistas.
-- Reposição rápida dos campeões de venda. 4x sem juros no cartão ou 5% OFF no PIX.
+- Poliamida blackout que não marca: o tecido que sua cliente procura. Exclusivo a lojistas.
+- Reposição rápida dos campeões de venda. 4x sem juros no cartão ou 5% de desconto no PIX.
 - Sua loja com moda fitness que gira: flare, canelada, conjuntos e masculino. Atacado.
 
 **CTA:** AG1 "Comprar agora" · AG2 "Saiba mais"

@@ -40,7 +40,7 @@ const SEARCH = {
     'Leggings Poliamida Blackout',
     'Pronta Entrega para Lojistas',
     'Cadastre Seu CNPJ e Compre',
-    'Preço de Fábrica p/ Revenda',
+    'Preço de Fábrica Para Revenda',
     'Legging Flare Mais Vendida',
     'Até 4x Sem Juros no Cartão',
     'Enviamos Para Todo o Brasil',
@@ -57,7 +57,7 @@ const SEARCH = {
     'Grade Aberta: Monte Seu Mix',
     'Pronta Entrega para Lojistas',
     'Cadastre Seu CNPJ e Compre',
-    'Preço de Fábrica p/ Revenda',
+    'Preço de Fábrica Para Revenda',
     'Até 4x Sem Juros no Cartão',
     'Enviamos Para Todo o Brasil',
     'Fabricação Própria',
@@ -66,7 +66,7 @@ const SEARCH = {
     'Fábrica própria no Brás. Leggings, conjuntos e shorts em poliamida blackout para revenda.',
     'Pedido mínimo de 10 peças com grade aberta. Monte o mix ideal para a sua loja.',
     'Cadastre seu CNPJ, veja os preços de atacado e faça seu pedido online em minutos.',
-    'Pronta entrega e reposição rápida dos campeões de venda. 4x sem juros ou 5% OFF no PIX.',
+    'Pronta entrega e reposição rápida. 4x sem juros ou 5% de desconto no PIX.',
   ],
   adGroups: [
     {
@@ -124,7 +124,7 @@ const SEARCH = {
     { text: 'Linha Plus Size', d1: 'Tamanhos do P ao G3', d2: 'Conjuntos, leggings e tops', url: SITE + '/plus-size/c' },
   ],
   callouts: ['Fábrica Própria', 'Grade Aberta', 'Mínimo 10 Peças', 'Pronta Entrega',
-    '5% OFF no PIX', '4x Sem Juros', 'Envio p/ Todo o Brasil', 'Loja Física no Brás'],
+    '5% de Desconto no PIX', '4x Sem Juros', 'Envio p/ Todo o Brasil', 'Loja Física no Brás'],
   snippet: { header: 'Tipos', values: ['Leggings', 'Conjuntos', 'Shorts', 'Tops', 'Jaquetas', 'Masculino', 'Plus Size'] },
   images: [
     '01_Search_Atacado/imagens-sem-texto/PMF-B2B_SEARCH_conjunto-vermelho_1200x1200.jpg',
@@ -149,8 +149,8 @@ const DG = {
   descriptions: [
     'Fábrica própria no Brás. Leggings, conjuntos e shorts para revender. Mínimo de 10 peças.',
     'Monte seu mix com grade aberta e pronta entrega. Cadastre seu CNPJ e libere os preços.',
-    'Poliamida blackout que não marca: o tecido que sua cliente procura. Exclusivo p/ lojistas.',
-    'Reposição rápida dos campeões de venda. 4x sem juros no cartão ou 5% OFF no PIX.',
+    'Poliamida blackout que não marca: o tecido que sua cliente procura. Exclusivo a lojistas.',
+    'Reposição rápida dos campeões de venda. 4x sem juros no cartão ou 5% de desconto no PIX.',
     'Sua loja com moda fitness que gira: flare, canelada, conjuntos e masculino. Atacado.',
   ],
   customSegment: {
